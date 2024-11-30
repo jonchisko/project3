@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dw6v08l0tk6mx"
+path="res://.godot/imported/shouting_4_meghan.wav-e8c8832a9527cc36ff59308b94156d7a.sample"
+
+[deps]
+
+source_file="res://assets/audio/dialogues/pack_1/10 - Shouting/Female/Meghan Christian/shouting_4_meghan.wav"
+dest_files=["res://.godot/imported/shouting_4_meghan.wav-e8c8832a9527cc36ff59308b94156d7a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

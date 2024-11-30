@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bmlwvq4n0ci2q"
+path="res://.godot/imported/death_6_karen.wav-c3039f7e5c526f59fcaa861d303503ed.sample"
+
+[deps]
+
+source_file="res://assets/audio/dialogues/pack_1/8 - Death/Female/Karen Cenon/death_6_karen.wav"
+dest_files=["res://.godot/imported/death_6_karen.wav-c3039f7e5c526f59fcaa861d303503ed.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

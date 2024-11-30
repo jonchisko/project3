@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://esf6otki7117"
+path="res://.godot/imported/greeting_6_sean.wav-83e23afe37fe7e06b39d4e120cda7f8d.sample"
+
+[deps]
+
+source_file="res://assets/audio/dialogues/pack_1/3 - Greeting/Male/Sean Lenhart/greeting_6_sean.wav"
+dest_files=["res://.godot/imported/greeting_6_sean.wav-83e23afe37fe7e06b39d4e120cda7f8d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

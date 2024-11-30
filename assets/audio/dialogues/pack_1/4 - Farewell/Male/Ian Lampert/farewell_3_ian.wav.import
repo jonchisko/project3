@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://i4hfxv8hcn3c"
+path="res://.godot/imported/farewell_3_ian.wav-40b10b0004a27123662f009d051a633d.sample"
+
+[deps]
+
+source_file="res://assets/audio/dialogues/pack_1/4 - Farewell/Male/Ian Lampert/farewell_3_ian.wav"
+dest_files=["res://.godot/imported/farewell_3_ian.wav-40b10b0004a27123662f009d051a633d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
