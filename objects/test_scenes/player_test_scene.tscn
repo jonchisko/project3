@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://lhbcq6824emr"]
+
+[ext_resource type="PackedScene" uid="uid://t3gix0pvttu1" path="res://objects/player/player.tscn" id="1_7whwg"]
+
+[sub_resource type="Gradient" id="Gradient_gca0y"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j01oe"]
+gradient = SubResource("Gradient_gca0y")
+fill_from = Vector2(0.365217, 0.576812)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u18r"]
+size = Vector2(64, 64)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7whwg")]
+position = Vector2(520, 519)
+
+[node name="Rocks" type="Node" parent="."]
+
+[node name="Rock" type="RigidBody2D" parent="Rocks"]
+position = Vector2(1110, 861)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock2" type="RigidBody2D" parent="Rocks"]
+position = Vector2(1770, 843)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock2"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock2"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock3" type="RigidBody2D" parent="Rocks"]
+position = Vector2(551, 243)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock3"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock3"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock4" type="RigidBody2D" parent="Rocks"]
+position = Vector2(624, 930)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock4"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock4"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock5" type="RigidBody2D" parent="Rocks"]
+position = Vector2(877, 112)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock5"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock5"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock6" type="RigidBody2D" parent="Rocks"]
+position = Vector2(234, 327)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock6"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock6"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock7" type="RigidBody2D" parent="Rocks"]
+position = Vector2(1334, 799)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock7"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock7"]
+shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Rock8" type="RigidBody2D" parent="Rocks"]
+position = Vector2(1382, 279)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock8"]
+texture = SubResource("GradientTexture2D_j01oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock8"]
+shape = SubResource("RectangleShape2D_3u18r")

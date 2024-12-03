@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bncx77txlxr8g"]
+
+[ext_resource type="Script" path="res://objects/npcs/npc_0/npc_01.gd" id="1_d0qo7"]
+[ext_resource type="Texture2D" uid="uid://jcdx8hy2ld3d" path="res://objects/npcs/npc_0/npc_01.png" id="2_hkmtj"]
+[ext_resource type="PackedScene" uid="uid://dncvwhxc2ibl1" path="res://objects/modules/player_detector/player_detector.tscn" id="3_ntjxu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocu4g"]
+size = Vector2(100, 100)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_d0qo7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("2_hkmtj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ocu4g")
+
+[node name="PlayerDetector" parent="." instance=ExtResource("3_ntjxu")]
+radius_size = 200
+
+[connection signal="player_entered" from="PlayerDetector" to="." method="_on_player_detected"]
