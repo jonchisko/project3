@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://lhbcq6824emr"]
+[gd_scene load_steps=7 format=3 uid="uid://lhbcq6824emr"]
 
 [ext_resource type="PackedScene" uid="uid://t3gix0pvttu1" path="res://objects/player/player.tscn" id="1_7whwg"]
+[ext_resource type="PackedScene" uid="uid://bncx77txlxr8g" path="res://objects/npcs/npc_0/npc_01.tscn" id="2_mmv72"]
+[ext_resource type="PackedScene" uid="uid://p4kgfod8jt0e" path="res://objects/conversation/conversation_manager.tscn" id="2_mp518"]
 
 [sub_resource type="Gradient" id="Gradient_gca0y"]
 
@@ -15,6 +17,9 @@ size = Vector2(64, 64)
 
 [node name="Player" parent="." instance=ExtResource("1_7whwg")]
 position = Vector2(520, 519)
+
+[node name="ConversationManager" parent="." instance=ExtResource("2_mp518")]
+ApiKey = "YOUR API KEY"
 
 [node name="Rocks" type="Node" parent="."]
 
@@ -49,7 +54,7 @@ texture = SubResource("GradientTexture2D_j01oe")
 shape = SubResource("RectangleShape2D_3u18r")
 
 [node name="Rock4" type="RigidBody2D" parent="Rocks"]
-position = Vector2(624, 930)
+position = Vector2(777, 954)
 gravity_scale = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock4"]
@@ -89,7 +94,7 @@ texture = SubResource("GradientTexture2D_j01oe")
 shape = SubResource("RectangleShape2D_3u18r")
 
 [node name="Rock8" type="RigidBody2D" parent="Rocks"]
-position = Vector2(1382, 279)
+position = Vector2(968, 460)
 gravity_scale = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock8"]
@@ -97,3 +102,14 @@ texture = SubResource("GradientTexture2D_j01oe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock8"]
 shape = SubResource("RectangleShape2D_3u18r")
+
+[node name="Npc_01" parent="." instance=ExtResource("2_mmv72")]
+position = Vector2(1585, 432)
+ShortDescription = "My name is Luke Skywalker. I am a Jedi master."
+
+[node name="Npc_02" parent="." instance=ExtResource("2_mmv72")]
+position = Vector2(292, 916)
+ShortDescription = "My name is Obi Wan and I used to teach Anakin Skywalker."
+
+[connection signal="start_interaction" from="Player" to="ConversationManager" method="_on_player_start_interaction"]
+[connection signal="stop_interaction" from="Player" to="ConversationManager" method="_on_player_stop_interaction"]

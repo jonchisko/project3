@@ -5,13 +5,19 @@ extends PanelContainer
 
 var _float_tween: Tween
 var _end_tween: Tween
+var _original_position: Vector2
 
 func enable_popup() -> void:
-	self._enable_popup()
-	self._create_float_tween()
+	if not self.visible:
+		self._enable_popup()
+		self._create_float_tween()
 	
 func disable_popup() -> void:
-	self._create_end_tween()
+	if self.visible:
+		self._create_end_tween()
+
+func _ready() -> void:
+	self._original_position = self.position
 
 func _create_float_tween() -> void:
 	var new_position = Vector2(self.position.x, self.position.y - self.height_delta)
@@ -29,6 +35,7 @@ func _create_end_tween() -> void:
 	self._end_tween.tween_callback(self._disable_popup)
 
 func _enable_popup() -> void:
+	self.position = self._original_position
 	self.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
 	self.show()
 
