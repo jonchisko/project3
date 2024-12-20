@@ -86,4 +86,10 @@ func clear_all_messages() -> TemplateBase:
 	return self
 
 func show_messages() -> String:
-	return self._message_manager.show_messages()
+	return self._message_manager.messages_to_string()
+	
+func structured_messages() -> Array[StructuredMessage]:
+	return self._message_manager.get_structured_messages()
+
+func structured_context() -> Array[StructuredMessage]:
+	return self._message_manager.get_structured_context()

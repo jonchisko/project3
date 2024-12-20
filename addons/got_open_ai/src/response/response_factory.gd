@@ -5,8 +5,10 @@ class_name ResponseFactory
 static func GetCompletionResponse(requester: OpenAiRequestBase, url: String, headers: PackedStringArray, method: HTTPClient.Method, request_data: Dictionary) -> CompletionResponse:
 	var response_data: String = await requester.request_data(url, headers, method, request_data)
 	
+	# TODO: Sometimes the response is there, not empty and it holds an error message. This leads to crash cuz this guard check doesnt work.
 	if response_data == null or response_data.is_empty():
 		return CompletionResponse.new(false, [], 0, 0, 0, {})
+	# print(response_data)
 	
 	var dictionary = JSON.parse_string(response_data)
 	

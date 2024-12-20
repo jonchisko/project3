@@ -9,7 +9,7 @@ func test_prepend_message_on_empty_messages() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be 1, but is not.")
-	assert_eq(object_under_test.show_messages().contains("message"), true)
+	assert_eq(object_under_test.messages_to_string().contains("message"), true)
 	
 	
 func test_prepend_messages_on_non_empty_messages_expect_order_reversed() -> void:

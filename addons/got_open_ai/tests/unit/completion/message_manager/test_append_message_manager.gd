@@ -10,9 +10,9 @@ func test_append_message() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
-	assert_eq(object_under_test.show_messages().contains("message1"), true, "Messages do not contain 'message1'.")
-	assert_eq(object_under_test.show_messages().contains("message2"), true, "Messages do not contain 'message2'.")
-	assert_eq(object_under_test.show_messages().contains("message3"), false, "Messages contain 'message3'.")
+	assert_eq(object_under_test.messages_to_string().contains("message1"), true, "Messages do not contain 'message1'.")
+	assert_eq(object_under_test.messages_to_string().contains("message2"), true, "Messages do not contain 'message2'.")
+	assert_eq(object_under_test.messages_to_string().contains("message3"), false, "Messages contain 'message3'.")
 
 
 func test_append_messages() -> void:
@@ -24,9 +24,9 @@ func test_append_messages() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
-	assert_eq(object_under_test.show_messages().contains("message1"), true, "Messages do not contain 'message1'.")
-	assert_eq(object_under_test.show_messages().contains("message2"), true, "Messages do not contain 'message2'.")
-	assert_eq(object_under_test.show_messages().contains("message3"), false, "Messages contain 'message3'.")
+	assert_eq(object_under_test.messages_to_string().contains("message1"), true, "Messages do not contain 'message1'.")
+	assert_eq(object_under_test.messages_to_string().contains("message2"), true, "Messages do not contain 'message2'.")
+	assert_eq(object_under_test.messages_to_string().contains("message3"), false, "Messages contain 'message3'.")
 
 
 func test_append_message_dictionary() -> void:
@@ -38,7 +38,7 @@ func test_append_message_dictionary() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")
-	assert_eq(object_under_test.show_messages().contains("message"), true, "Messages do not contain 'message'.")
+	assert_eq(object_under_test.messages_to_string().contains("message"), true, "Messages do not contain 'message'.")
 
 
 func test_append_messages_combined_variations() -> void:
@@ -52,7 +52,7 @@ func test_append_messages_combined_variations() -> void:
 	object_under_test.append_message_dictionary({"role": "test4", "content": "message4"})
 	
 	# Assert
-	var messages = object_under_test.show_messages()
+	var messages = object_under_test.messages_to_string()
 	
 	assert_eq(object_under_test.get_combined_message_data().size(), expected_elements.size(), 
 	"Size should be {size}, but it is not.".format({"size": expected_elements.size()}))
@@ -71,9 +71,9 @@ func test_append_static_context() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
-	assert_eq(object_under_test.show_context().contains("message1"), true, "Messages do not contain 'message1'.")
-	assert_eq(object_under_test.show_context().contains("message2"), true, "Messages do not contain 'message2'.")
-	assert_eq(object_under_test.show_context().contains("message3"), false, "Messages contain 'message3'.")
+	assert_eq(object_under_test.context_to_string().contains("message1"), true, "Messages do not contain 'message1'.")
+	assert_eq(object_under_test.context_to_string().contains("message2"), true, "Messages do not contain 'message2'.")
+	assert_eq(object_under_test.context_to_string().contains("message3"), false, "Messages contain 'message3'.")
 	
 
 func test_append_static_contexts() -> void:
@@ -85,8 +85,8 @@ func test_append_static_contexts() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
-	assert_eq(object_under_test.show_context().contains("message1"), true, "Messages do not contain 'message1'.")
-	assert_eq(object_under_test.show_context().contains("message2"), true, "Messages do not contain 'message2'.")
+	assert_eq(object_under_test.context_to_string().contains("message1"), true, "Messages do not contain 'message1'.")
+	assert_eq(object_under_test.context_to_string().contains("message2"), true, "Messages do not contain 'message2'.")
 	
 
 func test_append_static_context_dictionary() -> void:
@@ -98,5 +98,5 @@ func test_append_static_context_dictionary() -> void:
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")
-	assert_eq(object_under_test.show_context().contains("test1"), true, "Messages do not contain 'test1'.")
-	assert_eq(object_under_test.show_context().contains("message1"), true, "Messages do not contain 'message1'.")
+	assert_eq(object_under_test.context_to_string().contains("test1"), true, "Messages do not contain 'test1'.")
+	assert_eq(object_under_test.context_to_string().contains("message1"), true, "Messages do not contain 'message1'.")

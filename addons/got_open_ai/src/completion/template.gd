@@ -48,7 +48,7 @@ func construct_data() -> Dictionary:
 	if not self._tool_choice.is_empty():
 		data["tool_choice"] = self._tool_choice
 	if self._max_completion_tokens >= 0:
-		data["max_completion_tokenes"] = self._max_completion_tokens
+		data["max_completion_tokens"] = self._max_completion_tokens
 	if self._tools.size() > 0:
 		data["tools"] = self._tools
 		data["tool_choice"] = self._tool_choice

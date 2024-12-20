@@ -11,11 +11,25 @@ var _message_data: Array[Dictionary]
 func _init() -> void:
 	pass
 	
-func show_messages() -> String:
+func messages_to_string() -> String:
 	return JSON.stringify(self._message_data)
 	
-func show_context() -> String:
+func context_to_string() -> String:
 	return JSON.stringify(self._static_context)
+	
+func get_structured_messages() -> Array[StructuredMessage]:
+	var messages: Array[StructuredMessage] = []
+	for message in self._message_data:
+		messages.push_back(StructuredMessage.new(message[self._role_key], message[self._content_key]))
+	
+	return messages
+
+func get_structured_context() -> Array[StructuredMessage]:
+	var contextes: Array[StructuredMessage] = []
+	for context in self._static_context:
+		contextes.push_back(StructuredMessage.new(context[self._role_key], context[self._content_key]))
+	
+	return contextes
 
 func get_combined_message_data() -> Array[Dictionary]:
 	var combined: Array[Dictionary] = []
