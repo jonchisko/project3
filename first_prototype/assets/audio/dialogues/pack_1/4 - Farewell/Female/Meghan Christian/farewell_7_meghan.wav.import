@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ddyk2cvnvthfs"
+path="res://.godot/imported/farewell_7_meghan.wav-157d98da24b3041fb44e47432069fc85.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/4 - Farewell/Female/Meghan Christian/farewell_7_meghan.wav"
+dest_files=["res://.godot/imported/farewell_7_meghan.wav-157d98da24b3041fb44e47432069fc85.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

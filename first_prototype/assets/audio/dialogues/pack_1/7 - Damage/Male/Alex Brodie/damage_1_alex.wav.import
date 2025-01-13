@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ce35afbxofk1g"
+path="res://.godot/imported/damage_1_alex.wav-86afa69a2e375826ae87082692d6de74.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/7 - Damage/Male/Alex Brodie/damage_1_alex.wav"
+dest_files=["res://.godot/imported/damage_1_alex.wav-86afa69a2e375826ae87082692d6de74.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bldiq36olnrau"
+path="res://.godot/imported/death_5_sean.wav-9f2d611bff98cd2198ff907aea9ed9a6.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/8 - Death/Male/Sean Lenhart/death_5_sean.wav"
+dest_files=["res://.godot/imported/death_5_sean.wav-9f2d611bff98cd2198ff907aea9ed9a6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

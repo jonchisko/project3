@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d0310e14l0tq8"
+path="res://.godot/imported/damage_2_ian.wav-128b717c54d404e1b310dbb4815686e6.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/7 - Damage/Male/Ian Lampert/damage_2_ian.wav"
+dest_files=["res://.godot/imported/damage_2_ian.wav-128b717c54d404e1b310dbb4815686e6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

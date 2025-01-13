@@ -27,7 +27,7 @@ enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
 
 [gui]
 
-theme/custom="res://default_theme.tres"
+theme/custom="res://first_prototype/default_theme.tres"
 
 [input]
 

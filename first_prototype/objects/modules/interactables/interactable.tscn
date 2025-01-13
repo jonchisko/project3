@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coindx8ledwp4"]
+
+[ext_resource type="Script" path="res://first_prototype/interactable.gd" id="1_ksanf"]
+[ext_resource type="PackedScene" uid="uid://bphscsskh36gb" path="res://first_prototype/objects/modules/interactable_popup/interact_popup.tscn" id="2_o3bta"]
+
+[node name="Interactable" type="Node2D"]
+script = ExtResource("1_ksanf")
+
+[node name="InteractPopup" parent="." instance=ExtResource("2_o3bta")]
+visible = false
+offset_left = 0.0
+offset_right = 417.0
+offset_bottom = 93.0

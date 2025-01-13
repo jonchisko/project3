@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cusimxex6u7s3"
+path="res://.godot/imported/completion_9_sean.wav-6755972fb622dcc3fecd7bed77c694e5.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/1 - Completion/Male/Sean Lenhart/completion_9_sean.wav"
+dest_files=["res://.godot/imported/completion_9_sean.wav-6755972fb622dcc3fecd7bed77c694e5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

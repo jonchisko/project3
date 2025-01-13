@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vb5f5u2iwwma"
+path="res://.godot/imported/grunting_7_sean.wav-ffc4d6425516dd530c8cd80408b802fc.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/9 - Grunting/Male/Sean Lenhart/grunting_7_sean.wav"
+dest_files=["res://.godot/imported/grunting_7_sean.wav-ffc4d6425516dd530c8cd80408b802fc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://q4idgqu6glrn"
+path="res://.godot/imported/damage_3_sean.wav-f006baa0db1fcf3c6d180d7a4b131a9f.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/7 - Damage/Male/Sean Lenhart/damage_3_sean.wav"
+dest_files=["res://.godot/imported/damage_3_sean.wav-f006baa0db1fcf3c6d180d7a4b131a9f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

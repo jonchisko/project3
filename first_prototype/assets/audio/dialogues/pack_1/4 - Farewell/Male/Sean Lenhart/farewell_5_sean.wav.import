@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cm8qoetnbh2y0"
+path="res://.godot/imported/farewell_5_sean.wav-21e6f978fa3d7ee87dd2c27cca93b420.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/4 - Farewell/Male/Sean Lenhart/farewell_5_sean.wav"
+dest_files=["res://.godot/imported/farewell_5_sean.wav-21e6f978fa3d7ee87dd2c27cca93b420.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b3qnd5rgpbvj0"
+path="res://.godot/imported/death_6_meghan.wav-5f99d03877f7553b15208ec3f27000f9.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/8 - Death/Female/Meghan Christian/death_6_meghan.wav"
+dest_files=["res://.godot/imported/death_6_meghan.wav-5f99d03877f7553b15208ec3f27000f9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

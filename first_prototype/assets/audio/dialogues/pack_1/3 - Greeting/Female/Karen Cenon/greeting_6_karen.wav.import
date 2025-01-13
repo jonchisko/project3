@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d21iwhlaadcys"
+path="res://.godot/imported/greeting_6_karen.wav-0a60b7c84dbc5620dd442c2fbce91474.sample"
+
+[deps]
+
+source_file="res://first_prototype/assets/audio/dialogues/pack_1/3 - Greeting/Female/Karen Cenon/greeting_6_karen.wav"
+dest_files=["res://.godot/imported/greeting_6_karen.wav-0a60b7c84dbc5620dd442c2fbce91474.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
