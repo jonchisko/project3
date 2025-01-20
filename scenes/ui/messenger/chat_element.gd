@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends MarginContainer
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _message_text: RichTextLabel = %MessageText

@@ -29,6 +29,10 @@ window/size/mode.debug=0
 
 enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
 
+[gui]
+
+theme/custom_font="res://assets/m5x7.ttf"
+
 [input]
 
 move_right={
