@@ -76,67 +76,31 @@ libraries = {
 "": SubResource("AnimationLibrary_66gic")
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = -10
-
-[node name="HBoxContainerAuthor" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainerMessage" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HSeparatorLeft" type="HSeparator" parent="VBoxContainer/HBoxContainerAuthor"]
-unique_name_in_owner = true
+[node name="HSeparatorLeft" type="HSeparator" parent="HBoxContainerMessage"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_j8mlb")
-
-[node name="AuthorContent" type="PanelContainer" parent="VBoxContainer/HBoxContainerAuthor"]
-z_index = 1
-custom_minimum_size = Vector2(120, 40)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainerAuthor/AuthorContent"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="AuthorText" type="RichTextLabel" parent="VBoxContainer/HBoxContainerAuthor/AuthorContent/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]The name of the one that is great.[/center]"
-fit_content = true
-
-[node name="HSeparatorRight" type="HSeparator" parent="VBoxContainer/HBoxContainerAuthor"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_j8mlb")
-
-[node name="HBoxContainerMessage" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HSeparatorLeft" type="HSeparator" parent="VBoxContainer/HBoxContainerMessage"]
-layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 5.0
 theme_override_styles/separator = SubResource("StyleBoxEmpty_j8mlb")
 
-[node name="MessageContent" type="PanelContainer" parent="VBoxContainer/HBoxContainerMessage"]
+[node name="MessageContent" type="PanelContainer" parent="HBoxContainerMessage"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 10.0
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainerMessage/MessageContent"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainerMessage/MessageContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="MessageText" type="RichTextLabel" parent="VBoxContainer/HBoxContainerMessage/MessageContent/MarginContainer"]
+[node name="MessageText" type="RichTextLabel" parent="HBoxContainerMessage/MessageContent/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
@@ -145,8 +109,9 @@ text = "[left]Sed  egestaslorem urna, nec vestibulum arcu convallis. Sed egestas
 fit_content = true
 scroll_active = false
 
-[node name="HSeparatorRight" type="HSeparator" parent="VBoxContainer/HBoxContainerMessage"]
+[node name="HSeparatorRight" type="HSeparator" parent="HBoxContainerMessage"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 5.0
 theme_override_styles/separator = SubResource("StyleBoxEmpty_j8mlb")
