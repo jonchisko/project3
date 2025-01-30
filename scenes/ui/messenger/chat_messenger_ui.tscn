@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cx4qln7ab8h5k"]
 
-[ext_resource type="Script" path="res://scenes/ui/messenger/messenger_ui.gd" id="1_jaef6"]
+[ext_resource type="Script" path="res://scenes/ui/messenger/chat_messenger_ui.gd" id="1_quy3e"]
 
 [sub_resource type="Animation" id="Animation_knrmo"]
 length = 0.001
@@ -77,8 +77,8 @@ bg_color = Color(0.302004, 0.302004, 0.302004, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooldi"]
 
-[node name="MessengerUi" type="CanvasLayer"]
-script = ExtResource("1_jaef6")
+[node name="ChatMessengerUi" type="CanvasLayer"]
+script = ExtResource("1_quy3e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-class_name MessengerUi
+class_name ChatMessengerUi
 
 signal message_created(message: String)
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxfwffa26ost"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/open_ai_api.gd" id="1_7q6xm"]
+[ext_resource type="Script" path="res://addons/got_open_ai/src/got_open_ai.gd" id="2_gv1fv"]
+
+[node name="OpenAiApi" type="Node"]
+script = ExtResource("1_7q6xm")
+
+[node name="GotOpenAi" type="Node" parent="."]
+script = ExtResource("2_gv1fv")
