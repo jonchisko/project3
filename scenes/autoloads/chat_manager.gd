@@ -5,7 +5,6 @@ var _chat_messenger_ui: PackedScene = preload("res://scenes/ui/messenger/chat_me
 var _chat_messenger_instance: ChatMessengerUi = null
 
 var _current_npc: InteractableNpc
-var _open_ai_api: OpenAiApi
 var _gpt_template: TemplateBase
 
 @export var ApiKey: String = ""
@@ -41,8 +40,8 @@ func _on_player_message_sent(message: String) -> void:
 func _create_open_ai_template(npc: InteractableNpc) -> void:
 	# TODO insert history context from HistoryManager?!
 	var user_configuration = UserConfiguration.new(self.ApiKey)
-	self._open_ai_api.got_open_ai.user_configuration = user_configuration
-	self._gpt_template = self._open_ai_api.got_open_ai.GetGptCompletion()\
+	OpenAiApi.got_open_ai.user_configuration = user_configuration
+	self._gpt_template = OpenAiApi.got_open_ai.GetGptCompletion()\
 		.get_template()\
 		.append_static_context("system", "You role-play as the non-player-character.")\
 		.append_static_context("system", "Here is the description of your non-player-character, named '{name}': '{desc}'"
