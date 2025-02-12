@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs00om2w21mk"]
+
+[ext_resource type="Script" path="res://scenes/test/open_ai_chat_test.gd" id="1_sy10k"]
+[ext_resource type="PackedScene" uid="uid://sx7m1m2d04o3" path="res://scenes/components/npc/interactable_npc.tscn" id="2_cbqx0"]
+
+[node name="OpenAiChatTest" type="Node2D"]
+script = ExtResource("1_sy10k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OpenChatUi" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 100)
+offset_right = 150.0
+offset_bottom = 100.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/OpenChatUi"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/OpenChatUi/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Open Chat"
+
+[node name="OpenAiApiKeyUi" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 50)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 150.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/OpenAiApiKeyUi"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/OpenAiApiKeyUi/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter OpenAi API key ..."
+
+[node name="InteractableNpc" parent="." instance=ExtResource("2_cbqx0")]
+formal_name = "Test Tester"
+short_discription = "I am just an object, used for testing the chat manager."
+temporary_reply = "Waiting for OpenAi ..."
+
+[connection signal="pressed" from="CanvasLayer/OpenChatUi/PanelContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="text_submitted" from="CanvasLayer/OpenAiApiKeyUi/PanelContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
