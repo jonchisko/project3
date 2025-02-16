@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cah0y8lt5uy55"]
+
+[ext_resource type="Texture2D" uid="uid://dpge8muke6jip" path="res://scenes/game_objects/player/player.svg" id="1_83j7e"]
+[ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
+[ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="3_vjdjt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bp7gi"]
+radius = 63.0317
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_sls11")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_vjdjt")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_83j7e")
+offset = Vector2(0, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -62)
+shape = SubResource("CircleShape2D_bp7gi")
