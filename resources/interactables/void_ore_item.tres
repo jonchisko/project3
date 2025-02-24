@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://b7xd5asqkebvc"]
+
+[ext_resource type="Resource" uid="uid://dxbt0wul8fjsn" path="res://resources/items/void_ore/void_ore_data.tres" id="1_tvpdt"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_kd6iv"]
+[ext_resource type="Resource" uid="uid://darxk2i0m8qmo" path="res://resources/items/void_ore/void_ore_visual.tres" id="3_xrlfb"]
+
+[resource]
+script = ExtResource("2_kd6iv")
+visual = ExtResource("3_xrlfb")
+data = ExtResource("1_tvpdt")

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameEvents="*res://scenes/autoloads/game_events.gd"
 ChatManager="*res://scenes/autoloads/chat_manager.tscn"
 OpenAiApi="*res://scenes/autoloads/open_ai_api.tscn"
+GameTypes="*res://scenes/autoloads/game_types.gd"
 
 [display]
 
@@ -35,6 +36,10 @@ window/size/mode.debug=0
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
+
+[global_group]
+
+interactable_item_ui="Interactable item ui elements"
 
 [gui]
 
@@ -74,6 +79,11 @@ interact={
 cancel_interact={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+left_click={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(262, 32),"global_position":Vector2(276, 102),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
 ]
 }
 

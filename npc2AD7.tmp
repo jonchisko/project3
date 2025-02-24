@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3eipmgtfl7t8"]
+
+[ext_resource type="Script" path="res://npc.gd" id="1_p36ow"]
+[ext_resource type="Resource" uid="uid://b5lpn30dx3k8" path="res://resources/interactables/no_name_npc.tres" id="2_r8n65"]
+[ext_resource type="PackedScene" uid="uid://br3n6lnm1fp1y" path="res://scenes/components/interactable/interactable.tscn" id="3_ocd51"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3gsot"]
+
+[node name="Npc" type="Node2D"]
+script = ExtResource("1_p36ow")
+interactable_resource = ExtResource("2_r8n65")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Interactable" parent="." instance=ExtResource("3_ocd51")]
+interactable_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(168, 101)
+shape = SubResource("CircleShape2D_3gsot")
