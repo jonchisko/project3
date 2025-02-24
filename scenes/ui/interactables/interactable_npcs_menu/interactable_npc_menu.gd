@@ -19,15 +19,20 @@ func add_interactable(interactable: InteractableArea):
 	npc_ui.selected.connect(self._on_selected_npc.bind(interactable))
 	
 	self.interactables[interactable] = npc_ui
+	
+	super.add_interactable(interactable)
 
 
 func remove_interactable(interactable: InteractableArea):
 	if not self.interactables.has(interactable):
+		super.remove_interactable(interactable)
 		return
 		
 	var npc_ui = self.interactables[interactable]
 	npc_ui.remove_item()
 	self.interactables.erase(interactable)
+	
+	super.remove_interactable(interactable)
 
 
 func _on_selected_npc(interactable: InteractableArea):

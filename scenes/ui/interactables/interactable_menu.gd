@@ -8,8 +8,10 @@ var interactables: Dictionary
 
 
 func add_interactable(interactable: InteractableArea):
-	pass
+	if self.interactables.size() >= 1:
+		self.visible = true
 	
 
 func remove_interactable(interactable: InteractableArea):
-	pass
+	if self.interactables.size() < 1:
+		self.visible = false

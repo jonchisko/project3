@@ -18,6 +18,8 @@ func add_interactable(interactable: InteractableArea):
 	item_ui.selected.connect(self._on_selected_item.bind(interactable))
 	
 	self.interactables[interactable] = item_ui
+	
+	super.add_interactable(interactable)
 
 
 func remove_interactable(interactable: InteractableArea):
@@ -27,6 +29,8 @@ func remove_interactable(interactable: InteractableArea):
 	var item_ui = self.interactables[interactable]
 	item_ui.remove_item()
 	self.interactables.erase(interactable)
+	
+	super.remove_interactable(interactable)
 
 
 func _on_selected_item(interactable: InteractableArea):
