@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7bxrv81whfx"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/items/item.gd" id="1_pioi1"]
+[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_xht3j"]
+[ext_resource type="PackedScene" uid="uid://br3n6lnm1fp1y" path="res://scenes/components/interactable/interactable.tscn" id="2_6qnjy"]
+[ext_resource type="Resource" uid="uid://b7xd5asqkebvc" path="res://resources/interactables/void_ore_item.tres" id="2_8uva8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_betry"]
+size = Vector2(18, 18)
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_pioi1")
+interactable_data = ExtResource("2_8uva8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_xht3j")
+
+[node name="Interactable" parent="." instance=ExtResource("2_6qnjy")]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_betry")

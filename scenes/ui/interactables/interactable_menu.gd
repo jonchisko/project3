@@ -13,5 +13,6 @@ func add_interactable(interactable: InteractableArea):
 	
 
 func remove_interactable(interactable: InteractableArea):
+	print("Make invisible.")
 	if self.interactables.size() < 1:
 		self.visible = false

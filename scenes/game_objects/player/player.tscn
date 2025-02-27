@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cah0y8lt5uy55"]
+[gd_scene load_steps=9 format=3 uid="uid://cah0y8lt5uy55"]
 
-[ext_resource type="Texture2D" uid="uid://dpge8muke6jip" path="res://scenes/game_objects/player/player.svg" id="1_83j7e"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
+[ext_resource type="PackedScene" uid="uid://5aqm5cvym304" path="res://scenes/components/interactable/interactable_detector.tscn" id="3_8nyx6"]
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="3_vjdjt"]
+[ext_resource type="PackedScene" uid="uid://buckjdtxfe0bf" path="res://scenes/components/interactable/interactable_detector_manager.tscn" id="3_wchc7"]
+[ext_resource type="Texture2D" uid="uid://bs86xwp2gk3du" path="res://assets/placeholder_sprites/player_placeholder.png" id="5_82fmp"]
+[ext_resource type="PackedScene" uid="uid://bhk8be5bdwxqv" path="res://scenes/ui/interactables/interactable_items_menu/interactable_items_menu.tscn" id="5_iidxw"]
+[ext_resource type="PackedScene" uid="uid://1brh6u13qggt" path="res://scenes/ui/interactables/interactable_npcs_menu/interactable_npc_menu.tscn" id="6_2iwkn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bp7gi"]
-radius = 63.0317
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 32
@@ -14,10 +18,38 @@ script = ExtResource("1_sls11")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_vjdjt")]
 
+[node name="NpcDetector" type="Node2D" parent="."]
+
+[node name="InteractableDetectorNpcManager" parent="NpcDetector" node_paths=PackedStringArray("interactable_detector", "ui_manager") instance=ExtResource("3_wchc7")]
+interactable_detector = NodePath("../InteractableNpcDetector")
+ui_manager = NodePath("../../HUDCanvasLayer/InteractableNpcMenu")
+
+[node name="InteractableNpcDetector" parent="NpcDetector" instance=ExtResource("3_8nyx6")]
+position = Vector2(0, -6)
+
+[node name="ItemDetector" type="Node2D" parent="."]
+
+[node name="InteractableDetectorItemManager" parent="ItemDetector" node_paths=PackedStringArray("interactable_detector", "ui_manager") instance=ExtResource("3_wchc7")]
+interactable_detector = NodePath("../InteractableItemDetector")
+ui_manager = NodePath("../../HUDCanvasLayer/InteractableItemsMenu")
+
+[node name="InteractableItemDetector" parent="ItemDetector" instance=ExtResource("3_8nyx6")]
+position = Vector2(0, -6)
+collision_mask = 16
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_83j7e")
-offset = Vector2(0, -64)
+position = Vector2(0, -8)
+texture = ExtResource("5_82fmp")
+offset = Vector2(0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -62)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_bp7gi")
+
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InteractableItemsMenu" parent="HUDCanvasLayer" instance=ExtResource("5_iidxw")]
+visible = false
+
+[node name="InteractableNpcMenu" parent="HUDCanvasLayer" instance=ExtResource("6_2iwkn")]
+visible = false

@@ -15,7 +15,3 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_eb53p")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(320, 180)
-zoom = Vector2(0.25, 0.25)

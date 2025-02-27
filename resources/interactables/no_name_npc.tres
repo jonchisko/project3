@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://b5lpn30dx3k8"]
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://b5lpn30dx3k8"]
 
 [ext_resource type="Script" path="res://resources/interactable_resource.gd" id="1_7k6mc"]
 [ext_resource type="Resource" uid="uid://c0x0w4nfync6h" path="res://resources/npcs/no_name/no_name_data.tres" id="1_odte8"]

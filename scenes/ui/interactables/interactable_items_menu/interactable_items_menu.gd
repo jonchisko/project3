@@ -24,9 +24,10 @@ func add_interactable(interactable: InteractableArea):
 
 func remove_interactable(interactable: InteractableArea):
 	if not self.interactables.has(interactable):
+		super.remove_interactable(interactable)
 		return
 		
-	var item_ui = self.interactables[interactable]
+	var item_ui = self.interactables[interactable] as InteractableItemUi
 	item_ui.remove_item()
 	self.interactables.erase(interactable)
 	
@@ -35,7 +36,11 @@ func remove_interactable(interactable: InteractableArea):
 
 func _on_selected_item(interactable: InteractableArea):
 	self.interactables.erase(interactable)
-	interactable_picked.emit(interactable)
+	self.interactable_picked.emit(interactable)
+	
+	super.remove_interactable(interactable) # TODO: this needs to be reworked, it s just called
+	# to make the UI invisible, if you picked last item
+	# otherwise it become invisible, when we leave the area
 
 
 func _on_button_pressed() -> void:

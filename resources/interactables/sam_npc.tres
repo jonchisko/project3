@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://dphomnoj6algs"]
+
+[ext_resource type="Resource" uid="uid://dg7muu8qhnh2f" path="res://resources/npcs/sam/sam_data.tres" id="1_v3xxc"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_lw4lo"]
+[ext_resource type="Resource" uid="uid://e3m535imbxpk" path="res://resources/npcs/no_name/no_name_visual.tres" id="3_68wbf"]
+
+[resource]
+script = ExtResource("2_lw4lo")
+visual = ExtResource("3_68wbf")
+data = ExtResource("1_v3xxc")

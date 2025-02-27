@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://c64dxxyh07sen"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/npcs/npc.gd" id="1_7lua1"]
+[ext_resource type="Texture2D" uid="uid://jfthfc2typdi" path="res://assets/placeholder_sprites/npc_placeholder.png" id="1_hxgka"]
+[ext_resource type="Resource" uid="uid://b5lpn30dx3k8" path="res://resources/interactables/no_name_npc.tres" id="2_8j36e"]
+[ext_resource type="PackedScene" uid="uid://br3n6lnm1fp1y" path="res://scenes/components/interactable/interactable.tscn" id="2_vm2sd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2u5up"]
+size = Vector2(8, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqpie"]
+radius = 14.0357
+
+[node name="Npc" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 39
+script = ExtResource("1_7lua1")
+interactable_data = ExtResource("2_8j36e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_2u5up")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hxgka")
+
+[node name="Interactable" parent="." instance=ExtResource("2_vm2sd")]
+interactable_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_sqpie")

@@ -8,7 +8,7 @@ extends Node
 func _ready() -> void:
 	interactable_detector.interactable_entered.connect(self._on_interactable_area_entered)
 	interactable_detector.interactable_left.connect(self._on_interactable_area_exited)
-	self.ui_manager.interactable_picked.connect(self._on_elements_picked)
+	self.ui_manager.interactable_picked.connect(self._on_element_picked)
 
 
 func _on_element_picked(element: InteractableArea):
