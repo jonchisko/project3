@@ -1,8 +1,5 @@
-extends PanelContainer
+extends InteractableUiBase
 class_name InteractableItemUi
-
-
-signal selected
 
 
 @onready var item_icon: TextureRect = %Icon
@@ -10,11 +7,6 @@ signal selected
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var _disabled = false 
-
-
-func set_data(icon: Texture2D, name: String):
-	self.item_icon.texture = icon
-	self.item_name.text = name
 
 
 func select_item(delay = .0):

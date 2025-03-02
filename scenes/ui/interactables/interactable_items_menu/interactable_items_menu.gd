@@ -1,46 +1,14 @@
 extends InteractableMenu
 
-@onready var item_container: VBoxContainer = %ItemContainer
 
-var _ui_item_scene: PackedScene = preload("res://scenes/ui/interactables/interactable_items_menu/interactable_item_ui.tscn")
-
-
-func add_interactable(interactable: InteractableArea):
-	var item_ui = self._ui_item_scene.instantiate() as InteractableItemUi
-	self.item_container.add_child(item_ui)
-	
-	var item_data = interactable.interactable_data.data as ItemData
-	if item_data == null:
-		printerr("Item data is null, because interactable is not ItemData, but should be. 
-		Means the physical layer masks are incorrect.")
-		
-	item_ui.set_data(interactable.interactable_data.visual.icon, item_data.name)
-	item_ui.selected.connect(self._on_selected_item.bind(interactable))
-	
-	self.interactables[interactable] = item_ui
-	
-	super.add_interactable(interactable)
+func _ready():
+	self.ui_scene = preload("res://scenes/ui/interactables/interactable_items_menu/interactable_item_ui.tscn")
+	self.container = %ItemContainer
 
 
-func remove_interactable(interactable: InteractableArea):
-	if not self.interactables.has(interactable):
-		super.remove_interactable(interactable)
-		return
-		
-	var item_ui = self.interactables[interactable] as InteractableItemUi
-	item_ui.remove_item()
+func _selected_interactable_abstract(interactable: InteractableArea):
 	self.interactables.erase(interactable)
-	
-	super.remove_interactable(interactable)
-
-
-func _on_selected_item(interactable: InteractableArea):
-	self.interactables.erase(interactable)
-	self.interactable_picked.emit(interactable)
-	
-	super.remove_interactable(interactable) # TODO: this needs to be reworked, it s just called
-	# to make the UI invisible, if you picked last item
-	# otherwise it become invisible, when we leave the area
+	self._hide_menu()
 
 
 func _on_button_pressed() -> void:

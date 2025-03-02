@@ -12,12 +12,13 @@ func _ready() -> void:
 
 
 func _on_element_picked(element: InteractableArea):
+	print("Interactor picked!", element.name)
 	GameEvents.interact_with_interactable.emit(element)
 
 
 func _on_interactable_area_entered(interactable_area: InteractableArea) -> void:
-	self.ui_manager.add_interactable(interactable_area)
+	self.ui_manager.show_interactable(interactable_area)
 
 
 func _on_interactable_area_exited(interactable_area: InteractableArea) -> void:
-	self.ui_manager.remove_interactable(interactable_area)
+	self.ui_manager.hide_interactable(interactable_area)
