@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://first_prototype/chat_window.gd" id="1_kwlom"]
 
-
 [node name="ChatWindow" type="PanelContainer"]
 offset_right = 512.0
 offset_bottom = 256.0

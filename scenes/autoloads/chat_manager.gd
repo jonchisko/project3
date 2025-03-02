@@ -16,11 +16,10 @@ func _ready() -> void:
 func _open_chat_window_for(interactable: InteractableArea) -> void:
 	var current_npc_data = interactable.interactable_data.data as NpcData
 	if current_npc_data == null:
-		printerr("Interactable data is not NpcData.")
 		return
 	
 	if self._chat_messenger_instance != null:
-		self._chat_messenger_instance.queue_free()
+		self._chat_messenger_instance.close_chat()
 		
 	self._chat_messenger_instance = self._chat_messenger_ui.instantiate() as ChatMessengerUi
 	self.add_child(self._chat_messenger_instance)
@@ -40,7 +39,7 @@ func _on_player_message_sent(message: String) -> void:
 	if response.successful():
 		var npc_message = response.choices()[0]["message"]["content"]
 		self._gpt_template.append_message("assistant", npc_message)
-		self._chat_messenger_instance.add_chat_element(npc_message)
+		self._chat_messenger_instance.edit_last_chat_element(npc_message)
 	else:
 		self._gpt_template.append_message("system", "<No response from assistant.>")
 
