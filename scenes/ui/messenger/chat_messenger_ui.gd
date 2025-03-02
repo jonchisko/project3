@@ -21,7 +21,6 @@ func _ready():
 	self._panel_container.modulate = Color.TRANSPARENT
 	self.get_tree().paused = true
 	self._animation_player.play("in")
-	#self.add_chat_element("Heeej")
 
 
 func add_chat_element(message: String):
