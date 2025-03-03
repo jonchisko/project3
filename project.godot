@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameEvents="*res://scenes/autoloads/game_events.gd"
 OpenAiApi="*res://scenes/autoloads/open_ai_api.tscn"
 GameTypes="*res://scenes/autoloads/game_types.gd"
+ResourceDictionary="*res://scenes/autoloads/resource_dictionary.tscn"
 
 [display]
 

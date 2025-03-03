@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=4 uid="uid://csy86dvjribq8"]
+[gd_scene load_steps=14 format=4 uid="uid://csy86dvjribq8"]
 
+[ext_resource type="PackedScene" uid="uid://cylw3gxernrkr" path="res://scenes/managers/inventory/inventory_manager.tscn" id="1_kd77s"]
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_va1ot"]
 [ext_resource type="Texture2D" uid="uid://cqqumbn5gu365" path="res://assets/placeholder_sprites/tile_placeholder.png" id="1_w2llx"]
 [ext_resource type="PackedScene" uid="uid://b7bxrv81whfx" path="res://scenes/game_objects/items/item.tscn" id="2_ujvne"]
 [ext_resource type="PackedScene" uid="uid://c64dxxyh07sen" path="res://scenes/game_objects/npcs/npc.tscn" id="3_hx4gn"]
-[ext_resource type="Resource" uid="uid://c2pcjfsskadhs" path="res://resources/interactables/frodo_npc.tres" id="4_c0uix"]
+[ext_resource type="Resource" uid="uid://c2pcjfsskadhs" path="res://resources/interactables/npcs/frodo_npc.tres" id="4_c0uix"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="4_vpimj"]
-[ext_resource type="Resource" uid="uid://rhf325xk7ksc" path="res://resources/interactables/gandalf_npc.tres" id="5_2ctpd"]
+[ext_resource type="Resource" uid="uid://rhf325xk7ksc" path="res://resources/interactables/npcs/gandalf_npc.tres" id="5_2ctpd"]
 [ext_resource type="Script" path="res://scenes/test/api_key_ui_test.gd" id="5_vinhy"]
-[ext_resource type="Resource" uid="uid://cq0gekcrkx4wj" path="res://resources/interactables/legolas_npc.tres" id="6_ftdbp"]
-[ext_resource type="Resource" uid="uid://dphomnoj6algs" path="res://resources/interactables/sam_npc.tres" id="7_vww0k"]
+[ext_resource type="Resource" uid="uid://cq0gekcrkx4wj" path="res://resources/interactables/npcs/legolas_npc.tres" id="6_ftdbp"]
+[ext_resource type="Resource" uid="uid://dphomnoj6algs" path="res://resources/interactables/npcs/sam_npc.tres" id="7_vww0k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1trk"]
 texture = ExtResource("1_w2llx")
@@ -34,6 +35,8 @@ texture = ExtResource("1_w2llx")
 sources/0 = SubResource("TileSetAtlasSource_p1trk")
 
 [node name="PlayerInteractingItemTest" type="Node2D"]
+
+[node name="InventoryManager" parent="." instance=ExtResource("1_kd77s")]
 
 [node name="ChatManager" parent="." instance=ExtResource("1_va1ot")]
 

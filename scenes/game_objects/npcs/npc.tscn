@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/game_objects/npcs/npc.gd" id="1_7lua1"]
 [ext_resource type="Texture2D" uid="uid://jfthfc2typdi" path="res://assets/placeholder_sprites/npc_placeholder.png" id="1_hxgka"]
-[ext_resource type="Resource" uid="uid://b5lpn30dx3k8" path="res://resources/interactables/no_name_npc.tres" id="2_8j36e"]
+[ext_resource type="Resource" uid="uid://b5lpn30dx3k8" path="res://resources/interactables/npcs/no_name_npc.tres" id="2_8j36e"]
 [ext_resource type="PackedScene" uid="uid://br3n6lnm1fp1y" path="res://scenes/components/interactable/interactable.tscn" id="2_vm2sd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u5up"]
