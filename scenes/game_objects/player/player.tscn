@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
 [ext_resource type="PackedScene" uid="uid://5aqm5cvym304" path="res://scenes/components/interactable/interactable_detector.tscn" id="3_8nyx6"]
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="3_vjdjt"]
-[ext_resource type="PackedScene" uid="uid://buckjdtxfe0bf" path="res://scenes/components/interactable/interactable_detector_manager.tscn" id="3_wchc7"]
+[ext_resource type="PackedScene" uid="uid://buckjdtxfe0bf" path="res://scenes/managers/interactor/interactable_detector_manager.tscn" id="3_wchc7"]
 [ext_resource type="Texture2D" uid="uid://bs86xwp2gk3du" path="res://assets/placeholder_sprites/player_placeholder.png" id="5_82fmp"]
 [ext_resource type="PackedScene" uid="uid://bhk8be5bdwxqv" path="res://scenes/ui/interactables/interactable_items_menu/interactable_items_menu.tscn" id="5_iidxw"]
 [ext_resource type="PackedScene" uid="uid://1brh6u13qggt" path="res://scenes/ui/interactables/interactable_npcs_menu/interactable_npc_menu.tscn" id="6_2iwkn"]

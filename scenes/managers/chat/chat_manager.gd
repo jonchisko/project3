@@ -1,5 +1,5 @@
 extends Node
-
+class_name ChatManager
 
 var _chat_messenger_ui: PackedScene = preload("res://scenes/ui/messenger/chat_messenger_ui.tscn")
 var _chat_messenger_instance: ChatMessengerUi = null

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameEvents="*res://scenes/autoloads/game_events.gd"
-ChatManager="*res://scenes/autoloads/chat_manager.tscn"
 OpenAiApi="*res://scenes/autoloads/open_ai_api.tscn"
 GameTypes="*res://scenes/autoloads/game_types.gd"
 
