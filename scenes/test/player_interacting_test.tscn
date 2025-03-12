@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://csy86dvjribq8"]
+[gd_scene load_steps=18 format=4 uid="uid://csy86dvjribq8"]
 
 [ext_resource type="PackedScene" uid="uid://cylw3gxernrkr" path="res://scenes/managers/inventory/inventory_manager.tscn" id="1_kd77s"]
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_va1ot"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="4_vpimj"]
 [ext_resource type="Resource" uid="uid://rhf325xk7ksc" path="res://resources/interactables/npcs/gandalf_npc.tres" id="5_2ctpd"]
 [ext_resource type="Script" path="res://scenes/test/api_key_ui_test.gd" id="5_vinhy"]
+[ext_resource type="Resource" uid="uid://xwuhqshy1fbb" path="res://resources/interactables/items/golden_ring.tres" id="5_yhrgg"]
+[ext_resource type="Resource" uid="uid://dpo842nnox447" path="res://resources/interactables/items/scarf_item.tres" id="6_2mid8"]
 [ext_resource type="Resource" uid="uid://cq0gekcrkx4wj" path="res://resources/interactables/npcs/legolas_npc.tres" id="6_ftdbp"]
+[ext_resource type="Resource" uid="uid://cecn814yrbvgk" path="res://resources/interactables/items/silver_ring_item.tres" id="7_ux1bp"]
 [ext_resource type="Resource" uid="uid://dphomnoj6algs" path="res://resources/interactables/npcs/sam_npc.tres" id="7_vww0k"]
+[ext_resource type="PackedScene" uid="uid://8qrlvu4x0kqk" path="res://scenes/ui/inventory_ui/inventory_menu_ui.tscn" id="12_wfoa8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1trk"]
 texture = ExtResource("1_w2llx")
@@ -36,7 +40,8 @@ sources/0 = SubResource("TileSetAtlasSource_p1trk")
 
 [node name="PlayerInteractingItemTest" type="Node2D"]
 
-[node name="InventoryManager" parent="." instance=ExtResource("1_kd77s")]
+[node name="InventoryManager" parent="." node_paths=PackedStringArray("inventory_ui") instance=ExtResource("1_kd77s")]
+inventory_ui = NodePath("../InventoryMenuUi")
 
 [node name="ChatManager" parent="." instance=ExtResource("1_va1ot")]
 
@@ -54,9 +59,23 @@ position = Vector2(193, 171)
 
 [node name="Item3" parent="Items" instance=ExtResource("2_ujvne")]
 position = Vector2(-127, -17)
+interactable_data = ExtResource("5_yhrgg")
 
 [node name="Item4" parent="Items" instance=ExtResource("2_ujvne")]
-position = Vector2(-127, 6)
+position = Vector2(-45, 164)
+interactable_data = ExtResource("5_yhrgg")
+
+[node name="Item5" parent="Items" instance=ExtResource("2_ujvne")]
+position = Vector2(-20, 164)
+interactable_data = ExtResource("6_2mid8")
+
+[node name="Item6" parent="Items" instance=ExtResource("2_ujvne")]
+position = Vector2(242, -154)
+interactable_data = ExtResource("7_ux1bp")
+
+[node name="Item7" parent="Items" instance=ExtResource("2_ujvne")]
+position = Vector2(-173, -114)
+interactable_data = ExtResource("7_ux1bp")
 
 [node name="Npcs" type="Node" parent="."]
 
@@ -95,5 +114,7 @@ script = ExtResource("5_vinhy")
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
 placeholder_text = "Enter API key"
+
+[node name="InventoryMenuUi" parent="." instance=ExtResource("12_wfoa8")]
 
 [connection signal="text_submitted" from="CanvasLayer/PanelContainer/LineEdit" to="CanvasLayer/PanelContainer" method="_on_line_edit_text_submitted"]

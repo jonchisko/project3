@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://bgc53c8tdemxs"]
+
+[ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_cn6ha"]
+[ext_resource type="Texture2D" uid="uid://cbeaso848hkg3" path="res://assets/placeholder_sprites/silver_ring.png" id="1_tlxpt"]
+
+[resource]
+script = ExtResource("1_cn6ha")
+icon = ExtResource("1_tlxpt")
+world_visual = ExtResource("1_tlxpt")

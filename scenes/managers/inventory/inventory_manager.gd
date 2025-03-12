@@ -1,12 +1,55 @@
 extends Node
 class_name InventoryManager
 
+@export var inventory_ui: InventoryMenuUi
+
 var _inventory: Dictionary = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameEvents.interact_with_interactable.connect(self._on_item_picked_up)
+	
+	self.inventory_ui.item_used.connect(self._on_item_used)
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("inventory") and not inventory_ui.visible:
+		var item_data = self._get_item_data()
+		self.inventory_ui.open_inventory(item_data)
+	
+	if Input.is_action_just_pressed("inventory") and inventory_ui.visible:
+		self.inventory_ui.close_inventory()
+
+
+func _get_item_data() -> Array[Dictionary]:
+	var item_data: Array[Dictionary] = []
+	
+	for inventory_id in self._inventory.keys():
+		var resource = ResourceDictionary.ResourceIdToResource[inventory_id]
+		var visual = resource.visual
+		var data = resource.data
+		
+		item_data.push_back({
+			"icon": visual.icon, 
+			"id": data.id, 
+			"name": data.name, 
+			"description": data.description,
+			"amount": self._inventory[inventory_id]})
+			
+	return item_data
+
+
+func _on_item_used(item_id: String) -> void:
+	if not self._inventory.has(item_id):
+		return
+		
+	self._inventory[item_id] -= 1
+	if self._inventory[item_id] == 0:
+		self._inventory.erase(item_id)
+	
+	print("Item used: ", item_id, ". Firing GameEvent(s) item_used.")
+	GameEvents.item_used.emit(item_id)
 
 
 func _on_item_picked_up(interactable: InteractableArea):

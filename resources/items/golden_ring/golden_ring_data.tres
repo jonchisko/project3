@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://5mted3j2dt8d"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_imfnr"]
+
+[resource]
+script = ExtResource("1_imfnr")
+id = "GoldenRing"
+name = "Golden ring"
+description = "A shiny golden ring with inscription."

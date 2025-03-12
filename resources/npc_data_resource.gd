@@ -5,3 +5,4 @@ class_name NpcData
 @export var name: String = "NoName"
 @export var context: String = "NoContext"
 @export var temporary_reply: String = "Wait, I am thinking ..."
+@export var system_knowledge: Array[String] = []

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://b4m5nxp686un5"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_qa6y4"]
+
+[resource]
+script = ExtResource("1_qa6y4")
+id = "SilverRing"
+name = "Silver ring"
+description = " A common silver ring."

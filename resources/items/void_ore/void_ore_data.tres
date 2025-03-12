@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_qe2hf")
-id = "VoidOreId"
-name = "VoidOre"
+id = "VoidOre"
+name = "Void ore"
+description = "Just void ore."

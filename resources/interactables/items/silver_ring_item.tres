@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://cecn814yrbvgk"]
+
+[ext_resource type="Resource" uid="uid://b4m5nxp686un5" path="res://resources/items/silver_ring/silver_ring_data.tres" id="1_b2u8q"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_r6p2x"]
+[ext_resource type="Resource" uid="uid://cgq3lohq0w2fx" path="res://resources/items/silver_ring/silver_ring_visual.tres" id="3_it4hs"]
+
+[resource]
+script = ExtResource("2_r6p2x")
+visual = ExtResource("3_it4hs")
+data = ExtResource("1_b2u8q")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://de65u4aoep58l"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_ocbj6"]
+
+[resource]
+script = ExtResource("1_ocbj6")
+id = "RedScarf"
+name = "Red scarf"
+description = "A peculiar red scarf."
