@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs00om2w21mk"]
+[gd_scene load_steps=4 format=3 uid="uid://cs00om2w21mk"]
 
 [ext_resource type="Script" path="res://scenes/test/open_ai_chat_test.gd" id="1_sy10k"]
 [ext_resource type="PackedScene" uid="uid://sx7m1m2d04o3" path="res://scenes/components/npc/interactable_npc.tscn" id="2_cbqx0"]
+[ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="2_ttkpk"]
 
 [node name="OpenAiChatTest" type="Node2D"]
 script = ExtResource("1_sy10k")
+
+[node name="ApiManagerTest" type="Node" parent="."]
+
+[node name="ChatManager" parent="." instance=ExtResource("2_ttkpk")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
