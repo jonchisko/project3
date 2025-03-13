@@ -31,7 +31,7 @@ func get_structured_context() -> Array[StructuredMessage]:
 	
 	return contextes
 
-func get_combined_message_data() -> Array[Dictionary]:
+func get_combined_message_data() -> Array:
 	var combined: Array[Dictionary] = []
 	combined = self._static_context + self._message_data
 	return combined
@@ -42,7 +42,7 @@ func append_static_context(role: String, content: String):
 func append_static_context_dictionary(role_content: Dictionary):
 	self._append_message_dictionary(role_content, self._static_context)
 
-func append_static_contexts(static_contexts: Array[Dictionary]):
+func append_static_contexts(static_contexts: Array):
 	for static_context in static_contexts:
 		self.append_static_context_dictionary(static_context)
 
@@ -57,7 +57,7 @@ func prepend_message_dictionary(role_content: Dictionary):
 		return
 	self._message_data.push_front(role_content)
 	
-func prepend_messages(messages: Array[Dictionary]):
+func prepend_messages(messages: Array):
 	for message in messages:
 		self.prepend_message_dictionary(message)
 
@@ -67,7 +67,7 @@ func append_message(role: String, content: String):
 func append_message_dictionary(role_content: Dictionary):
 	self._append_message_dictionary(role_content, self._message_data)
 	
-func append_messages(messages: Array[Dictionary]):
+func append_messages(messages: Array):
 	for message in messages:
 		self.append_message_dictionary(message)
 
@@ -80,10 +80,10 @@ func remove_oldest_message():
 func clear_all_messages():
 	self._message_data.clear()
 
-func _append_message(role: String, content: String, data: Array[Dictionary]) -> void:
+func _append_message(role: String, content: String, data: Array) -> void:
 	data.append({self._role_key: role, self._content_key: content})
 	
-func _append_message_dictionary(role_content: Dictionary, data: Array[Dictionary]) -> void:
+func _append_message_dictionary(role_content: Dictionary, data: Array) -> void:
 	if not role_content.has(self._role_key) or not role_content.has(self._content_key):
 		return
 	data.append(role_content)

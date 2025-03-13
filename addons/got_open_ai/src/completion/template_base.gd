@@ -41,7 +41,7 @@ func append_static_context_dictionary(role_content: Dictionary) -> TemplateBase:
 	self._message_manager.append_static_context_dictionary(role_content)
 	return self
 
-func append_static_contexts(static_contexts: Array[Dictionary]) -> TemplateBase:
+func append_static_contexts(static_contexts: Array) -> TemplateBase:
 	self._message_manager.append_static_contexts(static_contexts)
 	return self
 
@@ -57,7 +57,7 @@ func prepend_message_dictionary(role_content: Dictionary) -> TemplateBase:
 	self._message_manager.prepend_message_dictionary(role_content)
 	return self
 	
-func prepend_messages(messages: Array[Dictionary]) -> TemplateBase:
+func prepend_messages(messages: Array) -> TemplateBase:
 	self._message_manager.prepend_messages(messages)
 	return self
 
@@ -69,7 +69,7 @@ func append_message_dictionary(role_content: Dictionary) -> TemplateBase:
 	self._message_manager.append_message_dictionary(role_content)
 	return self
 	
-func append_messages(messages: Array[Dictionary]) -> TemplateBase:
+func append_messages(messages: Array) -> TemplateBase:
 	self._message_manager.append_messages(messages)
 	return self
 
