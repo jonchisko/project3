@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://je7f8gn4i78q"]
+
+[ext_resource type="Script" path="res://scenes/components/damage/damagable.gd" id="1_vogh3"]
+
+[node name="Damagable" type="Area2D"]
+collision_layer = 128
+collision_mask = 64
+script = ExtResource("1_vogh3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

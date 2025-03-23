@@ -100,6 +100,8 @@ inventory={
 2d_physics/layer_4="Npc"
 2d_physics/layer_5="Item"
 2d_physics/layer_6="Player"
+2d_physics/layer_7="Damagess"
+2d_physics/layer_8="Damagable"
 
 [rendering]
 
