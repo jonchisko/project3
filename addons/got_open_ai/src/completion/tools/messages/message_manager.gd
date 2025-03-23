@@ -53,9 +53,8 @@ func prepend_message(role: String, content: String):
 	self._message_data.push_front({self._role_key: role, self._content_key: content})
 	
 func prepend_message_dictionary(role_content: Dictionary):
-	if not role_content.has(self._role_key) or not role_content.has(self._content_key):
-		return
-	self._message_data.push_front(role_content)
+	var element = self._get_element_from_role_content(role_content)
+	self._message_data.push_front(element)
 	
 func prepend_messages(messages: Array):
 	for message in messages:
@@ -84,6 +83,16 @@ func _append_message(role: String, content: String, data: Array) -> void:
 	data.append({self._role_key: role, self._content_key: content})
 	
 func _append_message_dictionary(role_content: Dictionary, data: Array) -> void:
-	if not role_content.has(self._role_key) or not role_content.has(self._content_key):
-		return
-	data.append(role_content)
+	var element = self._get_element_from_role_content(role_content)
+	data.append(element)
+
+func _get_element_from_role_content(role_content: Dictionary) -> Dictionary:
+	if role_content.size() != 1:
+		printerr("The role_content should be of exactly size one 
+			{'some_role' : 'some_content'}, but was: ", role_content)
+		return {}
+		
+	var role = role_content.keys()[0]
+	var element = {self._role_key: role, self._content_key: role_content[role]}
+	
+	return element

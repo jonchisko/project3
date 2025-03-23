@@ -20,7 +20,7 @@ func test_append_messages() -> void:
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.append_messages([{"role": "test1", "content": "message1"}, {"role": "test2", "content": "message2"}])
+	object_under_test.append_messages([{"test1": "message1"}, {"test2": "message2"}])
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
@@ -34,7 +34,7 @@ func test_append_message_dictionary() -> void:
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.append_message_dictionary({"role": "test", "content": "message"})
+	object_under_test.append_message_dictionary({"test": "message"})
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")
@@ -48,8 +48,8 @@ func test_append_messages_combined_variations() -> void:
 	
 	# Act
 	object_under_test.append_message("test1", "message1")
-	object_under_test.append_messages([{"role": "test2", "content": "message2"}, {"role": "test3", "content": "message3"}])
-	object_under_test.append_message_dictionary({"role": "test4", "content": "message4"})
+	object_under_test.append_messages([{"test2": "message2"}, {"test3": "message3"}])
+	object_under_test.append_message_dictionary({"test4": "message4"})
 	
 	# Assert
 	var messages = object_under_test.messages_to_string()
@@ -81,7 +81,7 @@ func test_append_static_contexts() -> void:
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.append_static_contexts([{"role": "test1", "content": "message1"}, {"role": "test2", "content": "message2"}])
+	object_under_test.append_static_contexts([{"test1": "message1"}, {"test2": "message2"}])
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
@@ -94,7 +94,7 @@ func test_append_static_context_dictionary() -> void:
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.append_static_context_dictionary({"role": "test1", "content": "message1"})
+	object_under_test.append_static_context_dictionary({"test1": "message1"})
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")

@@ -70,8 +70,4 @@ func _create_open_ai_template(npcData: NpcData) -> void:
 	var history_data = self.chatHistory.get_history(npcData.id)
 	if not history_data.is_empty():
 		print("Appending history data: ", history_data)
-		var static_data = []
-		for element in history_data:
-			var key = (element as Dictionary).keys()[0]
-			static_data.push_back({"role": key, "content": element[key]})
-		self._gpt_template.append_static_contexts(static_data)
+		self._gpt_template.append_static_contexts(history_data)
