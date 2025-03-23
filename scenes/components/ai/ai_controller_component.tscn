@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://drhg3plicf04h"]
+
+[ext_resource type="Script" path="res://scenes/components/ai/ai_controller_component.gd" id="1_ml86r"]
+
+[node name="AiControllerComponent" type="Node2D"]
+script = ExtResource("1_ml86r")
+
+[node name="PatrolTimer" type="Timer" parent="."]

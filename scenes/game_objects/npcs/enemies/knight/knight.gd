@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
 @onready var _animation_player = $AnimationPlayer
+@onready var _velocity_component: VelocityComponent = $VelocityComponent
+@onready var _health_component: HealthComponent = $HealthComponent
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self._animation_player.play("idle")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,7 +16,7 @@ func _process(delta):
 
 
 func _on_damagable_damage_detected(amount):
-	$HealthComponent.damage(amount)
+	self._health_component.damage(amount)
 
 
 func _on_health_component_death():

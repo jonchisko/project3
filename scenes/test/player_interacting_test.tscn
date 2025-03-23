@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://csy86dvjribq8"]
+[gd_scene load_steps=21 format=4 uid="uid://csy86dvjribq8"]
 
 [ext_resource type="PackedScene" uid="uid://cylw3gxernrkr" path="res://scenes/managers/inventory/inventory_manager.tscn" id="1_kd77s"]
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_va1ot"]
@@ -18,26 +18,50 @@
 [ext_resource type="Resource" uid="uid://dphomnoj6algs" path="res://resources/interactables/npcs/sam_npc.tres" id="7_vww0k"]
 [ext_resource type="PackedScene" uid="uid://8qrlvu4x0kqk" path="res://scenes/ui/inventory_ui/inventory_menu_ui.tscn" id="12_wfoa8"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dyfgb"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1trk"]
 texture = ExtResource("1_w2llx")
 0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 2:0/0 = 0
+2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 3:0/0 = 0
+3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 0:1/0 = 0
+0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 1:1/0 = 0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 2:1/0 = 0
+2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 3:1/0 = 0
+3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dyfgb")
 0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_0rx2p"]
+physics_layer_0/collision_layer = 2
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_p1trk")
 
 [node name="PlayerInteractingItemTest" type="Node2D"]

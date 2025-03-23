@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuxpryxx0j1rt"]
+
+[ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="1_30ph5"]
+
+[node name="KnightTest" type="Node2D"]
+
+[node name="Knight" parent="." instance=ExtResource("1_30ph5")]
+position = Vector2(224, 150)

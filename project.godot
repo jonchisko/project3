@@ -40,6 +40,7 @@ enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
 [global_group]
 
 interactable_item_ui="Interactable item ui elements"
+player=""
 
 [gui]
 
