@@ -1,8 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://drhg3plicf04h"]
+[gd_scene load_steps=4 format=3 uid="uid://drhg3plicf04h"]
 
 [ext_resource type="Script" path="res://scenes/components/ai/ai_controller_component.gd" id="1_ml86r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ijcci"]
+radius = 148.18
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kaisp"]
+radius = 16.0312
 
 [node name="AiControllerComponent" type="Node2D"]
 script = ExtResource("1_ml86r")
 
 [node name="PatrolTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("CircleShape2D_ijcci")
+debug_color = Color(0.816029, 0.975798, 0.645038, 0.419608)
+
+[node name="StopChasingArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopChasingArea"]
+shape = SubResource("CircleShape2D_kaisp")
+
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_patrol_timer_timeout"]
+[connection signal="area_entered" from="PlayerDetector" to="." method="_on_player_detector_area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="_on_player_detector_area_exited"]
+[connection signal="area_entered" from="StopChasingArea" to="." method="_on_stop_chasing_area_area_entered"]
+[connection signal="area_exited" from="StopChasingArea" to="." method="_on_stop_chasing_area_area_exited"]
