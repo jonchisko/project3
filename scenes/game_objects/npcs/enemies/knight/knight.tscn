@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmyac6yq7afjt"]
+[gd_scene load_steps=21 format=3 uid="uid://dmyac6yq7afjt"]
 
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="1_1cpet"]
 [ext_resource type="Texture2D" uid="uid://cwokvm1nmguej" path="res://assets/sprites/knight/Sword.png" id="1_vfq44"]
@@ -6,15 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://je7f8gn4i78q" path="res://scenes/components/damage/damagable.tscn" id="2_gtqqk"]
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="2_uw7xo"]
 [ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_yd0n0"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vni35"]
-height = 24.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6to2r"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p20k2"]
-radius = 7.0
-height = 20.0
 
 [sub_resource type="Animation" id="Animation_gnwia"]
 length = 0.001
@@ -54,6 +45,10 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6to2r"]
+radius = 12.0
+height = 38.0
 
 [sub_resource type="Animation" id="Animation_g7fpk"]
 resource_name = "attack_strike"
@@ -105,7 +100,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.420827, 0.447396, 0.628193),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(13, -13), Vector2(13, -13), Vector2(13, -13)]
+"values": [Vector2(13, -13), Vector2(-5, -13), Vector2(13, -13)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -130,6 +125,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [SubResource("CapsuleShape2D_6to2r")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DamageArea/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.49066]
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_knb5b"]
@@ -339,14 +346,55 @@ _data = {
 "walk": SubResource("Animation_072x0")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5dsc5"]
+radius = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vni35"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p20k2"]
+radius = 7.0
+height = 20.0
+
 [node name="Knight" type="CharacterBody2D"]
+position = Vector2(76, 62)
+collision_layer = 4
+collision_mask = 2
+platform_floor_layers = 4294967217
+platform_wall_layers = 2
 script = ExtResource("1_vjjto")
+attack_type_sequence = Array[int]([0, 0, 1])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_uw7xo")]
 acceleration = 20000.0
 deacceleration = 20000.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_1cpet")]
+
+[node name="AttackTimerCd" type="Timer" parent="."]
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cx8ax")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_vfq44")
+hframes = 28
+vframes = 8
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(1, -10)
+shape = SubResource("CircleShape2D_5dsc5")
+debug_color = Color(0.388235, 0.580392, 0.552941, 0.203922)
 
 [node name="Damagable" parent="." instance=ExtResource("2_gtqqk")]
 
@@ -359,26 +407,15 @@ debug_color = Color(0.34689, 0.613058, 0.273331, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(13, -13)
+rotation = -3.49066
 shape = SubResource("CapsuleShape2D_6to2r")
 disabled = true
 debug_color = Color(0.871877, 0.268151, 0.569872, 0.42)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_vfq44")
-hframes = 28
-vframes = 8
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_p20k2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_cx8ax")
-}
-
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_area_entered"]
 [connection signal="damage_detected" from="Damagable" to="." method="_on_damagable_damage_detected"]

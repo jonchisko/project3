@@ -1,6 +1,9 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var _velocity_component: VelocityComponent = $VelocityComponent
+@onready var _health_component: HealthComponent = $HealthComponent
+
 
 func _physics_process(delta: float) -> void:
 	var direction = self._get_direction()
@@ -19,3 +22,11 @@ func _get_direction() -> Vector2:
 		direction.y += 1	
 		
 	return direction.normalized()
+
+
+func _on_damagable_damage_detected(amount):
+	_health_component.damage(amount)
+
+
+func _on_health_component_death():
+	self.queue_free()

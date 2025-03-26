@@ -1,12 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://cah0y8lt5uy55"]
+[gd_scene load_steps=12 format=3 uid="uid://cah0y8lt5uy55"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
+[ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="2_euodu"]
 [ext_resource type="PackedScene" uid="uid://5aqm5cvym304" path="res://scenes/components/interactable/interactable_detector.tscn" id="3_8nyx6"]
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="3_vjdjt"]
 [ext_resource type="PackedScene" uid="uid://buckjdtxfe0bf" path="res://scenes/managers/interactor/interactable_detector_manager.tscn" id="3_wchc7"]
 [ext_resource type="Texture2D" uid="uid://bs86xwp2gk3du" path="res://assets/placeholder_sprites/player_placeholder.png" id="5_82fmp"]
 [ext_resource type="PackedScene" uid="uid://bhk8be5bdwxqv" path="res://scenes/ui/interactables/interactable_items_menu/interactable_items_menu.tscn" id="5_iidxw"]
 [ext_resource type="PackedScene" uid="uid://1brh6u13qggt" path="res://scenes/ui/interactables/interactable_npcs_menu/interactable_npc_menu.tscn" id="6_2iwkn"]
+[ext_resource type="PackedScene" uid="uid://je7f8gn4i78q" path="res://scenes/components/damage/damagable.tscn" id="6_y5pw2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7j00b"]
+radius = 6.08276
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bp7gi"]
 radius = 6.0
@@ -15,6 +20,9 @@ radius = 6.0
 collision_layer = 32
 collision_mask = 3
 script = ExtResource("1_sls11")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_euodu")]
+max_health_points = 3
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_vjdjt")]
 
@@ -37,6 +45,13 @@ ui_manager = NodePath("../../HUDCanvasLayer/InteractableItemsMenu")
 position = Vector2(0, -6)
 collision_mask = 16
 
+[node name="Damagable" parent="." instance=ExtResource("6_y5pw2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagable"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_7j00b")
+debug_color = Color(0.257346, 0.619501, 0.398476, 0.42)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("5_82fmp")
@@ -53,3 +68,6 @@ visible = false
 
 [node name="InteractableNpcMenu" parent="HUDCanvasLayer" instance=ExtResource("6_2iwkn")]
 visible = false
+
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="damage_detected" from="Damagable" to="." method="_on_damagable_damage_detected"]
