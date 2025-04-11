@@ -1,7 +1,7 @@
 name: Task
 description: Create a development task with clear purpose and goals
 title: "[TASK] "
-labels: [task]
+labels: [enhancement]
 body:
   - type: markdown
     attributes:
@@ -14,31 +14,42 @@ body:
       label: Description
       description: High-level overview of the task.
       placeholder: |
-        ### Description
-        
         Create the initial version of the game world. The player should be able to move through an environment.
         The system should load and unload different sections of the world dynamically based on player proximity.
+    validations:
+      required: true
+      
+  - type: textarea
+    id: purpose
+    attributes:
+      label: What
+      description: What this task will achieve and why it matters.
+      placeholder: |
+        The player can explore a basic game world.
+    validations:
+      required: true
 
   - type: textarea
     id: purpose
     attributes:
-      label: What and Why
-      description: What this task will achieve and why it matters.
+      label: Why
+      description: Why it matters.
       placeholder: |
-        **What:** The player can explore a basic game world.
-
-        **Why:** This is a foundational part of gameplay and is required before we can implement meaningful content or interactions.
-
+        This is a foundational part of gameplay and is required before we can implement meaningful content or interactions.
+    validations:
+      required: true
+      
   - type: textarea
     id: acceptance
     attributes:
       label: Acceptance Criteria
       description: Clearly define what “done” looks like.
       placeholder: |
-        ### Acceptance Criteria
-
         - [ ] The world is conceptually designed.
         - [ ] A placeholder visual world is implemented.
         - [ ] A system is in place to load/unload sections based on proximity or coordinates.
         - [ ] Basic testing confirms player can explore without performance issues.
         - [ ] A follow-up story is created to replace placeholder art with final assets.
+
+    validations:
+      required: true
