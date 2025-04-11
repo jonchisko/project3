@@ -1,6 +1,6 @@
 name: Bug Report
 description: Report a bug or problem in the game
-title: "[BUG] "
+title: "**[BUG]** "
 labels: [bug]
 body:
   - type: markdown
@@ -13,7 +13,9 @@ body:
     attributes:
       label: Game Version
       placeholder: e.g. v0.2.1
-  
+    validations:
+      required: false
+      
   - type: textarea
     id: steps
     attributes:
@@ -23,21 +25,43 @@ body:
         1. Start game
         2. Click on beehive
         3. Observe crash
+    validations:
+      required: true
 
   - type: textarea
     id: expected
     attributes:
       label: Expected Behavior
       placeholder: What *should* happen?
+    validations:
+      required: true
 
   - type: textarea
     id: actual
     attributes:
       label: Actual Behavior
       placeholder: What *actually* happens?
+    validations:
+      required: true
 
-  - type: input
+  - type: dropdown
     id: platform
     attributes:
       label: Platform / OS
-      placeholder: e.g. Windows 10, Steam Deck, macOS Ventura
+      options: 
+        - Windows
+        - MacOs
+        - Linux
+        - SteamDeck
+        - Xbox
+        - Playstation
+    validations:
+      required: true
+      
+  - type: input
+    id: additional_platform_info
+    attributes:
+      label: Additional Platform Information
+      placeholder: Linux Ubuntu version X
+    validations:
+      required: false
