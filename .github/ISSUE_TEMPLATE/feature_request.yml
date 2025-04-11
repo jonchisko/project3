@@ -14,10 +14,10 @@ body:
       label: Description
       description: What is the feature you'd like to see?
       placeholder: |
-        ### Description
-
         Add a weather system that influences bee behavior and honey production. 
         Rainy days might reduce outside activity, while sunny days improve foraging.
+    validations:
+      required: true
 
   - type: textarea
     id: motivation
@@ -25,8 +25,10 @@ body:
       label: Why is this feature useful?
       description: Explain how this feature benefits gameplay or improves the experience.
       placeholder: |
-        **Why:** It adds atmosphere and gameplay depth, creating more interesting decision-making moments for players. 
+        It adds atmosphere and gameplay depth, creating more interesting decision-making moments for players. 
         Encourages planning and makes the world feel more dynamic.
+    validations:
+      required: true
 
   - type: textarea
     id: acceptance
@@ -34,9 +36,9 @@ body:
       label: Acceptance Criteria
       description: What needs to be implemented for this feature to be considered complete?
       placeholder: |
-        ### Acceptance Criteria
-
-        - Weather system is implemented with at least 2 types: Sunny and Rainy
-        - Weather changes randomly or based on time progression
-        - Bees behave differently depending on weather
-        - Visual indicators (e.g., rain animation, sun overlay)
+        - [ ] Weather system is implemented with at least 2 types: Sunny and Rainy
+        - [ ] Weather changes randomly or based on time progression
+        - [ ] Bees behave differently depending on weather
+        - [ ] Visual indicators (e.g., rain animation, sun overlay)
+    validations:
+      required: true
