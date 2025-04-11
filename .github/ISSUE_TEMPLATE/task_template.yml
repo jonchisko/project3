@@ -20,7 +20,7 @@ body:
       required: true
       
   - type: textarea
-    id: purpose
+    id: purpose_what
     attributes:
       label: What
       description: What this task will achieve and why it matters.
@@ -30,7 +30,7 @@ body:
       required: true
 
   - type: textarea
-    id: purpose
+    id: purpose_why
     attributes:
       label: Why
       description: Why it matters.
