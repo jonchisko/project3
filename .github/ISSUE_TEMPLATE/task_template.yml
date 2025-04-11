@@ -1,7 +1,7 @@
 name: Task
 description: Create a development task with clear purpose and goals
 title: "[TASK] "
-labels: [enhancement]
+labels: [enhancement, task]
 body:
   - type: markdown
     attributes:
