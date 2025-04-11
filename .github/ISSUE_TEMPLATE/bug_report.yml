@@ -15,6 +15,17 @@ body:
       placeholder: e.g. v0.2.1
     validations:
       required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short description of the issue
+      description: Short description of the issue - what is happening?
+      placeholder: |
+        While playing the game and moving around the beehive, everything seems to work just fine, until
+        I initiate the click on the beehive.
+    validations:
+      required: true
       
   - type: textarea
     id: steps
