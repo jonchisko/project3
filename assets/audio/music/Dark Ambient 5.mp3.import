@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgfiwy028lofh"
+path="res://.godot/imported/Dark Ambient 5.mp3-395e900269b0bec7a85bd7a3f1fa90ec.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Dark Ambient 5.mp3"
+dest_files=["res://.godot/imported/Dark Ambient 5.mp3-395e900269b0bec7a85bd7a3f1fa90ec.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
