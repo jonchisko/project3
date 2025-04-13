@@ -1,0 +1,78 @@
+name: Bug Report
+description: Report a bug or problem in the game
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please provide the details below.
+  
+  - type: input
+    id: version
+    attributes:
+      label: Game Version
+      placeholder: e.g. v0.2.1
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short description of the issue
+      description: Short description of the issue - what is happening?
+      placeholder: |
+        While playing the game and moving around the beehive, everything seems to work just fine, until
+        I initiate the click on the beehive.
+    validations:
+      required: true
+      
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: List the exact steps that lead to the bug
+      placeholder: |
+        1. Start game
+        2. Click on beehive
+        3. Observe crash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      placeholder: What *should* happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      placeholder: What *actually* happens?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform / OS
+      options: 
+        - Windows
+        - MacOs
+        - Linux
+        - SteamDeck
+        - Xbox
+        - Playstation
+    validations:
+      required: true
+      
+  - type: input
+    id: additional_platform_info
+    attributes:
+      label: Additional Platform Information
+      placeholder: Linux Ubuntu version X
+    validations:
+      required: false

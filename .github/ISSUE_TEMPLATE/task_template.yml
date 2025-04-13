@@ -1,0 +1,55 @@
+name: Task
+description: Create a development task with clear purpose and goals
+title: "[TASK] "
+labels: [enhancement, task]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill out the details below to clearly define this task.
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: High-level overview of the task.
+      placeholder: |
+        Create the initial version of the game world. The player should be able to move through an environment.
+        The system should load and unload different sections of the world dynamically based on player proximity.
+    validations:
+      required: true
+      
+  - type: textarea
+    id: purpose_what
+    attributes:
+      label: What
+      description: What this task will achieve and why it matters.
+      placeholder: |
+        The player can explore a basic game world.
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose_why
+    attributes:
+      label: Why
+      description: Why it matters.
+      placeholder: |
+        This is a foundational part of gameplay and is required before we can implement meaningful content or interactions.
+    validations:
+      required: true
+      
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Clearly define what “done” looks like.
+      placeholder: |
+        - [ ] The world is conceptually designed.
+        - [ ] A placeholder visual world is implemented.
+        - [ ] A system is in place to load/unload sections based on proximity or coordinates.
+        - [ ] Basic testing confirms player can explore without performance issues.
+        - [ ] A follow-up story is created to replace placeholder art with final assets.
+
+    validations:
+      required: true
