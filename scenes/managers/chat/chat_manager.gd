@@ -60,14 +60,34 @@ func _create_open_ai_template(npcData: NpcData) -> void:
 	OpenAiApi.got_open_ai.user_configuration = user_configuration
 	self._gpt_template = OpenAiApi.got_open_ai.GetGptCompletion()\
 		.get_template()\
-		.append_static_context("system", "You role-play as the non-player-character.")\
-		.append_static_context("system", "Here is the description of your non-player-character, named '{name}': '{desc}'"
-			.format({"name": npcData.name, "desc": npcData.context}))\
-		.append_static_context("system", "Only stay within the knowledge of context and lord of the rings. If the users asks you anything outside of that
-		domain, tell them that you dont know about it. Important: Impersonate the character and do not talk about
-		it in third person.")
+		.append_static_context("system", "You role-play as the non-player-character. Impersonate the chracter and do not talk about the character 
+			itself.")\
+		.append_static_context("system", "This is the context of the world you live in: '{world_context}'.".format({"world_context": ""}))\
+		.append_static_context("system", "The name of your character is '{name}'.
+			The following is your character's life until now: '{life_events}'.
+			This is your character's description (physical and characteristics, ambitions etc.): '{description}'"
+			.format({"name": npcData.name, "life_events": "", "description": npcData.context}))\
+		.append_static_context("system", "This is your current quest: '{quest_title}'. Description of the quest: '{quest_description}'.
+			Quest condition for the reward for the player: '{quest_condition}'. Quest reward, if condition fulfilled: '{quest_reward}'.
+			Do not give the quest to user unless he asks about your ambitions and goals or if you need something done."
+			.format({'quest_title': "", 'quest_description': "", "quest_condition": "", "quest_reward": ""}))
 		
 	var history_data = self.chatHistory.get_history(npcData.id)
 	if not history_data.is_empty():
 		print("Appending history data: ", history_data)
+		self._gpt_template.append_static_context("system", "If you already held any conversation with the user, the history of the conversation 
+			now follows:")
 		self._gpt_template.append_static_contexts(history_data)
+		self._gpt_template.append_static_context("system", "The history of the conversation stops here.")
+		
+	self._gpt_template.append_static_context("system", "Rules: stay within the context of the game world and if the user asks you anything 
+		outside of the domain of
+		the gameworld, tell him or her that you do not know what that is. 
+
+		Here are some example user inputs and your potential outputs:
+		User: Hi! We have talked yesterday already and you had some quest that I have done for you, do you have any new quests for me today?
+		You: Hej [PLAYER_NAME]! Indeed I do! I have lost [ITEM] in the forests north of the town, could you bring them back?
+		You return my [ITEM] and I will reward you with [REWARD]!")
+	
+	print("This is accesing the private properties of the gpt_template, static context:")
+	print(self._gpt_template._message_manager._static_context)
