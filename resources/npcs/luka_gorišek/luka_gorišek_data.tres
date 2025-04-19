@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://blv3lasglu4pw"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_iy4qi"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_ntd0d"]
+
+[resource]
+script = ExtResource("2_ntd0d")
+id = "luka_gorišek"
+name = "Luka Gorišek"
+life_history = "Born: 2160 A.G.
+ Place of Birth: Colnica, Wotlica
+ Parents: Long gone, barely remembered by locals
+No one talks much about why Luka was outcast. Some say he meddled in systems he shouldn’t have. Others say he saw something during the storm season that changed him. Whatever the reason, he was driven from Colnica years ago — not with torches, just silence and closed doors.
+Since then, Luka’s lived in the high woods above the valley. He built a small shelter out of broken satellite panels and old tent cloth. He traps squirrels, eats mossy berries, and stares down toward the village at night. Locals call him mad, but none dare visit.
+He isn’t mad. He listens. To the wind, to the machines in the hills, to the patterns in bird flight and storm static. He knows the land better than anyone, and he’s kept a close eye on the wreck near Colnica — the Mara IX. He knows you’ve come down from the sky, and he’s curious.
+If the player finds Luka and speaks honestly — tells him what happened, what Wotlica looks like now — he listens closely. He might not show it, but he’s been waiting to hear those words.
+And in return, he offers what no one else can: the correct atmospheric re-entry path. He memorized it from an old emergency beacon. The pilot of the Mara IX died in the crash — and without Luka’s knowledge, any launch attempt ends in tragedy.
+Current Location:
+ A secluded camp hidden above the Obli slopes, reachable only by careful navigation or rumor-following.
+"
+description = "Quiet, intense, and strange. Doesn’t ask questions directly. Thinks in loops. But when he speaks, it matters. He may not trust easily, but he doesn’t lie."
+relationships = {
+"bojan_kovač": "Doesn’t trust him. Metal that’s too clean rings false.",
+"franc_petrov": "Has heard the sounds in the mines. Knows they’re not just in Peter’s head.",
+"jure_hauptmann": "Doesn’t know him.",
+"jurij_vindiš": "The only one who brought him food. That mattered.",
+"miha_sitar": "They crossed paths after the exile. No words. Just shared silence and a fire.",
+"peter_rudar": "Respectful distance. Franc believes Peter saw something real in the mines. They don’t talk much, but Franc brings him extra wire or batteries when he has them.",
+"radovan_kolar": "Knows he’s reading the old notes. Is both flattered and cautious.",
+"tanja_draguljič": "No opinion. Loud voices don’t carry far into the woods."
+}
+quest_data = Array[ExtResource("1_iy4qi")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])

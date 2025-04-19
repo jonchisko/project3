@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dbq4nmygrfxbp"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_xah5b"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_g5my8"]
+
+[resource]
+script = ExtResource("2_g5my8")
+id = "peter_rudar"
+name = "Peter Rudar"
+life_history = "Born: 2172 A.G.
+ Place of Birth: Kovkarje, Wotlica
+ Parents: Klavdija and Samo Rudar – fourth-generation miners
+Peter was born into the rock. His family mined before him, and he expected to die with a pick in hand. Even after Kovkarje emptied out, he stayed behind, working the shafts alone with only echoes for company. When that mine collapsed, he walked to Colnica and kept digging.
+For years, he worked the southern tunnels just outside town. Quietly. Reliably. But lately, he refuses to go back in. “There’s something down there,” he says. “Old armor. No voices. Just clanging and watching.” Some laugh it off. Peter doesn’t.
+He claims the mine is cursed — taken over by dark, armored figures he calls “knights.” Not ghosts, not machines. Just something wrong. He doesn’t want it fixed for himself. He wants it safe. “It’s our mine, not theirs.”
+Peter has a stash of Robid cores locked away, salvaged from sealed storage before the tunnels went bad. He’s willing to give one up — but only if someone clears out the mine. Permanently.
+Current Location:
+ Colnica – Stays near the disused depot. Taps rhythms on stone when deep in thought.
+"
+description = "Plainspoken, suspicious, but fair. Doesn’t embellish. If he says he saw something, he saw it. Loyal to a fault if you earn his trust. Quick to walk away if you don’t."
+relationships = {
+"bojan_kovač": "Mutual silence. Trust without words.",
+"franc_petrov": "Sees him as someone who understands the weight of staying.",
+"jure_hauptmann": "Doesn’t know him.",
+"jurij_vindiš": "Brought him food once, years ago. Still remembers.",
+"luka_gorišek": "Has seen him in the fog. Once nodded at each other. That was enough.",
+"miha_sitar": "They share something. What, neither says.",
+"radovan_kolar": "Too many questions. Peter isn’t interested in being someone’s story.",
+"tanja_draguljič": "Thinks she’s too loud, but appreciated her gift."
+}
+quest_data = Array[ExtResource("1_xah5b")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])

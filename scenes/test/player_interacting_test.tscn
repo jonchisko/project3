@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://csy86dvjribq8"]
+[gd_scene load_steps=26 format=4 uid="uid://csy86dvjribq8"]
 
 [ext_resource type="PackedScene" uid="uid://cylw3gxernrkr" path="res://scenes/managers/inventory/inventory_manager.tscn" id="1_kd77s"]
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_va1ot"]
@@ -6,17 +6,81 @@
 [ext_resource type="PackedScene" uid="uid://b7bxrv81whfx" path="res://scenes/game_objects/items/item.tscn" id="2_ujvne"]
 [ext_resource type="PackedScene" uid="uid://c64dxxyh07sen" path="res://scenes/game_objects/npcs/npc.tscn" id="3_hx4gn"]
 [ext_resource type="PackedScene" uid="uid://byn1726bm412e" path="res://scenes/managers/chat/chat_history_services/basic_chat_history_service.tscn" id="3_rhiob"]
-[ext_resource type="Resource" uid="uid://c2pcjfsskadhs" path="res://resources/interactables/npcs/frodo_npc.tres" id="4_c0uix"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="4_vpimj"]
-[ext_resource type="Resource" uid="uid://rhf325xk7ksc" path="res://resources/interactables/npcs/gandalf_npc.tres" id="5_2ctpd"]
 [ext_resource type="TileSet" uid="uid://dae4c45ypgn7j" path="res://resources/test_world_tileset.tres" id="5_8xxla"]
 [ext_resource type="Script" path="res://scenes/test/api_key_ui_test.gd" id="5_vinhy"]
 [ext_resource type="Resource" uid="uid://xwuhqshy1fbb" path="res://resources/interactables/items/golden_ring.tres" id="5_yhrgg"]
 [ext_resource type="Resource" uid="uid://dpo842nnox447" path="res://resources/interactables/items/scarf_item.tres" id="6_2mid8"]
-[ext_resource type="Resource" uid="uid://cq0gekcrkx4wj" path="res://resources/interactables/npcs/legolas_npc.tres" id="6_ftdbp"]
 [ext_resource type="Resource" uid="uid://cecn814yrbvgk" path="res://resources/interactables/items/silver_ring_item.tres" id="7_ux1bp"]
-[ext_resource type="Resource" uid="uid://dphomnoj6algs" path="res://resources/interactables/npcs/sam_npc.tres" id="7_vww0k"]
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="11_irix4"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="12_2dw8c"]
 [ext_resource type="PackedScene" uid="uid://8qrlvu4x0kqk" path="res://scenes/ui/inventory_ui/inventory_menu_ui.tscn" id="12_wfoa8"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="13_rrjmg"]
+[ext_resource type="Resource" uid="uid://e3m535imbxpk" path="res://resources/npcs/no_name/no_name_visual.tres" id="14_di0c4"]
+
+[sub_resource type="Resource" id="Resource_4ll77"]
+script = ExtResource("12_2dw8c")
+id = "frodo"
+name = "Frodo"
+life_history = "NoNameLifeHistory"
+description = "NoNameDescription"
+relationships = {}
+quest_data = Array[ExtResource("11_irix4")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_vfc6x"]
+script = ExtResource("13_rrjmg")
+visual = ExtResource("14_di0c4")
+data = SubResource("Resource_4ll77")
+
+[sub_resource type="Resource" id="Resource_ur3i5"]
+script = ExtResource("12_2dw8c")
+id = "gandalf"
+name = "Gandalf"
+life_history = "NoNameLifeHistory"
+description = "NoNameDescription"
+relationships = {}
+quest_data = Array[ExtResource("11_irix4")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_cdpma"]
+script = ExtResource("13_rrjmg")
+visual = ExtResource("14_di0c4")
+data = SubResource("Resource_ur3i5")
+
+[sub_resource type="Resource" id="Resource_dl4rs"]
+script = ExtResource("12_2dw8c")
+id = "legolas"
+name = "Legolas"
+life_history = "NoNameLifeHistory"
+description = "NoNameDescription"
+relationships = {}
+quest_data = Array[ExtResource("11_irix4")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_wwse4"]
+script = ExtResource("13_rrjmg")
+visual = ExtResource("14_di0c4")
+data = SubResource("Resource_dl4rs")
+
+[sub_resource type="Resource" id="Resource_2fn47"]
+script = ExtResource("12_2dw8c")
+id = "sam"
+name = "Sam"
+life_history = "NoNameLifeHistory"
+description = "NoNameDescription"
+relationships = {}
+quest_data = Array[ExtResource("11_irix4")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_diruh"]
+script = ExtResource("13_rrjmg")
+visual = ExtResource("14_di0c4")
+data = SubResource("Resource_2fn47")
 
 [node name="PlayerInteractingItemTest" type="Node2D"]
 
@@ -67,19 +131,19 @@ interactable_data = ExtResource("7_ux1bp")
 
 [node name="Npc1" parent="Npcs" instance=ExtResource("3_hx4gn")]
 position = Vector2(163, -150)
-interactable_data = ExtResource("4_c0uix")
+interactable_data = SubResource("Resource_vfc6x")
 
 [node name="Npc2" parent="Npcs" instance=ExtResource("3_hx4gn")]
 position = Vector2(237, 134)
-interactable_data = ExtResource("5_2ctpd")
+interactable_data = SubResource("Resource_cdpma")
 
 [node name="Npc3" parent="Npcs" instance=ExtResource("3_hx4gn")]
 position = Vector2(-104, 146)
-interactable_data = ExtResource("6_ftdbp")
+interactable_data = SubResource("Resource_wwse4")
 
 [node name="Npc4" parent="Npcs" instance=ExtResource("3_hx4gn")]
 position = Vector2(-13, 14)
-interactable_data = ExtResource("7_vww0k")
+interactable_data = SubResource("Resource_diruh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

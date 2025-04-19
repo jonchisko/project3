@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://c4dew5ynm335l"]
+
+[ext_resource type="Resource" uid="uid://dfhghhggroos6" path="res://resources/npcs/jure_hauptmann/jure_hauptmann_data.tres" id="1_vmgju"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_maolc"]
+[ext_resource type="Resource" uid="uid://bw21d7mq44v5n" path="res://resources/npcs/jure_hauptmann/jure_hauptmann_visual.tres" id="3_3bkef"]
+
+[resource]
+script = ExtResource("2_maolc")
+visual = ExtResource("3_3bkef")
+data = ExtResource("1_vmgju")

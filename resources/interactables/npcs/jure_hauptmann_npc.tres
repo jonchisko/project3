@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://cauux50wjc8f2"]
+
+[ext_resource type="Resource" uid="uid://oy8k1jkjbdh" path="res://resources/npcs/franc_petrov/franc_petrov_data.tres" id="1_v1gg8"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_urkj5"]
+[ext_resource type="Resource" uid="uid://cab0fx2kpafvn" path="res://resources/npcs/franc_petrov/franc_petrov_visual.tres" id="3_5ntog"]
+
+[resource]
+script = ExtResource("2_urkj5")
+visual = ExtResource("3_5ntog")
+data = ExtResource("1_v1gg8")

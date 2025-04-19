@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://cocgt1amk5i8p"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_fsbay"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_3r3g3"]
+
+[resource]
+script = ExtResource("2_3r3g3")
+id = "miha_sitar"
+name = "Miha Sitar"
+life_history = "Born: 2159 A.G.
+ Place of Birth: Ajdovec, Wotlica
+ Parents: Unknown. Raised by cousins who ran a mechanical grain press.
+Miha once worked maintenance at an old outpost near the Obli Marshlands — back when it still had power and purpose. No one knows the full story, but something went wrong out there. Something that made the other workers vanish or leave without speaking. Miha was the only one who came back.
+He doesn’t talk about it. Just mutters and drinks. Locals say he keeps the entry codes to the outpost, locked in memory and fog. He lives near the edge of Colnica in a leaning shack made from rail panels and old comm dishes. You’ll usually find him at the makeshift tavern or staring into puddles like he’s waiting for them to speak.
+Miha's sharp when sober — sharper than he lets on. Every now and then, when the drink wears off, he’ll mention things no one else remembers: map fragments, old access tunnels, buried lifts. But it never lasts long. The past crawls back in, and the bottle goes back up.
+He doesn’t want saving. He doesn’t want pity. But if someone could actually sober him up long enough, those codes might resurface. Along with truths better left buried.
+Current Location:
+ Colnica – Loiters around the tavern and alleys. Sleeps where he falls.
+"
+description = "Unpredictable. Sometimes charming, sometimes hostile. Carries a haunted edge behind bloodshot eyes. When sober: surprisingly sharp, sarcastic, and even helpful. When drunk: forgetful, defensive, prone to angry nostalgia."
+relationships = {
+"bojan_kovač": "Miha once warned him about “iron that sings wrong.” Bojan still thinks about it.",
+"franc_petrov": "Avoids him. Too steady. Too familiar with grief.",
+"jure_hauptmann": "Doesn’t know him.",
+"jurij_vindiš": "The only person Miha accepts a drink from without suspicion. There’s a long, unspoken history between them.",
+"luka_gorišek": "Might have known each other before the exile. Miha never says.",
+"peter_rudar": "There’s a strange tension between them. They don’t speak, but seem to know something the others don’t.",
+"radovan_kolar": "Sometimes tries to get Miha to talk. Miha sometimes responds in riddles. It’s unclear who’s winning.",
+"tanja_draguljič": "Once got hit with a wrench. Fair."
+}
+quest_data = Array[ExtResource("1_fsbay")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="VisualResource" load_steps=4 format=3 uid="uid://odbgqvghrgla"]
+
+[ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_ikyqg"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iffbx"]
+size = Vector2(16, 16)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s48b3"]
+size = Vector2(16, 16)
+
+[resource]
+script = ExtResource("1_ikyqg")
+icon = SubResource("PlaceholderTexture2D_iffbx")
+world_visual = SubResource("PlaceholderTexture2D_s48b3")

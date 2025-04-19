@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://bnkqy3i1vs3l6"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_7gq8e"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_mv05c"]
+
+[resource]
+script = ExtResource("2_mv05c")
+id = "jurij_vindiš"
+name = "Jurij Vindiš"
+life_history = "Born: 2168 A.G.
+ Place of Birth: Čavn Basin, Wotlica
+ Parents: Marta and Borut Vindiš – tavern keepers
+Jurij was raised behind a counter, learning to cook, listen, and keep the fire going when things got cold. His parents ran a roadside tavern where miners and traders passed through. After the collapse of trade routes, most left. Jurij stayed.
+He moved to Colnica in his thirties and reopened a tavern near the old bazaar. It’s not much, but it’s clean, warm, and open to anyone with good intentions. Jurij doesn’t ask questions he doesn’t need answered. He remembers names, pours fair, and makes room for those who don’t quite fit in.
+He knows how to make a sobering brew from ingredients that don’t grow close together: green blueberries from the Ajd Plain and black honey from hives in the wetter parts near Gozdnik. It’s something his mother used to prepare for old drunks and bitten scouts. He won’t charge for it — but he won’t make it without the ingredients either.
+If asked, he’ll just say, “You bring me the right stuff, I’ll make the right drink.”
+Current Location:
+ Colnica – Runs the tavern on the east side of the plaza.
+"
+description = "Direct, practical, good-humored. Doesn’t dwell on the past but knows it well. Trusts actions more than words. Doesn’t push people, but knows when they need a push."
+relationships = {
+"bojan_kovač": "Solid man. Not many words. Sometimes they share food during late hours.",
+"franc_petrov": "Old drinking companion, though they rarely drink anymore.",
+"jure_hauptmann": "Doesn’t know him.",
+"luka_gorišek": "Once delivered food to his hut, long ago. Luka stared at the sky the whole time.",
+"miha_sitar": "Keeps an eye on him. Knows how far gone he is, and how far he might still go.",
+"peter_rudar": "Used to bring him honey before the mine incident. Wishes someone would believe him.",
+"radovan_kolar": "A deep, trusted friend. Shared a shelter during the great hailstorm of ’92.",
+"tanja_draguljič": "A whirlwind, but he likes her energy. Lets her behind the bar when she wants to experiment."
+}
+quest_data = Array[ExtResource("1_7gq8e")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])

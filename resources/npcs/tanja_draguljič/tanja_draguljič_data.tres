@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dbhy7dqcpvg0q"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_y18pv"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_spfn7"]
+
+[resource]
+script = ExtResource("2_spfn7")
+id = "tanja_draguljič"
+name = "Tanja Draguljič"
+life_history = "Born: 2178 A.G.
+ Place of Birth: Gozdnik, Wotlica
+ Parents: Stana and Milan Draguljič – blacksmith and bonecarver
+Tanja grew up with hammers in her ears and firelight in her eyes. In Gozdnik, where most kids were taught to track beasts or avoid spirits, she learned metalcraft — but turned it into art. While others shaped traps and tools, she cut gems, etched patterns into silver, and carved stories into brooches.
+Ambition pulled her from Gozdnik to Colnica by her mid-twenties. She talks fast, works faster, and doesn’t care much for philosophy. “If it doesn’t sparkle or snap into place, I’m not interested,” she says. But beneath the sharp tongue and confident smirk is someone chasing something rare — a design that means more than beauty.
+She’s obsessed with the rumored blueprints for a piece of jewelry said to channel energy — maybe emotional, maybe electrical, maybe both. The plans were archived in a long-abandoned outpost. Tanja wants them not just to learn, but to prove she’s more than a village goldsmith.
+If she gets them, she promises one thing: she’ll finally fix the cracked smaragd ring Franc wears. Not remake it. Fix it. Properly. “Not out of pity,” she says, “but because broken things deserve their ending.”
+Current Location:
+ Colnica – Runs a loud, busy workshop near the plaza. Smells like heated copper and burnt tea.
+"
+description = "Blunt, witty, impatient with vague talk. Loud laugh. Quick hands. Hates silence unless she’s working. Thinks deeply but never lets it show."
+relationships = {
+"bojan_kovač": "A mix of competition and kinship. Both work with heat and metal. They argue often, but trust each other with tools.",
+"franc_petrov": "Years ago, she traded him a hand-etched clasp in exchange for an old soldering torch he kept in a drawer \"just in case.\" Since then, they’ve had a quiet understanding — not many words, but when they speak, it’s always practical, direct, and weirdly precise. As if they skip past the noise and land straight on the point.",
+"jure_hauptmann": "Doesn’t know him.",
+"jurij_vindiš": "Likes his drinks. Calls him \"old honey hands.” He calls her \"trouble in earrings.\"",
+"luka_gorišek": "Thinks he’s a ghost story. Would probably want to meet him just to prove he’s real.",
+"miha_sitar": "Doesn’t like him. Once threw a wrench at him for grabbing her sleeve uninvited.",
+"peter_rudar": "Offered to build him a charm once. He refused, but thanked her with a very rare chunk of raw ore.",
+"radovan_kolar": "Thinks he hoards knowledge, but still brings him tea when she wants something translated."
+}
+quest_data = Array[ExtResource("1_y18pv")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])

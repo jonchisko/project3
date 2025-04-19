@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dfhghhggroos6"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_sitdb"]
+[ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_ne86b"]
+
+[resource]
+script = ExtResource("2_ne86b")
+id = "jure_hauptmann"
+name = "Jure Hauptmann"
+life_history = "Born: 2170 A.G.
+ Place of Birth: Orbital Hab-7 near Ganymede, Jovian Sector
+ Parents: Dragan and Lijana Hauptmann – industrial chemists turned station maintenance crew
+Jure Hauptmann wasn’t born on a planet — his first steps were taken on alloy grates and his lullabies were sung by the hissing of pressure seals. The Hauptmanns had lived in orbit for generations, drifting from station to station, rarely staying long enough to call any place home. His childhood was spent among tools, ducts, and machine guts — a quiet, focused boy who understood systems better than people.
+By his twenties, he was already a respected deep-space engineer, valued more for his results than his words. He had a habit of fixing things permanently, even when asked for quick patches. It made him friends in emergencies, enemies in management, and eventually led him to the kind of life that suited him best — working on long-haul ships, survey missions, and forgotten corners of known space.
+When the shuttle Mara IX was assigned a surface scan of Wotlica, it was meant to be routine. But a cascading fault in the reactor forced an emergency descent. During the rough landing, the Robid core — the ship’s primary energy system — was cracked beyond safe use. Without it, there’s no chance of leaving the planet.
+Now, Jure and the surviving crew — what little remains of it — have established a small camp near the wreck. Colnica is the nearest sign of civilization, a short walk but a far cry from the world he’s used to. He's spent his days stabilizing life support, salvaging what tech remains, and silently calculating what it would take to rebuild or replace the core.
+He doesn’t talk much about what it means to him — the core, the crash, or even the prospect of leaving. But you can see it in the way he checks the diagnostics every morning. In how he catalogues every component like it’s sacred. In how his hands sometimes tremble just slightly when he thinks no one’s watching.
+For Jure, the Robid core is more than machinery. It’s direction. It’s purpose. It’s a way home — or a reason to keep trying.
+Current Location:
+ A provisional encampment near the crashed shuttle Mara IX, on the outskirts of Colnica. From here, Jure occasionally makes the trek into town for supplies or information, though he prefers to send others when possible.
+"
+description = " Introverted, methodical, and grounded. Jure is a practical man who doesn’t waste time on false hope or dramatic speeches. He values competence, respects persistence, and tends to speak plainly, if at all. Underneath his cool exterior lies a quiet intensity — not emotional, but determined. He’s not trying to save the world. He just wants to fix the thing that broke."
+relationships = {
+"bojan_kovač": "Doesn’t know him.",
+"franc_petrov": "Respects him as a fixer and a relic of another time. Sometimes asks technical questions just to see how Franc would solve them.",
+"jurij_vindiš": "Doesn’t know him.",
+"luka_gorišek": "Doesn’t know him.",
+"miha_sitar": "Doesn’t know him.",
+"peter_rudar": "Doesn’t know him.",
+"radovan_kolar": "Doesn’t know him.",
+"tanja_draguljič": "Doesn’t know her."
+}
+quest_data = Array[ExtResource("1_sitdb")]([])
+temporary_replies = Array[String](["Wait, I am thinking ..."])
+system_knowledge = Array[String]([])
