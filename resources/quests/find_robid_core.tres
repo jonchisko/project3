@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://deftdttx5s261"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_svptm"]
+
+[resource]
+script = ExtResource("1_svptm")
+id = "find_robid_core"
+primary_quest = true
+title = "Obtain the Robid core"
+description = "When the shuttle Mara IX was assigned a surface scan of Wotlica, it was meant to be routine. But a cascading fault in the reactor forced an emergency descent. During the rough landing, the Robid core — the ship’s primary energy system — was cracked beyond safe use. Without it, there’s no chance of leaving the planet."
+condition_expression = "robid_core == 1"
+rewards = ["Game ends."]

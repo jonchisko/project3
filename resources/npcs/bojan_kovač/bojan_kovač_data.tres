@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://c6r1d8dfyq0ii"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://c6r1d8dfyq0ii"]
 
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="1_75uim"]
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_r4ji1"]
+[ext_resource type="Resource" uid="uid://cytd42g0gpe6o" path="res://resources/quests/get_wajvodian_spear_instructions.tres" id="2_1tu7v"]
 
 [resource]
 script = ExtResource("1_75uim")
@@ -28,6 +29,6 @@ relationships = {
 "radovan_kolar": "Doesn’t believe in fairy tales, but those spear plans were too detailed to ignore.",
 "tanja_draguljič": "Sparks fly — in both ways. Sometimes heat, sometimes friction."
 }
-quest_data = Array[ExtResource("1_r4ji1")]([])
+quest_data = Array[ExtResource("1_r4ji1")]([ExtResource("2_1tu7v")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

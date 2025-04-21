@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://cvufkvtsdft2c"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_c60p4"]
+
+[resource]
+script = ExtResource("1_c60p4")
+id = "tell_the_truth"
+primary_quest = false
+title = "Spill the tea"
+description = "If the player finds Luka and speaks honestly — tells him what happened, what Wotlica looks like now — he listens closely. He might not show it, but he’s been waiting to hear those words.And in return, he offers what no one else can: the correct atmospheric re-entry path. He memorized it from an old emergency beacon. The pilot of the Mara IX died in the crash — and without Luka’s knowledge, any launch attempt ends in tragedy."
+condition_expression = "Tell the truth about the current state of the game and village."
+rewards = ["correct_reentry_path"]

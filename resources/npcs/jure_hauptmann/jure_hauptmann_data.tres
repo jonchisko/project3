@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dfhghhggroos6"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=5 format=3 uid="uid://dfhghhggroos6"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_sitdb"]
+[ext_resource type="Resource" uid="uid://uv7ebj6w2oih" path="res://resources/quests/collect_metal_scraps.tres" id="2_l47qm"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_ne86b"]
+[ext_resource type="Resource" uid="uid://deftdttx5s261" path="res://resources/quests/find_robid_core.tres" id="3_pn3lv"]
 
 [resource]
 script = ExtResource("2_ne86b")
@@ -30,6 +32,6 @@ relationships = {
 "radovan_kolar": "Doesn’t know him.",
 "tanja_draguljič": "Doesn’t know her."
 }
-quest_data = Array[ExtResource("1_sitdb")]([])
+quest_data = Array[ExtResource("1_sitdb")]([ExtResource("2_l47qm"), ExtResource("3_pn3lv")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

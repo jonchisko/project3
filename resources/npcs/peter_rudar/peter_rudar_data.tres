@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dbq4nmygrfxbp"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://dbq4nmygrfxbp"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_xah5b"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_g5my8"]
+[ext_resource type="Resource" uid="uid://by1aqsg4ky6h4" path="res://resources/quests/clear_the_mines.tres" id="2_qgor5"]
 
 [resource]
 script = ExtResource("2_g5my8")
@@ -28,6 +29,6 @@ relationships = {
 "radovan_kolar": "Too many questions. Peter isn’t interested in being someone’s story.",
 "tanja_draguljič": "Thinks she’s too loud, but appreciated her gift."
 }
-quest_data = Array[ExtResource("1_xah5b")]([])
+quest_data = Array[ExtResource("1_xah5b")]([ExtResource("2_qgor5")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

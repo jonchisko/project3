@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://oy8k1jkjbdh"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://oy8k1jkjbdh"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_4jhnj"]
+[ext_resource type="Resource" uid="uid://cs4p0pcstrb3" path="res://resources/quests/repair_smaragd_ring.tres" id="2_o2o1i"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_q1cjq"]
 
 [resource]
@@ -33,6 +34,6 @@ relationships = {
 "radovan_kolar": "A strange friendship, built on long silences and rare exchanges. Franc knows Radovan wants the book. He hasn’t given it — not yet. But he hasn’t locked it away either.",
 "tanja_draguljič": "Finds her loud, but honest. Sometimes smiles when she argues with someone in the plaza. Trusts her to repair small metal parts, never asks her to fix the ring."
 }
-quest_data = Array[ExtResource("1_4jhnj")]([])
+quest_data = Array[ExtResource("1_4jhnj")]([ExtResource("2_o2o1i")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

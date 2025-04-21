@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://minbmcuc5bpn"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://minbmcuc5bpn"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_2ixxp"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_6njco"]
+[ext_resource type="Resource" uid="uid://c4auob44tfbpq" path="res://resources/quests/get_book_wotlica.tres" id="2_r6t46"]
 
 [resource]
 script = ExtResource("2_6njco")
@@ -30,6 +31,6 @@ relationships = {
 "peter_rudar": "Finds him unsettling. Once asked Peter to describe what he saw. Peter answered with silence and a very old word Radovan didn’t recognize.",
 "tanja_draguljič": "Calls her “a firebrand with no patience for footnotes.” Likes her spirit, even if she’s loud in the reading room."
 }
-quest_data = Array[ExtResource("1_2ixxp")]([])
+quest_data = Array[ExtResource("1_2ixxp")]([ExtResource("2_r6t46")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

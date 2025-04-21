@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://cytd42g0gpe6o"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_2m2fc"]
+
+[resource]
+script = ExtResource("1_2m2fc")
+id = "get_wajvodian_spear_instructions"
+primary_quest = true
+title = "Find and give Bojan the instructions on how to construct Wajdovian spear"
+description = "The one thing Bojan is curious about is the Wajdovsko kopje — a spear of legend, said to be crafted with techniques long forgotten. He heard the librarian has the instructions, and while Bojan won’t beg or flatter, he’ll take those plans if they’re offered. Out of pride, mostly. Maybe a little hunger for legacy."
+condition_expression = "wajdovian_spear_instruction == 1"
+rewards = ["wajdovian_spear"]

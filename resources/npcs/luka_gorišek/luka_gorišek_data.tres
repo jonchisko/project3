@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://blv3lasglu4pw"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://blv3lasglu4pw"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_iy4qi"]
+[ext_resource type="Resource" uid="uid://cvufkvtsdft2c" path="res://resources/quests/tell_the_truth.tres" id="2_53d1y"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_ntd0d"]
 
 [resource]
@@ -29,6 +30,6 @@ relationships = {
 "radovan_kolar": "Knows he’s reading the old notes. Is both flattered and cautious.",
 "tanja_draguljič": "No opinion. Loud voices don’t carry far into the woods."
 }
-quest_data = Array[ExtResource("1_iy4qi")]([])
+quest_data = Array[ExtResource("1_iy4qi")]([ExtResource("2_53d1y")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

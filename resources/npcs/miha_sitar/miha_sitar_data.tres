@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://cocgt1amk5i8p"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://cocgt1amk5i8p"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_fsbay"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_3r3g3"]
+[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/get_outpost_keycode.tres" id="2_3t2my"]
 
 [resource]
 script = ExtResource("2_3r3g3")
@@ -28,6 +29,6 @@ relationships = {
 "radovan_kolar": "Sometimes tries to get Miha to talk. Miha sometimes responds in riddles. It’s unclear who’s winning.",
 "tanja_draguljič": "Once got hit with a wrench. Fair."
 }
-quest_data = Array[ExtResource("1_fsbay")]([])
+quest_data = Array[ExtResource("1_fsbay")]([ExtResource("2_3t2my")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])

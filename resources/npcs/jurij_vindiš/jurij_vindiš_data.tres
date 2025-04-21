@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://bnkqy3i1vs3l6"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://bnkqy3i1vs3l6"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_7gq8e"]
+[ext_resource type="Resource" uid="uid://nxpbqdvnj0ub" path="res://resources/quests/make_hangover_potion.tres" id="2_gextl"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_mv05c"]
 
 [resource]
@@ -28,6 +29,6 @@ relationships = {
 "radovan_kolar": "A deep, trusted friend. Shared a shelter during the great hailstorm of ’92.",
 "tanja_draguljič": "A whirlwind, but he likes her energy. Lets her behind the bar when she wants to experiment."
 }
-quest_data = Array[ExtResource("1_7gq8e")]([])
+quest_data = Array[ExtResource("1_7gq8e")]([ExtResource("2_gextl")])
 temporary_replies = Array[String](["Wait, I am thinking ..."])
 system_knowledge = Array[String]([])
