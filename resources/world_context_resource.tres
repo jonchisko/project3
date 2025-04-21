@@ -1,0 +1,81 @@
+[gd_resource type="Resource" script_class="WorldContextResource" load_steps=2 format=3 uid="uid://cnjdkxfm2l5ws"]
+
+[ext_resource type="Script" path="res://resources/world_context_resource.gd" id="1_8vm41"]
+
+[resource]
+script = ExtResource("1_8vm41")
+documents = Array[String](["The World of Wotlica – A Fading Frontier
+Colonization Date:
+Wotlica was first colonized in the year 2047 A.G. (After Galactic Union), during the Third Expansion Phase of human settlement beyond the Core Worlds. The planet, chosen for its mild climate, mineral-rich crust, and abundant freshwater, was seen as a prime candidate for long-term agricultural and scientific outposts.
+Reason for Colonization:
+Initial colonization was driven by a coalition of mid-tier planetary corporations and academic institutions hoping to turn Wotlica into a model frontier. Terraforming wasn’t necessary; the planet was already biologically compatible, though filled with strange flora and large, flightless creatures resembling elk and jackals. Settlements were established in the fertile uplands of Cavn Basin and along the rivers running down from Mount Nanos and Obli Peak.
+Rise and Decline: 
+For the first century, Wotlica thrived. Towns like Nova Idrija, Ajdovec, and Kovkarje grew as trade hubs, exporting minerals, processed wood, and exotic biological compounds. However, Wotlica's distance from major trade lanes and the rapid development of artificial resource worlds made it increasingly obsolete.
+By 2180 A.G., most corporate interests had withdrawn. Interstellar attention drifted elsewhere. The Galactic Union de-listed Wotlica from strategic relevance in 2192 A.G., and without subsidies, most settlers either left or consolidated into small self-sustaining communities.
+Today, Wotlica is mostly forgotten — a planet of weathered towns, overgrown rail lines, and proud people living off the land and each other. The few who remain remember the old dreams with a mix of reverence and bitterness.
+", "Modern Settlements
+Colnica
+Once Wotlica’s beating heart of commerce — sitting at the crossroad of upland trade routes and rail lines. Its central bazaar sold everything from refurbished AI cores to fermented Obli berries. As offworld trade died, so did its prosperity.
+ Today: A melancholic trading post where wandering merchants trade scrap and stories. Many storefronts stand empty, machines rusting in place.
+Predmesa
+Founded by idealists and professors from Earth’s ecological universities, Predmesa was always more philosophical than practical. They sought to live in harmony with native life and established eco-temples, stone observatories, and open-air schools.
+ Today: A community of artisans, thinkers, and storytellers. Many still speak in the dialect of the First Landing. Their crafts are prized in nearby towns — particularly their leatherwork and glass.
+Gozdnik
+Built near the ancient Golaki Wilds, Gozdnik was always a rough place. It grew around logging camps and outposts for game wardens hunting dangerous beasts. The people of Gozdnik are known for their superstition and closeness to the land.
+ Today: A rugged settlement known for woodcraft, hunting, and folktales. Locals speak of spirits and intelligent animals. Outsiders are treated with suspicion unless they prove useful.
+Nova Idrija
+Constructed around Wotlica’s only orbital-access spaceport. Nova Idrija became the planet’s de facto capital after the First Abandonment. With its concrete towers and underground tram lines, it once resembled a small Core World city.
+ Today: A slowly crumbling metropolis. The spaceport still functions, but only for regional travel. Local guilds and councils govern in place of any interstellar authority. A place where you can still buy synthetic coffee… if you can afford it.
+Ajdovec
+Originally built as an agricultural colony focused on large-scale food production, Ajdovec suffered when the soil began to dry and trade dried up.
+ Today: Mostly abandoned, though a few families still maintain greenhouses. Its ancient irrigation towers now serve as nesting places for wild birds and Polziči.
+Kovkarje
+Once a mining outpost nestled at the base of the Nanos cliffs. The town flourished briefly during the Zvonit Boom. When the mines dried, the workers left.
+ Today: Completely deserted, save for the occasional scavenger. Stories claim one old man still lives there, speaking to the machines.", "Flora of Wotlica
+Wotlica’s plant life is dense and rugged — shaped by centuries of highland winds, acidic rains, and deep loamy soil. Native vegetation coexists with Earth imports, though in many areas, one has overtaken the other.
+Notable Flora:
+Brezava Vela (“Tall Birch”) – Towering white-barked trees native to the Obli uplands, resembling Earth birch but with curling, pale violet leaves that shimmer in dry wind. Their wood is prized for its flexibility and low resonance — used in musical instruments and old communication boxes.
+Rdeči Mah (“Red Moss”) – A thick, crimson moss that grows on stone, metal, and even live animals in damp regions like Gozdnik and Čavn Hollow. Its spongy surface retains moisture and was once used in field dressings during the early settlement wars.
+Zlati Šipk (“Golden Hipthorn”) – A thorny shrub introduced from Earth that thrived in Wotlica’s alkaline soil. Its golden-orange berries are mildly narcotic and brewed into a calming tea by locals.
+Jelkapec – A squat, broad-needled conifer with bioluminescent sap. Grown mostly in Golaki Ridge. Rumors persist that some emit low-frequency humming when the wind is right.
+", "Fauna of Wotlica
+The fauna of Wotlica has evolved to be cautious, hardy, and opportunistic. While some native creatures are massive and territorial, others thrive in the abandoned outskirts of human towns. Earth animals — intentionally introduced or escaped from farming facilities — have also spread and, in some cases, merged genetically with local species.
+Notable Fauna:
+Kraljvolk (“King Wolf”) – A massive predator once native to the Čaven plateau. Lean, long-limbed, with pale grey fur and a golden undercoat. Highly intelligent and rarely seen. Now endangered.
+Skokjar – Rabbit-like creatures with long back legs and antler-like cartilage growths. Known for erratic movement and high-pitched calls. Often hunted for meat.
+Dimjasti Srnjad (“Smokedeer”) – Descendants of Earth deer species, these creatures have developed smoky grey coats and emit an oily scent when threatened. They move silently in herds and are revered in Colnica folklore.
+Žužkopas – Insect-dog hybrids, the result of failed genetic pest control programs. These chitin-skinned scavengers swarm in packs and are usually found in the ruins near Nova Idrija.
+Polziči – Cat-sized snails with colorful shells and mild toxins. Harmless to humans, but ruinous to crops. Kids keep them as pets.", "Minerals & Resources
+Wotlica’s underground wealth was a major reason for its colonization — but much of it has since been depleted or become unprofitable to extract. Still, small-scale mining continues, especially in the Nanos range and near Ajdovec.
+Notable Minerals:
+Ajdolite – A pale blue crystal used in early energy cell containment. Now mostly obsolete, but still collected for trade and jewelry.
+Zvonit (“Bell Ore”) – A dense, silvery metal that chimes when struck. Found in Nanos highlands. Once thought to have resonance properties useful in early quantum communication devices.
+Mahkren – A rare mineral that forms sponge-like clusters with magnetic properties. Dangerous in large amounts, but useful in old-world tech.
+Volja Dust – A fine, glittering particulate found only in narrow seams near Predmesa. Mildly psychotropic when inhaled; banned in most settlements but sought by fringe mystics and artists.", "Biomes & Weather Patterns
+
+Wotlica is a temperate planet with highland-dominated geography and strong seasonal changes. Weather is unpredictable, especially in elevated areas, where storms can sweep across the land in minutes. Most settlements are built on plateaus, ridges, or nestled in valleys to avoid the worst of the wind and erosion.
+Biomes:
+1. Nanons Highlands
+Wind-beaten ridges, icy winters, and sparse conifer forests.
+Home to Jelkapec trees, old military relay towers, and small herder communities.
+Kraljvolk sightings are most common here.
+The highest peak of Wotlica resides here, Nanos.
+2. Golaki Wilds
+Dense, misty forest dominated by massive ferns and moss-draped trees.
+Often soaked in rain; fungi thrives here.
+Inhabited by hunters, herbalists, and isolationist sects.
+3. Čavn Basin
+Broad valleys and mineral-rich hills.
+Agriculture-heavy, dotted with abandoned mines and slowly dying towns.
+Known for its colorful stone formations and “ringing” caves of Zvonit ore.
+Highest peak of the basin is Čavn.
+4. Ajd Plain
+Once a great breadbasket of Wotlica.
+Now patchy farmland, partly reclaimed by nature.
+Occasional dust storms sweep through in spring, carrying pollen and ash from long-dead forests.
+5. Obli Marshlands
+Mysterious wetland stretching between Gozdnik and Kovkarje.
+Hosts unique insect life and whispering reeds.
+Avoided by most, though mystics claim it's “alive.”
+Almost in the center of the marshes, the rounded top of Obli peak can be seen.
+"])

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://c3beymx8b36tq"]
 
-[ext_resource type="Resource" uid="uid://c6r1d8dfyq0ii" path="res://resources/npcs/bojan_kovač/bojan_kovač_data.tres" id="1_g0540"]
+[ext_resource type="Resource" uid="uid://oy8k1jkjbdh" path="res://resources/npcs/franc_petrov/franc_petrov_data.tres" id="1_6eoj1"]
 [ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_at361"]
-[ext_resource type="Resource" uid="uid://odbgqvghrgla" path="res://resources/npcs/bojan_kovač/bojan_kovač_visual.tres" id="3_hwhdx"]
+[ext_resource type="Resource" uid="uid://cab0fx2kpafvn" path="res://resources/npcs/franc_petrov/franc_petrov_visual.tres" id="3_4hv4q"]
 
 [resource]
 script = ExtResource("2_at361")
-visual = ExtResource("3_hwhdx")
-data = ExtResource("1_g0540")
+visual = ExtResource("3_4hv4q")
+data = ExtResource("1_6eoj1")

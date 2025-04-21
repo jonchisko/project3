@@ -34,7 +34,7 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 func _on_player_message_sent(message: String) -> void:
 	self._gpt_template.append_message("user", message)
 	
-	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_reply)
+	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies[0])
 	var response = await self._gpt_template.get_reply()
 	
 	print("STATIC CONTEXT")
@@ -58,19 +58,30 @@ func _create_open_ai_template(npcData: NpcData) -> void:
 	# TODO insert history context from HistoryManager?!
 	var user_configuration = UserConfiguration.new(self.apiKey)
 	OpenAiApi.got_open_ai.user_configuration = user_configuration
+	
+	var world_context: String = self._get_world_context()
+	var current_quest: QuestResource = npcData.quest_data[0]
+	
 	self._gpt_template = OpenAiApi.got_open_ai.GetGptCompletion()\
 		.get_template()\
 		.append_static_context("system", "You role-play as the non-player-character. Impersonate the chracter and do not talk about the character 
 			itself.")\
-		.append_static_context("system", "This is the context of the world you live in: '{world_context}'.".format({"world_context": ""}))\
-		.append_static_context("system", "The name of your character is '{name}'.
+		.append_static_context("system", "This is the context of the world you live in: '{world_context}'.".format({"world_context": world_context}))\
+		.append_static_context("system", "The id of your character is '{id}' and the name of your character is '{name}'.
 			The following is your character's life until now: '{life_events}'.
 			This is your character's description (physical and characteristics, ambitions etc.): '{description}'"
-			.format({"name": npcData.name, "life_events": "", "description": npcData.context}))\
-		.append_static_context("system", "This is your current quest: '{quest_title}'. Description of the quest: '{quest_description}'.
+			.format({"id": npcData.id, "name": npcData.name, "life_events": npcData.life_history, "description": npcData.description}))\
+		.append_static_context("system", "These are your relationships with other characters in the game world: '{relationships}'.".format({
+			"relationships": npcData.relationships}))\
+		.append_static_context("system", "This is your current quest, id: '{quest_id}', title: '{quest_title}'. Description of the quest: '{quest_description}'.
 			Quest condition for the reward for the player: '{quest_condition}'. Quest reward, if condition fulfilled: '{quest_reward}'.
 			Do not give the quest to user unless he asks about your ambitions and goals or if you need something done."
-			.format({'quest_title': "", 'quest_description': "", "quest_condition": "", "quest_reward": ""}))
+			.format({
+				"quest_id": current_quest.id,
+				"quest_title": current_quest.title, 
+				"quest_description": current_quest.description, 
+				"quest_condition": current_quest.condition_expression, 
+				"quest_reward": current_quest.rewards[0]}))
 		
 	var history_data = self.chatHistory.get_history(npcData.id)
 	if not history_data.is_empty():
@@ -91,3 +102,28 @@ func _create_open_ai_template(npcData: NpcData) -> void:
 	
 	print("This is accesing the private properties of the gpt_template, static context:")
 	print(self._gpt_template._message_manager._static_context)
+
+
+func _get_world_context() -> String:
+	var world_context = self._load_world_context()
+	
+	if world_context == null:
+		printerr("WorldContextResource is null, returning empty string.")
+		return ""
+	
+	var combined_documents = ""
+	for document in world_context.documents:
+		combined_documents += document
+	
+	return combined_documents
+	
+
+func _load_world_context() -> WorldContextResource:
+	var path = "res://resources/world_context_resource.tres"
+	var resource = ResourceLoader.load(path, "WorldContextResource")
+	
+	if resource == null:
+		printerr("WorldContextResource could not be loaded.")
+		return null
+		
+	return resource

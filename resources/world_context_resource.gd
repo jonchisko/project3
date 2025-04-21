@@ -1,4 +1,4 @@
 extends Resource
 class_name WorldContextResource
 
-@export var documents: Array[String] = []
+@export_multiline var documents: Array[String] = []
