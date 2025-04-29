@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhpuyrt7r605i"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/music/background_music_player.gd" id="1_8ghbt"]
+[ext_resource type="AudioStream" uid="uid://c76o4wqp8h50q" path="res://assets/audio/music/Ambient 1.mp3" id="2_btpyq"]
+
+[node name="BackgroundMusicPlayer" type="Node" groups=["music"]]
+process_mode = 3
+script = ExtResource("1_8ghbt")
+music = ExtResource("2_btpyq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

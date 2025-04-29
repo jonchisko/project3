@@ -5,4 +5,4 @@ extends PanelContainer
 
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
-	chat_manager.apiKey = self.line_edit.text
+	OpenAiConfiguration.open_ai_api_key = self.line_edit.text

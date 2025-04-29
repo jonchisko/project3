@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgrpg82h0ngev"]
+
+[ext_resource type="Script" path="res://scenes/managers/pause_manager/pause_manager.gd" id="1_l7bej"]
+[ext_resource type="PackedScene" uid="uid://8oueelfqnsuj" path="res://scenes/ui/menu/popup_object.tscn" id="2_ea70x"]
+
+[node name="PauseManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_l7bej")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PopupObject" parent="CanvasLayer" instance=ExtResource("2_ea70x")]
+visible = false
+title = "PAUSED"

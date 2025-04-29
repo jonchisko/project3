@@ -1,0 +1,347 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjweu5sju1r0q"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/options_menu.gd" id="1_5yi0t"]
+[ext_resource type="Script" path="res://scenes/ui/menu/options_tab_container.gd" id="2_m14l7"]
+[ext_resource type="PackedScene" uid="uid://bucl1s8eaacb1" path="res://scenes/ui/button/audio_button.tscn" id="3_xjg4v"]
+[ext_resource type="AudioStream" uid="uid://c5yo36w4k7125" path="res://assets/audio/ui/click4.ogg" id="4_nxb77"]
+[ext_resource type="AnimationLibrary" uid="uid://clkwayymrxjft" path="res://assets/animations_ui/global_ui.res" id="5_ghfxx"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5yi0t")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_right = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+script = ExtResource("2_m14l7")
+
+[node name="VideoOptions" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/VideoOptions"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/VideoOptions/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/VideoOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Video display mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScreenModeButton" parent="TabContainer/VideoOptions/MarginContainer/VBoxContainer" instance=ExtResource("3_xjg4v")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Windowed Mode"
+
+[node name="AudioOptions" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/AudioOptions"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/AudioOptions/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Master volume"
+
+[node name="MasterSlider" type="HSlider" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "SFX volume"
+
+[node name="SfxSlider" type="HSlider" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Game music volume"
+
+[node name="GameMusicSlider" type="HSlider" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+
+[node name="MarginContainer4" type="MarginContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Main menu music volume"
+
+[node name="MenuMusicSlider" type="HSlider" parent="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+
+[node name="OpenAiOptions" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="OpenAiApiKey" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
+layout_mode = 2
+text = "Your OpenAi API key"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenAiApiTextEdit" type="LineEdit" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter your OpenAi API key and press enter ..."
+
+[node name="OpenAiProjectSettings" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Open AI Project 3 Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenAiProjectSettingsVBox" type="VBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ToDoOptions"
+
+[node name="AudioButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer" instance=ExtResource("3_xjg4v")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TodoButton"
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ToDoOptions"
+
+[node name="AudioButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer" instance=ExtResource("3_xjg4v")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TodoButton"
+
+[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ToDoOptions"
+
+[node name="AudioButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer" instance=ExtResource("3_xjg4v")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TodoButton"
+
+[node name="MarginContainer4" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ToDoOptions"
+
+[node name="AudioButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer" instance=ExtResource("3_xjg4v")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TodoButton"
+
+[node name="MarginContainer5" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ToDoOptions"
+
+[node name="AudioButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5/HBoxContainer" instance=ExtResource("3_xjg4v")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TodoButton"
+
+[node name="MainMenu" parent="." instance=ExtResource("3_xjg4v")]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 226.0
+offset_top = -31.0
+offset_right = 306.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Main Menu"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nxb77")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("5_ghfxx")
+}
+
+[connection signal="tab_clicked" from="TabContainer" to="." method="_on_tab_container_tab_clicked"]
+[connection signal="pressed" from="TabContainer/VideoOptions/MarginContainer/VBoxContainer/ScreenModeButton" to="." method="_on_screen_mode_button_pressed"]
+[connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/GameMusicSlider" to="." method="_on_game_music_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer4/HBoxContainer/MenuMusicSlider" to="." method="_on_menu_music_slider_value_changed"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer/OpenAiApiTextEdit" to="." method="_on_open_ai_api_text_edit_text_submitted"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]

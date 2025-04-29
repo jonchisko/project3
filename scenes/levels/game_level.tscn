@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck8ptk4sat71v"]
+
+[ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="1_37tyi"]
+[ext_resource type="AudioStream" uid="uid://duxf2fpimnk88" path="res://assets/audio/music/Ambient 3.mp3" id="2_bw8by"]
+[ext_resource type="PackedScene" uid="uid://cgrpg82h0ngev" path="res://scenes/managers/pause_manager/pause_manager.tscn" id="3_hlahm"]
+[ext_resource type="PackedScene" uid="uid://dqmfol7lf07ex" path="res://scenes/ui/effects/vignette.tscn" id="4_ma2cu"]
+
+[node name="GameLevel" type="Node2D"]
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("1_37tyi")]
+music = ExtResource("2_bw8by")
+bus = "GameMusic"
+
+[node name="PauseManager" parent="." instance=ExtResource("3_hlahm")]
+
+[node name="Vignette" parent="." instance=ExtResource("4_ma2cu")]

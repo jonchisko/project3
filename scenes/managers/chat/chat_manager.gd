@@ -8,7 +8,7 @@ var _current_npc_data: NpcData
 var _gpt_template: TemplateBase
 
 @export var chatHistory: ChatHistory
-@export var apiKey: String = ""
+
 
 func _ready() -> void:
 	GameEvents.interact_with_interactable.connect(self._open_chat_window_for)
@@ -56,7 +56,7 @@ func _on_player_message_sent(message: String) -> void:
 
 func _create_open_ai_template(npcData: NpcData) -> void:
 	# TODO insert history context from HistoryManager?!
-	var user_configuration = UserConfiguration.new(self.apiKey)
+	var user_configuration = UserConfiguration.new(OpenAiConfiguration.open_ai_api_key)
 	OpenAiApi.got_open_ai.user_configuration = user_configuration
 	
 	var world_context: String = self._get_world_context()

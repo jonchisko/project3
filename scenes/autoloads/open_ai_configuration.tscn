@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgcvubkl1monn"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/open_ai_configuration.gd" id="1_a6ytu"]
+
+[node name="OpenAiConfiguration" type="Node"]
+script = ExtResource("1_a6ytu")
