@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b511fuye2e1ce"]
+
+[ext_resource type="Script" path="res://scenes/components/areas/floor_area.gd" id="1_w2gxk"]
+[ext_resource type="AudioStream" uid="uid://bhmnn7hiisbby" path="res://assets/audio/game/footstep_carpet_000.ogg" id="2_ns5gh"]
+
+[node name="FloorArea" type="Area2D"]
+script = ExtResource("1_w2gxk")
+_foot_step_sound = ExtResource("2_ns5gh")

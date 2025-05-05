@@ -1,8 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bg1t6u3inksgs"]
+[gd_scene load_steps=12 format=3 uid="uid://bg1t6u3inksgs"]
 
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_m5gg4"]
+[ext_resource type="Texture2D" uid="uid://dpw5qdyui6p15" path="res://assets/sprites/animals/basic_animals/Basic Animal Animations/Clucking Chicken/CluckingChicken.png" id="2_hh0qb"]
+[ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_kx5cg"]
+[ext_resource type="PackedScene" uid="uid://b511fuye2e1ce" path="res://scenes/components/areas/floor_area.tscn" id="4_ancuh"]
+[ext_resource type="AudioStream" uid="uid://cbyhgkc5gd3qe" path="res://assets/audio/game/footstep_concrete_000.ogg" id="5_palu5"]
+[ext_resource type="Texture2D" uid="uid://wkck2e0x62mo" path="res://assets/sprites/tilesets/TX Tileset Wall.png" id="6_1m8sw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eb53p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tl1wt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wq2bh"]
+size = Vector2(71, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i83ks"]
+size = Vector2(102, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkm5p"]
+size = Vector2(128, 62)
 
 [node name="PlayerMovementTest" type="Node2D"]
 
@@ -15,3 +31,69 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_eb53p")
+
+[node name="DamageBox" type="Sprite2D" parent="."]
+position = Vector2(537, 258)
+texture = ExtResource("2_hh0qb")
+hframes = 4
+
+[node name="DamageArea" parent="DamageBox" instance=ExtResource("3_kx5cg")]
+damage_amount = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox/DamageArea"]
+shape = SubResource("CircleShape2D_tl1wt")
+
+[node name="FloorArea1" parent="." instance=ExtResource("4_ancuh")]
+position = Vector2(463, 107)
+_foot_step_sound = ExtResource("5_palu5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorArea1"]
+position = Vector2(25.5, 22.5)
+shape = SubResource("RectangleShape2D_wq2bh")
+
+[node name="FloorArea2" parent="." instance=ExtResource("4_ancuh")]
+position = Vector2(163, 52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorArea2"]
+position = Vector2(41, 39.5)
+shape = SubResource("RectangleShape2D_i83ks")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(118, 256)
+collision_layer = 2
+collision_mask = 36
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+texture = ExtResource("6_1m8sw")
+region_enabled = true
+region_rect = Rect2(32, 192, 128, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_dkm5p")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(441, 258)
+collision_layer = 2
+collision_mask = 36
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+texture = ExtResource("6_1m8sw")
+region_enabled = true
+region_rect = Rect2(32, 192, 128, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource("RectangleShape2D_dkm5p")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(521, 124)
+rotation = -1.57079
+collision_layer = 2
+collision_mask = 36
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+texture = ExtResource("6_1m8sw")
+region_enabled = true
+region_rect = Rect2(32, 192, 128, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+shape = SubResource("RectangleShape2D_dkm5p")

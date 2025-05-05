@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/components/interactable/interactable_detector.gd" id="1_otgpf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7clc4"]
-radius = 32.0
+radius = 45.0111
 
 [node name="InteractableDetector" type="Area2D"]
 collision_layer = 32
