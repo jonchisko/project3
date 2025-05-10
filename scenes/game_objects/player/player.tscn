@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cah0y8lt5uy55"]
+[gd_scene load_steps=35 format=3 uid="uid://cah0y8lt5uy55"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="2_euodu"]
@@ -9,7 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://1brh6u13qggt" path="res://scenes/ui/interactables/interactable_npcs_menu/interactable_npc_menu.tscn" id="6_2iwkn"]
 [ext_resource type="PackedScene" uid="uid://je7f8gn4i78q" path="res://scenes/components/damage/damagable.tscn" id="6_y5pw2"]
 [ext_resource type="Texture2D" uid="uid://ddqgo5mmnglr8" path="res://assets/sprites/player/TX Player.png" id="7_ue22m"]
+[ext_resource type="PackedScene" uid="uid://cylw3gxernrkr" path="res://scenes/managers/inventory/inventory_manager.tscn" id="8_fvtl5"]
+[ext_resource type="PackedScene" uid="uid://bduiq626bqoxp" path="res://scenes/components/spear_range/spear_range.tscn" id="8_nrxb2"]
+[ext_resource type="PackedScene" uid="uid://dmdap5up7v7wu" path="res://scenes/managers/spear/spear_controller.tscn" id="8_r1dgk"]
 [ext_resource type="Texture2D" uid="uid://bpqn8q87augcv" path="res://assets/sprites/items/items_16_x_16/Item_68.png" id="10_b8360"]
+[ext_resource type="PackedScene" uid="uid://8qrlvu4x0kqk" path="res://scenes/ui/inventory_ui/inventory_menu_ui.tscn" id="10_k3kd7"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/life_counter.gd" id="10_s7kjg"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/dash_ui.gd" id="10_v6oik"]
 [ext_resource type="AudioStream" uid="uid://bhmnn7hiisbby" path="res://assets/audio/game/footstep_carpet_000.ogg" id="13_6n723"]
@@ -26,6 +30,33 @@ radius = 15.0
 size = Vector2(20, 40)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1iykh"]
+
+[sub_resource type="Animation" id="Animation_dkg04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_sl3x4"]
 resource_name = "change"
@@ -56,7 +87,13 @@ tracks/1/keys = {
 "values": [0.0, -0.0872665, 0.0872665, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_dkg04"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjm8t"]
+_data = {
+"RESET": SubResource("Animation_dkg04"),
+"change": SubResource("Animation_sl3x4")
+}
+
+[sub_resource type="Animation" id="Animation_u0nck"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -69,24 +106,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjm8t"]
-_data = {
-"RESET": SubResource("Animation_dkg04"),
-"change": SubResource("Animation_sl3x4")
 }
 
 [sub_resource type="Animation" id="Animation_3brpb"]
@@ -103,21 +122,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 2.46228, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0.95, 0.95), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_u0nck"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l8qbn"]
@@ -141,9 +145,9 @@ tracks/0/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_kukup"]
-resource_name = "idle"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_of0fy"]
+resource_name = "dash_end"
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -152,10 +156,10 @@ tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.95, 0.95)]
+"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_fk7hh"]
@@ -175,9 +179,9 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_of0fy"]
-resource_name = "dash_end"
-length = 0.2
+[sub_resource type="Animation" id="Animation_kukup"]
+resource_name = "idle"
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -186,10 +190,10 @@ tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.95, 0.95)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5pm2"]
@@ -257,6 +261,19 @@ vframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_q6ms2")
+
+[node name="SpearRange" parent="." instance=ExtResource("8_nrxb2")]
+
+[node name="SpearController" parent="." node_paths=PackedStringArray("player", "inventory", "spear_range") instance=ExtResource("8_r1dgk")]
+player = NodePath("..")
+inventory = NodePath("../InventoryManager")
+spear_throw_range = 180
+spear_range = NodePath("../SpearRange")
+
+[node name="InventoryManager" parent="." node_paths=PackedStringArray("inventory_ui") instance=ExtResource("8_fvtl5")]
+inventory_ui = NodePath("../InventoryMenuUi")
+
+[node name="InventoryMenuUi" parent="." instance=ExtResource("10_k3kd7")]
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 

@@ -6,6 +6,23 @@ class_name InventoryManager
 var _inventory: Dictionary = {}
 
 
+func has_item(item_id: String) -> bool:
+	return self._inventory.has(item_id)
+
+
+func get_item(item_id: String) -> InteractableResource:
+	if not self.has_item(item_id):
+		return null
+	self._remove_item(item_id)
+	return ResourceDictionary.ResourceIdToResource[item_id]
+	
+	
+func give_item(item_id: String) -> void:
+	var item_data = ResourceDictionary.ResourceIdToResource[item_id]
+	self._add_item(item_data)
+	self._log_current_state()
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameEvents.interact_with_interactable.connect(self._on_item_picked_up)
@@ -41,6 +58,35 @@ func _get_item_data() -> Array[Dictionary]:
 
 
 func _on_item_used(item_id: String) -> void:
+	self._remove_item(item_id)
+
+
+func _on_item_picked_up(interactable: InteractableArea):
+	if interactable.interactable_type != GameTypes.InteractableType.Item:
+		return
+	
+	self._add_item(interactable.interactable_data)
+	
+	# TODO might be better to call something on the interactable + disable the colisions etc.
+	interactable.get_parent().call_deferred("queue_free")
+	
+	self._log_current_state()
+
+
+func _add_item(item: InteractableResource):
+	var visual = item.visual
+	var data = item.data as ItemData
+	
+	if visual == null or data == null:
+		return
+	
+	if self._inventory.has(data.id):
+		self._inventory[data.id] += 1 
+	else:
+		self._inventory[data.id] = 1
+		
+
+func _remove_item(item_id: String):
 	if not self._inventory.has(item_id):
 		return
 		
@@ -52,25 +98,7 @@ func _on_item_used(item_id: String) -> void:
 	GameEvents.item_used.emit(item_id)
 
 
-func _on_item_picked_up(interactable: InteractableArea):
-	if interactable.interactable_type != GameTypes.InteractableType.Item:
-		return
-	
-	var visual = interactable.interactable_data.visual
-	var data = interactable.interactable_data.data as ItemData
-	
-	if visual == null or data == null:
-		return
-	
-	if self._inventory.has(data.id):
-		self._inventory[data.id] += 1 
-	else:
-		self._inventory[data.id] = 1
-	
-	# TODO might be better to call something on the interactable + disable the colisions etc.
-	interactable.get_parent().call_deferred("queue_free")
-	
-	
+func _log_current_state():
 	print("Inventory: {inv}".format({"inv": self._inventory}))
 	
 	for inventory_id in self._inventory.keys():

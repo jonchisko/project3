@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cw6pnw5f7x7ly"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/items/spear/spear_object.gd" id="1_hylpn"]
+[ext_resource type="Texture2D" uid="uid://bj3eh1sog8724" path="res://assets/sprites/items/spear.png" id="2_8s274"]
+[ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_p2cjo"]
+[ext_resource type="AudioStream" uid="uid://b48wbn2uivkqy" path="res://assets/audio/game/impactPlate_medium_001.ogg" id="4_akhai"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oim4f"]
+radius = 5.0
+
+[node name="SpearObject" type="Node2D"]
+script = ExtResource("1_hylpn")
+speed = 2000
+elipse_b = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_8s274")
+
+[node name="DamageArea" parent="." instance=ExtResource("3_p2cjo")]
+rotation = 1.5708
+collision_mask = 134
+damage_amount = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_oim4f")
+debug_color = Color(0.759608, 0.358409, 0.712345, 0.42)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+rotation = 1.5708
+emitting = false
+amount = 30
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.88
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 217.74
+initial_velocity_max = 475.8
+linear_accel_min = 4.84
+linear_accel_max = 19.35
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.0775, 0.25, 0.22125, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_akhai")
+bus = &"SFX"

@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://0u6gyqhmrdi2"]
+
+[ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_1ox6c"]
+[ext_resource type="PackedScene" uid="uid://b7bxrv81whfx" path="res://scenes/game_objects/items/item.tscn" id="2_5msor"]
+[ext_resource type="Resource" uid="uid://7ddq85mnl0yu" path="res://resources/interactables/items/wajdovian_spear_item.tres" id="3_2h4uk"]
+[ext_resource type="Texture2D" uid="uid://cusbwpeedu3nr" path="res://assets/sprites/props/TX Props.png" id="4_tliti"]
+[ext_resource type="PackedScene" uid="uid://je7f8gn4i78q" path="res://scenes/components/damage/damagable.tscn" id="5_mwffj"]
+[ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="6_issij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csuq4"]
+size = Vector2(31, 44)
+
+[node name="PlayerFiringSceneTest" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_1ox6c")]
+position = Vector2(67, 59)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="WajdovianSpear" parent="." instance=ExtResource("2_5msor")]
+position = Vector2(450, 78)
+interactable_data = ExtResource("3_2h4uk")
+
+[node name="Destroyables" type="Node" parent="."]
+
+[node name="Node2D" type="Node2D" parent="Destroyables"]
+position = Vector2(35, 42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Destroyables/Node2D"]
+texture = ExtResource("4_tliti")
+region_enabled = true
+region_rect = Rect2(160, 16, 32, 48)
+
+[node name="Damagable" parent="Destroyables/Node2D" instance=ExtResource("5_mwffj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyables/Node2D/Damagable"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_csuq4")
+
+[node name="HealthComponent" parent="Destroyables/Node2D" instance=ExtResource("6_issij")]
+max_health_points = 10
+
+[connection signal="damage_detected" from="Destroyables/Node2D/Damagable" to="Destroyables/Node2D/HealthComponent" method="damage"]
+[connection signal="death" from="Destroyables/Node2D/HealthComponent" to="Destroyables/Node2D" method="queue_free"]

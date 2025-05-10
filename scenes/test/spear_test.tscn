@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dspl6cx3noe32"]
+
+[ext_resource type="Script" path="res://scenes/test/spear_test_controller.gd" id="1_sgdy2"]
+
+[sub_resource type="Gradient" id="Gradient_54iut"]
+offsets = PackedFloat32Array(0, 0.805, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.3375, 0.3375, 0.3375, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkjpc"]
+gradient = SubResource("Gradient_54iut")
+
+[node name="SpearTest" type="Node2D"]
+
+[node name="OgPosition" type="Node2D" parent="."]
+position = Vector2(45, 276)
+scale = Vector2(0.188184, 0.270696)
+
+[node name="Sprite2D" type="Sprite2D" parent="OgPosition"]
+texture = SubResource("GradientTexture2D_mkjpc")
+
+[node name="TargetPosition" type="Node2D" parent="."]
+position = Vector2(309, 78)
+
+[node name="Sprite2D" type="Sprite2D" parent="TargetPosition"]
+texture = SubResource("GradientTexture2D_mkjpc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(321, 180)
+zoom = Vector2(0.5, 0.5)
+
+[node name="SpearThrower" type="Node2D" parent="."]
+position = Vector2(893, 185)
+script = ExtResource("1_sgdy2")
+
+[node name="SpearThrower4" type="Node2D" parent="."]
+position = Vector2(537, 101)
+script = ExtResource("1_sgdy2")
+
+[node name="SpearThrower2" type="Node2D" parent="."]
+position = Vector2(443, 221)
+script = ExtResource("1_sgdy2")
+
+[node name="SpearThrower3" type="Node2D" parent="."]
+position = Vector2(700, 271)
+script = ExtResource("1_sgdy2")
