@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqn4eagcj476n"]
+
+[ext_resource type="Texture2D" uid="uid://cusbwpeedu3nr" path="res://assets/sprites/props/TX Props.png" id="1_lfyqq"]
+[ext_resource type="PackedScene" uid="uid://je7f8gn4i78q" path="res://scenes/components/damage/damagable.tscn" id="2_e201w"]
+[ext_resource type="Texture2D" uid="uid://beqkaa2g576j1" path="res://assets/sprites/props/TX Shadow.png" id="2_tdbuf"]
+[ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="3_2q2xh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csuq4"]
+size = Vector2(31, 44)
+
+[node name="DestructableBarrel" type="Node2D"]
+position = Vector2(35, 42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lfyqq")
+region_enabled = true
+region_rect = Rect2(160, 16, 32, 48)
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+z_index = -10
+position = Vector2(-3, 18)
+texture = ExtResource("2_tdbuf")
+region_enabled = true
+region_rect = Rect2(32, 30, 40, 34)
+
+[node name="Damagable" parent="." instance=ExtResource("2_e201w")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagable"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_csuq4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_2q2xh")]
+max_health_points = 10
+
+[connection signal="damage_detected" from="Damagable" to="HealthComponent" method="damage"]
+[connection signal="death" from="HealthComponent" to="." method="queue_free"]

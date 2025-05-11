@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm2f4tnyeinvq"]
+
+[ext_resource type="Texture2D" uid="uid://d2yk6gf4tx5u2" path="res://assets/sprites/tree/TX Plant.png" id="1_84c1j"]
+[ext_resource type="Script" path="res://scenes/game_objects/obstacles/tree.gd" id="1_htjmu"]
+[ext_resource type="Texture2D" uid="uid://ciowxt16lxrje" path="res://assets/sprites/tree/TX Shadow Plant.png" id="2_lq5md"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d14m7"]
+radius = 12.0
+height = 78.0
+
+[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("tree_sprites", "tree_shadows_sprites", "collisions")]
+collision_layer = 2
+collision_mask = 32
+script = ExtResource("1_htjmu")
+tree_sprites = NodePath("Sprite2D")
+tree_shadows_sprites = NodePath("Shadows")
+collisions = [NodePath("CollisionShape2DFrame1"), NodePath("CollisionShape2DFrame2"), NodePath("CollisionShape2DFrame3")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_84c1j")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(24, 13, 351, 148)
+
+[node name="CollisionShape2DFrame1" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2, 26)
+shape = SubResource("CapsuleShape2D_d14m7")
+disabled = true
+
+[node name="CollisionShape2DFrame2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(8, 27)
+shape = SubResource("CapsuleShape2D_d14m7")
+disabled = true
+
+[node name="CollisionShape2DFrame3" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(20, 25)
+shape = SubResource("CapsuleShape2D_d14m7")
+disabled = true
+
+[node name="Shadows" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(2, 60)
+texture = ExtResource("2_lq5md")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(48, 99, 330, 53)

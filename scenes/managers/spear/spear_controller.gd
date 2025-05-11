@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("left_click") and not self._is_on_cd:
 			self._is_on_cd = true
 			var spear_target = self.get_viewport().get_mouse_position()
+			spear_target = self.get_viewport().canvas_transform.inverse().origin + spear_target
 			if (spear_target - self.player.position).length_squared() > self._spear_throw_range_squared:
 				spear_target = self.player.position + (spear_target - self.player.position).normalized() * self.spear_throw_range
 			

@@ -48,3 +48,5 @@ color = Color(0.0775, 0.25, 0.22125, 1)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_akhai")
 bus = &"SFX"
+
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]

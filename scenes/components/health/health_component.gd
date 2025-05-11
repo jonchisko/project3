@@ -14,13 +14,18 @@ func _ready() -> void:
 
 
 func damage(amount: int) -> void:
+	print("Health component: damage by ", amount)
+	
 	self._health_points = clamp(self._health_points - amount, 0, self.max_health_points)
 	self.life_change.emit(_health_points)
 	
 	if self._health_points == 0:
+		print("Health component: emit death")
 		self.death.emit()
 
 
 func heal(amount: int) -> void:
+	print("Health component: heal by ", amount)
+	
 	self._health_points = clamp(self._health_points + amount, 0, self.max_health_points)
 	self.life_change.emit(_health_points)

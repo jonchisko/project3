@@ -16,8 +16,8 @@ var _throw_x: Vector2
 var _throw_y: Vector2
 
 var _circumference: float
-
 var _is_done: bool = false
+
 
 func _throw_spear(delta: float, target: Vector2):
 	self._x_location += (self._direction * delta * self.speed) / self._circumference
@@ -78,3 +78,8 @@ func _hit():
 	await $AudioStreamPlayer2D.finished
 	
 	self.call_deferred("queue_free")
+
+
+func _on_damage_area_area_entered(area: Area2D) -> void:
+	self._is_done = true
+	self._hit()

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw042ntxxiedk"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/obstacles/bush.gd" id="1_5jryu"]
+[ext_resource type="Texture2D" uid="uid://d2yk6gf4tx5u2" path="res://assets/sprites/tree/TX Plant.png" id="2_fb3j1"]
+[ext_resource type="Texture2D" uid="uid://ciowxt16lxrje" path="res://assets/sprites/tree/TX Shadow Plant.png" id="3_of7ag"]
+
+[node name="Bush" type="Node2D" node_paths=PackedStringArray("bush_sprites", "bush_shadows_sprites")]
+script = ExtResource("1_5jryu")
+bush_sprites = NodePath("Sprite2D")
+bush_shadows_sprites = NodePath("Shadows")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fb3j1")
+hframes = 6
+region_enabled = true
+region_rect = Rect2(19, 185, 388, 46)
+
+[node name="Shadows" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(-1, 8)
+texture = ExtResource("3_of7ag")
+hframes = 6
+region_enabled = true
+region_rect = Rect2(24, 198, 379, 35)

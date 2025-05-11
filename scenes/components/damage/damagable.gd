@@ -9,4 +9,5 @@ func _on_area_entered(area):
 	if damage == null:
 		return
 		
+	print("Damagable: emitting damage!")
 	self.damage_detected.emit(damage.damage_amount)

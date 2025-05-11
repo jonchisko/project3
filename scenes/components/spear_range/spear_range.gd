@@ -13,6 +13,3 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	var scale_factor = self.pixel_size / $Sprite2D.get_rect().size.x
 	self.scale = Vector2(scale_factor, scale_factor)
-	print(scale_factor, self.pixel_size, self.scale)
-	print($Sprite2D.get_rect().size)
-	print($Sprite2D.get_rect().size * self.scale)
