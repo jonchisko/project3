@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6jwy5kxcd0la"]
+
+[ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
+[ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_uudpt"]
+[ext_resource type="PackedScene" uid="uid://djtqfut6alxw6" path="res://scenes/managers/chat/chat_history.tscn" id="2_8olnj"]
+[ext_resource type="PackedScene" uid="uid://cafvxpx0avygy" path="res://scenes/managers/chat/chat_history_service.tscn" id="3_033e3"]
+[ext_resource type="PackedScene" uid="uid://dqmfol7lf07ex" path="res://scenes/ui/effects/vignette.tscn" id="6_jjxlv"]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="ChatManager" parent="." node_paths=PackedStringArray("chatHistory") instance=ExtResource("1_327vj")]
+chatHistory = NodePath("../ChatHistory")
+
+[node name="ChatHistory" parent="." node_paths=PackedStringArray("chatHistoryService") instance=ExtResource("2_8olnj")]
+chatHistoryService = NodePath("BasicChatHistoryService")
+
+[node name="BasicChatHistoryService" parent="ChatHistory" instance=ExtResource("3_033e3")]
+
+[node name="Player" parent="." instance=ExtResource("1_uudpt")]
+position = Vector2(320, 180)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Vignette" parent="." instance=ExtResource("6_jjxlv")]
+
+[editable path="Player"]
