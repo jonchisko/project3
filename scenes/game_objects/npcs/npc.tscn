@@ -27,6 +27,15 @@ texture = ExtResource("3_4al2f")
 region_enabled = true
 region_rect = Rect2(6, 14, 21, 44)
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.666667)
+z_index = -10
+position = Vector2(-3, 20)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_4al2f")
+region_enabled = true
+region_rect = Rect2(99, 32, 27, 28)
+
 [node name="Interactable" parent="." instance=ExtResource("2_vm2sd")]
 interactable_type = 2
 

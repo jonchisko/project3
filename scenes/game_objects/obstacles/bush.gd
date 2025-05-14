@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 
 @export var bush_sprites: Sprite2D
