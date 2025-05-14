@@ -257,19 +257,21 @@ debug_color = Color(0.446675, 0.49503, 0.875198, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("7_ue22m")
+offset = Vector2(0, -17)
 hframes = 4
 vframes = 2
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.666667)
 z_index = -10
-position = Vector2(-4, 23)
+position = Vector2(-2, 9)
+scale = Vector2(0.906584, 0.906584)
 texture = ExtResource("7_ue22m")
 region_enabled = true
 region_rect = Rect2(99, 32, 27, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 8)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_q6ms2")
 
 [node name="SpearRange" parent="." instance=ExtResource("8_nrxb2")]
