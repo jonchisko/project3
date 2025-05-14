@@ -9,6 +9,7 @@
 size = Vector2(18, 18)
 
 [node name="Item" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_pioi1")
 interactable_data = ExtResource("2_8uva8")
 

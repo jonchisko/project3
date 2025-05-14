@@ -27,7 +27,7 @@ size = Vector2(20, 36)
 radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6ms2"]
-size = Vector2(20, 40)
+size = Vector2(19, 16)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1iykh"]
 
@@ -269,7 +269,7 @@ region_enabled = true
 region_rect = Rect2(99, 32, 27, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_q6ms2")
 
 [node name="SpearRange" parent="." instance=ExtResource("8_nrxb2")]
