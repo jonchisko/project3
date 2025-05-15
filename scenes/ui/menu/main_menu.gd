@@ -18,7 +18,7 @@ func _on_play_button_pressed():
 		($PopupObject as PopupObject).show_popup()
 		return
 		
-	self.get_tree().change_scene_to_file("res://scenes/levels/game_level.tscn")
+	self.get_tree().change_scene_to_file("res://scenes/test/test_map.tscn")
 
 
 func _on_options_button_pressed():
