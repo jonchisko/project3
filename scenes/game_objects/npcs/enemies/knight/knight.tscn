@@ -358,6 +358,7 @@ radius = 6.0
 height = 18.0
 
 [node name="Knight" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 34
 motion_mode = 1
@@ -397,8 +398,8 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
 texture = ExtResource("1_vfq44")
+offset = Vector2(0, -18)
 hframes = 28
 vframes = 8
 
