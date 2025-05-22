@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dmyac6yq7afjt"]
+[gd_scene load_steps=24 format=3 uid="uid://dmyac6yq7afjt"]
 
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="1_1cpet"]
 [ext_resource type="Texture2D" uid="uid://cwokvm1nmguej" path="res://assets/sprites/knight/Sword.png" id="1_vfq44"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="2_uw7xo"]
 [ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_yd0n0"]
 [ext_resource type="PackedScene" uid="uid://drhg3plicf04h" path="res://scenes/components/ai/ai_controller_component.tscn" id="4_np3jn"]
+[ext_resource type="PackedScene" uid="uid://d1en4sxisf1gl" path="res://scenes/components/areas/floorable.tscn" id="8_ugfr7"]
 
 [sub_resource type="Animation" id="Animation_gnwia"]
 length = 0.001
@@ -357,6 +358,9 @@ height = 24.0
 radius = 6.0
 height = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4rdt7"]
+radius = 6.0
+
 [node name="Knight" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
@@ -434,6 +438,11 @@ debug_color = Color(0.871877, 0.268151, 0.569872, 0.42)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_p20k2")
+
+[node name="Floorable" parent="." instance=ExtResource("8_ugfr7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floorable"]
+shape = SubResource("CircleShape2D_4rdt7")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="timeout" from="AttackTimerCd" to="." method="_on_attack_timer_cd_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cah0y8lt5uy55"]
+[gd_scene load_steps=37 format=3 uid="uid://cah0y8lt5uy55"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="2_euodu"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://bhmnn7hiisbby" path="res://assets/audio/game/footstep_carpet_000.ogg" id="13_6n723"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/audio_stream_player_2d.gd" id="13_elpfb"]
 [ext_resource type="AudioStream" uid="uid://dwfbd8hqxkvqr" path="res://assets/audio/game/footstep_grass_004.ogg" id="15_d4xmh"]
+[ext_resource type="PackedScene" uid="uid://d1en4sxisf1gl" path="res://scenes/components/areas/floorable.tscn" id="20_fpmq3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkskr"]
 size = Vector2(20, 36)
@@ -204,6 +205,8 @@ _data = {
 "idle": SubResource("Animation_kukup")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mq57i"]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 32
@@ -381,6 +384,13 @@ bus = &"SFX"
 [node name="WalkSoundTimer" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
+
+[node name="Floorable" parent="." node_paths=PackedStringArray("items_to_be_floored") instance=ExtResource("20_fpmq3")]
+items_to_be_floored = [NodePath("../Sprite2D/Shadow")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floorable"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_mq57i")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="life_change" from="HealthComponent" to="." method="_on_health_component_life_change"]

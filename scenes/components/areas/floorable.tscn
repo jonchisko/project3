@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1en4sxisf1gl"]
+
+[ext_resource type="Script" path="res://scenes/components/areas/floorable.gd" id="1_krq3p"]
+
+[node name="Floorable" type="Area2D"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_krq3p")

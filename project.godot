@@ -120,6 +120,7 @@ pause={
 2d_physics/layer_6="Player"
 2d_physics/layer_7="Damagess"
 2d_physics/layer_8="Damagable"
+2d_physics/layer_9="Floorable"
 
 [rendering]
 
