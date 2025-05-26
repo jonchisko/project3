@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dyk3bsp8pon38"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_41kly"]
+
+[resource]
+script = ExtResource("1_41kly")
+id = "hangover_potion"
+name = "Hangover potion"
+description = "Hangover potion, for when you need to forget about the rough night!"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dlpyxaw0uf6kn"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_crjpt"]
+
+[resource]
+script = ExtResource("1_crjpt")
+id = "outpost_keycode"
+name = "Outpost keycode"
+description = "It should open something, an outpost perhaps?"

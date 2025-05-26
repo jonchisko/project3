@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://r60l7oipwhj6"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_gvbvy"]
+
+[resource]
+script = ExtResource("1_gvbvy")
+id = "smaragd_ring"
+name = "Smaragd ring"
+description = "A beautifully radiating smaragd ring."

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://cd0i6sglv5o7p"]
+
+[ext_resource type="Resource" uid="uid://2e76faf6w18f" path="res://resources/items/wajdovian_spear_instructions/wajdovian_spear_instructions_data.tres" id="1_gc5kt"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_adplg"]
+[ext_resource type="Resource" uid="uid://bdopowvc24tus" path="res://resources/items/wajdovian_spear_instructions/wajdovian_spear_instructions_visual.tres" id="3_dq6wd"]
+
+[resource]
+script = ExtResource("2_adplg")
+visual = ExtResource("3_dq6wd")
+data = ExtResource("1_gc5kt")

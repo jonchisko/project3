@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://3f34pd8lukxr"]
+
+[ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_jmv4a"]
+[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_rh65d"]
+
+[resource]
+script = ExtResource("1_jmv4a")
+icon = ExtResource("1_rh65d")
+world_visual = ExtResource("1_rh65d")

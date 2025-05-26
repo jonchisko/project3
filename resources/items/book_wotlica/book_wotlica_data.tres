@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://c8oi4kh7nkpe5"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_8hr85"]
+
+[resource]
+script = ExtResource("1_8hr85")
+id = "book_wotlica"
+name = "Book Wotlica"
+description = "A book covering the history of Wotlica."

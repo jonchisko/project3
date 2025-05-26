@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://o3g3qwcsytrr"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_7f866"]
+
+[resource]
+script = ExtResource("1_7f866")
+id = "jewelry_blueprints"
+name = "Jewelry blueprints"
+description = "Blueprints for making jewelry, apparently with almost magical properties."

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://c1xvdkrwdo2af"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_qqjg7"]
+
+[resource]
+script = ExtResource("1_qqjg7")
+id = "greenberries"
+name = "Greenberries"
+description = "Similar to blueberries, but green and extremly sour. One of the ingridients for the Hangover potion."

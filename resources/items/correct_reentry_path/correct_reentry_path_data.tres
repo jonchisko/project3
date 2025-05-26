@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dpkcuylyu8uad"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_eoid6"]
+
+[resource]
+script = ExtResource("1_eoid6")
+id = "correct_reentry_path"
+name = "Correct reentry path"
+description = "The necessary instructions for correctly reentering the Earth's orbit."

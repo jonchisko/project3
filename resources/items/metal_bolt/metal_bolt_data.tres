@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dsayx4jrib00u"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_nt3dk"]
+
+[resource]
+script = ExtResource("1_nt3dk")
+id = "metal_bolt"
+name = "Metal bolt"
+description = "The usual metal bolt, nothing special about it."

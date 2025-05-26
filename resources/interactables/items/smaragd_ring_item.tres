@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://dieg1myfe63i6"]
+
+[ext_resource type="Resource" uid="uid://r60l7oipwhj6" path="res://resources/items/smaragd_ring/smaragd_ring_data.tres" id="1_rnuqp"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_lb1xp"]
+[ext_resource type="Resource" uid="uid://vtyrjelm2i5h" path="res://resources/items/smaragd_ring/smaragd_ring_visual.tres" id="3_1sqtw"]
+
+[resource]
+script = ExtResource("2_lb1xp")
+visual = ExtResource("3_1sqtw")
+data = ExtResource("1_rnuqp")

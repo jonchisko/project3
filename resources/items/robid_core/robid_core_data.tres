@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bl1fib6tj0ol1"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_2rtot"]
+
+[resource]
+script = ExtResource("1_2rtot")
+id = "robid_core"
+name = "Robid core"
+description = "The ship’s primary energy system. An energy source to power the contemporary starships."

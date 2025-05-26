@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://b7j47oyxw43g1"]
+
+[ext_resource type="Resource" uid="uid://c3n7oov0gs7v" path="res://resources/items/metal_scrap/metal_scrap_data.tres" id="1_5v7pc"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_s57r6"]
+[ext_resource type="Resource" uid="uid://b700116u5u4cy" path="res://resources/items/metal_scrap/metal_scrap_visual.tres" id="3_60x6u"]
+
+[resource]
+script = ExtResource("2_s57r6")
+visual = ExtResource("3_60x6u")
+data = ExtResource("1_5v7pc")
