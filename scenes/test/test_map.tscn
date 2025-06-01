@@ -136,8 +136,10 @@ tile_map_data = PackedByteArray("AABPAP//AQAYABsAAABQAAEAAQAZACoAAABQAAMAAQAZACo
 tile_set = ExtResource("4_ex0tf")
 
 [node name="floor1" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="knights" type="Node2D" parent="YSorted/floor1"]
+y_sort_enabled = true
 
 [node name="Knight" parent="YSorted/floor1/knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(21, -815)
@@ -434,7 +436,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(629, -78)
+position = Vector2(-337, -407)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 
@@ -563,6 +565,7 @@ position = Vector2(2266, -471)
 position = Vector2(1888, -1032)
 
 [node name="Enemies" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Knight" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1489, 1212)
