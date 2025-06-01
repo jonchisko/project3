@@ -6,20 +6,26 @@ class_name InventoryManager
 var _inventory: Dictionary = {}
 
 
-func has_item(item_id: String) -> bool:
-	return self._inventory.has(item_id)
+func has_item(item_id: String, number: int = 1) -> bool:
+	return self._inventory.has(item_id) and self._inventory[item_id] == number
 
 
-func get_item(item_id: String) -> InteractableResource:
-	if not self.has_item(item_id):
+func get_item(item_id: String, number: int = 1) -> InteractableResource:
+	if not self.has_item(item_id, number):
 		return null
-	self._remove_item(item_id)
+		
+	for _i in range(number):
+		self._remove_item(item_id)
+	
 	return ResourceDictionary.ResourceIdToResource[item_id]
 	
 	
-func give_item(item_id: String) -> void:
+func give_item(item_id: String, number: int = 1) -> void:
 	var item_data = ResourceDictionary.ResourceIdToResource[item_id]
-	self._add_item(item_data)
+	
+	for _i in range(number):
+		self._add_item(item_data)
+	
 	self._log_current_state()
 
 

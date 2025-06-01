@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_uudpt"]
 [ext_resource type="PackedScene" uid="uid://djtqfut6alxw6" path="res://scenes/managers/chat/chat_history.tscn" id="2_8olnj"]
-[ext_resource type="PackedScene" uid="uid://cafvxpx0avygy" path="res://scenes/managers/chat/chat_history_service.tscn" id="3_033e3"]
+[ext_resource type="PackedScene" uid="uid://byn1726bm412e" path="res://scenes/managers/chat/chat_history_services/basic_chat_history_service.tscn" id="3_qbtg8"]
 [ext_resource type="TileSet" uid="uid://bjrho5ftsi0gg" path="res://resources/gras_tilemap.tres" id="4_ex0tf"]
 [ext_resource type="PackedScene" uid="uid://c64dxxyh07sen" path="res://scenes/game_objects/npcs/npc.tscn" id="5_0kbcl"]
 [ext_resource type="PackedScene" uid="uid://cjruhsu5fgrrt" path="res://scenes/game_objects/triggers/floor_level_changer.tscn" id="5_y1l84"]
@@ -30,13 +30,13 @@ radius = 16.0
 
 [node name="TestMap" type="Node2D"]
 
-[node name="ChatManager" parent="." node_paths=PackedStringArray("chatHistory") instance=ExtResource("1_327vj")]
-chatHistory = NodePath("../ChatHistory")
+[node name="ChatManager" parent="." node_paths=PackedStringArray("chat_history") instance=ExtResource("1_327vj")]
+chat_history = NodePath("../ChatHistory")
 
 [node name="ChatHistory" parent="." node_paths=PackedStringArray("chatHistoryService") instance=ExtResource("2_8olnj")]
 chatHistoryService = NodePath("BasicChatHistoryService")
 
-[node name="BasicChatHistoryService" parent="ChatHistory" instance=ExtResource("3_033e3")]
+[node name="BasicChatHistoryService" parent="ChatHistory" instance=ExtResource("3_qbtg8")]
 
 [node name="DirectionsLabels" type="Node2D" parent="."]
 

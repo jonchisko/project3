@@ -16,10 +16,9 @@ He moved to Colnica in his late teens, part of a relocation initiative to consol
 Over the decades, he catalogued forgotten maps, rewrote half-decayed registries by hand, and slowly, obsessively restored the library to some semblance of dignity. Locals say he knows the layout of the town better than anyone, because he’s read it like a manuscript.
 Radovan has long desired to complete the town’s historical section with a single missing text — “The History of Wotlica – from its humble beginnings to today”, written by the late Alenka, Franc Petrov’s companion. He knows it exists. He’s heard Franc still owns a copy. But he’s never asked directly. Not because he fears rejection, but because he believes some books should be offered, not requested.
 He’s never admitted it aloud, but he believes the book might hold more than just stories. Old methods. Lost traditions. Maybe even something to help Colnica endure what the rest of Wotlica couldn’t. Among the shelves of brittle journals and solar-dried blueprints, there is already a space reserved for it.
-In return for that book, Radovan is willing to share something he’s kept sealed for years: Starodavna navodila za izdelavo Wajdovskega kopja — the ancient instructions for crafting the Wajdovian spear. Whether myth or manual, it's said to combine metallurgy with something older, something pre-colonial. He treats it like a fable, but his eyes say otherwise.
-Current Location:
- Colnica — Library at the northern edge of the plaza, a sun-warped building with a reinforced basement and vine-wrapped dome.
-"
+In return for that book, Radovan is willing to share something he’s kept sealed for years: Starodavna navodila za izdelavo Wajdovskega kopja — the ancient instructions for crafting the Wajdovian spear. Whether myth or manual, it's said to combine metallurgy with something older, something pre-colonial. He treats it like a fable, but his eyes say otherwise."
+occupation = "Librarian"
+location = "Colnica, library at the northern edge of the plaza, a sun-warped building with a reinforced basement and vine-wrapped dome."
 description = "Radovan is soft-spoken, meticulous, and quietly intense. He does not waste words or time. Some call him distant, but those who’ve spent long evenings in the library’s upper gallery know he is a man of deep thought and occasional bursts of unexpected warmth — especially when discussing old legends, lost documents, or the scent of rain on dusty pages."
 relationships = {
 "bojan_kovač": "They talk occasionally, mostly about old texts and metals. Bojan asked about the Wajdovsko kopje once, but Radovan didn’t share the plans. Said they belonged to history, not to hammers.",
@@ -32,5 +31,5 @@ relationships = {
 "tanja_draguljič": "Calls her “a firebrand with no patience for footnotes.” Likes her spirit, even if she’s loud in the reading room."
 }
 quest_data = Array[ExtResource("1_2ixxp")]([ExtResource("2_r6t46")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["*Shhh*", "...", "One moment ...", "...", "...", "...", "..."])
 system_knowledge = Array[String]([])

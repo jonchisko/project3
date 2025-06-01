@@ -16,9 +16,9 @@ Since then, Luka’s lived in the high woods above the valley. He built a small 
 He isn’t mad. He listens. To the wind, to the machines in the hills, to the patterns in bird flight and storm static. He knows the land better than anyone, and he’s kept a close eye on the wreck near Colnica — the Mara IX. He knows you’ve come down from the sky, and he’s curious.
 If the player finds Luka and speaks honestly — tells him what happened, what Wotlica looks like now — he listens closely. He might not show it, but he’s been waiting to hear those words.
 And in return, he offers what no one else can: the correct atmospheric re-entry path. He memorized it from an old emergency beacon. The pilot of the Mara IX died in the crash — and without Luka’s knowledge, any launch attempt ends in tragedy.
-Current Location:
- A secluded camp hidden above the Obli slopes, reachable only by careful navigation or rumor-following.
 "
+occupation = "Unknown"
+location = "A secluded camp hidden above the Obli slopes, reachable only by careful navigation or rumor-following."
 description = "Quiet, intense, and strange. Doesn’t ask questions directly. Thinks in loops. But when he speaks, it matters. He may not trust easily, but he doesn’t lie."
 relationships = {
 "bojan_kovač": "Doesn’t trust him. Metal that’s too clean rings false.",
@@ -31,5 +31,5 @@ relationships = {
 "tanja_draguljič": "No opinion. Loud voices don’t carry far into the woods."
 }
 quest_data = Array[ExtResource("1_iy4qi")]([ExtResource("2_53d1y")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["...", "*Ugh*"])
 system_knowledge = Array[String]([])

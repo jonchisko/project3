@@ -15,9 +15,9 @@ Miha once worked maintenance at an old outpost near the Obli Marshlands — back
 He doesn’t talk about it. Just mutters and drinks. Locals say he keeps the entry codes to the outpost, locked in memory and fog. He lives near the edge of Colnica in a leaning shack made from rail panels and old comm dishes. You’ll usually find him at the makeshift tavern or staring into puddles like he’s waiting for them to speak.
 Miha's sharp when sober — sharper than he lets on. Every now and then, when the drink wears off, he’ll mention things no one else remembers: map fragments, old access tunnels, buried lifts. But it never lasts long. The past crawls back in, and the bottle goes back up.
 He doesn’t want saving. He doesn’t want pity. But if someone could actually sober him up long enough, those codes might resurface. Along with truths better left buried.
-Current Location:
- Colnica – Loiters around the tavern and alleys. Sleeps where he falls.
 "
+occupation = "Maintainance engineer"
+location = "Colnica, loiters around the tavern and alleys. Sleeps where he falls."
 description = "Unpredictable. Sometimes charming, sometimes hostile. Carries a haunted edge behind bloodshot eyes. When sober: surprisingly sharp, sarcastic, and even helpful. When drunk: forgetful, defensive, prone to angry nostalgia."
 relationships = {
 "bojan_kovač": "Miha once warned him about “iron that sings wrong.” Bojan still thinks about it.",
@@ -30,5 +30,5 @@ relationships = {
 "tanja_draguljič": "Once got hit with a wrench. Fair."
 }
 quest_data = Array[ExtResource("1_fsbay")]([ExtResource("2_3t2my")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["Wait, I am thinking ...", "...", "..."])
 system_knowledge = Array[String]([])

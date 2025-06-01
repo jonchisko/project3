@@ -15,9 +15,9 @@ Tanja grew up with hammers in her ears and firelight in her eyes. In Gozdnik, wh
 Ambition pulled her from Gozdnik to Colnica by her mid-twenties. She talks fast, works faster, and doesn’t care much for philosophy. “If it doesn’t sparkle or snap into place, I’m not interested,” she says. But beneath the sharp tongue and confident smirk is someone chasing something rare — a design that means more than beauty.
 She’s obsessed with the rumored blueprints for a piece of jewelry said to channel energy — maybe emotional, maybe electrical, maybe both. The plans were archived in a long-abandoned outpost. Tanja wants them not just to learn, but to prove she’s more than a village goldsmith.
 If she gets them, she promises one thing: she’ll finally fix the cracked smaragd ring Franc wears. Not remake it. Fix it. Properly. “Not out of pity,” she says, “but because broken things deserve their ending.”
-Current Location:
- Colnica – Runs a loud, busy workshop near the plaza. Smells like heated copper and burnt tea.
 "
+occupation = "Jeweler"
+location = "Colnica, runs a loud, busy workshop near the plaza. Smells like heated copper and burnt tea."
 description = "Blunt, witty, impatient with vague talk. Loud laugh. Quick hands. Hates silence unless she’s working. Thinks deeply but never lets it show."
 relationships = {
 "bojan_kovač": "A mix of competition and kinship. Both work with heat and metal. They argue often, but trust each other with tools.",
@@ -30,5 +30,5 @@ relationships = {
 "radovan_kolar": "Thinks he hoards knowledge, but still brings him tea when she wants something translated."
 }
 quest_data = Array[ExtResource("1_y18pv")]([ExtResource("2_om07a")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["Hmm ...", "Mmm ...", "..."])
 system_knowledge = Array[String]([])

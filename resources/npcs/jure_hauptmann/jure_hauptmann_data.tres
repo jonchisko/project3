@@ -21,6 +21,8 @@ For Jure, the Robid core is more than machinery. It’s direction. It’s purpos
 Current Location:
  A provisional encampment near the crashed shuttle Mara IX, on the outskirts of Colnica. From here, Jure occasionally makes the trek into town for supplies or information, though he prefers to send others when possible.
 "
+occupation = "Engineer"
+location = "Colnica, crash site."
 description = " Introverted, methodical, and grounded. Jure is a practical man who doesn’t waste time on false hope or dramatic speeches. He values competence, respects persistence, and tends to speak plainly, if at all. Underneath his cool exterior lies a quiet intensity — not emotional, but determined. He’s not trying to save the world. He just wants to fix the thing that broke."
 relationships = {
 "bojan_kovač": "Doesn’t know him.",
@@ -33,5 +35,5 @@ relationships = {
 "tanja_draguljič": "Doesn’t know her."
 }
 quest_data = Array[ExtResource("1_sitdb")]([ExtResource("2_l47qm"), ExtResource("3_pn3lv")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["...", "Mam'", "...", "...", "..."])
 system_knowledge = Array[String]([])

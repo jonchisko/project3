@@ -18,11 +18,13 @@ Franc left Ajdovec before he turned thirty, just another wandering mechanic with
 In his middle years, he stayed longer than usual in Predmesa, drawn in by the way the town still held on to some strange sense of grace — open-air schools, midnight glass-burnings, and quiet, thoughtful people who remembered what Wotlica could have been.
 That’s where he met Alenka, a reclusive scholar who had returned to her home town after the ecological faculty she taught at on Earth collapsed under debt. They shared long walks between overgrown stone rings and laughed at each other’s deeply incompatible sense of time. She measured life in seasons and symbols. Franc, in repair logs and supply runs.
 Still, they stayed. Years passed. They had no children — a quiet choice. Her death came slowly, as it does for those who never complain. Franc never talks about it, except to say he doesn’t dream much anymore.
-These days, Franc lives in Colnica, working from a cluttered stall near the old south rail, where the walls still carry scrawled logos of companies long bankrupt. He keeps to himself but always gives fair weight, and he has a reputation for finding things people didn’t know they needed.
+He keeps to himself but always gives fair weight, and he has a reputation for finding things people didn’t know they needed.
 He wears a cracked smaragd ring, its green stone faintly marbled with silver. It once belonged to Alenka, though he never says her name. He doesn’t sell it, doesn’t take it off. Just sometimes stares at it when he thinks no one’s watching.
 He says only one thing about it: “There’s someone out there who can fix it. Not remake it — fix it. That’s different.”
 He also owns a leather-bound book, always kept wrapped and tucked into the wall behind his workbench. It's titled “The history of Wotlica – from its humble beginnings to today.” It was written by Alenka.
 "
+occupation = "Scholar"
+location = "Colnica, working from a cluttered stall near the old south rail, where the walls still carry scrawled logos of companies long bankrupt."
 description = "Franc is patient, pragmatic, and blunt, with a dry sense of humor and the kind of long memory that forgets nothing but forgives easily. He doesn’t like being asked about the past, but he listens closely when others speak of theirs."
 relationships = {
 "bojan_kovač": "Mutual understanding — both blunt, both good with their hands. Bojan once offered to reforge the ring’s band. Franc refused. They didn’t argue.",
@@ -35,5 +37,5 @@ relationships = {
 "tanja_draguljič": "Finds her loud, but honest. Sometimes smiles when she argues with someone in the plaza. Trusts her to repair small metal parts, never asks her to fix the ring."
 }
 quest_data = Array[ExtResource("1_4jhnj")]([ExtResource("2_o2o1i")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["Wait, I am thinking ...", "...", "...", "...", "*Cough cough*"])
 system_knowledge = Array[String]([])

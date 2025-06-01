@@ -15,9 +15,9 @@ Peter was born into the rock. His family mined before him, and he expected to di
 For years, he worked the southern tunnels just outside town. Quietly. Reliably. But lately, he refuses to go back in. “There’s something down there,” he says. “Old armor. No voices. Just clanging and watching.” Some laugh it off. Peter doesn’t.
 He claims the mine is cursed — taken over by dark, armored figures he calls “knights.” Not ghosts, not machines. Just something wrong. He doesn’t want it fixed for himself. He wants it safe. “It’s our mine, not theirs.”
 Peter has a stash of Robid cores locked away, salvaged from sealed storage before the tunnels went bad. He’s willing to give one up — but only if someone clears out the mine. Permanently.
-Current Location:
- Colnica – Stays near the disused depot. Taps rhythms on stone when deep in thought.
 "
+occupation = "Miner"
+location = "Colnica , stays near the disused depot. Taps rhythms on stone when deep in thought."
 description = "Plainspoken, suspicious, but fair. Doesn’t embellish. If he says he saw something, he saw it. Loyal to a fault if you earn his trust. Quick to walk away if you don’t."
 relationships = {
 "bojan_kovač": "Mutual silence. Trust without words.",
@@ -30,5 +30,5 @@ relationships = {
 "tanja_draguljič": "Thinks she’s too loud, but appreciated her gift."
 }
 quest_data = Array[ExtResource("1_xah5b")]([ExtResource("2_qgor5")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["...", "*Less light the better nNnn*", "..."])
 system_knowledge = Array[String]([])

@@ -15,9 +15,9 @@ Jurij was raised behind a counter, learning to cook, listen, and keep the fire g
 He moved to Colnica in his thirties and reopened a tavern near the old bazaar. It’s not much, but it’s clean, warm, and open to anyone with good intentions. Jurij doesn’t ask questions he doesn’t need answered. He remembers names, pours fair, and makes room for those who don’t quite fit in.
 He knows how to make a sobering brew from ingredients that don’t grow close together: green blueberries from the Ajd Plain and black honey from hives in the wetter parts near Gozdnik. It’s something his mother used to prepare for old drunks and bitten scouts. He won’t charge for it — but he won’t make it without the ingredients either.
 If asked, he’ll just say, “You bring me the right stuff, I’ll make the right drink.”
-Current Location:
- Colnica – Runs the tavern on the east side of the plaza.
 "
+occupation = "Tavern keeper"
+location = "Colnica, runs the tavern on the east side of the plaza."
 description = "Direct, practical, good-humored. Doesn’t dwell on the past but knows it well. Trusts actions more than words. Doesn’t push people, but knows when they need a push."
 relationships = {
 "bojan_kovač": "Solid man. Not many words. Sometimes they share food during late hours.",
@@ -30,5 +30,5 @@ relationships = {
 "tanja_draguljič": "A whirlwind, but he likes her energy. Lets her behind the bar when she wants to experiment."
 }
 quest_data = Array[ExtResource("1_7gq8e")]([ExtResource("2_gextl")])
-temporary_replies = Array[String](["Wait, I am thinking ..."])
+temporary_replies = Array[String](["*Tralala*", "*Lalala*", "*Nanana*", "*Slurp slurp*", "...", "..."])
 system_knowledge = Array[String]([])
