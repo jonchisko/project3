@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://hipekv3r00m4"]
 
-[ext_resource type="Resource" uid="uid://o3g3qwcsytrr" path="res://resources/items/jewelry_blueprints/jewelry_blueprints_data.tres" id="1_m2c0x"]
-[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_pmnao"]
-[ext_resource type="Resource" uid="uid://3f34pd8lukxr" path="res://resources/items/jewelry_blueprints/jewelry_blueprints_visual.tres" id="3_2p7vq"]
+[ext_resource type="Resource" uid="uid://o3g3qwcsytrr" path="res://resources/items/jewelry_blueprints/jewelry_blueprints_data.tres" id="1_251c8"]
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="2_4haeo"]
+[ext_resource type="Resource" uid="uid://3f34pd8lukxr" path="res://resources/items/jewelry_blueprints/jewelry_blueprints_visual.tres" id="3_mw0w1"]
 
 [resource]
-script = ExtResource("2_pmnao")
-visual = ExtResource("3_2p7vq")
-data = ExtResource("1_m2c0x")
+resource_name = "JewelryBlueprints"
+script = ExtResource("2_4haeo")
+visual = ExtResource("3_mw0w1")
+data = ExtResource("1_251c8")

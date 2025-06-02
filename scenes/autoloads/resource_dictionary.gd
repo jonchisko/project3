@@ -15,8 +15,8 @@ func _load_resources():
 	var item_file_names = self._get_files_in_dir(self._ItemDirectory)
 	var npc_file_names = self._get_files_in_dir(self._NpcDirectory)
 
-	self._add_to_dictionary(item_file_names, "DataResource")
-	self._add_to_dictionary(npc_file_names, "DataResource")
+	self._add_to_dictionary(item_file_names, "InteractableResource")
+	self._add_to_dictionary(npc_file_names, "InteractableResource")
 
 
 func _get_files_in_dir(path):
@@ -37,7 +37,7 @@ func _get_files_in_dir(path):
 	
 func _add_to_dictionary(file_names: Array, type_hint: String):
 	for file_name in file_names:
-		var resource = ResourceLoader.load(file_name, type_hint)
+		var resource: InteractableResource = ResourceLoader.load(file_name, type_hint)
 		
 		if resource == null:
 			printerr("Resource is null, {fn}".format({"fn": file_name}))

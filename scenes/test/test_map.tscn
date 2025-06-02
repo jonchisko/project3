@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=27 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_uudpt"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c15mcrkr01jdp" path="res://scenes/game_objects/obstacles/rock.tscn" id="18_2lu6a"]
 [ext_resource type="Resource" uid="uid://7ddq85mnl0yu" path="res://resources/interactables/items/wajdovian_spear_item.tres" id="18_u1kc3"]
 [ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="22_yxsy3"]
+[ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="25_hmn17"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
@@ -515,7 +516,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(-515, 200)
+position = Vector2(-596, 183)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 
@@ -665,6 +666,10 @@ position = Vector2(1975, 1113)
 current_floor = -20
 
 [node name="Vignette" parent="." instance=ExtResource("6_jjxlv")]
+
+[node name="OutpostArea2D" parent="." instance=ExtResource("25_hmn17")]
+position = Vector2(961, -1151)
+new_scene = "res://scenes/levels/outpost_level.tscn"
 
 [editable path="YSorted/floor1/knights/Knight"]
 [editable path="YSorted/floor1/knights/Knight2"]
