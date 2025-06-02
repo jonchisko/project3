@@ -56,10 +56,10 @@ func _attack(attack_type: AttackType) -> void:
 	self._attack_on_cd = true
 	match attack_type:
 		AttackType.Basic:
-			self._damage_area.damage_amount = 5
+			self._damage_area.damage_amount = 20
 			self._animation_player.play("attack_strike")
 		AttackType.Special: 
-			self._damage_area.damage_amount = 15
+			self._damage_area.damage_amount = 40
 			self._animation_player.play("attack_swing")
 	await self._animation_player.animation_finished
 	
@@ -122,3 +122,8 @@ func _on_ai_controller_component_move_to(location: Vector2) -> void:
 
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	self._searching = false
+
+
+func _play_sword_sound() -> void:
+	$AudioStreamPlayer2D.pitch_scale = randf_range(0.8, 1.2)
+	$AudioStreamPlayer2D.play()	

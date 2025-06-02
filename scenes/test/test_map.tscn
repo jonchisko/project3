@@ -224,14 +224,8 @@ y_sort_enabled = true
 [node name="Knight" parent="YSorted/floor1/knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(21, -815)
 
-[node name="Floorable" parent="YSorted/floor1/knights/Knight" index="10"]
-current_floor = -10
-
 [node name="Knight2" parent="YSorted/floor1/knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(-465, -699)
-
-[node name="Floorable" parent="YSorted/floor1/knights/Knight2" index="10"]
-current_floor = -10
 
 [node name="floor2" type="Node2D" parent="YSorted"]
 y_sort_enabled = true
@@ -260,9 +254,6 @@ position = Vector2(-94, 862)
 
 [node name="Knight2" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(-439, 966)
-
-[node name="Floorable" parent="YSorted/floor2/Knights/Knight2" index="10"]
-current_floor = -10
 
 [node name="TileMapLayerObstacles" type="TileMapLayer" parent="YSorted"]
 y_sort_enabled = true
@@ -516,7 +507,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(-596, 183)
+position = Vector2(-36, -580)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 
@@ -650,32 +641,14 @@ y_sort_enabled = true
 [node name="Knight" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1489, 1212)
 
-[node name="Floorable" parent="YSorted/Enemies/Knight" index="10"]
-current_floor = -20
-
 [node name="Knight2" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1508, 1043)
 
-[node name="Floorable" parent="YSorted/Enemies/Knight2" index="10"]
-current_floor = -20
-
 [node name="Knight3" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1975, 1113)
-
-[node name="Floorable" parent="YSorted/Enemies/Knight3" index="10"]
-current_floor = -20
 
 [node name="Vignette" parent="." instance=ExtResource("6_jjxlv")]
 
 [node name="OutpostArea2D" parent="." instance=ExtResource("25_hmn17")]
 position = Vector2(961, -1151)
 new_scene = "res://scenes/levels/outpost_level.tscn"
-
-[editable path="YSorted/floor1/knights/Knight"]
-[editable path="YSorted/floor1/knights/Knight2"]
-[editable path="YSorted/floor2/Knights/Knight"]
-[editable path="YSorted/floor2/Knights/Knight2"]
-[editable path="YSorted/Player"]
-[editable path="YSorted/Enemies/Knight"]
-[editable path="YSorted/Enemies/Knight2"]
-[editable path="YSorted/Enemies/Knight3"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dmyac6yq7afjt"]
+[gd_scene load_steps=25 format=3 uid="uid://dmyac6yq7afjt"]
 
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="1_1cpet"]
 [ext_resource type="Texture2D" uid="uid://cwokvm1nmguej" path="res://assets/sprites/knight/Sword.png" id="1_vfq44"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_yd0n0"]
 [ext_resource type="PackedScene" uid="uid://drhg3plicf04h" path="res://scenes/components/ai/ai_controller_component.tscn" id="4_np3jn"]
 [ext_resource type="PackedScene" uid="uid://d1en4sxisf1gl" path="res://scenes/components/areas/floorable.tscn" id="8_ugfr7"]
+[ext_resource type="AudioStream" uid="uid://bdfjcsjjwap8t" path="res://assets/audio/game/impactPlate_heavy_000.ogg" id="9_hkp12"]
 
 [sub_resource type="Animation" id="Animation_gnwia"]
 length = 0.001
@@ -33,7 +34,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1.8, 1.8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -50,7 +51,7 @@ tracks/2/keys = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6to2r"]
 radius = 12.0
-height = 38.0
+height = 46.1278
 
 [sub_resource type="Animation" id="Animation_g7fpk"]
 resource_name = "attack_strike"
@@ -90,7 +91,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.272727),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1.05, 1.05), Vector2(1, 1)]
+"values": [Vector2(1.8, 1.8), Vector2(1.8, 1.8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -140,10 +141,24 @@ tracks/6/keys = {
 "update": 0,
 "values": [-3.49066]
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.636364),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_sword_sound"
+}]
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_knb5b"]
 radius = 17.26
-height = 34.52
+height = 50.0663
 
 [sub_resource type="Animation" id="Animation_t8gu2"]
 resource_name = "attack_swing"
@@ -171,7 +186,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0909091, 0.272727),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+"values": [Vector2(1.8, 1.8), Vector2(1.9, 1.9), Vector2(1.8, 1.8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -220,6 +235,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [SubResource("CapsuleShape2D_knb5b")]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.545455),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_sword_sound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_upv0g"]
@@ -349,10 +378,11 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dsc5"]
-radius = 23.0
+radius = 27.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vni35"]
-height = 24.0
+radius = 24.0
+height = 48.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p20k2"]
 radius = 6.0
@@ -373,7 +403,7 @@ script = ExtResource("1_vjjto")
 attack_type_sequence = Array[int]([0, 0, 1])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_uw7xo")]
-max_speed = 70.0
+max_speed = 90.0
 acceleration = 20000.0
 deacceleration = 20000.0
 
@@ -402,6 +432,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.8, 1.8)
 texture = ExtResource("1_vfq44")
 offset = Vector2(0, -18)
 hframes = 28
@@ -412,7 +443,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(1, -10)
+position = Vector2(1, -18)
 shape = SubResource("CircleShape2D_5dsc5")
 debug_color = Color(0.388235, 0.580392, 0.552941, 0.203922)
 
@@ -420,7 +451,7 @@ debug_color = Color(0.388235, 0.580392, 0.552941, 0.203922)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damagable"]
-position = Vector2(0, -11)
+position = Vector2(0, -17)
 shape = SubResource("CapsuleShape2D_vni35")
 debug_color = Color(0.34689, 0.613058, 0.273331, 0.42)
 
@@ -443,6 +474,11 @@ shape = SubResource("CapsuleShape2D_p20k2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floorable"]
 shape = SubResource("CircleShape2D_4rdt7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_hkp12")
+volume_db = -1.081
+bus = &"SFX"
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="timeout" from="AttackTimerCd" to="." method="_on_attack_timer_cd_timeout"]
