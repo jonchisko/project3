@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbxliedf2yq83"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/GptTemplates/template_factory.gd" id="1_2ec4l"]
+[ext_resource type="PackedScene" uid="uid://k366gfnvq27b" path="res://scenes/game_objects/GptTemplates/strict_gpt_template.tscn" id="2_vnmei"]
+[ext_resource type="PackedScene" uid="uid://coi40a2usaad2" path="res://scenes/game_objects/GptTemplates/loose_gpt_template.tscn" id="3_bi6t6"]
+
+[node name="TemplateFactory" type="Node" node_paths=PackedStringArray("templates")]
+script = ExtResource("1_2ec4l")
+templates = [NodePath("StrictGptTemplate"), NodePath("LooseGptTemplate")]
+
+[node name="StrictGptTemplate" parent="." instance=ExtResource("2_vnmei")]
+
+[node name="LooseGptTemplate" parent="." instance=ExtResource("3_bi6t6")]

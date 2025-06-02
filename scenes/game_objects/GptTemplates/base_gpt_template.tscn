@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://i300o0m8i3i0"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/GptTemplates/base_gpt_template.gd" id="1_yic3l"]
+
+[node name="BaseGptTemplate" type="Node"]
+script = ExtResource("1_yic3l")

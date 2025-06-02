@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://k366gfnvq27b"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/GptTemplates/strict_gpt_template.gd" id="1_dnwxv"]
+
+[node name="StrictGptTemplate" type="Node"]
+script = ExtResource("1_dnwxv")
