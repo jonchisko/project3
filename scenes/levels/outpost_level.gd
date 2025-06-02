@@ -11,7 +11,7 @@ var _player_in_area: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	GameEvents.level_change.emit(GameTypes.LevelChangeType.OnLoading)
 
 
 func _process(delta: float) -> void:
@@ -38,3 +38,8 @@ func _on_chest_area_area_entered(area: Area2D) -> void:
 func _on_chest_area_area_exited(area: Area2D) -> void:
 	self._player_in_area = false
 	self.label.visible = false
+
+
+func _on_tree_entered() -> void:
+	pass
+	#GameEvents.level_change.emit(GameTypes.LevelChangeType.OnLoading)

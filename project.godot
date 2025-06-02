@@ -22,6 +22,7 @@ OpenAiApi="*res://scenes/autoloads/open_ai_api.tscn"
 GameTypes="*res://scenes/autoloads/game_types.gd"
 ResourceDictionary="*res://scenes/autoloads/resource_dictionary.tscn"
 OpenAiConfiguration="*res://scenes/autoloads/open_ai_configuration.tscn"
+PlayerStateManager="*res://scenes/autoloads/player_state_manager.tscn"
 
 [display]
 

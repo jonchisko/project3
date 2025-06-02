@@ -197,8 +197,8 @@ func _add_function_calling() -> void:
 	You are able to call a tool to obtain information which items the player has or to give him/her the item you have in the ‘{quest_reward}’.")
 
 	self._gpt_template.append_message("developer", "## How to know if the player has an item
-You can get the information about a specific item (the item ‘{quest_condition}’) the player has in the following manner:
-has_item(item_id: String, number: int)
+You can get how much items of specific item_id (the item ‘{quest_condition}’) the player has in the following manner:
+has_item(item_id: String)
 
 ## How to give the player the item
 You can give the player the item (or multiple numbers of the same items) you have as ‘{quest_reward}’ in the following manner:

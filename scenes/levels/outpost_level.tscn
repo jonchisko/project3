@@ -123,6 +123,7 @@ autoplay = "label_animation"
 position = Vector2(45, 48)
 new_scene = "res://scenes/test/test_map.tscn"
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="area_entered" from="ChestArea" to="." method="_on_chest_area_area_entered"]
 [connection signal="area_exited" from="ChestArea" to="." method="_on_chest_area_area_exited"]
 

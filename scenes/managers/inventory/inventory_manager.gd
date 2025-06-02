@@ -6,12 +6,14 @@ class_name InventoryManager
 var _inventory: Dictionary = {}
 
 
-func has_item(item_id: String, number: int = 1) -> bool:
-	return self._inventory.has(item_id) and self._inventory[item_id] == number
+func has_item(item_id: String) -> int:
+	if not self._inventory.has(item_id):
+		return 0
+	return self._inventory[item_id]
 
 
 func get_item(item_id: String, number: int = 1) -> InteractableResource:
-	if not self.has_item(item_id, number):
+	if self.has_item(item_id) < number:
 		return null
 		
 	for _i in range(number):
@@ -28,6 +30,10 @@ func give_item(item_id: String, number: int = 1) -> void:
 	
 	self._log_current_state()
 
+
+func show_inventory() -> Dictionary:
+	return self._inventory
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
