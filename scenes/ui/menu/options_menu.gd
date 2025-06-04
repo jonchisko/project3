@@ -32,8 +32,9 @@ func _update_options():
 	(self._menu_music_slider as Slider).value = self._get_volume_linear("MenuMusic")
 	
 	open_ai_api_text_edit.text = OpenAiConfiguration.open_ai_api_key
-	gpt_template_button.select(self._from_template_type_to_index(OpenAiConfiguration.template_type))
 	
+	gpt_template_button.select(self._from_template_type_to_index(OpenAiConfiguration.template_type))
+	self._update_open_ai_based_on_selection(self._from_template_type_to_index(OpenAiConfiguration.template_type))
 
 
 func _on_tab_container_tab_clicked(tab):
@@ -98,6 +99,10 @@ func _on_open_ai_api_text_edit_text_submitted(new_text):
 
 
 func _on_gpt_template_button_item_selected(index: int) -> void:
+	self._update_open_ai_based_on_selection(index)
+
+
+func _update_open_ai_based_on_selection(index: int) -> void:
 	match gpt_template_button.get_item_text(index):
 		"Strict":
 			OpenAiConfiguration.template_type = OpenAiTypes.TemplateType.Strict
@@ -105,7 +110,10 @@ func _on_gpt_template_button_item_selected(index: int) -> void:
 			OpenAiConfiguration.template_type = OpenAiTypes.TemplateType.Loose
 
 
-func _from_template_type_to_index(template_type: OpenAiTypes.TemplateType) -> int:
+func _from_template_type_to_index(template_type) -> int:
+	if template_type == null:
+		return 0
+	
 	match template_type:
 		OpenAiTypes.TemplateType.Strict:
 			return 0

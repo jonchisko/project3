@@ -26,11 +26,10 @@ offset_left = -31.0
 offset_right = 31.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 2
+current_tab = 0
 script = ExtResource("2_m14l7")
 
 [node name="VideoOptions" type="MarginContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -159,6 +158,7 @@ max_value = 1.0
 step = 0.0
 
 [node name="OpenAiOptions" type="MarginContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
