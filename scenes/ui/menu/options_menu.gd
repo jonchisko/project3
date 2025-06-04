@@ -11,6 +11,7 @@ signal options_closed
 @onready var _menu_music_slider = %MenuMusicSlider
 @onready var _screen_mode_button = %ScreenModeButton
 @onready var open_ai_api_text_edit = %OpenAiApiTextEdit
+@onready var gpt_template_button: OptionButton = %GptTemplateButton
 
 
 const _WINDOW_ID: int = 0
@@ -31,7 +32,7 @@ func _update_options():
 	(self._menu_music_slider as Slider).value = self._get_volume_linear("MenuMusic")
 	
 	open_ai_api_text_edit.text = OpenAiConfiguration.open_ai_api_key
-	
+	gpt_template_button.select(self._from_template_type_to_index(OpenAiConfiguration.template_type))
 	
 
 
@@ -94,3 +95,21 @@ func _get_volume_linear(bus: String) -> float:
 
 func _on_open_ai_api_text_edit_text_submitted(new_text):
 	OpenAiConfiguration.open_ai_api_key = new_text
+
+
+func _on_gpt_template_button_item_selected(index: int) -> void:
+	match gpt_template_button.get_item_text(index):
+		"Strict":
+			OpenAiConfiguration.template_type = OpenAiTypes.TemplateType.Strict
+		"Loose":
+			OpenAiConfiguration.template_type = OpenAiTypes.TemplateType.Loose
+
+
+func _from_template_type_to_index(template_type: OpenAiTypes.TemplateType) -> int:
+	match template_type:
+		OpenAiTypes.TemplateType.Strict:
+			return 0
+		OpenAiTypes.TemplateType.Loose:
+			return 1
+		_:
+			return 0
