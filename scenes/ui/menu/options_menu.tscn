@@ -162,72 +162,79 @@ step = 0.0
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/OpenAiOptions"]
 layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="OpenAiApiKey" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+[node name="OpenAiApiKey" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiApiKey"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
 layout_mode = 2
 text = "Your OpenAi API key"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OpenAiApiTextEdit" type="LineEdit" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
+[node name="OpenAiApiTextEdit" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter your OpenAi API key and press enter ..."
 
-[node name="OpenAiProjectSettings" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+[node name="OpenAiProjectSettings" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettings"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettings"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Open AI Project 3 Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OpenAiProjectSettingsVBox" type="VBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer"]
+[node name="OpenAiProjectSettingsVBox" type="VBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
 text = "GPT Template"
 
-[node name="GptTemplateButton" type="OptionButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer"]
+[node name="GptTemplateButton" type="OptionButton" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,92 +243,209 @@ popup/item_0/text = "Strict"
 popup/item_1/text = "Loose"
 popup/item_1/id = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
 text = "Model Type"
 
-[node name="ModelButton" type="OptionButton" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer"]
+[node name="ModelButton" type="OptionButton" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 2
-popup/item_0/text = "model-3"
-popup/item_1/text = "model-4"
+item_count = 5
+popup/item_0/text = "model-3-5-turbo"
+popup/item_1/text = "model-4-turbo"
 popup/item_1/id = 1
+popup/item_2/text = "model-4o"
+popup/item_2/id = 2
+popup/item_3/text = "model-4-1"
+popup/item_3/id = 3
+popup/item_4/text = "model-4-1-mini"
+popup/item_4/id = 4
 
-[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Temperature (0-1)"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "Temperature (0...1)"
 
-[node name="TemperatureInput" type="LineEdit" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer"]
+[node name="TemperatureInput" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter value between 0 and 1"
 
-[node name="MarginContainer4" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+[node name="MarginContainer4" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Top-K (0-1)"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "Frequency Penalty (-2...2)"
 
-[node name="TopkInput" type="LineEdit" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer"]
+[node name="FrequencyPenaltyInput" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Enter value between 0 and 1"
+placeholder_text = "Enter value between -2 and 2"
 
-[node name="MarginContainer5" type="MarginContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox"]
+[node name="HistorySettings" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "History Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HistorySettingsVBox" type="VBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer5"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer5/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Top-P (0-1)"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "Max exchanges to remember (1...10)"
 
-[node name="ToppInput" type="LineEdit" parent="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer5/HBoxContainer"]
+[node name="HistoryMaxExchanges" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer5/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter value between 1 and 10"
+
+[node name="MarginContainer6" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer6"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer6/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "Max similar results (1...20)"
+
+[node name="MaxSimilarResults" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer6/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter value between 1 and 20"
+
+[node name="MarginContainer7" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer7"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer7/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "Similar results threshold (0...1)"
+
+[node name="SimilarResults" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer7/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter value between 0 and 1"
+
+[node name="GlobalKnowledgeSettings" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/GlobalKnowledgeSettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Global Knowledge Settings
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GlobalKnwoledgeSettingsVBox" type="VBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/GlobalKnwoledgeSettingsVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/GlobalKnwoledgeSettingsVBox/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/GlobalKnwoledgeSettingsVBox/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+text = "TODO"
+
+[node name="TbdInput" type="LineEdit" parent="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/GlobalKnwoledgeSettingsVBox/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "TODO"
 
 [node name="MainMenu" parent="." instance=ExtResource("3_xjg4v")]
 custom_minimum_size = Vector2(80, 30)
@@ -354,6 +478,12 @@ libraries = {
 [connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/GameMusicSlider" to="." method="_on_game_music_slider_value_changed"]
 [connection signal="value_changed" from="TabContainer/AudioOptions/MarginContainer/VBoxContainer/MarginContainer4/HBoxContainer/MenuMusicSlider" to="." method="_on_menu_music_slider_value_changed"]
-[connection signal="text_submitted" from="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer/OpenAiApiTextEdit" to="." method="_on_open_ai_api_text_edit_text_submitted"]
-[connection signal="item_selected" from="TabContainer/OpenAiOptions/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer/GptTemplateButton" to="." method="_on_gpt_template_button_item_selected"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiApiKey/HBoxContainer/OpenAiApiTextEdit" to="." method="_on_open_ai_api_text_edit_text_submitted"]
+[connection signal="item_selected" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer/HBoxContainer/GptTemplateButton" to="." method="_on_gpt_template_button_item_selected"]
+[connection signal="item_selected" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer2/HBoxContainer/ModelButton" to="." method="_on_model_button_item_selected"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer3/HBoxContainer/TemperatureInput" to="." method="_on_temperature_input_text_submitted"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/OpenAiProjectSettingsVBox/MarginContainer4/HBoxContainer/FrequencyPenaltyInput" to="." method="_on_frequency_penalty_input_text_submitted"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer5/HBoxContainer/HistoryMaxExchanges" to="." method="_on_history_max_exchanges_text_submitted"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer6/HBoxContainer/MaxSimilarResults" to="." method="_on_max_similar_results_text_submitted"]
+[connection signal="text_submitted" from="TabContainer/OpenAiOptions/ScrollContainer/MarginContainer/VBoxContainer/HistorySettingsVBox/MarginContainer7/HBoxContainer/SimilarResults" to="." method="_on_similar_results_text_submitted"]
 [connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
