@@ -97,6 +97,70 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 	self._template = self.template_factory.get_template(OpenAiConfiguration.template_type)
 	
 	self._gpt_template = OpenAiApi.got_open_ai.GetGptCompletion()\
+		.with_model(OpenAiTypes.model_version_to_string(OpenAiConfiguration.open_ai_model))\
+		.with_temperature(OpenAiConfiguration.temperature)\
+		.with_frequency_penalty(OpenAiConfiguration.frequency_penalty)\
+		.with_auto_tool_choice()\
+		.with_tool(self._get_has_item_tool())\
+		.with_tool(self._get_give_item_tool())\
+		.with_tool(self._get_get_item_tool())\
 		.get_template()
+		
+	self._set_chat_history()
 	
 	self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history)
+
+
+func _get_has_item_tool() -> Tool:
+	var has_item_tool: Tool = FunctionToolBuilder.new("has_item")\
+		.with_description("Obtains information how many instances of item 'item_id' the player holds (0, 1, 2, etc.).")\
+		.with_property(
+			PropertyBuilder.new("item_id", PropertyTypes.Type.StringJson)
+				.with_description("The item_id you want inquire about.")
+				.build(), 
+			true)\
+		.build()
+		
+	return has_item_tool
+
+
+func _get_give_item_tool() -> Tool:
+	var give_item_tool: Tool = FunctionToolBuilder.new("give_item")\
+		.with_description("Gives the desired amount of item 'item_id' to player.")\
+		.with_property(
+			PropertyBuilder.new("item_id", PropertyTypes.Type.StringJson)
+				.with_description("The item_id you want to give.")
+				.build(), 
+			true)\
+		.with_property(
+			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+				.with_description("How many items you want to give.")
+				.build(), 
+			true)\
+		.build()
+		
+	return give_item_tool
+
+
+func _get_get_item_tool() -> Tool:
+	var get_item_tool: Tool = FunctionToolBuilder.new("get_item")\
+		.with_description("Takes the desired amount of item 'item_id' from player.")\
+		.with_property(
+			PropertyBuilder.new("item_id", PropertyTypes.Type.StringJson)
+				.with_description("The item_id you want to take.")
+				.build(), 
+			true)\
+		.with_property(
+			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+				.with_description("How many items you want to take.")
+				.build(), 
+			true)\
+		.build()
+		
+	return get_item_tool
+	
+	
+func _set_chat_history() -> void:
+	chat_history.max_last_exchanges = OpenAiConfiguration.history_max_last_exchanges
+	chat_history.max_similar_results = OpenAiConfiguration.history_max_similar_results
+	chat_history.threshold_similar_results = OpenAiConfiguration.history_threshold_similar_results
