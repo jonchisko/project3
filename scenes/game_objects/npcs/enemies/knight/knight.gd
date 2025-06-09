@@ -24,6 +24,7 @@ var _attack_on_cd: bool = false
 var _searching: bool = false
 var _attacking: bool = false
 var _player_in_attack_range: bool = false
+var _is_dying: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,10 +37,11 @@ func _process(delta):
 	var direction = Vector2.ZERO
 	if self._searching:
 		direction = (-self.global_position + self._navigation_agent_2d.get_next_path_position()).normalized()
-	self._velocity_component.move_in_direction(self, direction)
+	if not self._is_dying:
+		self._velocity_component.move_in_direction(self, direction)
 	
 	#print(self.velocity)
-	if not self._attacking:
+	if not self._attacking and not self._is_dying and self._animation_player.current_animation != "hit":
 		if self.velocity.x != 0 or self.velocity.y != 0:
 			self._animation_player.play("running")
 		else:
@@ -95,11 +97,15 @@ func _on_attack_range_area_exited(area: Area2D) -> void:
 	
 
 func _on_damagable_damage_detected(amount):
+	print("Knight: damage_hit")
 	self._animation_player.play("hit")
 	self._health_component.damage(amount)
 
 
 func _on_health_component_death():
+	self._is_dying = true
+	
+	print("Knight: death")
 	$Damagable/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$DamageArea/CollisionShape2D.set_deferred("disabled", true)

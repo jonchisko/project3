@@ -22,8 +22,9 @@ OpenAiApi="*res://scenes/autoloads/open_ai_api.tscn"
 GameTypes="*res://scenes/autoloads/game_types.gd"
 ResourceDictionary="*res://scenes/autoloads/resource_dictionary.tscn"
 OpenAiConfiguration="*res://scenes/autoloads/open_ai_configuration.tscn"
-PlayerStateManager="*res://scenes/autoloads/player_state_manager.tscn"
 OpenAiTypes="*res://scenes/autoloads/open_ai_types.tscn"
+PlayerStateManager="*res://scenes/autoloads/player_state_manager.tscn"
+SceneStateManager="*res://scenes/autoloads/scene_state_manager.tscn"
 
 [display]
 
@@ -45,6 +46,9 @@ enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
 interactable_item_ui="Interactable item ui elements"
 player=""
 music=""
+pickupable_item=""
+enemy=""
+level_scene=""
 
 [gui]
 

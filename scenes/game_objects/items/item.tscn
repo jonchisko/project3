@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_betry"]
 size = Vector2(18, 18)
 
-[node name="Item" type="Node2D"]
+[node name="Item" type="Node2D" groups=["pickupable_item"]]
 y_sort_enabled = true
 script = ExtResource("1_pioi1")
 interactable_data = ExtResource("2_8uva8")

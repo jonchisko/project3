@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=30 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -27,11 +27,12 @@
 [ext_resource type="Resource" uid="uid://7ddq85mnl0yu" path="res://resources/interactables/items/wajdovian_spear_item.tres" id="18_u1kc3"]
 [ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="22_yxsy3"]
 [ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="25_hmn17"]
+[ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="28_ndh6o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
 
-[node name="TestMap" type="Node2D"]
+[node name="TestMap" type="Node2D" groups=["level_scene"]]
 script = ExtResource("1_cw72i")
 
 [node name="ChatManager" parent="." node_paths=PackedStringArray("chat_history", "template_factory") instance=ExtResource("1_327vj")]
@@ -221,6 +222,25 @@ tile_set = ExtResource("4_ex0tf")
 tile_map_data = PackedByteArray("AADo/+P/BAAOAAoAAADs/+H/BQACAAYAAADi/+H/BQACAAYAAADt/+H/BQACAAwAAADf/+H/BQACAAwAAADy/+H/BQACAAYAAADc/+H/BQACAAYAAADc/93/BQACAAUAAADc/9z/BQASAAIAAADc/9b/BQASAAIAAADc/9D/BQACAAMAAAD3/+H/BQACAAwAAAAGAOH/BQACAAYAAAALAN3/BQAVAAIAAAALANf/BQAVAAIAAAALANH/BQAVAAIAAADc/8//BQASAAIAAADc/8n/BQACAAIAAADd/8n/BQAYAAIAAADj/8n/BQAYAAIAAADp/8n/BQAYAAIAAADv/8n/BQAYAAIAAAD1/8n/BQAYAAIAAAD7/8n/BQAYAAIAAAABAMn/BQAYAAIAAAAFAMn/BQAYAAIAAAALAMn/BQAHAAIAAAALAM//BQAVAAIAAAABAOH/BQACAAwAAAD//+H/BQACAAwAAABsAD0ABAAIAAIAAABoADsABQALAAIAAABwADsABQALAAIAAAB0ADsABQACAAwAAAB8ADsABQACAAwAAABgADsABQACAAwAAABYADsABQACAAwAAABXADsABQAJAAIAAACDADsABQAPAAIAAABXAEEABQAVAAIAAABXAEcABQAVAAIAAABXAE0ABQAVAAIAAACEAEEABQASAAIAAACEAEcABQASAAIAAACEAE0ABQASAAIAAACEAE4ABQAQAAgAAABXAE4ABQAJAAgAAABYAE4ABQAKAAgAAABeAE4ABQAMAAgAAABkAE4ABQAPAAgAAABqAE4ABQAOAAgAAABvAE4ABQANAAgAAAB+AE4ABQAKAAgAAAB/AE4ABQALAAgAAACAAE4ABQAMAAgAAACBAE4ABQANAAgAAACCAE4ABQAOAAgAAACDAE4ABQAPAAgAAAB4AE4ABQAKAAgAAAB5AE4ABQALAAgAAAB6AE4ABQAMAAgAAAB7AE4ABQANAAgAAAB8AE4ABQAOAAgAAAB9AE4ABQAPAAgAAAByAE4ABQAKAAgAAABzAE4ABQALAAgAAAB0AE4ABQAMAAgAAAB1AE4ABQANAAgAAAB2AE4ABQAOAAgAAAB3AE4ABQAPAAgAAABsAE4ABQAKAAgAAABtAE4ABQALAAgAAABuAE4ABQAMAAgAAABwAE4ABQAOAAgAAABxAE4ABQAPAAgAAABlAE4ABQAKAAgAAABmAE4ABQAKAAgAAABnAE4ABQALAAgAAABoAE4ABQAMAAgAAABpAE4ABQANAAgAAABrAE4ABQAPAAgAAABfAE4ABQANAAgAAABgAE4ABQAOAAgAAABhAE4ABQAPAAgAAABiAE4ABQANAAgAAABjAE4ABQAOAAgAAABcAE4ABQAOAAgAAABdAE4ABQAPAAgAAABZAE4ABQALAAgAAABaAE4ABQAMAAgAAABbAE4ABQANAAgAAADc/0cABQACAAYAAADe/0cABQACAAwAAADm/0cABQACAAwAAADc/0MABQASAAIAAADc/z0ABQASAAIAAADc/zcABQASAAIAAADc/zEABQACAAIAAADd/zEABQAYAAIAAADj/zEABQAYAAIAAADp/zEABQAYAAIAAADv/zEABQAYAAIAAAD1/zEABQAYAAIAAAD7/zEABQAYAAIAAAABADEABQAHAAIAAAABADcABQAVAAIAAAABAD0ABQAVAAIAAAABAEMABQAVAAIAAADn/0cABQACAAwAAADw/0kABAAOAAoAAADs/0cABQACABIAAAD0/0cABQACABIAAAD4/0cABQACAAwAAAD+/0cABQAYAAYAAAD9/0cABQAIABIAAAD8/0cABQAIABIAAAA=")
 tile_set = ExtResource("4_ex0tf")
 
+[node name="Item" parent="." instance=ExtResource("17_nywt0")]
+position = Vector2(846, -1047)
+
+[node name="Item2" parent="." instance=ExtResource("17_nywt0")]
+position = Vector2(792, -1007)
+
+[node name="Item3" parent="." instance=ExtResource("17_nywt0")]
+position = Vector2(785, -1061)
+
+[node name="WajdovianSpear2" parent="." instance=ExtResource("17_nywt0")]
+position = Vector2(806, -974)
+interactable_data = ExtResource("18_u1kc3")
+
+[node name="Knight2" parent="." instance=ExtResource("22_yxsy3")]
+position = Vector2(1072, -1062)
+
+[node name="Knight3" parent="." instance=ExtResource("22_yxsy3")]
+position = Vector2(1078, -978)
+
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -266,8 +286,8 @@ y_sort_enabled = true
 [node name="Knight" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(-94, 862)
 
-[node name="Knight2" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
-position = Vector2(-439, 966)
+[node name="Knight3" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
+position = Vector2(-94, 862)
 
 [node name="TileMapLayerObstacles" type="TileMapLayer" parent="YSorted"]
 y_sort_enabled = true
@@ -521,7 +541,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(-556, 174)
+position = Vector2(783, -922)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 
@@ -666,3 +686,6 @@ position = Vector2(1975, 1113)
 [node name="OutpostArea2D" parent="." instance=ExtResource("25_hmn17")]
 position = Vector2(961, -1151)
 new_scene = "res://scenes/levels/outpost_level.tscn"
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("28_ndh6o")]
+bus = "GameMusic"

@@ -9,4 +9,5 @@ script = ExtResource("1_8ghbt")
 music = ExtResource("2_btpyq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -0.511
 autoplay = true

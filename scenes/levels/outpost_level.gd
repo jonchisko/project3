@@ -1,4 +1,4 @@
-extends Node2D
+extends SceneSyncher
 
 
 @export var label: Label
@@ -8,6 +8,36 @@ var _item_resource = preload("res://resources/interactables/items/jewelry_bluepr
 var _item_scene = preload("res://scenes/game_objects/items/item.tscn")
 var _item_spawned: bool = false
 var _player_in_area: bool = true
+
+
+func save_scene() -> Dictionary:
+	var saved_data: Dictionary = {}
+	
+	var player = self.get_tree().get_first_node_in_group("player") as Player
+	saved_data["player"] = player.global_position
+	
+	var enemies: Dictionary = {}
+	for enemy in self.get_tree().get_nodes_in_group("enemy"):
+		enemies[enemy.get_path()] = true
+	
+	saved_data["enemies"] = enemies
+		
+	saved_data["item_spawned"] = self._item_spawned
+	
+	return saved_data
+	
+
+func load_scene(data: Dictionary) -> void:
+	var player = self.get_tree().get_first_node_in_group("player") as Player
+	player.global_position = data["player"]
+	
+	for enemy in self.get_tree().get_nodes_in_group("enemy"):
+		if data["enemies"].has(enemy.get_path()):
+			continue
+		enemy.call_deferred("queue_free")
+	
+	self._item_spawned = data["item_spawned"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +62,8 @@ func _spawn_item() -> void:
 		
 func _on_chest_area_area_entered(area: Area2D) -> void:
 	self._player_in_area = true
-	self.label.visible = true
+	if not self._item_spawned:
+		self.label.visible = true
 
 
 func _on_chest_area_area_exited(area: Area2D) -> void:
