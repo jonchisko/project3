@@ -49,6 +49,7 @@ music=""
 pickupable_item=""
 enemy=""
 level_scene=""
+chat_openai=""
 
 [gui]
 

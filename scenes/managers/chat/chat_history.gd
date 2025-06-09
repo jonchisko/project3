@@ -41,3 +41,11 @@ func get_similar(npc_id: String, query: String) -> Array:
 
 func get_recent(npc_id: String) -> Array:
 	return self.get_history(npc_id)
+	
+	
+func save_data() -> Dictionary:
+	return self.chatHistoryService.get_all_data()
+	
+	
+func load_data(data: Dictionary) -> void:
+	self.chatHistoryService.set_all_data(data)

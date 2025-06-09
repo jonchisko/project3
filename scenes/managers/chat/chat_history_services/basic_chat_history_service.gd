@@ -17,3 +17,11 @@ func save_history(npc_id: String, chat: Array) -> void:
 		data_array.append_array(chat)
 	else:
 		self._chat_history_for_npcs[npc_id] = chat
+
+
+func get_all_data() -> Dictionary:
+	return self._chat_history_for_npcs
+	
+	
+func set_all_data(data: Dictionary) -> void:
+	self._chat_history_for_npcs = data

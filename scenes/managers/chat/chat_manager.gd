@@ -77,7 +77,6 @@ func _on_player_message_sent(message: String) -> void:
 		var data_to_save = [{"user": message}, {"assistant": npc_message}]
 		print("Saving history: ", data_to_save)
 		self.chat_history.save_history(self._current_npc_data.id, data_to_save)
-		print(self.chat_history.get_history(self._current_npc_data.id))
 	else:
 		# First remove the similar_data_from_history and user query, so that we just keep similar history
 		# for current query

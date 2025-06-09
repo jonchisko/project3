@@ -2,7 +2,7 @@ extends Node
 
 
 var _player_inventory: Dictionary = {}
-
+var _chat_history: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,6 +10,13 @@ func _ready() -> void:
 
 
 func _on_level_change(level_change_type: GameTypes.LevelChangeType) -> void:
+	var chat_manager: ChatManager = self.get_tree().get_first_node_in_group("chat_openai")
+	
+	if chat_manager == null:
+		return
+	
+	var chat_history = chat_manager.chat_history as ChatHistory
+	
 	var player = self._find_player_instance()
 	var inventory = player.find_child("InventoryManager") as InventoryManager
 	if inventory == null:
@@ -21,9 +28,11 @@ func _on_level_change(level_change_type: GameTypes.LevelChangeType) -> void:
 			print("PlayerStateManager: Restoring player inventory")
 			for value in self._player_inventory.keys():
 				inventory.give_item(value, self._player_inventory[value])
+			chat_history.load_data(self._chat_history)
 		GameTypes.LevelChangeType.OffLoading:
 			print("PlayerStateManager: Saving player inventory")
 			self._player_inventory = inventory.show_inventory()
+			self._chat_history = chat_history.save_data()
 
 
 func _find_player_instance() -> Player:
