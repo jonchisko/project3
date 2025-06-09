@@ -44,21 +44,21 @@ func _on_player_message_sent(message: String) -> void:
 	if self._first_message:
 		self._first_message = false
 		
-	self._template.add_user_query(self._gpt_template, message, true)
+	self._template.add_player_query(self._gpt_template, message, true)
 	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history, message)
 	self._template.add_instructions(self._gpt_template)
-	self._template.add_user_query(self._gpt_template, message, false)
+	self._template.add_player_query(self._gpt_template, message, false)
 	
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 	var response = await self._gpt_template.get_reply()
 	
-	print("STATIC CONTEXT")
-	for element in self._gpt_template.structured_context():
-		print(element.role, " ", element.content)
-		
-	print("MESSAGES")
-	for element in self._gpt_template.structured_messages():
-		print(element.role, " ", element.content)
+	#print("STATIC CONTEXT")
+	#for element in self._gpt_template.structured_context():
+		#print(element.role, " ", element.content)
+		#
+	#print("MESSAGES")
+	#for element in self._gpt_template.structured_messages():
+		#print(element.role, " ", element.content)
 	
 	if response.successful():
 		var npc_message = response.choices()[0]["message"]["content"]
@@ -69,7 +69,7 @@ func _on_player_message_sent(message: String) -> void:
 		self._gpt_template.remove_newest_message() # instructions
 		self._gpt_template.remove_newest_message() # similar history
 		
-		self._template.add_user_query(self._gpt_template, message, false) # re-add
+		self._template.add_player_query(self._gpt_template, message, false) # re-add
 		self._gpt_template.append_message("assistant", npc_message)
 		
 		self._chat_messenger_instance.edit_last_chat_element(npc_message)
@@ -85,7 +85,7 @@ func _on_player_message_sent(message: String) -> void:
 		self._gpt_template.remove_newest_message() # instructions
 		self._gpt_template.remove_newest_message() # similar history
 		
-		self._template.add_user_query(self._gpt_template, message, false) # re-add
+		self._template.add_player_query(self._gpt_template, message, false) # re-add
 		self._gpt_template.append_message("developer", "<No response from assistant.>")
 
 	
