@@ -210,7 +210,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 32
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("1_sls11")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_euodu")]
@@ -245,7 +245,7 @@ collision_layer = 32
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damagable"]
-position = Vector2(1, -4)
+position = Vector2(1, -20)
 shape = SubResource("RectangleShape2D_wkskr")
 debug_color = Color(0.257346, 0.619501, 0.398476, 0.42)
 
@@ -253,21 +253,20 @@ debug_color = Color(0.257346, 0.619501, 0.398476, 0.42)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorAudioDetector"]
-position = Vector2(0, 8)
+position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_b1ft6")
 debug_color = Color(0.446675, 0.49503, 0.875198, 0.42)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
 texture = ExtResource("7_ue22m")
-offset = Vector2(0, -17)
+offset = Vector2(0, -26.296)
 hframes = 4
 vframes = 2
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.666667)
 z_index = -10
-position = Vector2(-2, 9)
+position = Vector2(-2, -3)
 scale = Vector2(0.906584, 0.906584)
 texture = ExtResource("7_ue22m")
 region_enabled = true
@@ -389,7 +388,7 @@ one_shot = true
 items_to_be_floored = [NodePath("../Sprite2D/Shadow")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floorable"]
-position = Vector2(0, 7)
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_mq57i")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

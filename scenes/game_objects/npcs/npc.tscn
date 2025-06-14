@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ddqgo5mmnglr8" path="res://assets/sprites/player/TX Player.png" id="3_4al2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u5up"]
-size = Vector2(8, 12)
+size = Vector2(16, 14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqpie"]
-radius = 28.1603
+radius = 32.0
 
 [node name="Npc" type="CharacterBody2D"]
 collision_layer = 8
@@ -18,19 +18,20 @@ script = ExtResource("1_7lua1")
 interactable_data = ExtResource("2_8j36e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(1, -8)
 shape = SubResource("RectangleShape2D_2u5up")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.6048, 0.84, 0.83216, 1)
 texture = ExtResource("3_4al2f")
+offset = Vector2(0, -21.535)
 region_enabled = true
 region_rect = Rect2(6, 14, 21, 44)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.666667)
 z_index = -10
-position = Vector2(-3, 20)
+position = Vector2(-3, -2)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("3_4al2f")
 region_enabled = true
@@ -40,4 +41,5 @@ region_rect = Rect2(99, 32, 27, 28)
 interactable_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, -18)
 shape = SubResource("CircleShape2D_sqpie")
