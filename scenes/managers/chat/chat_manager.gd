@@ -61,8 +61,10 @@ func _on_player_message_sent(message: String) -> void:
 		#print(element.role, " ", element.content)
 	
 	if response.successful():
-		var npc_message = response.choices()[0]["message"]["content"]
-		
+		var choice: ChoiceResponse = response.choices()[0]
+		var npc_message = choice["message"]["content"]
+		var tools = choice.message.tool_calls
+		print(tools)
 		# First remove the similar_data_from_history and user query, so that we just keep similar history
 		# for current query
 		self._gpt_template.remove_newest_message() # query
