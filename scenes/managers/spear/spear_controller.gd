@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		
 		
 func _is_aiming() -> bool:
-	return Input.is_action_pressed("right_click") and self.inventory.has_item("wajdovian_spear")
+	return Input.is_action_pressed("right_click") and self.inventory.has_item("wajdovian_spear", 1)
 		
 
 

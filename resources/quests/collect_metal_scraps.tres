@@ -8,5 +8,5 @@ id = "collect_metal_scraps"
 primary_quest = false
 title = "Collect metal scraps"
 description = "When the shuttle emergency landed, it damaged and certain modules crashed and disintegrated upon landing. A lot of scraps are now laying around. Jure Hauptmann thinks these might come in handy later."
-condition_expression = "metal_bolt == 20 AND metal_scrap == 10"
+condition_expression = "metal_bolt == 5 AND metal_scrap == 2"
 rewards = ["Gives the player the following information - tells the player where he can find franc_petrov (Franc Petrov)."]

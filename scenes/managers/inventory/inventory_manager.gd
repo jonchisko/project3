@@ -6,14 +6,14 @@ class_name InventoryManager
 var _inventory: Dictionary = {}
 
 
-func has_item(item_id: String) -> int:
+func has_item(item_id: String, number: int) -> bool:
 	if not self._inventory.has(item_id):
-		return 0
-	return self._inventory[item_id]
+		return false
+	return self._inventory[item_id] >= number
 
 
 func get_item(item_id: String, number: int = 1) -> InteractableResource:
-	if self.has_item(item_id) < number:
+	if self.has_item(item_id, number):
 		return null
 		
 	for _i in range(number):

@@ -11,13 +11,13 @@ var _gpt_template: TemplateBase
 @export var chat_history: ChatHistory
 @export var template_factory: TemplateFactory
 
-
-
+var _player_inventory: InventoryManager
 var _first_message: bool = true
 
 
 func _ready() -> void:
 	GameEvents.interact_with_interactable.connect(self._open_chat_window_for)
+	self._player_inventory = self.get_tree().get_first_node_in_group("player").find_child("InventoryManager") as InventoryManager
 
 
 func _open_chat_window_for(interactable: InteractableArea) -> void:
@@ -63,8 +63,22 @@ func _on_player_message_sent(message: String) -> void:
 	if response.successful():
 		var choice: ChoiceResponse = response.choices()[0]
 		var npc_message = choice["message"]["content"]
-		var tools = choice.message.tool_calls
-		print(tools)
+		
+		var tools: Array[ToolCall] = choice.message.tool_calls
+		for tool in tools:
+			printt(tool.name, tool.arguments)
+			var tool_call_result = self._parse_tool_call(tool)
+			print(tool_call_result)
+			self._gpt_template.append_message("assistant", npc_message)
+			self._gpt_template.append_message("tool", str(tool_call_result["call_result"]))
+			response = await self._gpt_template.get_reply()
+			if response.successful():
+				print(response.choices()[0]["message"]["content"])
+				var s_tools = response.choices()[0].message.tool_calls
+				for t in s_tools:
+					print(t.name)
+					print(t.arguments)
+			
 		# First remove the similar_data_from_history and user query, so that we just keep similar history
 		# for current query
 		self._gpt_template.remove_newest_message() # query
@@ -114,10 +128,15 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 
 func _get_has_item_tool() -> Tool:
 	var has_item_tool: Tool = FunctionToolBuilder.new("has_item")\
-		.with_description("Obtains information how many instances of item 'item_id' the player holds (0, 1, 2, etc.).")\
+		.with_description("Checks if the player has 'number' of item_id' in the inventory. Returns true or false.")\
 		.with_property(
 			PropertyBuilder.new("item_id", PropertyTypes.Type.StringJson)
 				.with_description("The item_id you want inquire about.")
+				.build(), 
+			true)\
+		.with_property(
+			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+				.with_description("How many items you want to give.")
 				.build(), 
 			true)\
 		.build()
@@ -165,3 +184,58 @@ func _set_chat_history() -> void:
 	chat_history.max_last_exchanges = OpenAiConfiguration.history_max_last_exchanges
 	chat_history.max_similar_results = OpenAiConfiguration.history_max_similar_results
 	chat_history.threshold_similar_results = OpenAiConfiguration.history_threshold_similar_results
+
+
+func _parse_tool_call(tool: ToolCall) -> Dictionary:
+	var call_result = {"error": false, "message": "", "call_result": null}
+	
+	var fun_name = tool.name
+	
+	var parsed_arguments_data = self._parse_arguments_data(tool.arguments)
+	if not parsed_arguments_data["message"].is_empty():
+		call_result["error"] = true
+		call_result["message"] = parsed_arguments_data["message"]
+		return call_result
+		
+	var fun_args = parsed_arguments_data["data"]
+	
+	match fun_name:
+		"has_item":
+			if not fun_args.has("item_id") or not fun_args.has("number"):
+				call_result["error"] = true
+				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
+			else:
+				var has_item = self._player_inventory.has_item(fun_args["item_id"], fun_args["number"])
+				call_result["call_result"] = has_item
+			
+		"get_item":
+			if not fun_args.has("item_id") or not fun_args.has("number"):
+				call_result["error"] = true
+				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
+			else:
+				var item = self._player_inventory.get_item(fun_args["item_id"], fun_args["number"])
+				call_result["call_result"] = item
+		
+		"give_item":
+			if not fun_args.has("item_id") or not fun_args.has("number"):
+				call_result["error"] = true
+				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
+			else:
+				self._player_inventory.give_item(fun_args["item_id"], fun_args["number"])
+				call_result["call_result"] = true
+		_:
+			call_result["error"] = true
+			call_result["message"] = "Missing function. Incorrect function call name!"
+	
+	return call_result
+	
+
+func _parse_arguments_data(arguments: String) -> Dictionary:
+	var json_parser = JSON.new()
+	var error = json_parser.parse(arguments)
+	if error == OK:
+		var data = json_parser.data
+		if typeof(data) == TYPE_DICTIONARY:
+			return {"message": "", "data": data}
+		return {"message": "Unknown data type of tool arguments", "data": null}
+	return {"message": "Tool arguments:" + json_parser.get_error_message(), "data": null}

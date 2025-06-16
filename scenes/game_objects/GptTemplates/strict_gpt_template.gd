@@ -84,7 +84,34 @@ func _add_quest(npc_data: NpcData) -> String:
 					<quest_condition>{quest_condition}</quest_condition>
 				The quest reward in the fulfillment case is <quest_reward>{quest_reward}</quest_reward>
 			</quest_fulfillment>
-		</quest>"\
+		</quest>
+		
+		The structure of the <quest_condition> can be a boolean expression or a 'statement' that looks like the following:
+		<quest_conditions>
+			<quest_condition_structure>
+				item_id == number <logical_operator=[AND, OR]> item_id == number
+			</quest_condition_structure>
+			<quest_condition_structure>
+				item_id == number
+			</quest_condition_structure>
+			<quest_condition_structure>
+				Some statement that needs to be observing the dynamic or static game world information.
+			</quest_condition_structure>
+		</quest_conditions>
+		
+		Concrete examples (item_id is made up):
+		<quest_conditions_examples>
+			<example>
+				concrete_slabs == 20 AND bolts == 10 AND screws == 1
+			</example>
+			<example>
+				planks == 40
+			</example>
+			<example>
+				The player talked with the npc_id.
+			</example>
+		</quest_conditions_examples>
+		"\
 		.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
 		"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
 	
@@ -132,16 +159,17 @@ func _add_function_calling() -> String:
 	You are able to call a tool to obtain information which items the player has or to give him/her the item you have in the <quest_reward>.
 	
 	## How to know if the player has an item
-	You can get how much items of specific item_id (the item <quest_condition>) the player has in the following manner:
+	You can get information if the player has enough of specific item_id (the <quest_item_id> and the
+	<quest_number> can be parsed from <quest_condition>) in the following manner:
 	<function>
-		<definition_gdscript>has_item(item_id: String) -> int</definition_gdscript>
-		<example_call>has_item(<quest_condition>)</example_call>
+		<definition_gdscript>has_item(item_id: String, number: int) -> bool</definition_gdscript>
+		<example_call>has_item(<quest_item_id>, <quest_number>)</example_call>
 	</function>
 
 	Remember, if multiples items are in the <quest_condition>, has_item must be called multiple times:
 	<example_call>
-		has_item(<quest_condition>[0])
-		has_item(<quest_condition>[1])
+		has_item(<quest_item_id>, <quest_number>)
+		has_item(<quest_item_id>, <quest_number>)
 	</example_call>
 
 	## How to give the player the item
@@ -158,16 +186,18 @@ func _add_function_calling() -> String:
 	</example_call>
 
 	## How to take player’s item
-	You can take the item (the item <quest_condition>) from the player in the following manner:
+	After verifying the player has enough quest condition items to finish the quest. You should
+	take them from his or hers inventory (the <quest_item_id> and the <quest_number> can be parsed from <quest_condition>). 
+	This is done in the following manner:
 	<function>
 		<definition_gdscript>get_item(item_id: String, number: int = 1) -> InteractableResource</definition_gdscript>
-		<example_call>get_item(<quest_condition>, 1)</example_call>
+		<example_call>get_item(<quest_item_id>, <quest_number>)</example_call>
 	</function>
 	
 	Remember, if multiples items are in the <quest_condition>, get_item must be called multiple times:
 	<example_call>
-		get_item(<quest_condition>[0], 1)
-		get_item(<quest_condition>[1], 10)
+		get_item(<quest_item_id>, <quest_number>)
+		get_item(<quest_item_id>, <quest_number>)
 	</example_call>
 	"
 

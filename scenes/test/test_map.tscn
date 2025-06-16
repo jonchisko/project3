@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=32 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -28,6 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="22_yxsy3"]
 [ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="25_hmn17"]
 [ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="28_ndh6o"]
+[ext_resource type="Resource" uid="uid://c56ydsh5licpm" path="res://resources/interactables/items/metal_bolt_item.tres" id="29_notju"]
+[ext_resource type="Resource" uid="uid://b7j47oyxw43g1" path="res://resources/interactables/items/metal_scrap_item.tres" id="30_esub5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
@@ -541,7 +543,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(1243, 710)
+position = Vector2(-597, 185)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 
@@ -689,3 +691,45 @@ new_scene = "res://scenes/levels/outpost_level.tscn"
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("28_ndh6o")]
 bus = "GameMusic"
+
+[node name="ItemsTest" type="Node2D" parent="."]
+
+[node name="Item" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-851, 61)
+interactable_data = ExtResource("29_notju")
+
+[node name="Item2" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-829, 85)
+interactable_data = ExtResource("29_notju")
+
+[node name="Item3" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-801, 109)
+interactable_data = ExtResource("29_notju")
+
+[node name="Item4" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-804, 61)
+interactable_data = ExtResource("29_notju")
+
+[node name="Item5" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-849, 107)
+interactable_data = ExtResource("29_notju")
+
+[node name="Item6" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-844, 220)
+interactable_data = ExtResource("30_esub5")
+
+[node name="Item7" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-824, 242)
+interactable_data = ExtResource("30_esub5")
+
+[node name="Item8" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-804, 257)
+interactable_data = ExtResource("30_esub5")
+
+[node name="Item9" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-843, 259)
+interactable_data = ExtResource("30_esub5")
+
+[node name="Item10" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-802, 223)
+interactable_data = ExtResource("30_esub5")
