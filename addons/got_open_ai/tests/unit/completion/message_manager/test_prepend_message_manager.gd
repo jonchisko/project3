@@ -37,23 +37,23 @@ func test_prepend_multiple_messages() -> void:
 	object_under_test.prepend_messages(messages)
 	
 	# Assert
-	var combined_messages: Array[Dictionary] = object_under_test.get_combined_message_data()
+	var combined_messages: Array[Message] = object_under_test.get_combined_message_data()
 	for index in messages.size():
 		# messages.size() - index - 1 because we are in reverse due to prepending the elements and not appending
 		var role_key = messages[messages.size() - index - 1].keys()[0]
 		var expected_role = role_key
 		var expected_message = messages[messages.size() - index - 1][role_key]
-		assert_eq(combined_messages[index]["role"], expected_role)
-		assert_eq(combined_messages[index]["content"], expected_message)
+		assert_eq(combined_messages[index].role, expected_role)
+		assert_eq(combined_messages[index].content, expected_message)
 
-func test_prepend_message_dictionary() -> void:
+func test_prepend_message_with() -> void:
 	# Arrange
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.prepend_message_dictionary({"test": "test_message"})
+	object_under_test.prepend_message_with(MessageBuilder.new("test").with_content("test_message").build())
 	
 	# Assert
-	var combined_messages: Array[Dictionary] = object_under_test.get_combined_message_data()
-	assert_eq(combined_messages[0]["role"], "test")
-	assert_eq(combined_messages[0]["content"], "test_message")
+	var combined_messages: Array[Message] = object_under_test.get_combined_message_data()
+	assert_eq(combined_messages[0].role, "test")
+	assert_eq(combined_messages[0].content, "test_message")

@@ -29,12 +29,12 @@ func test_append_messages() -> void:
 	assert_eq(object_under_test.messages_to_string().contains("message3"), false, "Messages contain 'message3'.")
 
 
-func test_append_message_dictionary() -> void:
+func test_append_message_with() -> void:
 	# Arrange
 	var object_under_test: MessageManager = MessageManager.new()
 	
 	# Act
-	object_under_test.append_message_dictionary({"test": "message"})
+	object_under_test.append_message_with	(MessageBuilder.new("test4").with_content("message4").build())
 	
 	# Assert
 	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")
@@ -49,7 +49,7 @@ func test_append_messages_combined_variations() -> void:
 	# Act
 	object_under_test.append_message("test1", "message1")
 	object_under_test.append_messages([{"test2": "message2"}, {"test3": "message3"}])
-	object_under_test.append_message_dictionary({"test4": "message4"})
+	object_under_test.append_message_with	(MessageBuilder.new("test4").with_content("message4").build())
 	
 	# Assert
 	var messages = object_under_test.messages_to_string()
@@ -87,16 +87,3 @@ func test_append_static_contexts() -> void:
 	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be two, but it is not.")
 	assert_eq(object_under_test.context_to_string().contains("message1"), true, "Messages do not contain 'message1'.")
 	assert_eq(object_under_test.context_to_string().contains("message2"), true, "Messages do not contain 'message2'.")
-	
-
-func test_append_static_context_dictionary() -> void:
-	# Arrange
-	var object_under_test: MessageManager = MessageManager.new()
-	
-	# Act
-	object_under_test.append_static_context_dictionary({"test1": "message1"})
-	
-	# Assert
-	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one, but it is not.")
-	assert_eq(object_under_test.context_to_string().contains("test1"), true, "Messages do not contain 'test1'.")
-	assert_eq(object_under_test.context_to_string().contains("message1"), true, "Messages do not contain 'message1'.")

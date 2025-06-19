@@ -27,7 +27,8 @@ func test_clear_all_messages_on_non_empty_messages() -> void:
 	# Arrange
 	var object_under_test: MessageManager = MessageManager.new()
 	object_under_test.append_message("test", "message_test")
-	assert_eq(object_under_test.get_combined_message_data().size(), 1, "Size should be one after add, but it is not.")
+	object_under_test.append_message_with(MessageBuilder.new("test").build())
+	assert_eq(object_under_test.get_combined_message_data().size(), 2, "Size should be one after add, but it is not.")
 	
 	# Act
 	object_under_test.clear_all_messages()
