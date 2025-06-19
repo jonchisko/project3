@@ -111,6 +111,35 @@ func _add_quest(npc_data: NpcData) -> String:
 				The player talked with the npc_id.
 			</example>
 		</quest_conditions_examples>
+		
+		The structure of the <quest_reward> is as follows:
+		<quest_rewards>
+			<quest_reward_structure>
+				Give the item_id.
+			</quest_reward_structure>
+			<quest_reward_structure>
+				Tell the player about npc_id.
+			</quest_reward_structure>
+			<quest_reward_structure>
+				The item_id.
+			</quest_reward_structure>
+		</quest_rewards>
+		
+		Concrete examples:
+		<quest_reward_examples>
+			<example>
+				Give the ring.
+			</example>
+			<example>
+				Tell the player about miha_sneg.
+			</example>
+			<example>
+				The outlawed_pen.
+			</example>
+		</quest_reward_examples>
+		
+		You must take the <quest_condition> item from the player - for this use the function get_item,
+		examples on how to call function/tools are in chapter 'How to call a tool or function'.
 		"\
 		.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
 		"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})

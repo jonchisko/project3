@@ -62,15 +62,16 @@ func _on_player_message_sent(message: String) -> void:
 	
 	if response.successful():
 		var choice: ChoiceResponse = response.choices()[0]
-		var npc_message = choice["message"]["content"]
+		var npc_message: Message = choice.message
 		
+		# START: PROTOTYPE TOOL CALL AREA
 		var tools: Array[ToolCall] = choice.message.tool_calls
 		for tool in tools:
 			printt(tool.name, tool.arguments)
 			var tool_call_result = self._parse_tool_call(tool)
 			print(tool_call_result)
-			self._gpt_template.append_message("assistant", npc_message)
-			self._gpt_template.append_message("tool", str(tool_call_result["call_result"]))
+			self._gpt_template.append_message_with(npc_message)
+			self._gpt_template.append_tool_message(tool.id, str(tool_call_result["call_result"]))
 			response = await self._gpt_template.get_reply()
 			if response.successful():
 				print(response.choices()[0]["message"]["content"])
@@ -78,7 +79,27 @@ func _on_player_message_sent(message: String) -> void:
 				for t in s_tools:
 					print(t.name)
 					print(t.arguments)
+					
+		choice = response.choices()[0]
+		npc_message = choice.message
+		
+		# START: PROTOTYPE TOOL CALL AREA
+		tools = choice.message.tool_calls
+		for tool in tools:
+			printt(tool.name, tool.arguments)
+			var tool_call_result = self._parse_tool_call(tool)
+			print(tool_call_result)
+			self._gpt_template.append_message_with(npc_message)
+			self._gpt_template.append_tool_message(tool.id, str(tool_call_result["call_result"]))
+			response = await self._gpt_template.get_reply()
+			if response.successful():
+				print(response.choices()[0]["message"]["content"])
+				var s_tools = response.choices()[0].message.tool_calls
+				for t in s_tools:
+					printt(t.name, t.arguments)
 			
+		# START: PROTOTYPE TOOL CALL AREA
+		
 		# First remove the similar_data_from_history and user query, so that we just keep similar history
 		# for current query
 		self._gpt_template.remove_newest_message() # query
@@ -86,9 +107,9 @@ func _on_player_message_sent(message: String) -> void:
 		self._gpt_template.remove_newest_message() # similar history
 		
 		self._template.add_player_query(self._gpt_template, message, false) # re-add
-		self._gpt_template.append_message("assistant", npc_message)
+		self._gpt_template.append_message("assistant", npc_message.content)
 		
-		self._chat_messenger_instance.edit_last_chat_element(npc_message)
+		self._chat_messenger_instance.edit_last_chat_element(npc_message.content)
 		
 		var data_to_save = [{"user": message}, {"assistant": npc_message}]
 		print("Saving history: ", data_to_save)
@@ -110,7 +131,7 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 	OpenAiApi.got_open_ai.user_configuration = user_configuration
 	
 	self._template = self.template_factory.get_template(OpenAiConfiguration.template_type)
-	
+
 	self._gpt_template = OpenAiApi.got_open_ai.GetGptCompletion()\
 		.with_model(OpenAiTypes.model_version_to_string(OpenAiConfiguration.open_ai_model))\
 		.with_temperature(OpenAiConfiguration.temperature)\
