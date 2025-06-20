@@ -9,4 +9,4 @@ primary_quest = true
 title = "Repair Smaragd ring"
 description = "He wears a cracked smaragd ring, its green stone faintly marbled with silver. It once belonged to Alenka, though he never says her name. He doesn’t sell it, doesn’t take it off. Just sometimes stares at it when he thinks no one’s watching.He says only one thing about it: “There’s someone out there who can fix it. Not remake it — fix it. That’s different.” He is willing to give the item book_wotlica for it."
 condition_expression = "smaragd_ring == 1"
-rewards = ["The item book_wotlica, “The history of Wotlica – from its humble beginnings to today”. It was written by Alenka."]
+rewards = ["give_item(book_wotlica, 1)"]

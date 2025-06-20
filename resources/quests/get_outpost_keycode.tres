@@ -9,4 +9,4 @@ primary_quest = true
 title = "Get the outpost keycode"
 description = "He doesn’t want saving. He doesn’t want pity. But if someone could actually sober him up long enough, those outpost codes might resurface. Along with truths better left buried."
 condition_expression = "hangover_potion == 1"
-rewards = ["outpost_keycode"]
+rewards = ["give_item(outpost_keycode, 1)"]

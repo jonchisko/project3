@@ -8,5 +8,5 @@ id = "clear_the_mines"
 primary_quest = true
 title = "Clear the mines"
 description = "He claims the mine is cursed — taken over by dark, armored figures he calls “knights.” Not ghosts, not machines. Just something wrong. He doesn’t want it fixed for himself. He wants it safe. “It’s our mine, not theirs.”Peter has a stash of Robid cores locked away, salvaged from sealed storage before the tunnels went bad. He’s willing to give one up — but only if someone clears out the mine. Permanently."
-condition_expression = "Knights in the mine are 0. There are no knights in the mine."
-rewards = ["robid_core"]
+condition_expression = "You as the NPC need to verify in 'Dynamic world context' if there is any information about player clearing the mines."
+rewards = ["give_item(robid_core, 1)"]

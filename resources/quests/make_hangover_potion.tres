@@ -9,4 +9,4 @@ primary_quest = true
 title = "Help Jurij make hangover potion"
 description = "He knows how to make a sobering brew from ingredients that don’t grow close together: greenberries from the Ajd Plain and black honey from hives in the wetter parts near Gozdnik. It’s something his mother used to prepare for old drunks and bitten scouts."
 condition_expression = "black_honey_combs == 5 AND greenberries == 8 "
-rewards = ["hangover_potion"]
+rewards = ["give_item(hangover_potion, 1)"]

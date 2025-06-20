@@ -9,4 +9,4 @@ primary_quest = true
 title = "Obtain the Robid core"
 description = "When the shuttle Mara IX was assigned a surface scan of Wotlica, it was meant to be routine. But a cascading fault in the reactor forced an emergency descent. During the rough landing, the Robid core — the ship’s primary energy system — was cracked beyond safe use. Without it, there’s no chance of leaving the planet."
 condition_expression = "robid_core == 1"
-rewards = ["Game ends."]
+rewards = ["trigger_event(game_end)"]

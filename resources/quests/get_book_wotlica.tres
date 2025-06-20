@@ -9,4 +9,4 @@ primary_quest = true
 title = "Get the book \"The history of Wotlica – from its humble beginnings to today\"."
 description = "He’s never admitted it aloud, but he believes the book might hold more than just stories. Old methods. Lost traditions. Maybe even something to help Colnica endure what the rest of Wotlica couldn’t. Among the shelves of brittle journals and solar-dried blueprints, there is already a space reserved for it.In return for that book, Radovan is willing to share something he’s kept sealed for years: Starodavna navodila za izdelavo Wajdovskega kopja — the ancient instructions for crafting the Wajdovian spear. Whether myth or manual, it's said to combine metallurgy with something older, something pre-colonial. He treats it like a fable, but his eyes say otherwise."
 condition_expression = "book_wotlica == 1"
-rewards = ["wajdovian_spear_instruction"]
+rewards = ["give_item(wajdovian_spear_instruction, 1)"]

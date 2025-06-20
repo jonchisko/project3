@@ -9,4 +9,4 @@ primary_quest = true
 title = "Find the magical jewelry blueprints"
 description = "She’s obsessed with the rumored blueprints for a piece of jewelry said to channel energy — maybe emotional, maybe electrical, maybe both. The plans were archived in a long-abandoned outpost. Tanja wants them not just to learn, but to prove she’s more than a village goldsmith."
 condition_expression = "jewelry_blueprints == 1"
-rewards = ["The repaired smaragd_ring"]
+rewards = ["give_item(smaragd_ring, 1)"]
