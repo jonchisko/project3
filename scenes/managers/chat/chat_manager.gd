@@ -67,11 +67,18 @@ func _on_player_message_sent(player_message: String) -> void:
 			var choice: ChoiceResponse = response.choices()[0]
 			var npc_message: Message = choice.message
 			
-			self._chat_messenger_instance.edit_last_chat_element(npc_message.content)
+			var content_to_show = npc_message.content
+			if not npc_message.tool_calls.is_empty():
+				content_to_show += "\nCalling functions: {calls}".format({"calls": 
+					npc_message.tool_calls.map(func(x: ToolCall): return "{name}~{params}".format({"name": x.name, "params": x.arguments}))
+					})
+
+			self._chat_messenger_instance.edit_last_chat_element(content_to_show)
 			self._gpt_template.append_message_with(npc_message)
 			self.chat_history.save_history(self._current_npc_data.id, [npc_message])
 			
 			var tools: Array[ToolCall] = choice.message.tool_calls
+			
 			if tools.is_empty():
 				break
 			
@@ -88,6 +95,7 @@ func _on_player_message_sent(player_message: String) -> void:
 				self.chat_history.save_history(self._current_npc_data.id, [tool_message])
 				
 			response = await self._gpt_template.get_reply()
+			self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 			
 		else:
 			var system_message: String = "Response from assistant was not successful.
