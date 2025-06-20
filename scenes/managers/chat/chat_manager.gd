@@ -76,14 +76,14 @@ func _on_player_message_sent(player_message: String) -> void:
 				break
 			
 			for tool in tools:
-				printt("Tool:", tool.name, tool.arguments)
 				var tool_call_result = self._parse_tool_call(tool)
-				printt("Tool:", tool.name, tool.arguments, tool_call_result["call_result"])
+				printt("Tool:", tool.name, tool.arguments, JSON.stringify(tool_call_result))
 				
 				var tool_message: Message = MessageBuilder.new("tool")\
 					.with_tool_call_id(tool.id)\
-					.with_content(str(tool_call_result["call_result"]))\
+					.with_content(JSON.stringify(tool_call_result))\
 					.build()
+				
 				self._gpt_template.append_message_with(tool_message)
 				self.chat_history.save_history(self._current_npc_data.id, [tool_message])
 				
@@ -174,6 +174,19 @@ func _get_get_item_tool() -> Tool:
 	return get_item_tool
 	
 	
+func _trigger_event_tool() -> Tool:
+	var trigger_event_tool: Tool = FunctionToolBuilder.new("trigger_event")\
+		.with_description("Triggers the game event.")\
+		.with_property(
+			PropertyBuilder.new("event_id", PropertyTypes.Type.StringJson)
+				.with_description("The event_id you want to trigger.")
+				.build(), 
+			true)\
+		.build()
+		
+	return trigger_event_tool
+	
+	
 func _set_chat_history() -> void:
 	chat_history.max_last_exchanges = OpenAiConfiguration.history_max_last_exchanges
 	chat_history.max_similar_results = OpenAiConfiguration.history_max_similar_results
@@ -208,14 +221,24 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
 				var item = self._player_inventory.get_item(fun_args["item_id"], fun_args["number"])
-				call_result["call_result"] = item
-		
+				if item == null:
+					call_result["error"] = true
+					call_result["message"] = "Get item was unable to obtain {item_id}".format({"item_id": fun_args["item_id"]})
+				else:
+					call_result["call_result"] = item
 		"give_item":
 			if not fun_args.has("item_id") or not fun_args.has("number"):
 				call_result["error"] = true
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
-				self._player_inventory.give_item(fun_args["item_id"], fun_args["number"])
+				var result = self._player_inventory.give_item(fun_args["item_id"], fun_args["number"])
+				call_result["call_result"] = result
+		"trigger_event":
+			if not fun_args.has("event_id"):
+				call_result["error"] = true
+				call_result["message"] = "Missing function arguments (event_id)!"
+			else:
+				print("Triggering event {event}".format({"event": fun_args["event_id"]}))
 				call_result["call_result"] = true
 		_:
 			call_result["error"] = true

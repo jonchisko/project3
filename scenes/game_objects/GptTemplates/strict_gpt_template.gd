@@ -108,33 +108,33 @@ func _add_quest(npc_data: NpcData) -> String:
 				planks == 40
 			</example>
 			<example>
-				The player talked with the npc_id.
+				Verify in dynamic world context that the player talked with the npc_id.
 			</example>
 		</quest_conditions_examples>
 		
 		The structure of the <quest_reward> is as follows:
 		<quest_rewards>
 			<quest_reward_structure>
-				Give the item_id.
+				give_item(wajdovian_spear_instruction, 1)
 			</quest_reward_structure>
 			<quest_reward_structure>
-				Tell the player about npc_id.
+				trigger_event(event_id)
 			</quest_reward_structure>
 			<quest_reward_structure>
-				The item_id.
+				give_item(item_id, amount)
 			</quest_reward_structure>
 		</quest_rewards>
 		
 		Concrete examples:
 		<quest_reward_examples>
 			<example>
-				Give the ring.
+				give_item(wajdovian_spear_instruction, 1)
 			</example>
 			<example>
-				Tell the player about miha_sneg.
+				trigger_event(end_game)
 			</example>
 			<example>
-				The outlawed_pen.
+				give_item(outlawed_pen, 3)
 			</example>
 		</quest_reward_examples>
 		
@@ -204,7 +204,7 @@ func _add_function_calling() -> String:
 	## How to give the player the item
 	You can give the player the item (or multiple numbers of the same items) you have as <quest_reward> in the following manner:
 	<function>
-		<definition_gdscript>give_item(item_id: String, number: int = 1) -> void</definition_gdscript>
+		<definition_gdscript>give_item(item_id: String, number: int = 1) -> bool</definition_gdscript>
 		<example_call>give_item(<quest_reward>, 1)</example_call>
 	</function>
 	
@@ -213,7 +213,9 @@ func _add_function_calling() -> String:
 		give_item(<quest_reward>[0], 1)
 		give_item(<quest_reward>[1], 1)
 	</example_call>
-
+	The result tells you if the item was successfully given - it might happen that the item_id doesn't
+	exist in case if you misunderstood the item_id from the conversation/quest data.
+	
 	## How to take player’s item
 	After verifying the player has enough quest condition items to finish the quest. You should
 	take them from his or hers inventory (the <quest_item_id> and the <quest_number> can be parsed from <quest_condition>). 
@@ -228,6 +230,8 @@ func _add_function_calling() -> String:
 		get_item(<quest_item_id>, <quest_number>)
 		get_item(<quest_item_id>, <quest_number>)
 	</example_call>
+	
+	If InteractableResource, then the item_id was most likely incorrect.
 	"
 
 

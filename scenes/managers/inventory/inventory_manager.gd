@@ -13,7 +13,7 @@ func has_item(item_id: String, number: int) -> bool:
 
 
 func get_item(item_id: String, number: int = 1) -> InteractableResource:
-	if self.has_item(item_id, number):
+	if not self.has_item(item_id, number):
 		return null
 		
 	for _i in range(number):
@@ -22,14 +22,18 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	return ResourceDictionary.ResourceIdToResource[item_id]
 	
 	
-func give_item(item_id: String, number: int = 1) -> void:
+func give_item(item_id: String, number: int = 1) -> bool:
+	if not ResourceDictionary.ResourceIdToResource.has(item_id):
+		return false
+	
 	var item_data = ResourceDictionary.ResourceIdToResource[item_id]
 	
 	for _i in range(number):
 		self._add_item(item_data)
 	
 	self._log_current_state()
-
+	return true
+	
 
 func show_inventory() -> Dictionary:
 	return self._inventory
