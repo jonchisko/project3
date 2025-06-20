@@ -12,7 +12,6 @@ var _gpt_template: TemplateBase
 @export var template_factory: TemplateFactory
 
 var _player_inventory: InventoryManager
-var _first_message: bool = true
 
 
 func _ready() -> void:
@@ -38,91 +37,65 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 
 
 # Done every time a message is SENT
-func _on_player_message_sent(message: String) -> void:
-	if not self._first_message:
-		self._gpt_template.remove_oldest_message() # Remove the old message query at the top
-	if self._first_message:
-		self._first_message = false
-		
-	self._template.add_player_query(self._gpt_template, message, true)
-	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history, message)
-	self._template.add_instructions(self._gpt_template)
-	self._template.add_player_query(self._gpt_template, message, false)
-	
+func _on_player_message_sent(player_message: String) -> void:
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
-	var response = await self._gpt_template.get_reply()
+
+	self._template.add_player_query(self._gpt_template, player_message, true)
+	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history, player_message)
+	self._template.add_instructions(self._gpt_template)
+	self._template.add_player_query(self._gpt_template, player_message, false)
+
+	var response: CompletionResponse = await self._gpt_template.get_reply()
 	
-	#print("STATIC CONTEXT")
-	#for element in self._gpt_template.structured_context():
-		#print(element.role, " ", element.content)
-		#
-	#print("MESSAGES")
-	#for element in self._gpt_template.structured_messages():
-		#print(element.role, " ", element.content)
+	# First remove the similar_data_from_history and user query, so that we just keep similar history
+	# for current query
+	self._gpt_template.remove_oldest_message() # Remove the old message query at the top
 	
-	if response.successful():
-		var choice: ChoiceResponse = response.choices()[0]
-		var npc_message: Message = choice.message
-		
-		# START: PROTOTYPE TOOL CALL AREA
-		var tools: Array[ToolCall] = choice.message.tool_calls
-		for tool in tools:
-			printt(tool.name, tool.arguments)
-			var tool_call_result = self._parse_tool_call(tool)
-			print(tool_call_result)
-			self._gpt_template.append_message_with(npc_message)
-			self._gpt_template.append_tool_message(tool.id, str(tool_call_result["call_result"]))
-			response = await self._gpt_template.get_reply()
-			if response.successful():
-				print(response.choices()[0]["message"]["content"])
-				var s_tools = response.choices()[0].message.tool_calls
-				for t in s_tools:
-					print(t.name)
-					print(t.arguments)
-					
-		choice = response.choices()[0]
-		npc_message = choice.message
-		
-		# START: PROTOTYPE TOOL CALL AREA
-		tools = choice.message.tool_calls
-		for tool in tools:
-			printt(tool.name, tool.arguments)
-			var tool_call_result = self._parse_tool_call(tool)
-			print(tool_call_result)
-			self._gpt_template.append_message_with(npc_message)
-			self._gpt_template.append_tool_message(tool.id, str(tool_call_result["call_result"]))
-			response = await self._gpt_template.get_reply()
-			if response.successful():
-				print(response.choices()[0]["message"]["content"])
-				var s_tools = response.choices()[0].message.tool_calls
-				for t in s_tools:
-					printt(t.name, t.arguments)
+	self._gpt_template.remove_newest_message() # query
+	self._gpt_template.remove_newest_message() # instructions
+	self._gpt_template.remove_newest_message() # similar history
+	
+	self._template.add_player_query(self._gpt_template, player_message, false) # re-add
+	
+	while true:
+		if response.successful():
+			var player_message_to_save: Message = MessageBuilder.new("user")\
+				.with_content(player_message)\
+				.build()
+			self.chat_history.save_history(self._current_npc_data.id, [player_message_to_save])
 			
-		# START: PROTOTYPE TOOL CALL AREA
-		
-		# First remove the similar_data_from_history and user query, so that we just keep similar history
-		# for current query
-		self._gpt_template.remove_newest_message() # query
-		self._gpt_template.remove_newest_message() # instructions
-		self._gpt_template.remove_newest_message() # similar history
-		
-		self._template.add_player_query(self._gpt_template, message, false) # re-add
-		self._gpt_template.append_message("assistant", npc_message.content)
-		
-		self._chat_messenger_instance.edit_last_chat_element(npc_message.content)
-		
-		var data_to_save = [{"user": message}, {"assistant": npc_message}]
-		print("Saving history: ", data_to_save)
-		self.chat_history.save_history(self._current_npc_data.id, data_to_save)
-	else:
-		# First remove the similar_data_from_history and user query, so that we just keep similar history
-		# for current query
-		self._gpt_template.remove_newest_message() # query
-		self._gpt_template.remove_newest_message() # instructions
-		self._gpt_template.remove_newest_message() # similar history
-		
-		self._template.add_player_query(self._gpt_template, message, false) # re-add
-		self._gpt_template.append_message("developer", "<No response from assistant.>")
+			var choice: ChoiceResponse = response.choices()[0]
+			var npc_message: Message = choice.message
+			
+			self._chat_messenger_instance.edit_last_chat_element(npc_message.content)
+			self._gpt_template.append_message_with(npc_message)
+			self.chat_history.save_history(self._current_npc_data.id, [npc_message])
+			
+			var tools: Array[ToolCall] = choice.message.tool_calls
+			if tools.is_empty():
+				break
+			
+			for tool in tools:
+				printt("Tool:", tool.name, tool.arguments)
+				var tool_call_result = self._parse_tool_call(tool)
+				printt("Tool:", tool.name, tool.arguments, tool_call_result["call_result"])
+				
+				var tool_message: Message = MessageBuilder.new("tool")\
+					.with_tool_call_id(tool.id)\
+					.with_content(str(tool_call_result["call_result"]))\
+					.build()
+				self._gpt_template.append_message_with(tool_message)
+				self.chat_history.save_history(self._current_npc_data.id, [tool_message])
+				
+			response = await self._gpt_template.get_reply()
+			
+		else:
+			var system_message: String = "Response from assistant was not successful.
+			Player query not stored in 'long-term' history."
+			
+			self._chat_messenger_instance.edit_last_chat_element(system_message)
+			
+			break
 
 	
 # Done ONCE at the start of the chat
