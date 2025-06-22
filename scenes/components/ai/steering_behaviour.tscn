@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx4lket34aill"]
+
+[ext_resource type="Script" path="res://scenes/components/ai/steering_behaviour.gd" id="1_mh30k"]
+[ext_resource type="PackedScene" uid="uid://h4brcja5j0" path="res://scenes/components/ai/chasing_behaviour.tscn" id="2_jq6if"]
+[ext_resource type="PackedScene" uid="uid://dr74y61gyffes" path="res://scenes/components/ai/avoiding_behaviour.tscn" id="3_me071"]
+
+[node name="SteeringBehaviour" type="Node" node_paths=PackedStringArray("behaviours")]
+script = ExtResource("1_mh30k")
+behaviours = [NodePath("ChasingBehaviour"), NodePath("AvoidingBehaviour")]
+
+[node name="ChasingBehaviour" parent="." instance=ExtResource("2_jq6if")]
+
+[node name="AvoidingBehaviour" parent="." instance=ExtResource("3_me071")]
