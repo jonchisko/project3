@@ -89,9 +89,6 @@ y_sort_enabled = true
 [node name="Knight" parent="YSorted/Knights" instance=ExtResource("3_pvhuu")]
 position = Vector2(555, 206)
 
-[node name="Knight2" parent="YSorted/Knights" instance=ExtResource("3_pvhuu")]
-position = Vector2(381, 283)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2s8ru")
 camera_attributes = SubResource("CameraAttributesPractical_1g1xk")

@@ -44,11 +44,11 @@ func _on_player_detector_area_exited(area: Area2D) -> void:
 	
 func _is_visible() -> bool:
 	var space_state = self.get_world_2d().direct_space_state
+
 	var query = PhysicsRayQueryParameters2D.create(self.global_position, self._player_reference.global_position, 
 		2, [self])
 		
 	var result = space_state.intersect_ray(query)
-	print(result)
 	return result.is_empty()
 	
 

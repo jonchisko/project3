@@ -1,6 +1,10 @@
 extends Node
 class_name SteeringBehaviourBase
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+func get_interest_map(knight: KnightNpc, interests: PackedFloat32Array) -> void:
+	pass
+
+
+func get_danger_map(knight: KnightNpc, dangers: PackedFloat32Array) -> void:
+	pass

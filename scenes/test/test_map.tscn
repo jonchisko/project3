@@ -243,6 +243,12 @@ position = Vector2(1072, -1062)
 [node name="Knight3" parent="." instance=ExtResource("22_yxsy3")]
 position = Vector2(1078, -978)
 
+[node name="Knight4" parent="." instance=ExtResource("22_yxsy3")]
+position = Vector2(1189, -1070)
+
+[node name="Knight5" parent="." instance=ExtResource("22_yxsy3")]
+position = Vector2(1182, -968)
+
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -543,7 +549,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(-597, 185)
+position = Vector2(785, -913)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 

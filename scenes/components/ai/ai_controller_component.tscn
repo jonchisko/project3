@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/components/ai/ai_controller_component.gd" id="1_ml86r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ijcci"]
-radius = 148.18
+radius = 257.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kaisp"]
 radius = 16.0312

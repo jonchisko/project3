@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name KnightNpc
 
 enum AttackType {
 	Basic,
@@ -16,6 +16,7 @@ enum AttackType {
 @onready var _attack_timer_cd: Timer = $AttackTimerCd
 @onready var _damage_area: DamageArea = $DamageArea
 @onready var _navigation_agent_2d: NavigationAgent2D = $Navigation/NavigationAgent2D
+@onready var _steering_behaviour: SteeringBehaviour = $Navigation/SteeringBehaviour
 
 
 
@@ -36,7 +37,8 @@ func _ready():
 func _process(delta):
 	var direction = Vector2.ZERO
 	if self._searching:
-		direction = (-self.global_position + self._navigation_agent_2d.get_next_path_position()).normalized()
+		direction = self._steering_behaviour.get_direction().normalized()
+		#direction = (-self.global_position + self._navigation_agent_2d.get_next_path_position()).normalized()
 	if not self._is_dying:
 		self._velocity_component.move_in_direction(self, direction)
 	
@@ -47,10 +49,10 @@ func _process(delta):
 		else:
 			self._animation_player.play("idle")
 	
-	#if self.velocity.x < 0:
-		#self.scale.x = -1
-	#if self.velocity.x > 0:
-		#self.scale.x = 1
+	if self.velocity.x < -0.1:
+		$Sprite2D.flip_h = true
+	if self.velocity.x > 0.1:
+		$Sprite2D.flip_h = false
 
 
 func _attack(attack_type: AttackType) -> void:
@@ -132,4 +134,4 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 
 func _play_sword_sound() -> void:
 	$AudioStreamPlayer2D.pitch_scale = randf_range(0.8, 1.2)
-	$AudioStreamPlayer2D.play()	
+	$AudioStreamPlayer2D.play()

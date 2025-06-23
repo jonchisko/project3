@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmyac6yq7afjt"]
+[gd_scene load_steps=26 format=3 uid="uid://dmyac6yq7afjt"]
 
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="1_1cpet"]
 [ext_resource type="Texture2D" uid="uid://cwokvm1nmguej" path="res://assets/sprites/knight/Sword.png" id="1_vfq44"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cpxbijp47j556" path="res://scenes/components/velocity/velocity_component.tscn" id="2_uw7xo"]
 [ext_resource type="PackedScene" uid="uid://c16ukqcbxjfku" path="res://scenes/components/damage/damage_area.tscn" id="3_yd0n0"]
 [ext_resource type="PackedScene" uid="uid://drhg3plicf04h" path="res://scenes/components/ai/ai_controller_component.tscn" id="4_np3jn"]
+[ext_resource type="PackedScene" uid="uid://bx4lket34aill" path="res://scenes/components/ai/steering_behaviour.tscn" id="5_sb4o4"]
 [ext_resource type="PackedScene" uid="uid://d1en4sxisf1gl" path="res://scenes/components/areas/floorable.tscn" id="8_ugfr7"]
 [ext_resource type="AudioStream" uid="uid://bdfjcsjjwap8t" path="res://assets/audio/game/impactPlate_heavy_000.ogg" id="9_hkp12"]
 
@@ -394,7 +395,7 @@ radius = 6.0
 [node name="Knight" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
 collision_layer = 4
-collision_mask = 34
+collision_mask = 6
 motion_mode = 1
 wall_min_slide_angle = 0.586431
 platform_floor_layers = 4294967217
@@ -417,15 +418,19 @@ max_health_points = 30
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
 path_desired_distance = 22.59
 target_desired_distance = 15.0
-path_max_distance = 150.0
+path_max_distance = 180.0
 simplify_path = true
 simplify_epsilon = 0.68
 avoidance_enabled = true
 radius = 20.08
+neighbor_distance = 700.0
 debug_enabled = true
 
 [node name="AiControllerComponent" parent="Navigation" instance=ExtResource("4_np3jn")]
 position = Vector2(0, -8)
+
+[node name="SteeringBehaviour" parent="Navigation" node_paths=PackedStringArray("knight") instance=ExtResource("5_sb4o4")]
+knight = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
