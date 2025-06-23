@@ -8,7 +8,9 @@ enum AttackType {
 
 
 @export var attack_type_sequence: Array[AttackType]
+@export var floor: FloorLevelChanger.Level
 
+var nearby_obstacles: Array[Node2D]
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _velocity_component: VelocityComponent = $VelocityComponent
@@ -29,6 +31,7 @@ var _is_dying: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	($Floorable as Floorable).set_floor_level(self.floor)
 	self._current_attack_type_index = 0
 	self._animation_player.play("idle")
 
@@ -135,3 +138,14 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 func _play_sword_sound() -> void:
 	$AudioStreamPlayer2D.pitch_scale = randf_range(0.8, 1.2)
 	$AudioStreamPlayer2D.play()
+
+
+func _on_ai_controller_component_obstacled_in_proximity(obstacle: Node2D) -> void:
+	if obstacle != self:
+		self.nearby_obstacles.push_back(obstacle)
+
+
+func _on_ai_controller_component_obstacled_out_of_proximity(obstacle: Node2D) -> void:
+	var index = self.nearby_obstacles.find(obstacle)
+	if index >= 0:
+		self.nearby_obstacles.remove_at(index)

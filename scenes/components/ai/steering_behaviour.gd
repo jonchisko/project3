@@ -23,17 +23,33 @@ func get_direction() -> Vector2:
 	#printt(self._interests, self._dangers)
 
 	var mask := PackedByteArray([true, true, true, true, true, true, true, true])
-	for i in range(0, self._dangers.size()):
-		if self._dangers[i] != 0.0:
-			mask[i] = false
-
+	
+	#var min_danger = 1.0
+	#for i in range(0, self._dangers.size()):
+		#if self._dangers[i] <= min_danger:
+			#min_danger = self._dangers[i]
+	#
+	#for i in range(0, self._dangers.size()):
+		#if self._dangers[i] > min_danger:
+			#mask[i] = false
+#
+	#var angle_ratio = 2 * PI / self._interests.size()
+	#var max_interest = 0.0
+	#for i in range(0, self._interests.size()):
+		#if mask[i] and self._interests[i] >= max_interest:
+			#result = Vector2.RIGHT.rotated(angle_ratio * i)
+			#max_interest = self._interests[i]
+	var sorted = self._dangers.duplicate()
+	sorted.sort()
+	var threshold_danger = sorted[5]
+	
 	var angle_ratio = 2 * PI / self._interests.size()
 	var max_interest = 0.0
 	for i in range(0, self._interests.size()):
-		if mask[i] and self._interests[i] >= max_interest:
+		if self._dangers[i] <= threshold_danger and self._interests[i] >= max_interest:
 			result = Vector2.RIGHT.rotated(angle_ratio * i)
 			max_interest = self._interests[i]
-	
+	printt(threshold_danger, max_interest, result)
 	self._interests = PackedFloat32Array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 	self._dangers = PackedFloat32Array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 

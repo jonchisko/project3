@@ -1,11 +1,13 @@
 extends Node2D
 class_name AiController
 
-
+signal obstacled_in_proximity(obstacle: Area2D)
+signal obstacled_out_of_proximity(obstacle: Area2D)
 signal move_to(location: Vector2)
 
 
 @export var update_frequency: float = 0.2
+@export var floorable: Floorable
 
 @onready var _patrol_timer: Timer = $PatrolTimer
 @onready var _player_detector: Area2D = $PlayerDetector
@@ -52,9 +54,13 @@ func _is_visible() -> bool:
 	return result.is_empty()
 	
 
+func _is_on_same_floor() -> bool:
+	return self.floorable.current_floor == self._player_reference.find_child("Floorable").current_floor
+
 
 func _on_patrol_timer_timeout() -> void:
-	if not self._stop_chase and self._check_visibility and self._is_visible():
+	print(self._is_on_same_floor())
+	if not self._stop_chase and self._check_visibility and self._is_on_same_floor():
 		self.move_to.emit(self._player_reference.global_position)
 
 
@@ -64,3 +70,13 @@ func _on_stop_chasing_area_area_entered(area: Area2D) -> void:
 
 func _on_stop_chasing_area_area_exited(area: Area2D) -> void:
 	self._stop_chase = false
+
+
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	if not body is Player:
+		self.obstacled_in_proximity.emit(body)
+
+
+func _on_player_detector_body_exited(body: Node2D) -> void:
+	if not body is Player:
+		self.obstacled_out_of_proximity.emit(body)

@@ -239,15 +239,19 @@ interactable_data = ExtResource("18_u1kc3")
 
 [node name="Knight2" parent="." instance=ExtResource("22_yxsy3")]
 position = Vector2(1072, -1062)
+floor = -15
 
 [node name="Knight3" parent="." instance=ExtResource("22_yxsy3")]
 position = Vector2(1078, -978)
+floor = -15
 
 [node name="Knight4" parent="." instance=ExtResource("22_yxsy3")]
 position = Vector2(1189, -1070)
+floor = -15
 
 [node name="Knight5" parent="." instance=ExtResource("22_yxsy3")]
 position = Vector2(1182, -968)
+floor = -15
 
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -265,9 +269,11 @@ y_sort_enabled = true
 
 [node name="Knight" parent="YSorted/floor1/knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(21, -815)
+floor = -10
 
 [node name="Knight2" parent="YSorted/floor1/knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(-465, -699)
+floor = -10
 
 [node name="floor2" type="Node2D" parent="YSorted"]
 y_sort_enabled = true
@@ -292,10 +298,12 @@ position = Vector2(-531, 1056)
 y_sort_enabled = true
 
 [node name="Knight" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
-position = Vector2(-94, 862)
+position = Vector2(-92, 996)
+floor = -10
 
 [node name="Knight3" parent="YSorted/floor2/Knights" instance=ExtResource("22_yxsy3")]
 position = Vector2(-94, 862)
+floor = -10
 
 [node name="TileMapLayerObstacles" type="TileMapLayer" parent="YSorted"]
 y_sort_enabled = true
@@ -682,12 +690,15 @@ y_sort_enabled = true
 
 [node name="Knight" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1489, 1212)
+floor = -20
 
 [node name="Knight2" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1508, 1043)
+floor = -20
 
 [node name="Knight3" parent="YSorted/Enemies" instance=ExtResource("22_yxsy3")]
 position = Vector2(1975, 1113)
+floor = -20
 
 [node name="Vignette" parent="." instance=ExtResource("6_jjxlv")]
 

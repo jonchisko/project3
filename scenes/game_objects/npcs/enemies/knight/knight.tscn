@@ -426,8 +426,9 @@ radius = 20.08
 neighbor_distance = 700.0
 debug_enabled = true
 
-[node name="AiControllerComponent" parent="Navigation" instance=ExtResource("4_np3jn")]
+[node name="AiControllerComponent" parent="Navigation" node_paths=PackedStringArray("floorable") instance=ExtResource("4_np3jn")]
 position = Vector2(0, -8)
+floorable = NodePath("../../Floorable")
 
 [node name="SteeringBehaviour" parent="Navigation" node_paths=PackedStringArray("knight") instance=ExtResource("5_sb4o4")]
 knight = NodePath("../..")
@@ -490,6 +491,8 @@ bus = &"SFX"
 [connection signal="timeout" from="AttackTimerCd" to="." method="_on_attack_timer_cd_timeout"]
 [connection signal="navigation_finished" from="Navigation/NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
 [connection signal="move_to" from="Navigation/AiControllerComponent" to="." method="_on_ai_controller_component_move_to"]
+[connection signal="obstacled_in_proximity" from="Navigation/AiControllerComponent" to="." method="_on_ai_controller_component_obstacled_in_proximity"]
+[connection signal="obstacled_out_of_proximity" from="Navigation/AiControllerComponent" to="." method="_on_ai_controller_component_obstacled_out_of_proximity"]
 [connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_area_entered"]
 [connection signal="area_exited" from="AttackRange" to="." method="_on_attack_range_area_exited"]
 [connection signal="damage_detected" from="Damagable" to="." method="_on_damagable_damage_detected"]
