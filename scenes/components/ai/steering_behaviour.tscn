@@ -11,4 +11,3 @@ behaviours = [NodePath("ChasingBehaviour"), NodePath("AvoidingBehaviour")]
 [node name="ChasingBehaviour" parent="." instance=ExtResource("2_jq6if")]
 
 [node name="AvoidingBehaviour" parent="." instance=ExtResource("3_me071")]
-obstacle_range = 80.0

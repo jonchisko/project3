@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm2f4tnyeinvq"]
+[gd_scene load_steps=6 format=3 uid="uid://bm2f4tnyeinvq"]
 
 [ext_resource type="Texture2D" uid="uid://d2yk6gf4tx5u2" path="res://assets/sprites/tree/TX Plant.png" id="1_84c1j"]
 [ext_resource type="Script" path="res://scenes/game_objects/obstacles/tree.gd" id="1_htjmu"]
@@ -7,6 +7,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d14m7"]
 radius = 7.0
 height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_grpsp"]
+radius = 18.0
+height = 48.0
 
 [node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("tree_sprites", "tree_shadows_sprites", "collisions")]
 y_sort_enabled = true
@@ -38,6 +42,10 @@ disabled = true
 position = Vector2(19, -12)
 shape = SubResource("CapsuleShape2D_d14m7")
 disabled = true
+
+[node name="CollisionShapeForNavmesh" type="CollisionShape2D" parent="."]
+position = Vector2(8, -15)
+shape = SubResource("CapsuleShape2D_grpsp")
 
 [node name="Shadows" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.666667)

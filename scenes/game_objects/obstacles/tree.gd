@@ -14,3 +14,5 @@ func _ready() -> void:
 	var collision = self.collisions[frame]
 	collision.visible = true
 	collision.disabled = false
+	$CollisionShapeForNavmesh.disabled = true
+	$CollisionShapeForNavmesh.visible = false

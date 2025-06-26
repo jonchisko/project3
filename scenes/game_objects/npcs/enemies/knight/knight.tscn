@@ -417,12 +417,12 @@ max_health_points = 30
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
 path_desired_distance = 22.59
-target_desired_distance = 15.0
+target_desired_distance = 25.0
 path_max_distance = 180.0
 simplify_path = true
 simplify_epsilon = 0.68
 avoidance_enabled = true
-radius = 20.08
+radius = 30.0
 neighbor_distance = 700.0
 debug_enabled = true
 
