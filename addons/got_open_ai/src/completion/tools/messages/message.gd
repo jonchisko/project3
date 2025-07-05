@@ -32,3 +32,7 @@ func get_dictionary_form() -> Dictionary:
 		result["tool_calls"] = self.tool_calls.map(func(x): return x.to_dictionary())
 		
 	return result
+
+
+func _to_string():
+	return str(self.get_dictionary_form())
