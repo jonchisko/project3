@@ -21,12 +21,9 @@ var threshold_similar_results: float = 0.6:
 
 
 func get_history(npc_id: String) -> Array:
-	# History is stored in pairs assistant, user, so if you want just last exachange, you still need to get 
-	# the last two elements
-	var history = self.chatHistoryService.get_history(npc_id)
-	return history.slice(-self.max_last_exchanges * 2, history.size())
-	
-	
+	return self.get_history(npc_id)
+
+
 func save_history(npc_id: String, chat: Array) -> void:
 	self.chatHistoryService.save_history(npc_id, chat)
 
@@ -40,7 +37,10 @@ func get_similar(npc_id: String, query: String) -> Array:
 
 
 func get_recent(npc_id: String) -> Array:
-	return self.get_history(npc_id)
+	# History is stored in pairs assistant, user, so if you want just last exachange, you still need to get 
+	# the last two elements
+	var history = self.chatHistoryService.get_history(npc_id)
+	return history.slice(-self.max_last_exchanges * 2, history.size())
 	
 	
 func save_data() -> Dictionary:

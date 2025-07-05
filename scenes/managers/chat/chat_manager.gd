@@ -4,14 +4,16 @@ class_name ChatManager
 var _chat_messenger_ui: PackedScene = preload("res://scenes/ui/messenger/chat_messenger_ui.tscn")
 var _chat_messenger_instance: ChatMessengerUi = null
 
-var _current_npc_data: NpcData
-var _template: BaseGptTemplate
-var _gpt_template: TemplateBase
-
 @export var chat_history: ChatHistory
 @export var template_factory: TemplateFactory
 
 var _player_inventory: InventoryManager
+
+var _current_npc_data: NpcData
+var _template: BaseGptTemplate
+var _gpt_template: TemplateBase
+
+var _current_conversation_messages: Array[Message] = []
 
 
 func _ready() -> void:
@@ -33,6 +35,7 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 	self._create_open_ai_template(current_npc_data)
 	
 	self._chat_messenger_instance.message_created.connect(self._on_player_message_sent)
+	self._chat_messenger_instance.chat_closed.connect(self._on_chat_closed)
 	self._current_npc_data = current_npc_data
 
 
@@ -62,7 +65,7 @@ func _on_player_message_sent(player_message: String) -> void:
 			var player_message_to_save: Message = MessageBuilder.new("user")\
 				.with_content(player_message)\
 				.build()
-			self.chat_history.save_history(self._current_npc_data.id, [player_message_to_save])
+			self._current_conversation_messages.append(player_message_to_save)
 			
 			var choice: ChoiceResponse = response.choices()[0]
 			var npc_message: Message = choice.message
@@ -75,7 +78,7 @@ func _on_player_message_sent(player_message: String) -> void:
 
 			self._chat_messenger_instance.edit_last_chat_element(content_to_show)
 			self._gpt_template.append_message_with(npc_message)
-			self.chat_history.save_history(self._current_npc_data.id, [npc_message])
+			self._current_conversation_messages.append(npc_message)
 			
 			var tools: Array[ToolCall] = choice.message.tool_calls
 			
@@ -92,7 +95,7 @@ func _on_player_message_sent(player_message: String) -> void:
 					.build()
 				
 				self._gpt_template.append_message_with(tool_message)
-				self.chat_history.save_history(self._current_npc_data.id, [tool_message])
+				self._current_conversation_messages.append(tool_message)
 				
 			response = await self._gpt_template.get_reply()
 			self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
@@ -105,7 +108,13 @@ func _on_player_message_sent(player_message: String) -> void:
 			
 			break
 
-	
+
+func _on_chat_closed() -> void:
+	if not self._current_conversation_messages.is_empty():
+		self.chat_history.save_history(self._current_npc_data.id, self._current_conversation_messages)
+		self._current_conversation_messages.clear()
+
+
 # Done ONCE at the start of the chat
 func _create_open_ai_template(npc_data: NpcData) -> void:
 	var user_configuration = UserConfiguration.new(OpenAiConfiguration.open_ai_api_key)

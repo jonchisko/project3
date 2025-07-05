@@ -3,6 +3,7 @@ extends CanvasLayer
 class_name ChatMessengerUi
 
 signal message_created(message: String)
+signal chat_closed
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _chat_element_container = %VBoxContainer
@@ -34,6 +35,7 @@ func edit_last_chat_element(message: String):
 func close_chat():
 	self._animation_player.play("out")
 	await self._animation_player.animation_finished
+	self.chat_closed.emit()
 	self.get_tree().paused = false
 
 

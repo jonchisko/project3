@@ -2,7 +2,7 @@ extends ChatHistoryService
 
 
 var _chat_history_for_npcs: Dictionary = {} 
-# {"npc_id1" : [{"assistant": "ssdasd"}, {"user": "asdda}, {"a": "sa}], "npc_id2" : [...]}
+# {"npc_id1" : [MessageNpc, MessagePlayer, MessageNpc], "npc_id2" : [...]}
 
 
 func get_history(npc_id: String) -> Array:
