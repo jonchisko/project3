@@ -6,3 +6,5 @@ reloadable = true
 [libraries]
 windows.debug.x86_64 =   "res://rust_project_3/target/debug/rust_project_3.dll"
 windows.release.x86_64 = "res://rust_project_3/target/release/rust_project_3.dll"
+linux.debug.x86_64 =     "res://rust_project_3/target/debug/librust_project_3.so"
+linux.release.x86_64 =   "res://rust_project_3/target/release/librust_project_3.so"

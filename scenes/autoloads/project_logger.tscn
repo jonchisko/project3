@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1ocq0n6o2lia"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/project_logger.gd" id="1_hg7hh"]
+
+[node name="ProjectLogger" type="Node"]
+script = ExtResource("1_hg7hh")
+
+[node name="LoggerRust" type="ProjectLogger" parent="."]
