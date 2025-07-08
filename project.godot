@@ -26,6 +26,7 @@ OpenAiTypes="*res://scenes/autoloads/open_ai_types.tscn"
 PlayerStateManager="*res://scenes/autoloads/player_state_manager.tscn"
 SceneStateManager="*res://scenes/autoloads/scene_state_manager.tscn"
 DebugDrawer="*res://scenes/test/debug_drawer.tscn"
+GodotProjectLogger="*res://scenes/autoloads/godot_project_logger.tscn"
 
 [display]
 

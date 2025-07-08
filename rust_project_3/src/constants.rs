@@ -1,0 +1,1 @@
+pub const USER_LOG_FILE_PATH: &'static str = "user://game_logs.txt";
