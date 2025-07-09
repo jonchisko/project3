@@ -1,6 +1,5 @@
-use std::io::Result;
-use std::fmt::Display;
 use crate::constants;
+use std::fmt::Display;
 
 use godot::{classes::file_access::ModeFlags, prelude::*};
 
@@ -20,7 +19,7 @@ impl Display for LogType {
             LogType::Other => "OTHER",
         };
 
-        write!(f, "{}", enum_display)
+        f.pad(enum_display)
     }
 }
 
@@ -46,7 +45,11 @@ impl LogMessage {
 
 impl Display for LogMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{} | {} | {}", self.log_type, self.source, self.content)
+        write!(
+            f,
+            "|| {:^15} | {:^15} ||\n\n{}\n",
+            self.log_type, self.source, self.content
+        )
     }
 }
 
@@ -71,7 +74,7 @@ impl INode for ProjectLogger {
 impl ProjectLogger {
     #[func]
     fn push_message(&mut self, message: Gd<LogMessage>) {
-       self.messages.push(message);
+        self.messages.push(message);
     }
 
     #[func]
@@ -92,12 +95,14 @@ impl ProjectLogger {
 
     #[func]
     fn save_to_file_blocking(&self) {
-        let mut log_file: GFile = GFile::open(constants::USER_LOG_FILE_PATH, ModeFlags::WRITE).unwrap();
+        let mut log_file: GFile =
+            GFile::open(constants::USER_LOG_FILE_PATH, ModeFlags::WRITE).unwrap();
 
         for element in &self.messages {
-
-            let line = format!("{}\n", *element.bind());
-            godot_print!("{}", line);
+            let line = format!(
+                "{}\n------------------------------------------------------------\n",
+                *element.bind()
+            );
 
             log_file.write_gstring(&line).unwrap();
         }

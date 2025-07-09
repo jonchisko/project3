@@ -16,7 +16,9 @@ func _ready():
 	self._log_info(LogType.GameEvent, "s1", "lol")
 	self._log_info(LogType.GameEvent, "s1", "lol")
 	self._log_info(LogType.Other, "s2", "lol")
-	self._log_info(LogType.Dialogue, "s1", "lol")
+	self._log_info(LogType.Dialogue, "s1", "loloijasidj jiasiodaj jaisdj asdijais djjasid jasidas
+	jaisdaosdj adijoasdjasd
+	ajsida!!!")
 	self.project_logger.save_to_file_blocking()
 
 func _enter_tree() -> void:
@@ -29,6 +31,10 @@ func _exit_tree() -> void:
 	self._log_info(LogType.Other, "asdasd", "!!!!!!!!!!!!!!")
 	self.project_logger.save_to_file_blocking()
 	GameEvents.log_info.disconnect(self._log_info)
+
+
+func save_to_file_blocking() -> void:
+	self.project_logger.save_to_file_blocking()
 
 
 func _log_info(log_type: LogType, source: String, content: String) -> void:
