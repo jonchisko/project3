@@ -60,13 +60,13 @@ func _on_player_message_sent(player_message: String) -> void:
 	
 	self._template.add_player_query(self._gpt_template, player_message, false) # re-add
 	
+	var player_message_to_save: Message = MessageBuilder.new("user")\
+		.with_content(player_message)\
+		.build()
+	self._current_conversation_messages.append(player_message_to_save)
+	
 	while true:
 		if response.successful():
-			var player_message_to_save: Message = MessageBuilder.new("user")\
-				.with_content(player_message)\
-				.build()
-			self._current_conversation_messages.append(player_message_to_save)
-			
 			var choice: ChoiceResponse = response.choices()[0]
 			var npc_message: Message = choice.message
 			
@@ -112,6 +112,20 @@ func _on_player_message_sent(player_message: String) -> void:
 func _on_chat_closed() -> void:
 	if not self._current_conversation_messages.is_empty():
 		self.chat_history.save_history(self._current_npc_data.id, self._current_conversation_messages)
+		
+		var source: String
+		for message in self._current_conversation_messages:
+			match message.role:
+				"user":
+					source = "player"
+				"assistant":
+					source = self._current_npc_data.id
+				"tool":
+					source = "tool"
+				_:
+					source = "no_source_id"
+			GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
+
 		self._current_conversation_messages.clear()
 
 
