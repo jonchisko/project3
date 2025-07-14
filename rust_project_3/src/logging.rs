@@ -95,8 +95,17 @@ impl ProjectLogger {
 
     #[func]
     fn save_to_file_blocking(&self) {
-        let mut log_file: GFile =
-            GFile::open(constants::USER_LOG_FILE_PATH, ModeFlags::WRITE).unwrap();
+        let log_file = GFile::open(constants::USER_LOG_FILE_PATH, ModeFlags::WRITE);
+
+        if let Err(error) = log_file {
+            godot_error!(
+                "Could not save the log file to user log file path! Error: {}",
+                error
+            );
+            return;
+        }
+
+        let mut log_file = log_file.unwrap();
 
         for element in &self.messages {
             let line = format!(

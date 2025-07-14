@@ -37,6 +37,11 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 	self._chat_messenger_instance.message_created.connect(self._on_player_message_sent)
 	self._chat_messenger_instance.chat_closed.connect(self._on_chat_closed)
 	self._current_npc_data = current_npc_data
+	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent, 
+		self.name, 
+		"Dialogue opened for {npc}.".format({"npc" : self._current_npc_data.id}))
 
 
 # Done every time a message is SENT
@@ -125,7 +130,7 @@ func _on_chat_closed() -> void:
 				_:
 					source = "no_source_id"
 			GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
-
+		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, self.name, "Dialogue closed.")
 		self._current_conversation_messages.clear()
 
 
