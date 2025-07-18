@@ -1,7 +1,8 @@
-use crate::constants;
+use crate::file_storage::FileStorage;
+
 use std::fmt::Display;
 
-use godot::{classes::file_access::ModeFlags, prelude::*};
+use godot::{meta::AsArg, prelude::*};
 
 #[derive(GodotConvert, Debug)]
 #[godot(via = i64)]
@@ -95,25 +96,38 @@ impl ProjectLogger {
 
     #[func]
     fn save_to_file_blocking(&self) {
-        let log_file = GFile::open(constants::USER_LOG_FILE_PATH, ModeFlags::WRITE);
-
-        if let Err(error) = log_file {
-            godot_error!(
-                "Could not save the log file to user log file path! Error: {}",
-                error
-            );
-            return;
+        let mut data = String::from("");
+        for element in &self.messages {
+            data.push_str(&*element.bind().to_string());
+            data.push_str("\n------------------------------------------------------------\n");
         }
 
-        let mut log_file = log_file.unwrap();
-
-        for element in &self.messages {
-            let line = format!(
-                "{}\n------------------------------------------------------------\n",
-                *element.bind()
-            );
-
-            log_file.write_gstring(&line).unwrap();
+        if let Err(msg) = FileStorage::save(&data) {
+            godot_error!("{}", msg);
         }
     }
+}
+
+pub enum RepositoryError {
+    StorageFileOpen(String),
+    WriteString(String),
+}
+
+impl Display for RepositoryError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let message = match self {
+            RepositoryError::StorageFileOpen(message) => {
+                format!("File create/open issue: {}", message)
+            }
+            RepositoryError::WriteString(message) => format!("String write issue: {}", message),
+        };
+
+        f.pad(&message)
+    }
+}
+
+pub trait Repository {
+    fn save<T>(data: T) -> Result<(), RepositoryError>
+    where
+        T: AsArg<GString>;
 }
