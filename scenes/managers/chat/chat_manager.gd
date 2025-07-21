@@ -5,6 +5,7 @@ var _chat_messenger_ui: PackedScene = preload("res://scenes/ui/messenger/chat_me
 var _chat_messenger_instance: ChatMessengerUi = null
 
 @export var chat_history: ChatHistory
+@export var chat_history_rust: ChatHistoryRust
 @export var template_factory: TemplateFactory
 
 var _player_inventory: InventoryManager
@@ -49,7 +50,7 @@ func _on_player_message_sent(player_message: String) -> void:
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 
 	self._template.add_player_query(self._gpt_template, player_message, true)
-	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history, player_message)
+	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history_rust, player_message)
 	self._template.add_instructions(self._gpt_template)
 	self._template.add_player_query(self._gpt_template, player_message, false)
 
@@ -116,8 +117,9 @@ func _on_player_message_sent(player_message: String) -> void:
 
 func _on_chat_closed() -> void:
 	if not self._current_conversation_messages.is_empty():
-		self.chat_history.save_history(self._current_npc_data.id, self._current_conversation_messages)
-		
+		var test = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
+		self.chat_history_rust.save_conversation(self._current_npc_data.id, test)
+		print(self.chat_history_rust.get_recent(self._current_npc_data.id))
 		var source: String
 		for message in self._current_conversation_messages:
 			match message.role:
@@ -153,7 +155,7 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 		
 	self._set_chat_history()
 	
-	self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history)
+	self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history_rust)
 
 
 func _get_has_item_tool() -> Tool:
@@ -224,9 +226,12 @@ func _trigger_event_tool() -> Tool:
 	
 	
 func _set_chat_history() -> void:
-	chat_history.max_last_exchanges = OpenAiConfiguration.history_max_last_exchanges
-	chat_history.max_similar_results = OpenAiConfiguration.history_max_similar_results
-	chat_history.threshold_similar_results = OpenAiConfiguration.history_threshold_similar_results
+	self.chat_history.max_last_exchanges = OpenAiConfiguration.history_max_last_exchanges
+	self.chat_history.max_similar_results = OpenAiConfiguration.history_max_similar_results
+	self.chat_history.threshold_similar_results = OpenAiConfiguration.history_threshold_similar_results
+	self.chat_history_rust.set_max_last_exchanges(OpenAiConfiguration.history_max_last_exchanges)
+	self.chat_history_rust.set_max_similar_results(OpenAiConfiguration.history_max_similar_results)
+	self.chat_history_rust.set_threshold_similar_results(OpenAiConfiguration.history_threshold_similar_results)
 
 
 func _parse_tool_call(tool: ToolCall) -> Dictionary:

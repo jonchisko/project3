@@ -15,7 +15,7 @@ func add_player_query(gpt_template: TemplateBase, user_query: String, in_front: 
 		.format({"player_query": user_query}))
 
 
-func add_similar_data_from_history(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistory, query: String) -> void:
+func add_similar_data_from_history(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistoryRust, query: String) -> void:
 	gpt_template.append_message("developer", "This is the list of top matches of historical conversation based on the current player’s query 
 (if the list is empty, no results ranked high enough): {chat_history_similar_discussions}"
 	.format({"chat_history_similar_discussions": chat_history.get_similar(npc_data.id, query)}))
@@ -76,7 +76,7 @@ facts: {dynamic_world_context}."\
 	.format({"dynamic_world_context": "NONE"})
 
 
-func _add_history(npc_data: NpcData, chat_history: ChatHistory) -> String:
+func _add_history(npc_data: NpcData, chat_history: ChatHistoryRust) -> String:
 	return "Here you are able to find the conversation history you have already had with the player.
 	The summary of your conversation is: {chat_history_summary}.
 	The conversation of your last few chatting rounds is {chat_history_recent}."\

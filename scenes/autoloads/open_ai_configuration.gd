@@ -13,9 +13,9 @@ var frequency_penalty: float = 0.0:
 	set(value):
 		frequency_penalty = clampf(value, -2.0, 2.0)
 
-var history_max_last_exchanges: int = 5:
+var history_max_last_exchanges: int = 10:
 	set(value):
-		history_max_last_exchanges = clamp(value, 1, 10)
+		history_max_last_exchanges = clamp(value, 6, 30)
 		
 var history_max_similar_results: int = 10:
 	set(value):

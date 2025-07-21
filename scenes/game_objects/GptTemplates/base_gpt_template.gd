@@ -10,11 +10,11 @@ func add_player_query(gpt_template: TemplateBase, user_query: String, in_front: 
 	pass
 
 
-func add_similar_data_from_history(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistory, query: String) -> void:
+func add_similar_data_from_history(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistoryRust, query: String) -> void:
 	pass
 
 
-func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistory) -> void:
+func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistoryRust) -> void:
 	self.add_instructions(gpt_template)
 	
 	var static_template: String = ""
@@ -67,7 +67,7 @@ func _add_dynamic_world_context() -> String:
 	return ""
 
 
-func _add_history(npc_data: NpcData, chat_history: ChatHistory) -> String:
+func _add_history(npc_data: NpcData, chat_history: ChatHistoryRust) -> String:
 	return ""
 
 	

@@ -15,7 +15,7 @@ func _on_level_change(level_change_type: GameTypes.LevelChangeType) -> void:
 	if chat_manager == null:
 		return
 	
-	var chat_history = chat_manager.chat_history as ChatHistory
+	var chat_history = chat_manager.chat_history_rust as ChatHistoryRust
 	
 	var player = self._find_player_instance()
 	var inventory = player.find_child("InventoryManager") as InventoryManager
@@ -28,11 +28,11 @@ func _on_level_change(level_change_type: GameTypes.LevelChangeType) -> void:
 			print("PlayerStateManager: Restoring player inventory")
 			for value in self._player_inventory.keys():
 				inventory.give_item(value, self._player_inventory[value])
-			chat_history.load_data(self._chat_history)
+			chat_history.set_history_data(self._chat_history)
 		GameTypes.LevelChangeType.OffLoading:
 			print("PlayerStateManager: Saving player inventory")
 			self._player_inventory = inventory.show_inventory()
-			self._chat_history = chat_history.save_data()
+			self._chat_history = chat_history.get_history_data()
 
 
 func _find_player_instance() -> Player:

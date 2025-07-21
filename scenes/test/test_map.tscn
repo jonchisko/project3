@@ -45,11 +45,14 @@ agent_radius = 25.0
 [node name="TestMap" type="Node2D" groups=["level_scene"]]
 script = ExtResource("1_cw72i")
 
-[node name="ChatManager" parent="." node_paths=PackedStringArray("chat_history", "template_factory") instance=ExtResource("1_327vj")]
+[node name="ChatManager" parent="." node_paths=PackedStringArray("chat_history", "chat_history_rust", "template_factory") instance=ExtResource("1_327vj")]
 chat_history = NodePath("../ChatHistory")
+chat_history_rust = NodePath("../ChatHistoryRust")
 template_factory = NodePath("TemplateFactory")
 
 [node name="TemplateFactory" parent="ChatManager" instance=ExtResource("3_7p5hh")]
+
+[node name="ChatHistoryRust" type="ChatHistoryRust" parent="."]
 
 [node name="ChatHistory" parent="." node_paths=PackedStringArray("chatHistoryService") instance=ExtResource("2_8olnj")]
 chatHistoryService = NodePath("BasicChatHistoryService")
