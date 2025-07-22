@@ -1,4 +1,4 @@
-use crate::file_storage::FileStorage;
+use crate::{constants, file_storage::FileStorage};
 
 use std::fmt::Display;
 
@@ -102,7 +102,7 @@ impl ProjectLogger {
             data.push_str("\n------------------------------------------------------------\n");
         }
 
-        if let Err(msg) = FileStorage::save(&data) {
+        if let Err(msg) = FileStorage::save(constants::USER_LOG_FILE_PATH, &data) {
             godot_error!("{}", msg);
         }
     }
@@ -127,7 +127,7 @@ impl Display for RepositoryError {
 }
 
 pub trait Repository {
-    fn save<T>(data: T) -> Result<(), RepositoryError>
+    fn save<T>(path: &str, data: T) -> Result<(), RepositoryError>
     where
         T: AsArg<GString>;
 }

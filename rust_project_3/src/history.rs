@@ -1,10 +1,12 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, fmt::Display};
 
 use godot::{
     builtin::{Array, Dictionary, GString},
     classes::{INode, Node},
     prelude::*,
 };
+
+use crate::{constants, file_storage::FileStorage, logging::Repository};
 
 #[derive(GodotClass)]
 #[class(base=Node)]
@@ -161,7 +163,23 @@ impl ChatHistoryRust {
     }
 
     #[func]
-    fn save_history_to_file(&self) {}
+    fn save_history_to_file(&self) {
+        for (npc, history) in self.chat_history_service.get_all_data() {
+            let file_name = format!("{}//{}.txt", constants::USER_HISTORY_NPC_FILE_PATH, npc);
+            let data = history.iter().map(|message| message.to_string()).fold(
+                String::new(),
+                |mut acc, message| {
+                    acc.push_str(&message[..]);
+                    acc.push_str("\n");
+                    acc
+                },
+            );
+
+            if let Err(msg) = FileStorage::save(&file_name, &data) {
+                godot_error!("{}", msg);
+            }
+        }
+    }
 
     fn get_history(&self) -> Dictionary {
         let mut result: Dictionary = dict! {};
@@ -209,6 +227,18 @@ impl Message {
             content,
             tool_calls,
         }
+    }
+}
+
+impl Display for Message {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let display = format!(
+            "|| {:^10} ||\n{}\n-------\n{:#?}\n\n",
+            self.author,
+            self.content,
+            self.tool_calls.as_ref().unwrap_or(&vec![])
+        );
+        f.pad(&display)
     }
 }
 
