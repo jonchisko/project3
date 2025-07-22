@@ -29,6 +29,11 @@ impl INode for ChatHistoryRust {
             base: base,
         }
     }
+
+    fn exit_tree(&mut self) {
+        godot_print!("Saving history to file");
+        self.save_history_to_file();
+    }
 }
 
 #[godot_api]
@@ -233,7 +238,7 @@ impl Message {
 impl Display for Message {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let display = format!(
-            "|| {:^10} ||\n{}\n-------\n{:#?}\n\n",
+            "|| {:^10} ||\n{}\n-------\nToolCalls: {:#?}\n\n\n",
             self.author,
             self.content,
             self.tool_calls.as_ref().unwrap_or(&vec![])
