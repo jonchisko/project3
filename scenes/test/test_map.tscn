@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=45 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -31,6 +31,17 @@
 [ext_resource type="Resource" uid="uid://c56ydsh5licpm" path="res://resources/interactables/items/metal_bolt_item.tres" id="29_notju"]
 [ext_resource type="Resource" uid="uid://b7j47oyxw43g1" path="res://resources/interactables/items/metal_scrap_item.tres" id="30_esub5"]
 [ext_resource type="Resource" uid="uid://qx33nhldpx8a" path="res://resources/interactables/items/hangover_potion_item.tres" id="30_oq574"]
+[ext_resource type="Resource" uid="uid://dhqid1itmojr6" path="res://resources/interactables/items/black_honey_combs_item.tres" id="32_jqlue"]
+[ext_resource type="Resource" uid="uid://llkuq5juwcvy" path="res://resources/interactables/items/book_wotlica_item.tres" id="33_vsk7f"]
+[ext_resource type="Resource" uid="uid://bpp7keasn0b4l" path="res://resources/interactables/items/correct_reentry_path_item.tres" id="34_4n473"]
+[ext_resource type="Resource" uid="uid://dtv14ifl8yxew" path="res://resources/interactables/items/cracked_smaragd_ring_item.tres" id="35_mcch7"]
+[ext_resource type="Resource" uid="uid://d3jietp4618wb" path="res://resources/interactables/items/greenberries_item.tres" id="36_u04f4"]
+[ext_resource type="Resource" uid="uid://dp187r8vj7ril" path="res://resources/interactables/items/health_potion_item.tres" id="37_vovb0"]
+[ext_resource type="Resource" uid="uid://hipekv3r00m4" path="res://resources/interactables/items/jewelry_blueprints_item.tres" id="38_qpcqu"]
+[ext_resource type="Resource" uid="uid://ckxoku0rbpn2d" path="res://resources/interactables/items/outpost_keycode_item.tres" id="39_qvgyc"]
+[ext_resource type="Resource" uid="uid://cf2gvqpyyd4po" path="res://resources/interactables/items/robid_core_item.tres" id="40_hgs6u"]
+[ext_resource type="Resource" uid="uid://dieg1myfe63i6" path="res://resources/interactables/items/smaragd_ring_item.tres" id="41_vfblx"]
+[ext_resource type="Resource" uid="uid://cd0i6sglv5o7p" path="res://resources/interactables/items/wajdovian_spear_instructions_item.tres" id="42_rr84a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
@@ -743,10 +754,6 @@ interactable_data = ExtResource("29_notju")
 position = Vector2(-849, 107)
 interactable_data = ExtResource("29_notju")
 
-[node name="Item11" parent="ItemsTest" instance=ExtResource("17_nywt0")]
-position = Vector2(-883, 137)
-interactable_data = ExtResource("30_oq574")
-
 [node name="Item6" parent="ItemsTest" instance=ExtResource("17_nywt0")]
 position = Vector2(-844, 220)
 interactable_data = ExtResource("30_esub5")
@@ -766,6 +773,60 @@ interactable_data = ExtResource("30_esub5")
 [node name="Item10" parent="ItemsTest" instance=ExtResource("17_nywt0")]
 position = Vector2(-802, 223)
 interactable_data = ExtResource("30_esub5")
+
+[node name="TestItems" type="Node2D" parent="ItemsTest"]
+
+[node name="HangoverPotion" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-916, 95)
+interactable_data = ExtResource("30_oq574")
+
+[node name="BlackhoneyComb" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-914, 118)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="Wotlica" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-887, 68)
+interactable_data = ExtResource("33_vsk7f")
+
+[node name="ReentryPath" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-920, 143)
+interactable_data = ExtResource("34_4n473")
+
+[node name="CrackedSmaragd" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-919, 175)
+interactable_data = ExtResource("35_mcch7")
+
+[node name="Greenberries" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-918, 201)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="HealthPotion" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-884, 100)
+interactable_data = ExtResource("37_vovb0")
+
+[node name="JewelryBlueprints" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-885, 136)
+interactable_data = ExtResource("38_qpcqu")
+
+[node name="OutpostKeycode" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-886, 171)
+interactable_data = ExtResource("39_qvgyc")
+
+[node name="RobidCore" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-917, 231)
+interactable_data = ExtResource("40_hgs6u")
+
+[node name="SmaragdRing" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-887, 214)
+interactable_data = ExtResource("41_vfblx")
+
+[node name="WajdovianSpear" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-920, 260)
+interactable_data = ExtResource("18_u1kc3")
+
+[node name="WajdovianSpearInstrucctions" parent="ItemsTest/TestItems" instance=ExtResource("17_nywt0")]
+position = Vector2(-889, 258)
+interactable_data = ExtResource("42_rr84a")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_3ocpf")
