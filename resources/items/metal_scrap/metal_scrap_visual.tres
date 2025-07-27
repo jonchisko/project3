@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://b700116u5u4cy"]
 
-[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_foej5"]
+[ext_resource type="Texture2D" uid="uid://d2c50khe62oa1" path="res://assets/sprites/items/items_16_x_16/metal_scrap.png" id="1_jnh4o"]
 [ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_pvty0"]
 
 [resource]
 script = ExtResource("1_pvty0")
-icon = ExtResource("1_foej5")
-world_visual = ExtResource("1_foej5")
+icon = ExtResource("1_jnh4o")
+world_visual = ExtResource("1_jnh4o")

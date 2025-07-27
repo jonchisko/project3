@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ndrugshqlpx"
-path="res://.godot/imported/Item_50.png-d488fbe4924e578addd863ee570c7d47.ctex"
+uid="uid://c57knksyy8qvr"
+path="res://.godot/imported/robidian_core.png-388b375fcf67725e1417a1a5267353d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/items_16_x_16/Item_50.png"
-dest_files=["res://.godot/imported/Item_50.png-d488fbe4924e578addd863ee570c7d47.ctex"]
+source_file="res://assets/sprites/items/custom_items_16x16/robidian_core.png"
+dest_files=["res://.godot/imported/robidian_core.png-388b375fcf67725e1417a1a5267353d7.ctex"]
 
 [params]
 

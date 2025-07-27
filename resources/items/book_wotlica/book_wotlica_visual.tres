@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://ji5huax8adi6"]
 
-[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_lulb0"]
+[ext_resource type="Texture2D" uid="uid://mcwqdnft74vj" path="res://assets/sprites/items/custom_items_16x16/book_of_wotlica.png" id="1_l6s46"]
 [ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_pgu3w"]
 
 [resource]
 script = ExtResource("1_pgu3w")
-icon = ExtResource("1_lulb0")
-world_visual = ExtResource("1_lulb0")
+icon = ExtResource("1_l6s46")
+world_visual = ExtResource("1_l6s46")

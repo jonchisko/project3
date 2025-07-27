@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://bdopowvc24tus"]
 
+[ext_resource type="Texture2D" uid="uid://caa41gmf3j17g" path="res://assets/sprites/items/custom_items_16x16/wajdovian_spear.png" id="1_30epg"]
 [ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_pvjg7"]
-[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_vmwha"]
 
 [resource]
 script = ExtResource("1_pvjg7")
-icon = ExtResource("1_vmwha")
-world_visual = ExtResource("1_vmwha")
+icon = ExtResource("1_30epg")
+world_visual = ExtResource("1_30epg")

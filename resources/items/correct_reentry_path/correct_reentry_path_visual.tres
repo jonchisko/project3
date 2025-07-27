@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://bc0o53aw2k4bi"]
 
-[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_5cvit"]
 [ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_5ttf4"]
+[ext_resource type="Texture2D" uid="uid://uivmucs5slcy" path="res://assets/sprites/items/custom_items_16x16/reentry_instructions.png" id="1_gbbbq"]
 
 [resource]
 script = ExtResource("1_5ttf4")
-icon = ExtResource("1_5cvit")
-world_visual = ExtResource("1_5cvit")
+icon = ExtResource("1_gbbbq")
+world_visual = ExtResource("1_gbbbq")

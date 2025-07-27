@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://c0q0qpoeg1kf4"]
 
+[ext_resource type="Texture2D" uid="uid://d3amii1b233ft" path="res://assets/sprites/items/custom_items_16x16/outpost_keycode.png" id="1_ab1rn"]
 [ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_rn4sn"]
-[ext_resource type="Texture2D" uid="uid://bddlumku0hnt0" path="res://assets/placeholder_sprites/item_plceholder.png" id="1_stcnc"]
 
 [resource]
 script = ExtResource("1_rn4sn")
-icon = ExtResource("1_stcnc")
-world_visual = ExtResource("1_stcnc")
+icon = ExtResource("1_ab1rn")
+world_visual = ExtResource("1_ab1rn")

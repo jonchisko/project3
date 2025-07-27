@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ovim3ut8hjde"
-path="res://.godot/imported/Item_64.png-32c7265cae5fd7fa4b7b4527f6cb3a1d.ctex"
+uid="uid://caa41gmf3j17g"
+path="res://.godot/imported/wajdovian_spear.png-6d1ddae27a3f3224df9708e687d39273.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/items_16_x_16/Item_64.png"
-dest_files=["res://.godot/imported/Item_64.png-32c7265cae5fd7fa4b7b4527f6cb3a1d.ctex"]
+source_file="res://assets/sprites/items/custom_items_16x16/wajdovian_spear.png"
+dest_files=["res://.godot/imported/wajdovian_spear.png-6d1ddae27a3f3224df9708e687d39273.ctex"]
 
 [params]
 

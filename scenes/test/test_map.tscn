@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=34 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="28_ndh6o"]
 [ext_resource type="Resource" uid="uid://c56ydsh5licpm" path="res://resources/interactables/items/metal_bolt_item.tres" id="29_notju"]
 [ext_resource type="Resource" uid="uid://b7j47oyxw43g1" path="res://resources/interactables/items/metal_scrap_item.tres" id="30_esub5"]
+[ext_resource type="Resource" uid="uid://qx33nhldpx8a" path="res://resources/interactables/items/hangover_potion_item.tres" id="30_oq574"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
@@ -741,6 +742,10 @@ interactable_data = ExtResource("29_notju")
 [node name="Item5" parent="ItemsTest" instance=ExtResource("17_nywt0")]
 position = Vector2(-849, 107)
 interactable_data = ExtResource("29_notju")
+
+[node name="Item11" parent="ItemsTest" instance=ExtResource("17_nywt0")]
+position = Vector2(-883, 137)
+interactable_data = ExtResource("30_oq574")
 
 [node name="Item6" parent="ItemsTest" instance=ExtResource("17_nywt0")]
 position = Vector2(-844, 220)
