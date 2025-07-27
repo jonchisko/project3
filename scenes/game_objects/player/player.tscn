@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cah0y8lt5uy55"]
+[gd_scene load_steps=38 format=3 uid="uid://cah0y8lt5uy55"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_sls11"]
 [ext_resource type="PackedScene" uid="uid://b61ts8dpix56w" path="res://scenes/components/health/health_component.tscn" id="2_euodu"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://bhmnn7hiisbby" path="res://assets/audio/game/footstep_carpet_000.ogg" id="13_6n723"]
 [ext_resource type="Script" path="res://scenes/game_objects/player/audio_stream_player_2d.gd" id="13_elpfb"]
 [ext_resource type="AudioStream" uid="uid://dwfbd8hqxkvqr" path="res://assets/audio/game/footstep_grass_004.ogg" id="15_d4xmh"]
+[ext_resource type="Script" path="res://scenes/game_objects/player/quest_counter_ui.gd" id="17_jk4id"]
 [ext_resource type="PackedScene" uid="uid://d1en4sxisf1gl" path="res://scenes/components/areas/floorable.tscn" id="20_fpmq3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkskr"]
@@ -363,6 +364,62 @@ color = Color(0.0323822, 0.0323822, 0.0323822, 0.737255)
 libraries = {
 "": SubResource("AnimationLibrary_l8qbn")
 }
+
+[node name="QuestCounter" type="MarginContainer" parent="HUDCanvasLayer"]
+custom_minimum_size = Vector2(110, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("17_jk4id")
+
+[node name="PanelContainer" type="PanelContainer" parent="HUDCanvasLayer/QuestCounter"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDCanvasLayer/QuestCounter/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest info"
+horizontal_alignment = 1
+
+[node name="PrimaryHBox" type="HBoxContainer" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer/PrimaryHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Primary"
+
+[node name="PrimaryCounter" type="Label" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer/PrimaryHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0/100"
+horizontal_alignment = 2
+
+[node name="SecondaryHBox" type="HBoxContainer" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer/SecondaryHBox"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Secondary"
+
+[node name="SecondaryCounter" type="Label" parent="HUDCanvasLayer/QuestCounter/PanelContainer/MarginContainer/VBoxContainer/SecondaryHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0/100"
+horizontal_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://2rx5wj23p1ni"]
+[gd_scene load_steps=12 format=3 uid="uid://xbtpr0o0c2u0"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/quest_manager.gd" id="1_6hmk0"]
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="2_h2vrh"]
+[ext_resource type="Resource" uid="uid://uv7ebj6w2oih" path="res://resources/quests/collect_metal_scraps.tres" id="3_fg54q"]
+[ext_resource type="Resource" uid="uid://deftdttx5s261" path="res://resources/quests/find_robid_core.tres" id="4_gidl1"]
+[ext_resource type="Resource" uid="uid://c4auob44tfbpq" path="res://resources/quests/get_book_wotlica.tres" id="5_tti22"]
+[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/get_outpost_keycode.tres" id="6_1qpwa"]
+[ext_resource type="Resource" uid="uid://cytd42g0gpe6o" path="res://resources/quests/get_wajvodian_spear_instructions.tres" id="7_th77v"]
+[ext_resource type="Resource" uid="uid://nxpbqdvnj0ub" path="res://resources/quests/make_hangover_potion.tres" id="8_10ewf"]
+[ext_resource type="Resource" uid="uid://cs4p0pcstrb3" path="res://resources/quests/repair_smaragd_ring.tres" id="9_ayiq4"]
+[ext_resource type="Resource" uid="uid://cvufkvtsdft2c" path="res://resources/quests/tell_the_truth.tres" id="10_q7r6j"]
+[ext_resource type="Resource" uid="uid://by1aqsg4ky6h4" path="res://resources/quests/clear_the_mines.tres" id="11_12hri"]
 
 [node name="QuestManager" type="Node"]
+script = ExtResource("1_6hmk0")
+quests = Array[ExtResource("2_h2vrh")]([ExtResource("3_fg54q"), ExtResource("4_gidl1"), ExtResource("5_tti22"), ExtResource("6_1qpwa"), ExtResource("7_th77v"), ExtResource("8_10ewf"), ExtResource("9_ayiq4"), ExtResource("10_q7r6j"), ExtResource("11_12hri")])

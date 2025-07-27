@@ -272,7 +272,12 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				call_result["error"] = true
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
+				var quest_reward_item = fun_args["item_id"]
 				var result = self._player_inventory.give_item(fun_args["item_id"], fun_args["number"])
+				if not self._current_npc_data.quest_data.is_empty():
+					print("ChatManager: Quest '{quest}' done! Emitting event.".format({"quest": self._current_npc_data.quest_data[0].id}))
+					GameEvents.quest_done.emit(self._current_npc_data.quest_data[0].id)
+					self._current_npc_data.quest_data.pop_front()
 				call_result["call_result"] = result
 		"trigger_event":
 			if not fun_args.has("event_id"):

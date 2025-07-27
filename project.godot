@@ -27,6 +27,7 @@ PlayerStateManager="*res://scenes/autoloads/player_state_manager.tscn"
 SceneStateManager="*res://scenes/autoloads/scene_state_manager.tscn"
 DebugDrawer="*res://scenes/test/debug_drawer.tscn"
 GodotProjectLogger="*res://scenes/autoloads/godot_project_logger.tscn"
+QuestManager="*res://scenes/autoloads/quest_manager.tscn"
 
 [display]
 
@@ -42,6 +43,13 @@ window/size/mode.debug=0
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/got_open_ai/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://scenes/test/": "pink",
+"res://scenes/ui/": "green"
+}
 
 [global_group]
 
