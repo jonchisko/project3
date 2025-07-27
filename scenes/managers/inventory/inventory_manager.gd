@@ -1,6 +1,8 @@
 extends Node
 class_name InventoryManager
 
+signal item_used(item_id: String)
+
 @export var inventory_ui: InventoryMenuUi
 
 var _inventory: Dictionary = {}
@@ -74,6 +76,7 @@ func _get_item_data() -> Array[Dictionary]:
 
 
 func _on_item_used(item_id: String) -> void:
+	self.item_used.emit(item_id)
 	self._remove_item(item_id)
 
 

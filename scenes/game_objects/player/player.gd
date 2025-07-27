@@ -21,6 +21,7 @@ var _dash_start_time: float = 0.0
 
 func _ready() -> void:
 	$HUDCanvasLayer/LifeCounter.set_max_life(self._health_component.max_health_points)
+	$InventoryManager.item_used.connect(self._on_item_used)
 
 
 func _physics_process(delta: float) -> void:
@@ -95,6 +96,11 @@ func _dash(movement_direction: Vector2):
 		
 		$HUDCanvasLayer/Dash.start_cd(self.dash_cd)
 		
+
+func _on_item_used(item_id: String) -> void:
+	if item_id == "health_potion":
+		self._health_component.heal(15)
+
 
 func _on_damagable_damage_detected(amount):
 	_health_component.damage(amount)
