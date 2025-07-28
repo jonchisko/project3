@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxf212mf15fxx"]
+
+[ext_resource type="Script" path="res://scenes/levels/end_game_scene.gd" id="1_jxvax"]
+[ext_resource type="Texture2D" uid="uid://ro3caopf5coc" path="res://assets/sprites/bg/Clouds 5/1.png" id="2_8c854"]
+[ext_resource type="Texture2D" uid="uid://dkip0rp5whuq6" path="res://assets/sprites/bg/Clouds 5/4.png" id="3_5mav8"]
+[ext_resource type="Texture2D" uid="uid://daiijjt4we50c" path="res://assets/sprites/bg/Clouds 5/3.png" id="4_unknj"]
+[ext_resource type="Texture2D" uid="uid://cxj3exyg4uwu4" path="res://assets/sprites/bg/Clouds 5/5.png" id="5_0fbar"]
+[ext_resource type="Script" path="res://scenes/levels/continue_label.gd" id="6_j4la0"]
+[ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="7_ibukv"]
+[ext_resource type="PackedScene" uid="uid://dqmfol7lf07ex" path="res://scenes/ui/effects/vignette.tscn" id="8_x5k6n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4isww"]
+
+[node name="EndGameScene" type="Node2D"]
+script = ExtResource("1_jxvax")
+end_texts_landing_failure = Array[String](["Congratulations! You and your team have successfully repaired the spaceship and left the planet Wotlica ...", "After a few years in hibernation and interstellar travel you have finallay arrived back to the home planet of the human civilization, planet Earth ...", "Oh Wait, but what is that?!", "All of the controls suddenly start flashing red, the sirens and alarms are going wild, there seems to be outter heat shield malfunction!", "Bam! All that the inhabitants of a small tropical island can see, is the shuttle's debris engulfed in flames, slowly falling from the blue blue sky.", "The End! Thank you for playing. Please after you leave the game, find your log files in the user app folder and send them to my email."])
+end_texts_landing_success = Array[String](["Congratulations! You and your team have successfully repaired the spaceship and left the planet Wotlica ...", "After a few years in hibernation and interstellar travel you have finallay arrived back to the home planet of the human civilization, planet Earth ...", "All of the controls suddenly start flashing red, the sirens and alarms are going wild, there seems to be outter heat shield malfunction!", "All of sudden you remember that you have got the correct re-entry information. You quickly open the drawer, take out the card and insert it into the mainframe computer. Spaceship corrects the angle, the alarms slowly turn off one by one.", "A few minutes later you successfully land at the space airport, ready to meet your friends 'n family.", "The End! Thank you for playing. Please after you leave the game, find your log files in the user app folder and send them to my email."])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="BackClouds" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+position = Vector2(116, 18)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(567, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/BackClouds"]
+position = Vector2(-117, -25)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_8c854")
+centered = false
+
+[node name="MidClouds2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+position = Vector2(0, -21)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(850, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/MidClouds2"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_5mav8")
+centered = false
+
+[node name="MidClouds1" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+position = Vector2(-1, -83)
+motion_mirroring = Vector2(800, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/MidClouds1"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_0fbar")
+centered = false
+
+[node name="FrontClouds" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+position = Vector2(59, 45)
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(850, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/FrontClouds"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_unknj")
+centered = false
+
+[node name="TextPanelContainer" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TextPanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TextPanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "The return home"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.31
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4isww")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="EndStoryText" type="Label" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 1
+text = "dasdasdasd adasdas dasdasdasd adasdas
+dasdasdasd adasdas dasdasdasd adasdas dasd
+dasdasdasd adasdas
+dasdasdasd adasdas dasdasdasd adasdas dasdasdasd adasdas dasdasdasd adasdas"
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4isww")
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="ContinueLabel" type="Label" parent="CanvasLayer/TextPanelContainer/MarginContainer/VBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Press 'space' to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_j4la0")
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("7_ibukv")]
+
+[node name="Vignette" parent="." instance=ExtResource("8_x5k6n")]

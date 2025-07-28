@@ -22,6 +22,12 @@ func _ready() -> void:
 	self._player_inventory = self.get_tree().get_first_node_in_group("player").find_child("InventoryManager") as InventoryManager
 
 
+func _exit_tree() -> void:
+	print("Chat manager: EXIT TREE")
+	if self._chat_messenger_instance != null:
+		self._chat_messenger_instance.close_chat()
+
+
 func _open_chat_window_for(interactable: InteractableArea) -> void:
 	var current_npc_data = interactable.interactable_data.data as NpcData
 	if current_npc_data == null:

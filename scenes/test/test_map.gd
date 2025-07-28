@@ -3,6 +3,16 @@ extends SceneSyncher
 
 func _ready() -> void:
 	GameEvents.level_change.emit(GameTypes.LevelChangeType.OnLoading)
+	QuestManager.quest_update.connect(self._on_quest_finished)
+
+func _exit_tree() -> void:
+	QuestManager.quest_update.disconnect(self._on_quest_finished)
+
+
+func _on_quest_finished() -> void:
+	if QuestManager.all_necessary_quests_completed:
+		self.get_tree().paused = false
+		self.get_tree().change_scene_to_file("res://scenes/levels/end_game_scene.tscn")
 
 
 func save_scene() -> Dictionary:
