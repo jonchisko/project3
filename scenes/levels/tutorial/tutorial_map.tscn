@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3fwb4jpoynyc"]
+
+[ext_resource type="TileSet" uid="uid://bjrho5ftsi0gg" path="res://resources/gras_tilemap.tres" id="1_7gfsv"]
+[ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="2_x2byr"]
+
+[node name="TutorialMap" type="Node2D"]
+
+[node name="GrasslandLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_7gfsv")
+
+[node name="YSortedObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSortedObjects" instance=ExtResource("2_x2byr")]
+visible = false
+
+[node name="Objects" type="TileMapLayer" parent="YSortedObjects"]
+y_sort_enabled = true
+
+[node name="Trees" type="Node2D" parent="YSortedObjects"]
+y_sort_enabled = true
+
+[node name="Rocks" type="Node2D" parent="YSortedObjects"]
+y_sort_enabled = true

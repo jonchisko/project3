@@ -45,6 +45,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "PLAY"
 
+[node name="AudioButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_n3lxy")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TUTORIAL"
+
 [node name="OptionsButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_n3lxy")]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
