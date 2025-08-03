@@ -2,7 +2,10 @@ extends Area2D
 class_name InteractableArea
 
 @export var interactable_type: GameTypes.InteractableType = GameTypes.InteractableType.Item
-var interactable_data: InteractableResource
+var interactable_data: InteractableResource:
+	set(value):
+		interactable_data = value
+		self._set_layer()
 
 
 # Called when the node enters the scene tree for the first time.

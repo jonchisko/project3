@@ -14,6 +14,8 @@ var _chat_element: PackedScene = preload("res://scenes/ui/messenger/chat_element
 
 var _last_npc_chat_element: ChatElement
 
+var is_closing: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if self._animation_player.is_playing():
@@ -33,10 +35,15 @@ func edit_last_chat_element(message: String):
 
 
 func close_chat():
+	if self.is_closing:
+		return
+	
+	self.is_closing = true
+	
+	self.get_tree().paused = false
 	self._animation_player.play("out")
 	await self._animation_player.animation_finished
 	self.chat_closed.emit()
-	self.get_tree().paused = false
 
 
 func _create_chat_element(is_player: bool, message: String) -> ChatElement:

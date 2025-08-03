@@ -1,6 +1,14 @@
 extends CharacterBody2D
+class_name Npc
 
-@export var interactable_data: InteractableResource
+
+@onready var interactable: InteractableArea = $Interactable
+
+@export var interactable_data: InteractableResource:
+	set(value):
+		if self.interactable != null:
+			$Interactable.interactable_data = value
+		interactable_data = value
 
 
 #const SPEED = 300.0

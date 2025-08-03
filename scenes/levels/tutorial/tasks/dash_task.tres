@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cujjwuchliqn2"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/dash_task.gd" id="1_16r1h"]
+
+[resource]
+script = ExtResource("1_16r1h")
+task_description = "Use \"SPACE\" to DASH."
+task_goal = "Dash once."
+objects = Array[String]([])

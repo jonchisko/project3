@@ -1,12 +1,15 @@
 extends Node
 class_name ChatManager
 
+signal chat_closed
+
 var _chat_messenger_ui: PackedScene = preload("res://scenes/ui/messenger/chat_messenger_ui.tscn")
 var _chat_messenger_instance: ChatMessengerUi = null
 
 @export var chat_history: ChatHistory
 @export var chat_history_rust: ChatHistoryRust
 @export var template_factory: TemplateFactory
+@export var is_tutorial: bool = false
 
 var _player_inventory: InventoryManager
 
@@ -122,7 +125,7 @@ func _on_player_message_sent(player_message: String) -> void:
 
 
 func _on_chat_closed() -> void:
-	if not self._current_conversation_messages.is_empty():
+	if not self.is_tutorial and not self._current_conversation_messages.is_empty():
 		var test = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
 		self.chat_history_rust.save_conversation(self._current_npc_data.id, test)
 		print(self.chat_history_rust.get_recent(self._current_npc_data.id))
@@ -140,7 +143,8 @@ func _on_chat_closed() -> void:
 			GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
 		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, self.name, "Dialogue closed.")
 		self._current_conversation_messages.clear()
-
+	
+	self.chat_closed.emit()
 
 # Done ONCE at the start of the chat
 func _create_open_ai_template(npc_data: NpcData) -> void:

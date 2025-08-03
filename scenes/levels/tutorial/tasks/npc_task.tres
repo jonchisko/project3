@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dtqt5xn4grwog"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/npc_task.gd" id="1_1nxrn"]
+
+[resource]
+script = ExtResource("1_1nxrn")
+task_description = "You will have to communicate with NPCs in the game."
+task_goal = "Start a conversation with the NPC and close the chat window, when you are done."
+objects = Array[String](["res://scenes/game_objects/npcs/npc.tscn"])

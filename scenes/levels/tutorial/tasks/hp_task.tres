@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://sfxscemvtta7"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/hp_task.gd" id="1_y5c6g"]
+
+[resource]
+script = ExtResource("1_y5c6g")
+task_description = "You can use certain items in the game. "
+task_goal = "Press \"I\" and use the health potion."
+objects = Array[String]([])

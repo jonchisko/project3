@@ -19,6 +19,15 @@ func _on_play_button_pressed():
 		return
 		
 	self.get_tree().change_scene_to_file("res://scenes/test/test_map.tscn")
+	
+
+func _on_tutorial_button_pressed():
+	if OpenAiConfiguration.open_ai_api_key.is_empty():
+		printerr("Open AI API key is not set.")
+		($PopupObject as PopupObject).show_popup()
+		return
+		
+	self.get_tree().change_scene_to_file("res://scenes/levels/tutorial/tutorial_map.tscn")
 
 
 func _on_options_button_pressed():

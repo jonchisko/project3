@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal dashed
+signal life_changed(int)
 
 @export var dash_range: float = 30.0
 @export var dash_cd: float  = 5.0
@@ -71,6 +73,8 @@ func _dash(movement_direction: Vector2):
 	var current_time = Time.get_unix_time_from_system() # Could have used timer
 	
 	if self._dash_start_time + self.dash_cd <= current_time:
+		self.dashed.emit()
+		
 		self._dash_start_time = current_time
 		
 		# Check for obstacles in dash path
@@ -111,6 +115,7 @@ func _on_health_component_death():
 
 
 func _on_health_component_life_change(health_points: int) -> void:
+	self.life_changed.emit(health_points)
 	$HUDCanvasLayer/LifeCounter.change_life(health_points)
 	
 

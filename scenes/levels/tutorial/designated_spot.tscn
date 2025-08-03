@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://j4na5grebyb8"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/designated_spot.gd" id="1_fertu"]
+[ext_resource type="Shader" path="res://designated_spot.gdshader" id="1_j8eqf"]
+[ext_resource type="Texture2D" uid="uid://ciowxt16lxrje" path="res://assets/sprites/tree/TX Shadow Plant.png" id="2_v3u6q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yaeqh"]
+shader = ExtResource("1_j8eqf")
+shader_parameter/alpha_over_time = 1.0
+shader_parameter/area_color = Color(0.9, 0.5466, 0.216, 1)
+
+[sub_resource type="Animation" id="Animation_r00ut"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/alpha_over_time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_w8scb"]
+resource_name = "alpha_animation"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/alpha_over_time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.8, 0.6, 0.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bm7vq"]
+_data = {
+"RESET": SubResource("Animation_r00ut"),
+"alpha_animation": SubResource("Animation_w8scb")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4rjc4"]
+radius = 37.0135
+
+[node name="DesignatedSpot" type="Node2D"]
+script = ExtResource("1_fertu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yaeqh")
+texture = ExtResource("2_v3u6q")
+region_enabled = true
+region_rect = Rect2(173, 105, 82, 46)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bm7vq")
+}
+autoplay = "alpha_animation"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 2)
+shape = SubResource("CircleShape2D_4rjc4")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

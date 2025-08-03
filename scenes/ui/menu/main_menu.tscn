@@ -45,7 +45,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "PLAY"
 
-[node name="AudioButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_n3lxy")]
+[node name="TutorialButton" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_n3lxy")]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -88,6 +88,7 @@ libraries = {
 }
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/LogsButton" to="." method="_on_logs_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

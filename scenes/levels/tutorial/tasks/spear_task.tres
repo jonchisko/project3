@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dwp6i6lsfa3sj"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/spear_task.gd" id="1_06al7"]
+
+[resource]
+script = ExtResource("1_06al7")
+task_description = "If you have a spear in your inventory, you can fight off enemies with it. You were given a spear - hold \"RMB\" and throw it by clicking \"LMB\"."
+task_goal = "Destroy the wooden crate."
+objects = Array[String](["res://scenes/game_objects/barrel/destructable_barrel.tscn"])

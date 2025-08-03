@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://qmfmn07dm72w"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/done_task.gd" id="1_42tj6"]
+
+[resource]
+script = ExtResource("1_42tj6")
+task_description = "Tutorial finished."
+task_goal = "Press \"ESC\" when ready."
+objects = Array[String]([])

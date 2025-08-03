@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c03anil6dmp41"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/movement_task.gd" id="1_83pis"]
+
+[resource]
+script = ExtResource("1_83pis")
+task_description = "Use \"WASD\" keys to move. "
+task_goal = "Move to the designated spot."
+objects = Array[String](["res://scenes/levels/tutorial/designated_spot.tscn"])

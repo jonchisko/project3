@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cuavls6xddifr"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tasks/item_task.gd" id="1_vgilc"]
+
+[resource]
+script = ExtResource("1_vgilc")
+task_description = "You can pick up items in the game."
+task_goal = "Pick up the health potion."
+objects = Array[String](["res://scenes/game_objects/items/item.tscn"])

@@ -1,10 +1,15 @@
 extends MarginContainer
 
+@export var is_tutorial: bool = false
+
 @onready var primary_counter: Label = %PrimaryCounter
 @onready var secondary_counter: Label = %SecondaryCounter
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if self.is_tutorial:
+		self.visible = false
+
 	QuestManager.quest_update.connect(self._on_quest_update)
 	self._on_quest_update()
 
