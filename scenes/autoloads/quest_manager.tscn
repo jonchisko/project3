@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://uv7ebj6w2oih" path="res://resources/quests/collect_metal_scraps.tres" id="3_fg54q"]
 [ext_resource type="Resource" uid="uid://deftdttx5s261" path="res://resources/quests/find_robid_core.tres" id="4_gidl1"]
 [ext_resource type="Resource" uid="uid://c4auob44tfbpq" path="res://resources/quests/get_book_wotlica.tres" id="5_tti22"]
-[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/get_outpost_keycode.tres" id="6_1qpwa"]
+[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/sober_up_miha.tres" id="6_1qpwa"]
 [ext_resource type="Resource" uid="uid://cytd42g0gpe6o" path="res://resources/quests/get_wajvodian_spear_instructions.tres" id="7_th77v"]
 [ext_resource type="Resource" uid="uid://nxpbqdvnj0ub" path="res://resources/quests/make_hangover_potion.tres" id="8_10ewf"]
 [ext_resource type="Resource" uid="uid://cs4p0pcstrb3" path="res://resources/quests/repair_smaragd_ring.tres" id="9_ayiq4"]
