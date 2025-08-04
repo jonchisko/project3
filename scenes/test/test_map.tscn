@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=35 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -28,6 +28,10 @@
 [ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="22_yxsy3"]
 [ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="25_hmn17"]
 [ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="28_ndh6o"]
+[ext_resource type="Resource" uid="uid://c56ydsh5licpm" path="res://resources/interactables/items/metal_bolt_item.tres" id="29_notju"]
+[ext_resource type="Resource" uid="uid://b7j47oyxw43g1" path="res://resources/interactables/items/metal_scrap_item.tres" id="30_esub5"]
+[ext_resource type="Resource" uid="uid://dhqid1itmojr6" path="res://resources/interactables/items/black_honey_combs_item.tres" id="32_jqlue"]
+[ext_resource type="Resource" uid="uid://d3jietp4618wb" path="res://resources/interactables/items/greenberries_item.tres" id="36_u04f4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhdey"]
 radius = 16.0
@@ -267,6 +271,288 @@ tile_set = ExtResource("4_ex0tf")
 
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="ItemsBase" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
+
+[node name="ItemScrap" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-672, 46)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap2" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-466, -31)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap3" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-722, -121)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap4" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-768, 303)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap5" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-291, 232)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap6" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-307, 255)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap7" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-310, -28)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap8" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-327, 50)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap9" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-593, -140)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap10" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-509, 37)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap11" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-840, 53)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap12" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-821, 28)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap13" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-437, 305)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap14" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-464, 322)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemScrap15" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-613, 411)
+interactable_data = ExtResource("30_esub5")
+
+[node name="ItemBolt" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-762, 145)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt2" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-740, 179)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt3" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-784, 181)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt4" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-554, 21)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt5" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-793, 3)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt6" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-784, 431)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt7" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-685, 373)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt8" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-347, 331)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt9" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-623, 234)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt10" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-388, 113)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt11" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-861, 118)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt12" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-868, 279)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt13" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-667, -202)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt14" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-876, -128)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt15" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-591, -77)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt16" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-399, -99)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemBolt17" parent="YSorted/ItemsBase" instance=ExtResource("17_nywt0")]
+position = Vector2(-401, 425)
+interactable_data = ExtResource("29_notju")
+
+[node name="ItemsForest" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
+
+[node name="ItemBlackHoneyComb" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1537, -372)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb2" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1489, -345)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb3" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1470, -412)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb4" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1694, -516)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb5" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1651, -507)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb6" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1282, -556)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb7" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1428, -665)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb8" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1722, -568)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb9" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1834, -327)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb10" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1847, -162)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb11" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1610, -199)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb12" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1624, -19)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb13" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1831, -64)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb14" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1333, -311)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb15" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2118, -215)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb16" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1745, -795)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb17" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1535, -607)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb18" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1957, -522)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb19" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1760, -150)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemBlackHoneyComb20" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2059, -68)
+interactable_data = ExtResource("32_jqlue")
+
+[node name="ItemGreenberries" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1772, -532)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries2" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1590, -409)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries3" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1796, -539)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries4" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1669, -783)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries5" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1843, -759)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries6" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2053, -745)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries7" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2024, -728)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries8" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2082, -716)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries9" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2009, -887)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries10" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2037, -885)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries11" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2021, -867)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries12" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1680, -943)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries16" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1653, -927)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries17" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1631, -930)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries13" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(2203, -883)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries14" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1425, -874)
+interactable_data = ExtResource("36_u04f4")
+
+[node name="ItemGreenberries15" parent="YSorted/ItemsForest" instance=ExtResource("17_nywt0")]
+position = Vector2(1407, -890)
+interactable_data = ExtResource("36_u04f4")
 
 [node name="TileMapLayerHouses" type="TileMapLayer" parent="YSorted" groups=["navigation"]]
 y_sort_enabled = true
