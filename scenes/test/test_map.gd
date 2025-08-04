@@ -1,6 +1,9 @@
 extends SceneSyncher
 
 
+var pause_menu: Resource = preload("res://scenes/ui/pause_menu.tscn")
+
+
 func _ready() -> void:
 	GameEvents.level_change.emit(GameTypes.LevelChangeType.OnLoading)
 	QuestManager.quest_update.connect(self._on_quest_finished)
@@ -49,3 +52,12 @@ func load_scene(data: Dictionary) -> void:
 		if data["items"].has(item.get_path()):
 			continue
 		item.call_deferred("queue_free")
+
+
+func _input(event: InputEvent) -> void:
+	var event_key = event as InputEventKey
+	
+	if event_key != null and event_key.keycode == KEY_P and event.is_pressed() and not event_key.echo:
+		var instantiated = pause_menu.instantiate() as PauseMenu
+		$Vignette.add_child(instantiated)
+		instantiated.open()

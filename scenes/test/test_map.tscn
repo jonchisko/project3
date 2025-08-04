@@ -173,10 +173,10 @@ theme_override_font_sizes/font_size = 48
 text = "Mines"
 
 [node name="ForgeLabel" type="Label" parent="DirectionsLabels"]
-offset_left = -321.0
-offset_top = 790.0
-offset_right = -150.0
-offset_bottom = 869.0
+offset_left = -238.0
+offset_top = 791.0
+offset_right = -67.0
+offset_bottom = 870.0
 theme_override_font_sizes/font_size = 48
 text = "Forge"
 

@@ -10,6 +10,8 @@ var _disabled = false
 
 
 func select_item(delay = .0):
+	if self.get_tree() == null:
+		return
 	self._disabled = true
 	self.animation_player.play("play_out")
 	await self.get_tree().create_timer(delay)
@@ -17,6 +19,8 @@ func select_item(delay = .0):
 	
 	
 func remove_item(delay = .0):
+	if self.get_tree() == null:
+		return
 	self._disabled = true
 	self.animation_player.play("play_out")
 	await self.get_tree().create_timer(delay)
