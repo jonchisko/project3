@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjweu5sju1r0q"]
+[gd_scene load_steps=12 format=3 uid="uid://cjweu5sju1r0q"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/options_menu.gd" id="1_5yi0t"]
 [ext_resource type="Script" path="res://scenes/ui/menu/options_tab_container.gd" id="2_m14l7"]
+[ext_resource type="Texture2D" uid="uid://dtdw0ighmdct3" path="res://assets/ui_options_images/movement.png" id="3_0cqol"]
 [ext_resource type="PackedScene" uid="uid://bucl1s8eaacb1" path="res://scenes/ui/button/audio_button.tscn" id="3_xjg4v"]
+[ext_resource type="Texture2D" uid="uid://d01kifsmbn17" path="res://assets/ui_options_images/inventory.png" id="4_bak3k"]
 [ext_resource type="AudioStream" uid="uid://c5yo36w4k7125" path="res://assets/audio/ui/click4.ogg" id="4_nxb77"]
 [ext_resource type="AnimationLibrary" uid="uid://clkwayymrxjft" path="res://assets/animations_ui/global_ui.res" id="5_ghfxx"]
+[ext_resource type="Texture2D" uid="uid://csgpxae27o8ei" path="res://assets/ui_options_images/pause.png" id="5_njthl"]
+[ext_resource type="Texture2D" uid="uid://bf1r24ag1sc17" path="res://assets/ui_options_images/combat.png" id="6_eekar"]
+
+[sub_resource type="Gradient" id="Gradient_al7k4"]
+colors = PackedColorArray(0.239216, 0.239216, 0.239216, 1, 0.24, 0.24, 0.24, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u8kin"]
+gradient = SubResource("Gradient_al7k4")
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -26,13 +36,92 @@ offset_left = -31.0
 offset_right = 31.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 2
+current_tab = 0
 script = ExtResource("2_m14l7")
+
+[node name="KeyMappingOptions" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Background" type="MarginContainer" parent="TabContainer/KeyMappingOptions"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/KeyMappingOptions/Background"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_u8kin")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/KeyMappingOptions/Background"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Movement" type="MarginContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/Movement"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("3_0cqol")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="InventoryPause" type="MarginContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/InventoryPause"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/InventoryPause/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/InventoryPause/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("4_bak3k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/InventoryPause/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/InventoryPause/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("5_njthl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Combat" type="MarginContainer" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/KeyMappingOptions/Background/VBoxContainer/Combat"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+texture = ExtResource("6_eekar")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VideoOptions" type="MarginContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 0
+metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/VideoOptions"]
 layout_mode = 2
@@ -57,7 +146,7 @@ text = "Windowed Mode"
 [node name="AudioOptions" type="MarginContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/AudioOptions"]
 layout_mode = 2
@@ -159,8 +248,9 @@ max_value = 1.0
 step = 0.0
 
 [node name="OpenAiOptions" type="MarginContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/OpenAiOptions"]
 layout_mode = 2
