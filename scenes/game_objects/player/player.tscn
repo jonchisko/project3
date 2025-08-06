@@ -209,7 +209,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_mq57i"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-y_sort_enabled = true
 collision_layer = 32
 collision_mask = 14
 script = ExtResource("1_sls11")
@@ -258,20 +257,20 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_b1ft6")
 debug_color = Color(0.446675, 0.49503, 0.875198, 0.42)
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.666667)
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("7_ue22m")
+offset = Vector2(-3, -3)
+region_enabled = true
+region_rect = Rect2(99, 32, 27, 28)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
 texture = ExtResource("7_ue22m")
 offset = Vector2(0, -26.296)
 hframes = 4
 vframes = 2
-
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
-modulate = Color(1, 1, 1, 0.666667)
-position = Vector2(-3, -3)
-scale = Vector2(0.906584, 0.906584)
-texture = ExtResource("7_ue22m")
-region_enabled = true
-region_rect = Rect2(99, 32, 27, 28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.45, -7)
@@ -442,7 +441,7 @@ wait_time = 0.6
 one_shot = true
 
 [node name="Floorable" parent="." node_paths=PackedStringArray("items_to_be_floored") instance=ExtResource("20_fpmq3")]
-items_to_be_floored = [NodePath("../Sprite2D/Shadow")]
+items_to_be_floored = [NodePath("../Shadow")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floorable"]
 position = Vector2(0, -5)
