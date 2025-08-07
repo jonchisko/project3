@@ -404,7 +404,7 @@ script = ExtResource("1_vjjto")
 attack_type_sequence = Array[int]([0, 0, 1])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_uw7xo")]
-max_speed = 90.0
+max_speed = 170.0
 acceleration = 20000.0
 deacceleration = 20000.0
 

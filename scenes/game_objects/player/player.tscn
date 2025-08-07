@@ -212,12 +212,14 @@ _data = {
 collision_layer = 32
 collision_mask = 14
 script = ExtResource("1_sls11")
+dash_range = 50.0
+dash_cd = 4.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_euodu")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_vjdjt")]
-max_speed = 150.0
-acceleration = 1200.0
+max_speed = 250.0
+acceleration = 1500.0
 
 [node name="NpcDetector" type="Node2D" parent="."]
 
