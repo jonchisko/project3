@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx4qln7ab8h5k"]
+[gd_scene load_steps=9 format=3 uid="uid://cx4qln7ab8h5k"]
 
 [ext_resource type="Script" path="res://scenes/ui/messenger/chat_messenger_ui.gd" id="1_quy3e"]
 
@@ -7,22 +7,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer/MarginContainer:scale")
+tracks/0/path = NodePath("PanelContainer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -36,22 +24,10 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer/MarginContainer:scale")
+tracks/0/path = NodePath("PanelContainer:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(4.43828, 1.07177),
 "update": 0,
@@ -62,25 +38,13 @@ tracks/1/keys = {
 resource_name = "out"
 length = 0.4
 step = 0.05
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer/MarginContainer:scale")
-tracks/0/interp = 2
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(0, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -88,13 +52,13 @@ tracks/1/keys = {
 "method": &"queue_free"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -107,6 +71,8 @@ _data = {
 "in": SubResource("Animation_mimtg"),
 "out": SubResource("Animation_a3fl6")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0r2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bcra"]
 bg_color = Color(0.302004, 0.302004, 0.302004, 1)
@@ -123,35 +89,44 @@ libraries = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0.478431)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l0r2f")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainerMessages" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainerMessages" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -160,23 +135,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerMessages"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerMessages"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0bcra")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerMessages/ScrollContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerMessages/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ooldi")
 
-[node name="MarginContainerInput" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainerInput" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -185,17 +159,16 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerInput"]
-unique_name_in_owner = true
+[node name="LineEdit" type="LineEdit" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerInput"]
 layout_mode = 2
 placeholder_text = "Enter Message"
 
-[node name="CloseChatButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CloseChatButton" type="Button" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "X"
 
-[connection signal="text_submitted" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerInput/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/CloseChatButton" to="." method="_on_close_chat_button_pressed"]
+[connection signal="text_submitted" from="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainerInput/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="PanelContainer2/MarginContainer/HBoxContainer/CloseChatButton" to="." method="_on_close_chat_button_pressed"]
