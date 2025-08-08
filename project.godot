@@ -63,6 +63,7 @@ chat_openai=""
 
 [gui]
 
+theme/custom="res://assets/default_theme.tres"
 theme/custom_font="res://assets/m5x7.ttf"
 
 [input]
