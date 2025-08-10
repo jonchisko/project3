@@ -4,6 +4,7 @@ class_name ChatMessengerUi
 
 signal message_created(message: String)
 signal chat_closed
+signal skip_quest
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _chat_element_container = %VBoxContainer
@@ -64,3 +65,7 @@ func _on_line_edit_text_submitted(new_text):
 
 func _on_close_chat_button_pressed():
 	self.close_chat()
+
+
+func _on_long_press_button_long_pressed() -> void:
+	self.skip_quest.emit()

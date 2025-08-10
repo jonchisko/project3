@@ -110,6 +110,11 @@ func _on_damagable_damage_detected(amount):
 func _on_health_component_death():
 	self._is_dying = true
 	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent,
+		self.name,
+		"Knight death.")
+	
 	print("Knight: death")
 	$Damagable/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)

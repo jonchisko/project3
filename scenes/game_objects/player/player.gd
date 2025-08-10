@@ -111,6 +111,11 @@ func _on_damagable_damage_detected(amount):
 
 
 func _on_health_component_death():
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent,
+		self.name,
+		"Player death.")
+
 	self.queue_free()
 
 

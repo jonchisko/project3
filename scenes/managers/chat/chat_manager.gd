@@ -46,6 +46,8 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 	
 	self._chat_messenger_instance.message_created.connect(self._on_player_message_sent)
 	self._chat_messenger_instance.chat_closed.connect(self._on_chat_closed)
+	self._chat_messenger_instance.skip_quest.connect(self._on_skipped_quest)
+	
 	self._current_npc_data = current_npc_data
 	
 	GameEvents.log_info.emit(
@@ -126,9 +128,9 @@ func _on_player_message_sent(player_message: String) -> void:
 
 func _on_chat_closed() -> void:
 	if not self.is_tutorial and not self._current_conversation_messages.is_empty():
-		var test = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
-		self.chat_history_rust.save_conversation(self._current_npc_data.id, test)
-		print(self.chat_history_rust.get_recent(self._current_npc_data.id))
+		var conversation = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
+		self.chat_history_rust.save_conversation(self._current_npc_data.id, conversation)
+		#print(self.chat_history_rust.get_recent(self._current_npc_data.id))
 		var source: String
 		for message in self._current_conversation_messages:
 			match message.role:
@@ -145,6 +147,7 @@ func _on_chat_closed() -> void:
 		self._current_conversation_messages.clear()
 	
 	self.chat_closed.emit()
+
 
 # Done ONCE at the start of the chat
 func _create_open_ai_template(npc_data: NpcData) -> void:
@@ -166,6 +169,20 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 	self._set_chat_history()
 	
 	self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history_rust)
+
+
+func _on_skipped_quest() -> void:
+	print("ChatManager: Skipping quest if any active for current NPC")
+	if self._current_npc_data.quest_data.is_empty():
+		return
+
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent, 
+		self.name,
+		"Skipping quest (finishing by 'button skip'): {quest_id}.".format({"quest_id" : self._current_npc_data.quest_data[0].id}))
+	var parsed_quest_reward = self._parse_quest_reward(self._current_npc_data.quest_data[0].rewards[0])
+	print(parsed_quest_reward)
+	self._finish_quest(parsed_quest_reward["item"], parsed_quest_reward["amount"])
 
 
 func _get_has_item_tool() -> Tool:
@@ -283,11 +300,7 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
 				var quest_reward_item = fun_args["item_id"]
-				var result = self._player_inventory.give_item(fun_args["item_id"], fun_args["number"])
-				if not self._current_npc_data.quest_data.is_empty():
-					print("ChatManager: Quest '{quest}' done! Emitting event.".format({"quest": self._current_npc_data.quest_data[0].id}))
-					GameEvents.quest_done.emit(self._current_npc_data.quest_data[0].id)
-					self._current_npc_data.quest_data.pop_front()
+				var result = self._finish_quest(quest_reward_item, fun_args["number"])
 				call_result["call_result"] = result
 		"trigger_event":
 			if not fun_args.has("event_id"):
@@ -312,3 +325,29 @@ func _parse_arguments_data(arguments: String) -> Dictionary:
 			return {"message": "", "data": data}
 		return {"message": "Unknown data type of tool arguments", "data": null}
 	return {"message": "Tool arguments:" + json_parser.get_error_message(), "data": null}
+
+
+func _finish_quest(reward_item_id: String, amount: int) -> bool:
+	var result = self._player_inventory.give_item(reward_item_id, amount)
+	
+	if self._current_npc_data.quest_data.is_empty():
+		return result
+	
+	print("ChatManager: Quest '{quest}' done! Emitting event.".format({"quest": self._current_npc_data.quest_data[0].id}))
+	GameEvents.quest_done.emit(self._current_npc_data.quest_data[0].id)
+	self._current_npc_data.quest_data.pop_front()
+	
+	return result
+	
+
+func _parse_quest_reward(quest_reward: String) -> Dictionary:
+	# give_item(outpost_keycode, 1)
+	var first_paranthesis_index = quest_reward.find("(")
+	var last_paranthesis_index = quest_reward.find(")")
+	var comma_index = quest_reward.find(",")
+	
+	var item: String = quest_reward.substr(first_paranthesis_index + 1, comma_index - (first_paranthesis_index + 1))
+	var amount: int = quest_reward.substr(comma_index + 1, last_paranthesis_index - (comma_index + 1)).to_int()
+	
+	return {"item": item, "amount": amount}
+	

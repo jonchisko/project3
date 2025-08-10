@@ -18,7 +18,12 @@ func has_item(item_id: String, number: int) -> bool:
 func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	if not self.has_item(item_id, number):
 		return null
-		
+	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent,
+		self.name,
+		"Getting item from player - {item_id}, amount {amount}.".format({"item_id": item_id, "amount": number}))
+	
 	for _i in range(number):
 		self._remove_item(item_id)
 	
@@ -28,6 +33,11 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 func give_item(item_id: String, number: int = 1) -> bool:
 	if not ResourceDictionary.ResourceIdToResource.has(item_id):
 		return false
+	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent,
+		self.name,
+		"Giving item to player - {item_id}, amount {amount}.".format({"item_id": item_id, "amount": number}))
 	
 	var item_data = ResourceDictionary.ResourceIdToResource[item_id]
 	
