@@ -66,83 +66,83 @@ func _add_previous_life(npc_data: NpcData) -> String:
 	
 	
 func _add_quest(npc_data: NpcData) -> String:
-	var quest_data := npc_data.quest_data[0]
-	var quest_rewards = ", ".join(quest_data.rewards)
-	
 	if npc_data.quest_data.is_empty():
 		return "## Quest
 		You do not have any quests or goals, all of them have already been fulfilled by the player."
-	else:
-		return "## Quest
-		Your current quest or goal is structured as following:
-		<quest>
-			<quest_id>{quest_id}</quest_id>
-			<quest_title>{quest_title}</quest_title>
-			<quest_description>{quest_description}</quest_description>
-			<quest_fulfillment> 
-				The player gets a reward from you, if the player fulfills the quest condition: 
-					<quest_condition>{quest_condition}</quest_condition>
-				The quest reward in the fulfillment case is <quest_reward>{quest_reward}</quest_reward>
-			</quest_fulfillment>
-		</quest>
-		
-		The structure of the <quest_condition> can be a boolean expression or a 'statement' that looks like the following:
-		<quest_conditions>
-			<quest_condition_structure>
-				item_id == number <logical_operator=[AND, OR]> item_id == number
-			</quest_condition_structure>
-			<quest_condition_structure>
-				item_id == number
-			</quest_condition_structure>
-			<quest_condition_structure>
-				Some statement that needs to be observing the dynamic or static game world information.
-			</quest_condition_structure>
-		</quest_conditions>
-		
-		Concrete examples (item_id is made up):
-		<quest_conditions_examples>
-			<example>
-				concrete_slabs == 20 AND bolts == 10 AND screws == 1
-			</example>
-			<example>
-				planks == 40
-			</example>
-			<example>
-				Verify in dynamic world context that the player talked with the npc_id.
-			</example>
-		</quest_conditions_examples>
-		
-		The structure of the <quest_reward> is as follows:
-		<quest_rewards>
-			<quest_reward_structure>
-				give_item(wajdovian_spear_instruction, 1)
-			</quest_reward_structure>
-			<quest_reward_structure>
-				trigger_event(event_id)
-			</quest_reward_structure>
-			<quest_reward_structure>
-				give_item(item_id, amount)
-			</quest_reward_structure>
-		</quest_rewards>
-		
-		Concrete examples:
-		<quest_reward_examples>
-			<example>
-				give_item(wajdovian_spear_instruction, 1)
-			</example>
-			<example>
-				trigger_event(end_game)
-			</example>
-			<example>
-				give_item(outlawed_pen, 3)
-			</example>
-		</quest_reward_examples>
-		
-		You must take the <quest_condition> item from the player - for this use the function get_item,
-		examples on how to call function/tools are in chapter 'How to call a tool or function'.
-		"\
-		.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
-		"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
+	
+	var quest_data := npc_data.quest_data[0]
+	var quest_rewards = ", ".join(quest_data.rewards)
+
+	return "## Quest
+	Your current quest or goal is structured as following:
+	<quest>
+		<quest_id>{quest_id}</quest_id>
+		<quest_title>{quest_title}</quest_title>
+		<quest_description>{quest_description}</quest_description>
+		<quest_fulfillment> 
+			The player gets a reward from you, if the player fulfills the quest condition: 
+				<quest_condition>{quest_condition}</quest_condition>
+			The quest reward in the fulfillment case is <quest_reward>{quest_reward}</quest_reward>
+		</quest_fulfillment>
+	</quest>
+	
+	The structure of the <quest_condition> can be a boolean expression or a 'statement' that looks like the following:
+	<quest_conditions>
+		<quest_condition_structure>
+			item_id == number <logical_operator=[AND, OR]> item_id == number
+		</quest_condition_structure>
+		<quest_condition_structure>
+			item_id == number
+		</quest_condition_structure>
+		<quest_condition_structure>
+			Some statement that needs to be observing the dynamic or static game world information.
+		</quest_condition_structure>
+	</quest_conditions>
+	
+	Concrete examples (item_id is made up):
+	<quest_conditions_examples>
+		<example>
+			concrete_slabs == 20 AND bolts == 10 AND screws == 1
+		</example>
+		<example>
+			planks == 40
+		</example>
+		<example>
+			Verify in dynamic world context that the player talked with the npc_id.
+		</example>
+	</quest_conditions_examples>
+	
+	The structure of the <quest_reward> is as follows:
+	<quest_rewards>
+		<quest_reward_structure>
+			give_item(wajdovian_spear_instruction, 1)
+		</quest_reward_structure>
+		<quest_reward_structure>
+			trigger_event(event_id)
+		</quest_reward_structure>
+		<quest_reward_structure>
+			give_item(item_id, amount)
+		</quest_reward_structure>
+	</quest_rewards>
+	
+	Concrete examples:
+	<quest_reward_examples>
+		<example>
+			give_item(wajdovian_spear_instruction, 1)
+		</example>
+		<example>
+			trigger_event(end_game)
+		</example>
+		<example>
+			give_item(outlawed_pen, 3)
+		</example>
+	</quest_reward_examples>
+	
+	You must take the <quest_condition> item from the player - for this use the function get_item,
+	examples on how to call function/tools are in chapter 'How to call a tool or function'.
+	"\
+	.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
+	"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
 	
 	
 func _add_examples() -> String:

@@ -58,6 +58,12 @@ func _on_quests_completed(quest_id: String) -> void:
 		self.quests.erase(finished_quest)
 	else:
 		printerr("Could not find quest '{quest}' in the non finished quests array.".format({"quest": quest_id}))
+		return
+	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent, 
+		self.name, 
+		"Quest completed - {quest_id}.".format({"quest_id" : finished_quest.id}))
 	
 	if finished_quest.primary_quest:
 		self.current_primary_quests_completed += 1

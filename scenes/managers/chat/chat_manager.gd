@@ -180,9 +180,12 @@ func _on_skipped_quest() -> void:
 		GodotProjectLogger.LogType.GameEvent, 
 		self.name,
 		"Skipping quest (finishing by 'button skip'): {quest_id}.".format({"quest_id" : self._current_npc_data.quest_data[0].id}))
-	var parsed_quest_reward = self._parse_quest_reward(self._current_npc_data.quest_data[0].rewards[0])
-	print(parsed_quest_reward)
-	self._finish_quest(parsed_quest_reward["item"], parsed_quest_reward["amount"])
+	
+	if self._current_npc_data.quest_data[0].rewards[0].contains("give"):
+		var parsed_quest_reward = self._parse_quest_reward(self._current_npc_data.quest_data[0].rewards[0])
+		self._give_item_to_player(parsed_quest_reward["item"], parsed_quest_reward["amount"])
+	
+	self._finish_quest()
 
 
 func _get_has_item_tool() -> Tool:
@@ -300,7 +303,9 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
 				var quest_reward_item = fun_args["item_id"]
-				var result = self._finish_quest(quest_reward_item, fun_args["number"])
+				var result = self._give_item_to_player(quest_reward_item, fun_args["number"])
+				if not self._current_npc_data.quest_data.is_empty():
+					self._finish_quest()
 				call_result["call_result"] = result
 		"trigger_event":
 			if not fun_args.has("event_id"):
@@ -327,18 +332,18 @@ func _parse_arguments_data(arguments: String) -> Dictionary:
 	return {"message": "Tool arguments:" + json_parser.get_error_message(), "data": null}
 
 
-func _finish_quest(reward_item_id: String, amount: int) -> bool:
+func _give_item_to_player(reward_item_id: String, amount: int) -> bool:
 	var result = self._player_inventory.give_item(reward_item_id, amount)
-	
-	if self._current_npc_data.quest_data.is_empty():
-		return result
-	
+	return result
+
+
+func _finish_quest() -> void:
 	print("ChatManager: Quest '{quest}' done! Emitting event.".format({"quest": self._current_npc_data.quest_data[0].id}))
 	GameEvents.quest_done.emit(self._current_npc_data.quest_data[0].id)
 	self._current_npc_data.quest_data.pop_front()
 	
-	return result
-	
+	self._refresh_static_template(self._current_conversation_messages, self.chat_history_rust, self._current_npc_data)
+
 
 func _parse_quest_reward(quest_reward: String) -> Dictionary:
 	# give_item(outpost_keycode, 1)
@@ -351,3 +356,13 @@ func _parse_quest_reward(quest_reward: String) -> Dictionary:
 	
 	return {"item": item, "amount": amount}
 	
+	
+func _refresh_static_template(current_messages: Array[Message], chat_history: ChatHistoryRust, npc_data: NpcData) -> void:
+	self._gpt_template.clear_static_context()
+	self._gpt_template.clear_all_messages()
+	
+	self._template.set_up_static_template(self._gpt_template, npc_data, chat_history)
+	
+	for message in current_messages:
+		self._gpt_template.append_message_with(message)
+	#print(self._gpt_template.show_messages())
