@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 godot = "0.2.4"
+rusqlite = { version = "0.37.0", features = ["bundled"] }
 
 [lib]
 crate-type = ["cdylib"]  # Compile this crate to a dynamic C library.

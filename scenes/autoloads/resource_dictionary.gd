@@ -5,6 +5,9 @@ const _NpcDirectory = "res://resources/interactables/npcs"
 
 var ResourceIdToResource: Dictionary = {}
 
+var npc_ids: Array[String] = []
+var item_ids: Array[String] = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,8 +18,8 @@ func _load_resources():
 	var item_file_names = self._get_files_in_dir(self._ItemDirectory)
 	var npc_file_names = self._get_files_in_dir(self._NpcDirectory)
 
-	self._add_to_dictionary(item_file_names, "InteractableResource")
-	self._add_to_dictionary(npc_file_names, "InteractableResource")
+	self._add_to_dictionary(item_file_names, "InteractableResource", item_ids)
+	self._add_to_dictionary(npc_file_names, "InteractableResource", npc_ids)
 
 
 func _get_files_in_dir(path):
@@ -35,7 +38,7 @@ func _get_files_in_dir(path):
 	return files
 		
 	
-func _add_to_dictionary(file_names: Array, type_hint: String):
+func _add_to_dictionary(file_names: Array, type_hint: String, id_collection: Array[String]):
 	for file_name in file_names:
 		var resource: InteractableResource = ResourceLoader.load(file_name, type_hint)
 		
@@ -48,4 +51,5 @@ func _add_to_dictionary(file_names: Array, type_hint: String):
 			.format({"InDict": self.ResourceIdToResource[resource.data.id], "ToAdd": resource.data.name}))
 			continue
 		
+		id_collection.push_back(resource.data.id)
 		self.ResourceIdToResource[resource.data.id] = resource
