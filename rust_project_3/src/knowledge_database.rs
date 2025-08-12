@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use godot::{classes::Engine, prelude::*};
 use rusqlite::{Connection, Result};
 
@@ -6,6 +8,40 @@ struct Person {
     id: i32,
     name: String,
     data: Option<Vec<u8>>,
+}
+
+#[derive(GodotConvert, Debug)]
+#[godot(via = i64)]
+pub enum GameAction {
+    Owns,
+    HasTrait,
+    LocatedIn,
+    InteractsWith,
+    Gives,
+    IsA,
+    Wears,
+    Completes,
+    Kills,
+    Damages,
+}
+
+impl Display for GameAction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let enum_display = match self {
+            GameAction::Owns => "owns",
+            GameAction::HasTrait => "has_trait",
+            GameAction::LocatedIn => "located_in",
+            GameAction::InteractsWith => "interacts_with",
+            GameAction::Gives => "gives",
+            GameAction::IsA => "is_a",
+            GameAction::Wears => "wears",
+            GameAction::Completes => "completes",
+            GameAction::Kills => "kills",
+            GameAction::Damages => "damages",
+        };
+
+        f.pad(enum_display)
+    }
 }
 
 #[derive(GodotClass)]
@@ -123,32 +159,11 @@ impl INode for KnowledgeDatabase {
                 (),
             )
             .expect("Failed at creating action_log table");
-        //self.fill_entities_table();
-        /*let me = Person {
-            id: 0,
-            name: "Steven".to_string(),
-            data: None,
-        };
-        conn.execute(
-            "INSERT INTO person (name, data) VALUES (?1, ?2)",
-            (&me.name, &me.data),
-        ).unwrap();
 
-        let mut stmt = conn.prepare("SELECT id, name, data FROM person").unwrap();
-        let person_iter = stmt.query_map([], |row| {
-            Ok(Person {
-                id: row.get(0)?,
-                name: row.get(1)?,
-                data: row.get(2)?,
-            })
-        }).unwrap();
-
-        for person in person_iter {
-            godot_print!("Found person {:?}", person.unwrap());
-        }*/
         self.fill_entities_table();
         self.fill_items_table();
         self.fill_quests_table();
+        self.fill_actions_table();
     }
 }
 
@@ -172,6 +187,7 @@ impl KnowledgeDatabase {
         new_value: i32,
     ) -> bool {
         // If exists, update, if it does not, insert
+
         todo!()
     }
 
@@ -212,6 +228,11 @@ impl KnowledgeDatabase {
             stmt.execute([npc_id.to_string()])
                 .expect("Error when inserting npc ids into entities");
         }
+
+        stmt.execute(["player"])
+            .expect("Error when inserting player id into entities");
+        stmt.execute(["enemy_knight"])
+            .expect("Error when inserting knight id into entities");
     }
 
     fn fill_items_table(&mut self) -> () {
@@ -224,7 +245,7 @@ impl KnowledgeDatabase {
         let mut stmt = self
             .connection
             .prepare("INSERT INTO items (game_item_id) VALUES (?1)")
-            .expect("Failed at creating prepared statement for fill entities");
+            .expect("Failed at creating prepared statement for fill items");
 
         for item_id in item_ids.iter_shared() {
             stmt.execute([item_id.to_string()])
@@ -242,7 +263,7 @@ impl KnowledgeDatabase {
         let mut stmt = self
             .connection
             .prepare("INSERT INTO quests (game_quest_id) VALUES (?1)")
-            .expect("Failed at creating prepared statement for fill entities");
+            .expect("Failed at creating prepared statement for fill quests");
 
         for quest in quests.iter_shared() {
             let quest_id = quest.get("id").try_to::<GString>().unwrap();
@@ -251,5 +272,31 @@ impl KnowledgeDatabase {
         }
     }
 
-    fn fill_actions_table(&mut self) -> () {}
+    fn fill_actions_table(&mut self) -> () {
+        let mut stmt = self
+            .connection
+            .prepare("INSERT INTO actions (name) VALUES (?1)")
+            .expect("Failed at creating prepared statement for fill actions");
+
+        stmt.execute([GameAction::Completes.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::Damages.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::Gives.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::HasTrait.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::InteractsWith.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::IsA.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::Kills.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::LocatedIn.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::Owns.to_string()])
+            .expect("Error when inserting game action name into actions");
+        stmt.execute([GameAction::Wears.to_string()])
+            .expect("Error when inserting game action name into actions");
+    }
 }
