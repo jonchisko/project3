@@ -196,8 +196,13 @@ impl KnowledgeDatabase {
 
         match update_result {
             Ok(num_rows) => {
-                godot_print!("Updated quest, rows affected: {}", num_rows);
-                true
+                if num_rows == 0 {
+                    godot_error!("Quest was not updated, perhaps incorrect game_quest_id");
+                    false
+                } else {
+                    godot_print!("Updated quest, rows affected: {}", num_rows);
+                    true
+                }
             }
             Err(_) => {
                 godot_error!("Could not update quest");

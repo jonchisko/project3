@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://cpwsyp7c2qm75"]
+[gd_scene load_steps=2 format=3 uid="uid://cpwsyp7c2qm75"]
+
+[ext_resource type="Script" path="res://scenes/test/test_knowledge_database.gd" id="1_77h5a"]
 
 [node name="TestKnowledgeDatabase" type="Node2D"]
+script = ExtResource("1_77h5a")
 
 [node name="KDB" type="KnowledgeDatabase" parent="."]
