@@ -1,34 +1,8 @@
 use std::fmt::Display;
+use std::time::SystemTime;
 
 use godot::prelude::*;
-use rusqlite::{Connection, Result, params};
-
-#[derive(GodotConvert, Debug)]
-#[godot(via = i64)]
-pub enum GameObject {
-    Entity,
-    Item,
-}
-
-impl Display for GameObject {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let enum_display = match self {
-            GameObject::Entity => "entity",
-            GameObject::Item => "item",
-        };
-
-        f.pad(enum_display)
-    }
-}
-
-impl From<GameObject> for i64 {
-    fn from(value: GameObject) -> Self {
-        match value {
-            GameObject::Entity => 0,
-            GameObject::Item => 1,
-        }
-    }
-}
+use rusqlite::{Connection, MappedRows, Result, Row, params};
 
 #[derive(GodotConvert, Debug)]
 #[godot(via = i64)]
@@ -161,9 +135,8 @@ impl INode for KnowledgeDatabase {
                 id                  INTEGER PRIMARY KEY,
                 action_id           INTEGER NOT NULL,
                 source_entity_id    INTEGER NOT NULL,
-                target_object_id    INTEGER NOT NULL,
-                target_object_type  INTEGER NOT NULL,
-                time                REAL NOT NULL,
+                target_object       TEXT NOT NULL,
+                time                INTEGER NOT NULL,
                 FOREIGN KEY (action_id)
                 REFERENCES actions (action_id)
                     ON UPDATE CASCADE
@@ -171,8 +144,7 @@ impl INode for KnowledgeDatabase {
                 FOREIGN KEY (source_entity_id)
                 REFERENCES entities (entity_id)
                     ON UPDATE CASCADE
-                    ON DELETE RESTRICT,
-                CHECK (target_object_type == 0 OR target_object_type == 1)
+                    ON DELETE RESTRICT
             )",
                 (),
             )
@@ -226,20 +198,14 @@ impl KnowledgeDatabase {
                 let done: i64 = row.get(1).expect("Could not get 'done' from quests table");
 
                 if done == 1 {
-                    Ok(format!("player completes {}", game_quest_id))
+                    Ok(format!("(player completes {})", game_quest_id))
                 } else {
-                    Ok(format!("player not_completes {}", game_quest_id))
+                    Ok(format!("(player not_completes {})", game_quest_id))
                 }
             })
             .expect("Iterator could not be constructed");
 
-        triplets_iter
-            .filter(|triplet| triplet.is_ok())
-            .fold("".to_string(), |mut acc, triplet| {
-                acc.push_str(&triplet.unwrap());
-                acc.push('\n');
-                acc
-            })
+        Self::construct_triplets(triplets_iter)
     }
 
     #[func]
@@ -331,23 +297,104 @@ impl KnowledgeDatabase {
 
     #[func]
     fn get_ownership_triplets(&self) -> String {
-        todo!()
+        let mut stmt = self
+            .connection
+            .prepare(
+                "SELECT it.game_item_id, en.game_entity_id, own.amount FROM ownership own 
+                INNER JOIN entities en ON en.entity_id = own.entity_id
+                INNER JOIN items it ON it.item_id = own.item_id",
+            )
+            .expect("Failed at creating prepared statement for ownership triplets");
+
+        let triplets_iter = stmt
+            .query_map([], |row| {
+                let game_item: String = row
+                    .get(0)
+                    .expect("Could not get 'game_item' from the table");
+
+                let game_entity: String = row
+                    .get(1)
+                    .expect("Could not get 'game_entity' from the table");
+
+                let amount: i64 = row.get(2).expect("Could not get 'amount' from the table");
+
+                Ok(format!("({} owns {} {})", game_entity, amount, game_item))
+            })
+            .expect("Iterator could not be constructed");
+
+        Self::construct_triplets(triplets_iter)
     }
 
     #[func]
     fn add_action(
         &mut self,
-        action: String,
-        source: String,
-        target: String,
-        target_type: GameObject,
+        game_action_id: GameAction,
+        source_game_entity_id: String,
+        target_object: String,
     ) -> bool {
-        todo!()
+        let action_id = self.get_action_id(game_action_id);
+        let source_entity_id = self.get_entity_id(source_game_entity_id);
+
+        if action_id.is_err() || source_entity_id.is_err() {
+            godot_error!("Either game action or source entity could not be obtained");
+            return false;
+        }
+
+        let (action_id, source_entity_id) = (action_id.unwrap(), source_entity_id.unwrap());
+
+        let time_since_epoch = SystemTime::now()
+            .duration_since(SystemTime::UNIX_EPOCH)
+            .expect("Somehow UNIX EPOCH is later than 'now'")
+            .as_secs();
+
+        match self.connection.execute(
+            "INSERT INTO action_log (action_id, source_entity_id, target_object, time) VALUES (?1, ?2, ?3, ?4)",
+            params![action_id, source_entity_id, target_object, time_since_epoch],
+        ) {
+            Ok(num_rows) => {
+                godot_print!("Action added, rows affected {}", num_rows);
+                true
+            },
+            Err(msg) => {
+                godot_error!("Could not insert into action_log, {}", msg.to_string());
+                false
+            }
+        }
     }
 
     #[func]
     fn get_action_triplets(&self) -> String {
-        todo!()
+        let mut stmt = self
+            .connection
+            .prepare(
+                "SELECT en.game_entity_id, ac.name, al.target_object, al.time FROM action_log al
+            INNER JOIN entities en ON en.entity_id = al.source_entity_id
+            INNER JOIN actions ac ON al.action_id = ac.action_id",
+            )
+            .expect("Failed at creating prepared statement for action triplets");
+
+        let triplets_iter = stmt
+            .query_map([], |row| {
+                let game_entity: String =
+                    row.get(0).expect("Could not get 'game_entity' from table");
+
+                let action_name: String =
+                    row.get(1).expect("Could not get 'action_name' from table");
+
+                let target_object: String = row
+                    .get(2)
+                    .expect("Could not get 'target_object' from table");
+
+                let time: i64 = row.get(3).expect("Could not get 'time' from table");
+
+                Ok(format!(
+                    "({} {} {} : Timestamp {} [seconds])",
+                    game_entity, action_name, target_object, time
+                ))
+            })
+            .expect("Iterator could not be constructed");
+
+        Self::construct_triplets(triplets_iter)
     }
 
     fn fill_entities_table(&mut self) -> () {
@@ -448,13 +495,56 @@ impl KnowledgeDatabase {
             .map_err(|err| format!("Item id could not be obtained, {}", err.to_string()))
     }
 
+    fn get_game_item_id(&self, item_id: i64) -> Result<i64, String> {
+        self.connection
+            .query_one(
+                "SELECT game_item_id FROM items WHERE item_id = ?1",
+                [item_id],
+                |row| row.get(0),
+            )
+            .map_err(|err| format!("Game item id could not be obtained, {}", err.to_string()))
+    }
+
     fn get_entity_id(&self, game_entity_id: String) -> Result<i64, String> {
         self.connection
             .query_one(
-                "SELECT entity_id FROM items WHERE game_entity_id = ?1",
+                "SELECT entity_id FROM entities WHERE game_entity_id = ?1",
                 [game_entity_id],
                 |row| row.get(0),
             )
             .map_err(|err| format!("Entity id could not be obtained, {}", err.to_string()))
+    }
+
+    fn get_game_entity_id(&self, entity_id: i64) -> Result<i64, String> {
+        self.connection
+            .query_one(
+                "SELECT game_entity_id FROM entities WHERE entity_id = ?1",
+                [entity_id],
+                |row| row.get(0),
+            )
+            .map_err(|err| format!("Game entity id could not be obtained, {}", err.to_string()))
+    }
+
+    fn get_action_id(&self, game_action: GameAction) -> Result<i64, String> {
+        self.connection
+            .query_one(
+                "SELECT action_id FROM actions WHERE name = ?1",
+                [game_action.to_string()],
+                |row| row.get(0),
+            )
+            .map_err(|err| format!("Game action id could not be obtained, {}", err.to_string()))
+    }
+
+    fn construct_triplets(
+        triplets_iter: MappedRows<'_, impl FnMut(&Row<'_>) -> Result<String, rusqlite::Error>>,
+    ) -> String {
+        triplets_iter
+            .filter(|triplet| triplet.is_ok())
+            .fold("".to_string(), |mut acc, triplet| {
+                acc.push_str(&triplet.unwrap());
+                acc.push(',');
+                acc.push('\n');
+                acc
+            })
     }
 }
