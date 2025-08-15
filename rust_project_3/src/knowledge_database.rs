@@ -56,6 +56,8 @@ impl INode for KnowledgeDatabase {
             );
             panic!("KnowledgeDatabase could not be started!");
         } else {
+            godot_print!("KnowledgeDatabase: connection opened, creating KDB");
+            
             Self {
                 connection: connection.expect("Connection was not successfully created"),
                 base: base,
@@ -161,6 +163,26 @@ impl INode for KnowledgeDatabase {
 impl KnowledgeDatabase {
     #[func]
     fn set_quest_done(&mut self, quest_id: String) -> bool {
+        let mut stmt = self
+            .connection
+            .prepare("SELECT done FROM quests WHERE game_quest_id =?1")
+            .expect("Failed at creating prepared statement for quest set to done");
+        let is_done: Result<i64, String> =
+            stmt.query_one([&quest_id], |row| row.get(0))
+                .map_err(|err| {
+                    format!(
+                        "KnowledgeDatabase: Quest done value could not be obtained, {}",
+                        err.to_string()
+                    )
+                });
+
+        if let Ok(done) = is_done {
+            if done == 1 {
+                godot_error!("KnowledgeDatabase: Quest is already done");
+                return false;
+            }
+        }
+
         let update_result = self.connection.execute(
             "UPDATE quests SET done = 1 WHERE game_quest_id = ?1",
             [quest_id],
@@ -169,15 +191,23 @@ impl KnowledgeDatabase {
         match update_result {
             Ok(num_rows) => {
                 if num_rows == 0 {
-                    godot_error!("Quest was not updated, perhaps incorrect game_quest_id");
+                    godot_error!(
+                        "KnowledgeDatabase: Quest was not updated, perhaps incorrect game_quest_id"
+                    );
                     false
                 } else {
-                    godot_print!("Updated quest, rows affected: {}", num_rows);
+                    godot_print!(
+                        "KnowledgeDatabase: Updated quest, rows affected: {}",
+                        num_rows
+                    );
                     true
                 }
             }
-            Err(_) => {
-                godot_error!("Could not update quest");
+            Err(error) => {
+                godot_error!(
+                    "KnowledgeDatabase: Could not update quest: {}",
+                    error.to_string()
+                );
                 false
             }
         }
@@ -221,12 +251,12 @@ impl KnowledgeDatabase {
         );
 
         if let Err(_) = item {
-            godot_error!("Item not found");
+            godot_error!("KnowledgeDatabase: Item not found");
             return false;
         }
 
         if let Err(_) = entity {
-            godot_error!("Entity not found");
+            godot_error!("KnowledgeDatabase: Entity not found");
             return false;
         }
 
@@ -238,24 +268,27 @@ impl KnowledgeDatabase {
         );
 
         if let Err(_) = update_result {
-            godot_error!("Could not update ownership");
+            godot_error!("KnowledgeDatabase: Could not update ownership");
             return false;
         }
 
         let num_rows = update_result.unwrap();
 
         if num_rows == 0 {
-            godot_print!("No update, inserting new ownership data");
+            godot_print!("KnowledgeDatabase: No update, inserting new ownership data");
             let insert_result = self.connection.execute(
                 "INSERT INTO ownership (item_id, entity_id, amount) VALUES (?1, ?2, ?3)",
                 params![item, entity, amount],
             );
             if let Err(_) = insert_result {
-                godot_error!("Insertion failed");
+                godot_error!("KnowledgeDatabase: Insertion failed");
                 return false;
             }
         } else {
-            godot_print!("Updated ownership, rows affected: {}", num_rows);
+            godot_print!(
+                "KnowledgeDatabase: Updated ownership, rows affected: {}",
+                num_rows
+            );
         }
 
         true
@@ -269,12 +302,12 @@ impl KnowledgeDatabase {
         );
 
         if let Err(_) = item {
-            godot_error!("Item not found");
+            godot_error!("KnowledgeDatabase: Item not found");
             return -1;
         }
 
         if let Err(_) = entity {
-            godot_error!("Entity not found");
+            godot_error!("KnowledgeDatabase: Entity not found");
             return -1;
         }
 
@@ -289,7 +322,7 @@ impl KnowledgeDatabase {
         match entity {
             Ok(val) => val,
             Err(_) => {
-                godot_error!("Error obtaining amount");
+                godot_error!("KnowledgeDatabase: Error obtaining amount");
                 -1
             }
         }
@@ -336,7 +369,9 @@ impl KnowledgeDatabase {
         let source_entity_id = self.get_entity_id(source_game_entity_id);
 
         if action_id.is_err() || source_entity_id.is_err() {
-            godot_error!("Either game action or source entity could not be obtained");
+            godot_error!(
+                "KnowledgeDatabase: Either game action or source entity could not be obtained"
+            );
             return false;
         }
 
@@ -352,11 +387,11 @@ impl KnowledgeDatabase {
             params![action_id, source_entity_id, target_object, time_since_epoch],
         ) {
             Ok(num_rows) => {
-                godot_print!("Action added, rows affected {}", num_rows);
+                godot_print!("KnowledgeDatabase: Action added, rows affected {}", num_rows);
                 true
             },
             Err(msg) => {
-                godot_error!("Could not insert into action_log, {}", msg.to_string());
+                godot_error!("KnowledgeDatabase: Could not insert into action_log, {}", msg.to_string());
                 false
             }
         }

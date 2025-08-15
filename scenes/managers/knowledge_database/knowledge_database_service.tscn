@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://n862p6wj4ryn"]
+
+[ext_resource type="Script" path="res://scenes/managers/knowledge_database/knowledge_database_service.gd" id="1_f73ue"]
+
+[node name="KnowledgeDatabaseService" type="Node"]
+script = ExtResource("1_f73ue")
+
+[node name="KDBRust" type="KnowledgeDatabase" parent="."]
