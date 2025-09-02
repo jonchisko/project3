@@ -30,6 +30,10 @@ var all_secondary_quests: int = 0:
 		return all_secondary_quests
 
 
+func quest_exists(quest_id: String) -> bool:
+	return self.quests.any(func (x): x.id == quest_id)
+
+
 func _ready() -> void:
 	var primary_quests_count: int = 0
 	var secondary_quests_count: int = 0
