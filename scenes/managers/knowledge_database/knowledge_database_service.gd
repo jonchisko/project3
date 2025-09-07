@@ -1,5 +1,4 @@
 extends Node
-class_name KDBService
 
 
 # Source of truth for the enum is in Rust /rust_project_3/src/knowledge_database.rs
@@ -24,7 +23,14 @@ func get_triplet_data_text() -> String:
 	var quest_triplets = self.kdb_rust.get_quest_triplets()
 	var ownership_triplets = self.kdb_rust.get_ownership_triplets()
 	
-	return "Data information triplets:\n{at}\n{qt}\n{ot}".format({"at": action_triplets, "qt": quest_triplets, "ot": ownership_triplets})
+	return "<data_information_triplets>
+		<action_history>{at}</action_history>
+		<quest_completion>{qt}</quest_completion>
+		<ownership_data>{ot}</ownership_data>
+	</data_information_triplets>
+	<extra_information> action_history events have timestamps in seconds. The larger the value
+	the more recent the event. In case there are conflicting events, the more recent one is the valid one.
+	</extra_information>".format({"at": action_triplets, "qt": quest_triplets, "ot": ownership_triplets})
 
 
 func add_action(game_action_id: GameAction, source_game_entity: String, target_object: String) -> bool:

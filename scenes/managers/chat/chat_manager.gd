@@ -50,6 +50,8 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 	
 	self._current_npc_data = current_npc_data
 	
+	KDBService.add_action(KDBService.GameAction.InteractsWith, "player", self._current_npc_data.id)
+	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent, 
 		self.name, 
@@ -181,8 +183,8 @@ func _on_skipped_quest() -> void:
 		self.name,
 		"Skipping quest (finishing by 'button skip'): {quest_id}.".format({"quest_id" : self._current_npc_data.quest_data[0].id}))
 	
-	if self._current_npc_data.quest_data[0].rewards[0].contains("give"):
-		var parsed_quest_reward = self._parse_quest_reward(self._current_npc_data.quest_data[0].rewards[0])
+	if self._current_npc_data.quest_data[0].get_reward().contains("give"):
+		var parsed_quest_reward = HelperQuests.parse_quest_reward(self._current_npc_data.quest_data[0].get_reward())
 		self._give_item_to_player(parsed_quest_reward["item"], parsed_quest_reward["amount"])
 	
 	self._finish_quest()
@@ -296,6 +298,13 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 					call_result["error"] = true
 					call_result["message"] = "Get item was unable to obtain {item_id}".format({"item_id": fun_args["item_id"]})
 				else:
+					var quantity: int = KDBService.get_ownership_quantity(item.data.id, self._current_npc_data.id)
+					KDBService.update_ownership_quantity(item.data.id, self._current_npc_data.id, quantity + fun_args["number"])
+					
+					KDBService.add_action(KDBService.GameAction.Gives, "player", self._current_npc_data.id)
+					# Rather not do the verb owns, since the ownership table is more up to date
+					#KDBService.add_action(KDBService.GameAction.Owns, self._current_npc_data.id, item.data.id)
+					
 					call_result["call_result"] = item
 		"give_item":
 			if not fun_args.has("item_id") or not fun_args.has("number"):
@@ -304,6 +313,13 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 			else:
 				var quest_reward_item = fun_args["item_id"]
 				var result = self._give_item_to_player(quest_reward_item, fun_args["number"])
+				
+				var quantity: int = KDBService.get_ownership_quantity(quest_reward_item.data.id, self._current_npc_data.id)
+				KDBService.update_ownership_quantity(quest_reward_item.data.id, self._current_npc_data.id, quantity - fun_args["number"])
+				
+				KDBService.add_action(KDBService.GameAction.Gives, self._current_npc_data.id, "player")
+				#KDBService.add_action(KDBService.GameAction.Owns, "player", quest_reward_item.data.id)
+				
 				if not self._current_npc_data.quest_data.is_empty():
 					self._finish_quest()
 				call_result["call_result"] = result
@@ -345,18 +361,6 @@ func _finish_quest() -> void:
 	self._refresh_static_template(self._current_conversation_messages, self.chat_history_rust, self._current_npc_data)
 
 
-func _parse_quest_reward(quest_reward: String) -> Dictionary:
-	# give_item(outpost_keycode, 1)
-	var first_paranthesis_index = quest_reward.find("(")
-	var last_paranthesis_index = quest_reward.find(")")
-	var comma_index = quest_reward.find(",")
-	
-	var item: String = quest_reward.substr(first_paranthesis_index + 1, comma_index - (first_paranthesis_index + 1))
-	var amount: int = quest_reward.substr(comma_index + 1, last_paranthesis_index - (comma_index + 1)).to_int()
-	
-	return {"item": item, "amount": amount}
-	
-	
 func _refresh_static_template(current_messages: Array[Message], chat_history: ChatHistoryRust, npc_data: NpcData) -> void:
 	self._gpt_template.clear_static_context()
 	self._gpt_template.clear_all_messages()

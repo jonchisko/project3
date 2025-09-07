@@ -73,7 +73,7 @@ func _add_dynamic_world_context() -> String:
 	return "You live in a forever changing world. Dynamic world context is the world events that have 
 happened due to the player's actions. Here is the list of all the currently valid 
 facts: {dynamic_world_context}."\
-	.format({"dynamic_world_context": "NONE"})
+	.format({"dynamic_world_context": KDBService.get_triplet_data_text()})
 
 
 func _add_history(npc_data: NpcData, chat_history: ChatHistoryRust) -> String:

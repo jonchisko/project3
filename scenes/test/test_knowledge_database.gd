@@ -162,16 +162,16 @@ func _verify_all_actions_can_be_used_expect_success():
 	self.add_child(kdb)
 	
 	# Act
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Owns, "peter_rudar", "a tree")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.HasTrait, "peter_rudar", "red face")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.LocatedIn, "peter_rudar", "in a house")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.InteractsWith, "peter_rudar", "player")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Gives, "peter_rudar", "some change")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.IsA, "peter_rudar", "a human")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Wears, "peter_rudar", "a dress")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Completes, "peter_rudar", "a rare quest")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Kills, "peter_rudar", "enemy_knight")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Damages, "peter_rudar", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Owns, "peter_rudar", "a tree")
+	kdb.add_action(KDBService.GameAction.HasTrait, "peter_rudar", "red face")
+	kdb.add_action(KDBService.GameAction.LocatedIn, "peter_rudar", "in a house")
+	kdb.add_action(KDBService.GameAction.InteractsWith, "peter_rudar", "player")
+	kdb.add_action(KDBService.GameAction.Gives, "peter_rudar", "some change")
+	kdb.add_action(KDBService.GameAction.IsA, "peter_rudar", "a human")
+	kdb.add_action(KDBService.GameAction.Wears, "peter_rudar", "a dress")
+	kdb.add_action(KDBService.GameAction.Completes, "peter_rudar", "a rare quest")
+	kdb.add_action(KDBService.GameAction.Kills, "peter_rudar", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Damages, "peter_rudar", "enemy_knight")
 	
 	# Assert
 	self.remove_child(kdb)
@@ -197,7 +197,7 @@ func _add_action_non_existing_entity_expect_error():
 	self.add_child(kdb)
 	
 	# Act
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Owns, "i_dont_exist", "a tree")
+	kdb.add_action(KDBService.GameAction.Owns, "i_dont_exist", "a tree")
 	
 	# Assert
 	self.remove_child(kdb)
@@ -209,18 +209,18 @@ func _actions_triplets_visualizer():
 	self.add_child(kdb)
 	
 	# Act
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Owns, "peter_rudar", "a tree")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.HasTrait, "peter_rudar", "red face")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.LocatedIn, "peter_rudar", "in a house")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.InteractsWith, "peter_rudar", "player")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Gives, "peter_rudar", "some change")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.IsA, "peter_rudar", "a human")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Wears, "peter_rudar", "a dress")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Completes, "peter_rudar", "a rare quest")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Kills, "peter_rudar", "enemy_knight")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Damages, "peter_rudar", "enemy_knight")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Damages, "peter_rudar", "enemy_knight")
-	kdb.add_action(KnowledgeDatabaseService.GameAction.Kills, "player", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Owns, "peter_rudar", "a tree")
+	kdb.add_action(KDBService.GameAction.HasTrait, "peter_rudar", "red face")
+	kdb.add_action(KDBService.GameAction.LocatedIn, "peter_rudar", "in a house")
+	kdb.add_action(KDBService.GameAction.InteractsWith, "peter_rudar", "player")
+	kdb.add_action(KDBService.GameAction.Gives, "peter_rudar", "some change")
+	kdb.add_action(KDBService.GameAction.IsA, "peter_rudar", "a human")
+	kdb.add_action(KDBService.GameAction.Wears, "peter_rudar", "a dress")
+	kdb.add_action(KDBService.GameAction.Completes, "peter_rudar", "a rare quest")
+	kdb.add_action(KDBService.GameAction.Kills, "peter_rudar", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Damages, "peter_rudar", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Damages, "peter_rudar", "enemy_knight")
+	kdb.add_action(KDBService.GameAction.Kills, "player", "enemy_knight")
 	
 	# Assert
 	print(kdb.get_action_triplets())

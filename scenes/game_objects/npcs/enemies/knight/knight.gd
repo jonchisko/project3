@@ -110,6 +110,8 @@ func _on_damagable_damage_detected(amount):
 func _on_health_component_death():
 	self._is_dying = true
 	
+	KDBService.add_action(KDBService.GameAction.Kills, "player", "enemy_knight")
+	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
 		self.name,

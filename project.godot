@@ -28,7 +28,8 @@ SceneStateManager="*res://scenes/autoloads/scene_state_manager.tscn"
 DebugDrawer="*res://scenes/test/debug_drawer.tscn"
 GodotProjectLogger="*res://scenes/autoloads/godot_project_logger.tscn"
 QuestManager="*res://scenes/autoloads/quest_manager.tscn"
-KnowledgeDatabaseService="*res://scenes/managers/knowledge_database/knowledge_database_service.tscn"
+KDBService="*res://scenes/managers/knowledge_database/knowledge_database_service.tscn"
+InitializeKdbService="*res://scenes/autoloads/initialize_kdb_service.tscn"
 
 [display]
 

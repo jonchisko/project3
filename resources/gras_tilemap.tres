@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5qfn3udcb0ns" path="res://assets/sprites/tilesets/TX Tileset Grass.png" id="1_2kwkc"]
 [ext_resource type="Texture2D" uid="uid://dnw5ontmxpo24" path="res://assets/sprites/houses/houses.png" id="2_1gvxw"]
 [ext_resource type="Texture2D" uid="uid://cgrgnqguipsnw" path="res://assets/sprites/tilesets/merged_props.png" id="2_a4ry7"]
-[ext_resource type="Resource" uid="uid://hipekv3r00m4" path="res://resources/interactables/items/jewelry_blueprints_item.tres" id="3_ijdfr"]
+[ext_resource type="Resource" path="res://resources/interactables/items/jewelry_blueprints_item.tres" id="3_ijdfr"]
 [ext_resource type="Texture2D" uid="uid://cu1yenltd5hgw" path="res://assets/sprites/tilesets/TX Struct.png" id="3_ujfuw"]
 [ext_resource type="Texture2D" uid="uid://wkck2e0x62mo" path="res://assets/sprites/tilesets/TX Tileset Wall.png" id="4_rksim"]
 

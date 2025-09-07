@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvplsypelit4y"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/initialize_kdb_service.gd" id="1_p5nch"]
+
+[node name="InitializeKDBService" type="Node"]
+script = ExtResource("1_p5nch")

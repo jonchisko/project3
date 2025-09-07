@@ -64,6 +64,9 @@ func _on_quests_completed(quest_id: String) -> void:
 		printerr("Could not find quest '{quest}' in the non finished quests array.".format({"quest": quest_id}))
 		return
 	
+	KDBService.set_quest_to_done(finished_quest.id)
+	KDBService.add_action(KDBService.GameEvents.Completes, "player", finished_quest.id)
+	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent, 
 		self.name, 

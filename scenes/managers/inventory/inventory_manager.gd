@@ -19,6 +19,9 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	if not self.has_item(item_id, number):
 		return null
 	
+	var quantity: int = KDBService.get_ownership_quantity(item_id, "player")
+	KDBService.update_ownership_quantity(item_id, "player", quantity - number)
+	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
 		self.name,
@@ -33,6 +36,9 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 func give_item(item_id: String, number: int = 1) -> bool:
 	if not ResourceDictionary.ResourceIdToResource.has(item_id):
 		return false
+	
+	var quantity: int = KDBService.get_ownership_quantity(item_id, "player")
+	KDBService.update_ownership_quantity(item_id, "player", quantity + number)
 	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
@@ -94,6 +100,8 @@ func _on_item_used(item_id: String) -> void:
 func _on_item_picked_up(interactable: InteractableArea):
 	if interactable.interactable_type != GameTypes.InteractableType.Item:
 		return
+	
+	KDBService.add_action(KDBService.GameAction.InteractsWith, "player", interactable.interactable_data.data.id)
 	
 	self.item_picked_up.emit(interactable.interactable_data.data.id)
 	self._add_item(interactable.interactable_data)
