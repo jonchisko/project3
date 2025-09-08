@@ -1,11 +1,14 @@
 extends CharacterBody2D
 class_name KnightNpc
 
+
 enum AttackType {
 	Basic,
 	Special,
 }
 
+
+signal knight_death
 
 @export var attack_type_sequence: Array[AttackType]
 @export var floor: FloorLevelChanger.Level
@@ -124,6 +127,7 @@ func _on_health_component_death():
 	$AttackRange/CollisionShape2D.set_deferred("disabled", true)
 	
 	self._animation_player.play("death")
+	self.knight_death.emit()
 
 
 func _on_attack_timer_cd_timeout() -> void:

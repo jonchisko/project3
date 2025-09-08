@@ -19,9 +19,6 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	if not self.has_item(item_id, number):
 		return null
 	
-	var quantity: int = KDBService.get_ownership_quantity(item_id, "player")
-	KDBService.update_ownership_quantity(item_id, "player", quantity - number)
-	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
 		self.name,
@@ -30,15 +27,14 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	for _i in range(number):
 		self._remove_item(item_id)
 	
+	KDBService.update_ownership_quantity(item_id, "player", self._inventory[item_id])
+	
 	return ResourceDictionary.ResourceIdToResource[item_id]
 	
 	
 func give_item(item_id: String, number: int = 1) -> bool:
 	if not ResourceDictionary.ResourceIdToResource.has(item_id):
 		return false
-	
-	var quantity: int = KDBService.get_ownership_quantity(item_id, "player")
-	KDBService.update_ownership_quantity(item_id, "player", quantity + number)
 	
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
@@ -49,6 +45,8 @@ func give_item(item_id: String, number: int = 1) -> bool:
 	
 	for _i in range(number):
 		self._add_item(item_data)
+	
+	KDBService.update_ownership_quantity(item_id, "player", self._inventory[item_id])
 	
 	self._log_current_state()
 	return true

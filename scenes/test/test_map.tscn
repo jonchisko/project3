@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=36 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="1_uudpt"]
 [ext_resource type="PackedScene" uid="uid://djtqfut6alxw6" path="res://scenes/managers/chat/chat_history.tscn" id="2_8olnj"]
+[ext_resource type="PackedScene" uid="uid://5b8wv3kv1dko" path="res://scenes/managers/enemies/enemy_mine_manager.tscn" id="2_l1xi6"]
 [ext_resource type="PackedScene" uid="uid://cbxliedf2yq83" path="res://scenes/game_objects/GptTemplates/template_factory.tscn" id="3_7p5hh"]
 [ext_resource type="PackedScene" uid="uid://byn1726bm412e" path="res://scenes/managers/chat/chat_history_services/basic_chat_history_service.tscn" id="3_qbtg8"]
 [ext_resource type="TileSet" uid="uid://bjrho5ftsi0gg" path="res://resources/gras_tilemap.tres" id="4_ex0tf"]
@@ -46,6 +47,9 @@ agent_radius = 25.0
 
 [node name="TestMap" type="Node2D" groups=["level_scene"]]
 script = ExtResource("1_cw72i")
+
+[node name="EnemyMineManager" parent="." node_paths=PackedStringArray("EnemyKnights") instance=ExtResource("2_l1xi6")]
+EnemyKnights = [NodePath("../YSorted/Enemies/Knight"), NodePath("../YSorted/Enemies/Knight2"), NodePath("../YSorted/Enemies/Knight3")]
 
 [node name="ChatManager" parent="." node_paths=PackedStringArray("chat_history", "chat_history_rust", "template_factory") instance=ExtResource("1_327vj")]
 chat_history = NodePath("../ChatHistory")
@@ -855,7 +859,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(-579, 184)
+position = Vector2(1734, 733)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 limit_left = -943
