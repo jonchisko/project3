@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=35 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://bw042ntxxiedk" path="res://scenes/game_objects/obstacles/bush.tscn" id="17_8p6c8"]
 [ext_resource type="PackedScene" uid="uid://b7bxrv81whfx" path="res://scenes/game_objects/items/item.tscn" id="17_nywt0"]
 [ext_resource type="PackedScene" uid="uid://c15mcrkr01jdp" path="res://scenes/game_objects/obstacles/rock.tscn" id="18_2lu6a"]
-[ext_resource type="Resource" uid="uid://7ddq85mnl0yu" path="res://resources/interactables/items/wajdovian_spear_item.tres" id="18_u1kc3"]
 [ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="22_yxsy3"]
 [ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="25_hmn17"]
 [ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="28_ndh6o"]
@@ -868,13 +867,6 @@ limit_right = 2170
 limit_bottom = 1321
 limit_smoothed = true
 position_smoothing_enabled = true
-
-[node name="Items" type="Node2D" parent="YSorted"]
-y_sort_enabled = true
-
-[node name="WajdovianSpear" parent="YSorted/Items" instance=ExtResource("17_nywt0")]
-position = Vector2(197, 196)
-interactable_data = ExtResource("18_u1kc3")
 
 [node name="Forest" type="Node2D" parent="YSorted" groups=["navigation"]]
 y_sort_enabled = true
