@@ -36,7 +36,7 @@ func edit_last_chat_element(message: String):
 
 
 func close_chat():
-	if self.is_closing:
+	if self.is_closing or self.get_tree() == null:
 		return
 	
 	self.is_closing = true

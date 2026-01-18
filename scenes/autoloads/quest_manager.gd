@@ -31,7 +31,7 @@ var all_secondary_quests: int = 0:
 
 
 func quest_exists(quest_id: String) -> bool:
-	return self.quests.any(func (x): x.id == quest_id)
+	return self.quests.any(func(x): return x.id == quest_id) or self.completed_quests.any(func(x): return x.id == quest_id)
 
 
 func _ready() -> void:
@@ -51,6 +51,7 @@ func _ready() -> void:
 	
 
 func _on_quests_completed(quest_id: String) -> void:
+	print("completing quest: {q}".format({"q": quest_id}))
 	var finished_quest: QuestResource = null
 	
 	for quest in self.quests:
@@ -64,19 +65,19 @@ func _on_quests_completed(quest_id: String) -> void:
 		printerr("Could not find quest '{quest}' in the non finished quests array.".format({"quest": quest_id}))
 		return
 	
-	KDBService.set_quest_to_done(finished_quest.id)
-	KDBService.add_action(KDBService.GameEvents.Completes, "player", finished_quest.id)
-	
-	GameEvents.log_info.emit(
-		GodotProjectLogger.LogType.GameEvent, 
-		self.name, 
-		"Quest completed - {quest_id}.".format({"quest_id" : finished_quest.id}))
-	
 	if finished_quest.primary_quest:
 		self.current_primary_quests_completed += 1
 	else:
 		self.current_secondary_quests_completed += 1
 	
 	self.completed_quests.push_back(finished_quest)
+	
+	KDBService.set_quest_to_done(finished_quest.id)
+	KDBService.add_action(KDBService.GameAction.Completes, "player", finished_quest.id)
+	
+	GameEvents.log_info.emit(
+		GodotProjectLogger.LogType.GameEvent, 
+		self.name, 
+		"Quest completed - {quest_id}.".format({"quest_id" : finished_quest.id}))
 	
 	self.quest_update.emit()
