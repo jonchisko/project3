@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://cesm3b318uoi1"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_xrowr"]
+
+[resource]
+script = ExtResource("1_xrowr")
+id = "solve_a_riddle"
+primary_quest = true
+title = "Solve a riddle"
+description = "Solve the riddle: \"I’m always in front of you but somehow you’ll never, ever catch me.No, not your deadlines.What am I?\". You are allowed to give some easy hints."
+condition_expression = "Check whether the player correctly solved the riddle"
+rewards = ["give_item(health_potion, 1)"]

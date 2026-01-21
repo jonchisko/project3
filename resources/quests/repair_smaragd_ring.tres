@@ -7,6 +7,6 @@ script = ExtResource("1_tddt0")
 id = "repair_smaragd_ring"
 primary_quest = true
 title = "Repair Smaragd ring"
-description = "He wears a cracked smaragd ring, its green stone faintly marbled with silver. It once belonged to Alenka, though he never says her name. He doesn’t sell it, doesn’t take it off. Just sometimes stares at it when he thinks no one’s watching.He says only one thing about it: “There’s someone out there who can fix it. Not remake it — fix it. That’s different.” He is willing to give the item book_wotlica for it."
-condition_expression = "smaragd_ring == 1"
+description = "He wears a cracked smaragd ring, its green stone faintly marbled with silver. It once belonged to Alenka, though he never says her name. He doesn’t sell it, doesn’t take it off. Just sometimes stares at it when he thinks no one’s watching. He would give cracked_smaragd_ring if asked, in order for the player to repair it.He says only one thing about it: “There’s someone out there who can fix it. Not remake it — fix it. That’s different.” He is willing to give the item book_wotlica for it, but only if he was first forced to confess that he indeed has the book. He should ONLY confess he has the book, if the player tells him that radovan_kolar told him franc_petrov has it."
+condition_expression = "smaragd_ring == 1 AND franc_petrov confessed he has book of wotlica."
 rewards = ["give_item(book_wotlica, 1)"]

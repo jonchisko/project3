@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://h6dpuiiv3y0b"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_887a1"]
+
+[resource]
+script = ExtResource("1_887a1")
+id = "tool_set"
+name = "Tool set"
+description = "A useful tool set for a crafty man (or woman)."

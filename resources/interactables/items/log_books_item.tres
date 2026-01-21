@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InteractableResource" load_steps=4 format=3 uid="uid://cpykyw55wkdfk"]
+
+[ext_resource type="Script" path="res://resources/interactable_resource.gd" id="1_74tk7"]
+[ext_resource type="Resource" uid="uid://dotcsswd5m7r4" path="res://resources/items/log_books/log_books_data.tres" id="1_80cl4"]
+[ext_resource type="Resource" uid="uid://mrcej3c70c68" path="res://resources/items/log_books/log_books_visual.tres" id="3_xpe3g"]
+
+[resource]
+script = ExtResource("1_74tk7")
+visual = ExtResource("3_xpe3g")
+data = ExtResource("1_80cl4")

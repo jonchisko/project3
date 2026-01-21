@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_fpy0m")
 id = "collect_metal_scraps"
-primary_quest = false
+primary_quest = true
 title = "Collect metal scraps"
 description = "When the shuttle emergency landed, it damaged and certain modules crashed and disintegrated upon landing. A lot of scraps are now laying around. Jure Hauptmann thinks these might come in handy later."
 condition_expression = "metal_bolt == 5 AND metal_scrap == 2"
-rewards = ["give_item(health_potion, 1)"]
+rewards = ["Tell the player where bojan_kovač is located."]

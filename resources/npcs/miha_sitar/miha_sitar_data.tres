@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_fsbay"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_3r3g3"]
-[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/sober_up_miha.tres" id="2_3t2my"]
+[ext_resource type="Resource" uid="uid://cnjtkisv5ofwy" path="res://resources/quests/get_outpost_keycode.tres" id="2_3t2my"]
 
 [resource]
 script = ExtResource("2_3r3g3")

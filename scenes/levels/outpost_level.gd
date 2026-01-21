@@ -4,7 +4,7 @@ extends SceneSyncher
 @export var label: Label
 @export var spawn_location: Node2D
 
-var _item_resource = preload("res://resources/interactables/items/jewelry_blueprints_item.tres")
+var _item_resource = preload("res://resources/interactables/items/log_books_item.tres")
 var _item_scene = preload("res://scenes/game_objects/items/item.tscn")
 var _item_spawned: bool = false
 var _player_in_area: bool = true

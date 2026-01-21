@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://mrcej3c70c68"]
+
+[ext_resource type="Texture2D" uid="uid://cswsxmtysb0xd" path="res://assets/sprites/items/custom_items_16x16/log_books.png" id="1_fmtsd"]
+[ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_q18bo"]
+
+[resource]
+script = ExtResource("1_q18bo")
+icon = ExtResource("1_fmtsd")
+world_visual = ExtResource("1_fmtsd")

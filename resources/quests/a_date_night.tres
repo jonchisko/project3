@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://d1hk1m1njltp6"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_tsbrs"]
+
+[resource]
+script = ExtResource("1_tsbrs")
+id = "a_date_night"
+primary_quest = true
+title = "A date night"
+description = "She would love to go on a date night with jurij_vindiš. Player should ask jurij_vindiš whether he wants to go on date with tanja_draguljič. The player should tell her the answer and she should confirm in the history of events and conversations whether the player indeed talked with jurij_vindiš and told the truth. If he did, the quest is complete and the player is awarded the repaired_smaragd_ring."
+condition_expression = "cracked_smaragd_ring == 1 AND player asked jurij_vindiš about the date night and the player told the truth"
+rewards = ["give_item(smaragd_ring, 1)"]

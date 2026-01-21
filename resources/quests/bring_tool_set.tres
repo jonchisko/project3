@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QuestResource" load_steps=2 format=3 uid="uid://2bv6yr2npor5"]
+
+[ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_wqjc7"]
+
+[resource]
+script = ExtResource("1_wqjc7")
+id = "bring_tool_set"
+primary_quest = true
+title = "Bring a new tool set"
+description = "There should be a new tool set for Bojan near the Tavern. Bring it to him."
+condition_expression = "tool_set == 1"
+rewards = ["give_item(health_potion, 1)"]

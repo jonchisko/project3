@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://dbhy7dqcpvg0q"]
 
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_y18pv"]
-[ext_resource type="Resource" uid="uid://d1hk1m1njltp6" path="res://resources/quests/find_jewelry_blueprints.tres" id="2_om07a"]
+[ext_resource type="Resource" uid="uid://d1hk1m1njltp6" path="res://resources/quests/a_date_night.tres" id="2_ltc6w"]
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="2_spfn7"]
 
 [resource]
@@ -29,6 +29,6 @@ relationships = {
 "peter_rudar": "Offered to build him a charm once. He refused, but thanked her with a very rare chunk of raw ore.",
 "radovan_kolar": "Thinks he hoards knowledge, but still brings him tea when she wants something translated."
 }
-quest_data = Array[ExtResource("1_y18pv")]([ExtResource("2_om07a")])
+quest_data = Array[ExtResource("1_y18pv")]([ExtResource("2_ltc6w")])
 temporary_replies = Array[String](["Hmm ...", "Mmm ...", "..."])
 system_knowledge = Array[String]([])

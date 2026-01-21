@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3 uid="uid://c6r1d8dfyq0ii"]
+[gd_resource type="Resource" script_class="NpcData" load_steps=6 format=3 uid="uid://c6r1d8dfyq0ii"]
 
 [ext_resource type="Script" path="res://resources/npc_data_resource.gd" id="1_75uim"]
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="1_r4ji1"]
 [ext_resource type="Resource" uid="uid://cytd42g0gpe6o" path="res://resources/quests/get_wajvodian_spear_instructions.tres" id="2_1tu7v"]
+[ext_resource type="Resource" uid="uid://cesm3b318uoi1" path="res://resources/quests/solve_a_riddle.tres" id="2_p53aw"]
+[ext_resource type="Resource" uid="uid://2bv6yr2npor5" path="res://resources/quests/bring_tool_set.tres" id="3_d0n3h"]
 
 [resource]
 script = ExtResource("1_75uim")
@@ -28,6 +30,6 @@ relationships = {
 "radovan_kolar": "Doesn’t believe in fairy tales, but those spear plans were too detailed to ignore.",
 "tanja_draguljič": "Sparks fly — in both ways. Sometimes heat, sometimes friction."
 }
-quest_data = Array[ExtResource("1_r4ji1")]([ExtResource("2_1tu7v")])
+quest_data = Array[ExtResource("1_r4ji1")]([ExtResource("2_p53aw"), ExtResource("3_d0n3h"), ExtResource("2_1tu7v")])
 temporary_replies = Array[String](["Hmmm ...", "Mmm ...", "...", "Let me think ...", "...", "..."])
 system_knowledge = Array[String]([])

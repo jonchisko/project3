@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://b6jwy5kxcd0la"]
+[gd_scene load_steps=36 format=4 uid="uid://b6jwy5kxcd0la"]
 
 [ext_resource type="PackedScene" uid="uid://ccd0v8ujrdbgc" path="res://scenes/managers/chat/chat_manager.tscn" id="1_327vj"]
 [ext_resource type="Script" path="res://scenes/test/test_map.gd" id="1_cw72i"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://c3beymx8b36tq" path="res://resources/interactables/npcs/franc_petrov_npc.tres" id="7_jjvfi"]
 [ext_resource type="Resource" uid="uid://cauux50wjc8f2" path="res://resources/interactables/npcs/jure_hauptmann_npc.tres" id="8_8b5ka"]
 [ext_resource type="Resource" uid="uid://c4dew5ynm335l" path="res://resources/interactables/npcs/jurij_vindiš_npc.tres" id="9_ctxsa"]
+[ext_resource type="Resource" uid="uid://eiuh32whnppr" path="res://resources/interactables/items/tool_set_item.tres" id="10_q1m0o"]
 [ext_resource type="Resource" uid="uid://bo77yvyrt3pxo" path="res://resources/interactables/npcs/luka_gorišek_npc.tres" id="10_w3ytx"]
 [ext_resource type="Resource" uid="uid://bwcbl4oemaci2" path="res://resources/interactables/npcs/miha_sitar_npc.tres" id="11_o3x8j"]
 [ext_resource type="Resource" uid="uid://dcjmo4lys5ruv" path="res://resources/interactables/npcs/peter_rudar_npc.tres" id="12_mnuo8"]
@@ -274,6 +275,25 @@ tile_set = ExtResource("4_ex0tf")
 
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="ItemsTavern" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
+
+[node name="ToolsetItem" parent="YSorted/ItemsTavern" instance=ExtResource("17_nywt0")]
+position = Vector2(1451, 90)
+interactable_data = ExtResource("10_q1m0o")
+
+[node name="ToolsetItem2" parent="YSorted/ItemsTavern" instance=ExtResource("17_nywt0")]
+position = Vector2(1482, 90)
+interactable_data = ExtResource("10_q1m0o")
+
+[node name="ToolsetItem3" parent="YSorted/ItemsTavern" instance=ExtResource("17_nywt0")]
+position = Vector2(1267, 99)
+interactable_data = ExtResource("10_q1m0o")
+
+[node name="ToolsetItem4" parent="YSorted/ItemsTavern" instance=ExtResource("17_nywt0")]
+position = Vector2(1240, 100)
+interactable_data = ExtResource("10_q1m0o")
 
 [node name="ItemsBase" type="Node2D" parent="YSorted"]
 y_sort_enabled = true
@@ -858,7 +878,7 @@ position = Vector2(1283, -250)
 position = Vector2(-470, 418)
 
 [node name="Player" parent="YSorted" instance=ExtResource("1_uudpt")]
-position = Vector2(1734, 733)
+position = Vector2(-699, 125)
 
 [node name="Camera2D" type="Camera2D" parent="YSorted/Player"]
 limit_left = -943
