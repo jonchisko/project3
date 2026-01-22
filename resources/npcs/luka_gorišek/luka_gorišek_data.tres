@@ -13,10 +13,7 @@ life_history = "Born: 2160 A.G.
  Parents: Long gone, barely remembered by locals
 No one talks much about why Luka was outcast. Some say he meddled in systems he shouldn’t have. Others say he saw something during the storm season that changed him. Whatever the reason, he was driven from Colnica years ago — not with torches, just silence and closed doors.
 Since then, Luka’s lived in the high woods above the valley. He built a small shelter out of broken satellite panels and old tent cloth. He traps squirrels, eats mossy berries, and stares down toward the village at night. Locals call him mad, but none dare visit.
-He isn’t mad. He listens. To the wind, to the machines in the hills, to the patterns in bird flight and storm static. He knows the land better than anyone, and he’s kept a close eye on the wreck near Colnica — the Mara IX. He knows you’ve come down from the sky, and he’s curious.
-If the player finds Luka and speaks honestly — tells him what happened, what Wotlica looks like now — he listens closely. He might not show it, but he’s been waiting to hear those words.
-And in return, he offers what no one else can: the correct atmospheric re-entry path. He memorized it from an old emergency beacon. The pilot of the Mara IX died in the crash — and without Luka’s knowledge, any launch attempt ends in tragedy.
-"
+He isn’t mad. He listens. To the wind, to the machines in the hills, to the patterns in bird flight and storm static. He knows the land better than anyone, and he’s kept a close eye on the wreck near Colnica — the Mara IX. He knows you’ve come down from the sky, and he’s curious."
 occupation = "Unknown"
 location = "A secluded camp hidden above the Obli slopes, reachable only by careful navigation or rumor-following."
 description = "Quiet, intense, and strange. Doesn’t ask questions directly. Thinks in loops. But when he speaks, it matters. He may not trust easily, but he doesn’t lie."
