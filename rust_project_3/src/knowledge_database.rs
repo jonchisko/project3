@@ -245,6 +245,8 @@ impl KnowledgeDatabase {
         game_entity_id: String,
         amount: i32,
     ) -> bool {
+        let it = game_item_id.clone();
+        let ent = game_entity_id.clone();
         let (item, entity) = (
             self.get_item_id(game_item_id),
             self.get_entity_id(game_entity_id),
@@ -312,18 +314,18 @@ impl KnowledgeDatabase {
         }
 
         let (item, entity) = (item.unwrap(), entity.unwrap());
-
+        
         let entity: Result<i64> = self.connection.query_one(
             "SELECT amount FROM ownership WHERE item_id = ?1 AND entity_id = ?2",
             [item, entity],
             |row| row.get(0),
         );
-
+        
         match entity {
             Ok(val) => val,
-            Err(_) => {
-                godot_error!("KnowledgeDatabase: Error obtaining amount");
-                -1
+            Err(error) => {
+                godot_error!("KnowledgeDatabase: Error obtaining amount (most likely no item yet). Actual 'err': {}", error.to_string());
+                0
             }
         }
     }

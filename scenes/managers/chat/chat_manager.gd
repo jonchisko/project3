@@ -298,13 +298,7 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 					call_result["error"] = true
 					call_result["message"] = "Get item was unable to obtain {item_id}".format({"item_id": fun_args["item_id"]})
 				else:
-					var quantity: int = KDBService.get_ownership_quantity(item.data.id, self._current_npc_data.id)
-					KDBService.update_ownership_quantity(item.data.id, self._current_npc_data.id, quantity + fun_args["number"])
-					
 					KDBService.add_action(KDBService.GameAction.Gives, "player", self._current_npc_data.id)
-					# Rather not do the verb owns, since the ownership table is more up to date
-					#KDBService.add_action(KDBService.GameAction.Owns, self._current_npc_data.id, item.data.id)
-					
 					call_result["call_result"] = item
 		"give_item":
 			if not fun_args.has("item_id") or not fun_args.has("number"):
@@ -313,14 +307,10 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 			else:
 				var quest_reward_item = fun_args["item_id"]
 				var result = self._give_item_to_player(quest_reward_item, fun_args["number"])
-				
-				var quantity: int = KDBService.get_ownership_quantity(quest_reward_item.data.id, self._current_npc_data.id)
-				KDBService.update_ownership_quantity(quest_reward_item.data.id, self._current_npc_data.id, quantity - fun_args["number"])
-				
 				KDBService.add_action(KDBService.GameAction.Gives, self._current_npc_data.id, "player")
-				#KDBService.add_action(KDBService.GameAction.Owns, "player", quest_reward_item.data.id)
 				
 				if not self._current_npc_data.quest_data.is_empty():
+					# TODO: we have to finish the quest even if the NPC does not give the item (not all quests give items)
 					self._finish_quest()
 				call_result["call_result"] = result
 		"trigger_event":
