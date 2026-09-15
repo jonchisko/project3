@@ -24,14 +24,7 @@ func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_
 	static_template += self._add_quest(npc_data)
 	static_template += self._add_examples()
 	static_template += self._add_function_calling()
-	static_template += "
-# Quest completion
-You decide whether the current quest condition is satisfied, using the available context and tools.
-Once satisfied, perform any required item exchanges and provide all information rewards to the player.
-Then call complete_quest(quest_id), even when the reward is only information or there is no reward.
-Item transfers alone do not complete quests. Wait for successful item tool results before calling complete_quest.
-After completion is accepted, include any information reward in your final reply. Do not start another quest in this response.
-"
+	static_template += self._add_quest_completion()
 	static_template += self._add_static_world_context()
 	static_template += self._add_dynamic_world_context()
 	static_template += self._add_history(npc_data, chat_history)
@@ -64,6 +57,10 @@ func _add_examples() -> String:
 	
 
 func _add_function_calling() -> String:
+	return ""
+
+
+func _add_quest_completion() -> String:
 	return ""
 
 

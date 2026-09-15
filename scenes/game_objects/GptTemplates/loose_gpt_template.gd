@@ -52,14 +52,6 @@ func _add_quest(npc_data: NpcData) -> String:
 	The quest reward in the fulfillment case is {quest_reward}."\
 	.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
 	"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
-	
-	
-func _add_examples() -> String:
-	return ""
-	
-
-func _add_function_calling() -> String:
-	return ""
 
 
 func _add_static_world_context() -> String:

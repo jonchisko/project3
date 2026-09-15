@@ -234,6 +234,17 @@ func _add_function_calling() -> String:
 	"
 
 
+func _add_quest_completion() -> String:
+	return "
+# Quest completion
+You decide whether the current quest condition is satisfied, using the available context and tools.
+Once satisfied, perform any required item exchanges and provide all information rewards to the player.
+Then call complete_quest(quest_id), even when the reward is only information or there is no reward.
+Item transfers alone do not complete quests. Wait for successful item tool results before calling complete_quest.
+After completion is accepted, include any information reward in your final reply. Do not start another quest in this response.
+"
+
+
 func _add_static_world_context() -> String:
 	return "# Static world context
 In this chapter the world you live in is described in a 
