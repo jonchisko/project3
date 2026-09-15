@@ -16,6 +16,14 @@ var _chat_element: PackedScene = preload("res://scenes/ui/messenger/chat_element
 var _last_npc_chat_element: ChatElement
 
 var is_closing: bool = false
+var request_pending: bool = false
+
+
+func set_request_pending(value: bool) -> void:
+	request_pending = value
+	_line_edit.editable = not value
+	$PanelContainer2/HBoxContainer/LongPressButton.disabled = value
+	$PanelContainer2/HBoxContainer/MarginContainer/HBoxContainer/CloseChatButton.disabled = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,13 +67,19 @@ func _create_chat_element(is_player: bool, message: String) -> ChatElement:
 
 
 func _on_line_edit_text_submitted(new_text):
+	if request_pending or is_closing or new_text.strip_edges().is_empty():
+		return
 	self._create_chat_element(true, new_text)
 	(self._line_edit as LineEdit).text = ""
 
 
 func _on_close_chat_button_pressed():
+	if request_pending:
+		return
 	self.close_chat()
 
 
 func _on_long_press_button_long_pressed() -> void:
+	if request_pending or is_closing:
+		return
 	self.skip_quest.emit()

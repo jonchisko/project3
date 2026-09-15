@@ -42,17 +42,16 @@ func _add_previous_life(npc_data: NpcData) -> String:
 	
 	
 func _add_quest(npc_data: NpcData) -> String:
+	if npc_data.quest_data.is_empty():
+		return "You do not have any quests or goals, all of them have already been fulfilled by the player."
 	var quest_data := npc_data.quest_data[0]
 	var quest_rewards = ", ".join(quest_data.rewards)
 	
-	if npc_data.quest_data.is_empty():
-		return "You do not have any quests or goals, all of them have already been fulfilled by the player."
-	else:
-		return "Your current quest or goal is {quest_id}, the title {quest_title}. The quest is 
-		about {quest_description}. The player gets a reward from you, if the player fulfills the quest condition: {quest_condition}.
-		The quest reward in the fulfillment case is {quest_reward}."\
-		.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
-		"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
+	return "Your current quest or goal is {quest_id}, the title {quest_title}. The quest is
+	about {quest_description}. The player gets a reward from you, if the player fulfills the quest condition: {quest_condition}.
+	The quest reward in the fulfillment case is {quest_reward}."\
+	.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
+	"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
 	
 	
 func _add_examples() -> String:

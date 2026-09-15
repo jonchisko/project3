@@ -2,6 +2,7 @@ extends SceneSyncher
 
 
 var pause_menu: Resource = preload("res://scenes/ui/pause_menu.tscn")
+var _ending_pending: bool = false
 
 
 func _ready() -> void:
@@ -13,7 +14,12 @@ func _exit_tree() -> void:
 
 
 func _on_quest_finished() -> void:
-	if QuestManager.all_necessary_quests_completed:
+	if QuestManager.all_necessary_quests_completed and not _ending_pending:
+		_ending_pending = true
+		var chat_manager: ChatManager = get_tree().get_first_node_in_group("chat_openai")
+		if chat_manager != null and chat_manager.is_chat_open():
+			# Let the player read the final reward and save the dialogue before leaving.
+			await chat_manager.chat_closed
 		self.get_tree().paused = false
 		self.get_tree().change_scene_to_file("res://scenes/levels/end_game_scene.tscn")
 

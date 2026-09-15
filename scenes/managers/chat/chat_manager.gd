@@ -18,6 +18,12 @@ var _template: BaseGptTemplate
 var _gpt_template: TemplateBase
 
 var _current_conversation_messages: Array[Message] = []
+var _request_pending: bool = false
+var _pending_completion_id: String = ""
+
+
+func is_chat_open() -> bool:
+	return is_instance_valid(_chat_messenger_instance) and not _chat_messenger_instance.is_closing
 
 
 func _ready() -> void:
@@ -60,11 +66,16 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 
 # Done every time a message is SENT
 func _on_player_message_sent(player_message: String) -> void:
+	if _request_pending:
+		return
+	_set_request_pending(true)
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 
 	self._template.add_player_query(self._gpt_template, player_message, true)
 	self._template.add_similar_data_from_history(self._gpt_template, self._current_npc_data, self.chat_history_rust, player_message)
+	var before_instructions: int = self._gpt_template.get_context().size()
 	self._template.add_instructions(self._gpt_template)
+	var instruction_count: int = self._gpt_template.get_context().size() - before_instructions
 	self._template.add_player_query(self._gpt_template, player_message, false)
 
 	var response: CompletionResponse = await self._gpt_template.get_reply()
@@ -74,7 +85,8 @@ func _on_player_message_sent(player_message: String) -> void:
 	self._gpt_template.remove_oldest_message() # Remove the old message query at the top
 	
 	self._gpt_template.remove_newest_message() # query
-	self._gpt_template.remove_newest_message() # instructions
+	for _i in range(instruction_count):
+		self._gpt_template.remove_newest_message() # instructions
 	self._gpt_template.remove_newest_message() # similar history
 	
 	self._template.add_player_query(self._gpt_template, player_message, false) # re-add
@@ -85,7 +97,7 @@ func _on_player_message_sent(player_message: String) -> void:
 	self._current_conversation_messages.append(player_message_to_save)
 	
 	while true:
-		if response.successful():
+		if response != null and response.successful() and not response.choices().is_empty():
 			var choice: ChoiceResponse = response.choices()[0]
 			var npc_message: Message = choice.message
 			
@@ -102,6 +114,9 @@ func _on_player_message_sent(player_message: String) -> void:
 			var tools: Array[ToolCall] = choice.message.tool_calls
 			
 			if tools.is_empty():
+				_set_request_pending(false)
+				if not _pending_completion_id.is_empty():
+					_finish_quest(_pending_completion_id)
 				break
 			
 			for tool in tools:
@@ -126,9 +141,17 @@ func _on_player_message_sent(player_message: String) -> void:
 			self._chat_messenger_instance.edit_last_chat_element(system_message)
 			
 			break
+	_set_request_pending(false)
+
+
+func _set_request_pending(value: bool) -> void:
+	_request_pending = value
+	if is_instance_valid(_chat_messenger_instance):
+		_chat_messenger_instance.set_request_pending(value)
 
 
 func _on_chat_closed() -> void:
+	_pending_completion_id = ""
 	if not self.is_tutorial and not self._current_conversation_messages.is_empty():
 		var conversation = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
 		self.chat_history_rust.save_conversation(self._current_npc_data.id, conversation)
@@ -166,6 +189,7 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 		.with_tool(self._get_has_item_tool())\
 		.with_tool(self._get_give_item_tool())\
 		.with_tool(self._get_get_item_tool())\
+		.with_tool(self._get_complete_quest_tool())\
 		.get_template()
 		
 	self._set_chat_history()
@@ -174,20 +198,95 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 
 
 func _on_skipped_quest() -> void:
-	print("ChatManager: Skipping quest if any active for current NPC")
-	if self._current_npc_data.quest_data.is_empty():
+	if _request_pending or self._current_npc_data.quest_data.is_empty():
 		return
+	# A completion accepted in the preceding turn must not grant its rewards twice.
+	if not _pending_completion_id.is_empty():
+		_chat_messenger_instance.add_chat_element("Please send another message to finish the pending conversation before skipping.")
+		return
+	var quest: QuestResource = _current_npc_data.quest_data[0]
+	var rewards: Dictionary = _get_skip_rewards(quest)
+	if not rewards.error.is_empty():
+		_chat_messenger_instance.add_chat_element(rewards.error)
+		return
+	_set_request_pending(true)
+	var information_message: Message = null
+	if not rewards.information.is_empty():
+		_chat_messenger_instance.add_chat_element("Preparing your quest reward...")
+		information_message = await _request_skip_information(quest, rewards.information)
+		if information_message == null:
+			_chat_messenger_instance.edit_last_chat_element("Could not retrieve the quest information. Please try skipping again.")
+			GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, "Quest skip failed: information request for " + quest.id)
+			_set_request_pending(false)
+			return
+	for reward in rewards.items:
+		if not _give_item_to_player(reward.item, reward.amount):
+			_chat_messenger_instance.add_chat_element("Could not grant the quest reward. Quest remains active.")
+			_set_request_pending(false)
+			return
+		KDBService.add_action(KDBService.GameAction.Gives, _current_npc_data.id, "player")
+	if information_message != null:
+		_chat_messenger_instance.edit_last_chat_element(information_message.content)
+		_current_conversation_messages.append(information_message)
+	GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name,
+		"Skipping quest (finishing by 'button skip'): " + quest.id)
+	_set_request_pending(false)
+	_finish_quest(quest.id)
 
-	GameEvents.log_info.emit(
-		GodotProjectLogger.LogType.GameEvent, 
-		self.name,
-		"Skipping quest (finishing by 'button skip'): {quest_id}.".format({"quest_id" : self._current_npc_data.quest_data[0].id}))
-	
-	if self._current_npc_data.quest_data[0].get_reward().contains("give"):
-		var parsed_quest_reward = HelperQuests.parse_quest_reward(self._current_npc_data.quest_data[0].get_reward())
-		self._give_item_to_player(parsed_quest_reward["item"], parsed_quest_reward["amount"])
-	
-	self._finish_quest()
+
+func _get_skip_rewards(quest: QuestResource) -> Dictionary:
+	var result: Dictionary = {"items": [], "information": [], "error": ""}
+	var item_pattern := RegEx.new()
+	item_pattern.compile("^give_item\\(\\s*([^,()]+)\\s*,\\s*([0-9]+)\\s*\\)$")
+	for raw_reward in quest.rewards:
+		var reward: String = str(raw_reward).strip_edges()
+		if reward.is_empty():
+			continue
+		var item_match: RegExMatch = item_pattern.search(reward)
+		if item_match != null:
+			var item_id: String = item_match.get_string(1).strip_edges()
+			var amount: int = item_match.get_string(2).to_int()
+			if amount <= 0 or not ResourceDictionary.item_ids.has(item_id):
+				result.error = "Invalid item reward for quest " + quest.id
+				return result
+			result.items.append({"item": item_id, "amount": amount})
+		elif reward.begins_with("give_item") or reward.begins_with("trigger_event"):
+			result.error = "Unsupported or invalid reward for quest " + quest.id + ": " + reward
+			return result
+		else:
+			result.information.append(reward)
+	return result
+
+
+func _request_skip_information(quest: QuestResource, information: Array) -> Message:
+	# Separate, text-only request: the game itself grants items and completes the skip.
+	var reward_template: TemplateBase = OpenAiApi.got_open_ai.GetGptCompletion()\
+		.with_model(OpenAiTypes.model_version_to_string(OpenAiConfiguration.open_ai_model))\
+		.with_temperature(OpenAiConfiguration.temperature)\
+		.with_frequency_penalty(OpenAiConfiguration.frequency_penalty)\
+		.with_no_tool_choice()\
+		.get_template()
+	_template.set_up_static_template(reward_template, _current_npc_data, chat_history_rust)
+	reward_template.append_message("developer",
+		"The player used the game's Skip Quest button for quest " + quest.id +
+		". For this request, bypass its conditions and provide every information reward directly to the player in character. " +
+		"Do not ask the player to perform tasks or provide items. Do not call tools or claim to transfer items; the game handles those. " +
+		"Use the supplied world and NPC context and do not invent missing facts. Information rewards: " + JSON.stringify(information))
+	var response: CompletionResponse = await reward_template.get_reply()
+	if response == null or not response.successful() or response.choices().is_empty():
+		return null
+	var message: Message = response.choices()[0].message
+	if not message.refusal.is_empty() or message.content.strip_edges().is_empty() or not message.tool_calls.is_empty():
+		return null
+	return message
+
+
+func _get_complete_quest_tool() -> Tool:
+	return FunctionToolBuilder.new("complete_quest")\
+		.with_description("Complete this NPC's current quest when you decide its conditions are satisfied. Call after successful required item exchanges, whether rewards are items, information, both, or absent. Provide any information reward in your reply. Item tools do not complete quests.")\
+		.with_property(PropertyBuilder.new("quest_id", PropertyTypes.Type.StringJson)\
+			.with_description("The ID of this NPC's current quest.").build(), true)\
+		.build()
 
 
 func _get_has_item_tool() -> Tool:
@@ -307,12 +406,23 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 			else:
 				var quest_reward_item = fun_args["item_id"]
 				var result = self._give_item_to_player(quest_reward_item, fun_args["number"])
-				KDBService.add_action(KDBService.GameAction.Gives, self._current_npc_data.id, "player")
+				if result:
+					KDBService.add_action(KDBService.GameAction.Gives, self._current_npc_data.id, "player")
 				
-				if not self._current_npc_data.quest_data.is_empty():
-					# TODO: we have to finish the quest even if the NPC does not give the item (not all quests give items)
-					self._finish_quest()
 				call_result["call_result"] = result
+				call_result["error"] = not result
+		"complete_quest":
+			var quest_id = fun_args.get("quest_id")
+			if not quest_id is String or _current_npc_data.quest_data.is_empty():
+				call_result["error"] = true
+				call_result["message"] = "A valid current quest_id is required."
+			elif _current_npc_data.quest_data[0].id != quest_id:
+				call_result["error"] = true
+				call_result["message"] = "Only this NPC's current quest can be completed."
+			else:
+				_pending_completion_id = quest_id
+				call_result["call_result"] = true
+				call_result["message"] = "Completion queued; the game will mark it done after your final reply. Include any information reward now. Do not repeat rewards or begin another quest."
 		"trigger_event":
 			if not fun_args.has("event_id"):
 				call_result["error"] = true
@@ -343,11 +453,13 @@ func _give_item_to_player(reward_item_id: String, amount: int) -> bool:
 	return result
 
 
-func _finish_quest() -> void:
-	print("ChatManager: Quest '{quest}' done! Emitting event.".format({"quest": self._current_npc_data.quest_data[0].id}))
-	GameEvents.quest_done.emit(self._current_npc_data.quest_data[0].id)
+func _finish_quest(quest_id: String) -> void:
+	if _current_npc_data.quest_data.is_empty() or _current_npc_data.quest_data[0].id != quest_id:
+		return
+	_pending_completion_id = ""
 	self._current_npc_data.quest_data.pop_front()
-	
+	# Update the database through QuestManager before rebuilding world context.
+	GameEvents.quest_done.emit(quest_id)
 	self._refresh_static_template(self._current_conversation_messages, self.chat_history_rust, self._current_npc_data)
 
 

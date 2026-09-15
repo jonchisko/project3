@@ -27,7 +27,7 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 	for _i in range(number):
 		self._remove_item(item_id)
 	
-	KDBService.update_ownership_quantity(item_id, "player", self._inventory[item_id])
+	KDBService.update_ownership_quantity(item_id, "player", self._inventory.get(item_id, 0))
 	return ResourceDictionary.ResourceIdToResource[item_id]
 	
 	
