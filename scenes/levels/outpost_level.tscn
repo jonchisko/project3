@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://b30ag8ffg7c6"]
+[gd_scene load_steps=14 format=4 uid="uid://b30ag8ffg7c6"]
 
 [ext_resource type="Script" path="res://scenes/levels/outpost_level.gd" id="1_2vhv3"]
 [ext_resource type="TileSet" uid="uid://bjrho5ftsi0gg" path="res://resources/gras_tilemap.tres" id="1_djjyr"]
 [ext_resource type="PackedScene" uid="uid://cah0y8lt5uy55" path="res://scenes/game_objects/player/player.tscn" id="2_33tc6"]
-[ext_resource type="PackedScene" uid="uid://dmyac6yq7afjt" path="res://scenes/game_objects/npcs/enemies/knight/knight.tscn" id="3_pvhuu"]
 [ext_resource type="PackedScene" uid="uid://capvvx7bteiqg" path="res://scenes/levels/outpost_area_2d.tscn" id="5_3tdcq"]
 [ext_resource type="PackedScene" uid="uid://dhpuyrt7r605i" path="res://scenes/game_objects/music/background_music_player.tscn" id="6_jblci"]
 [ext_resource type="AudioStream" uid="uid://bnayh3lnkj4mt" path="res://assets/audio/music/Dark Ambient 4.mp3" id="7_57pk3"]
@@ -91,12 +90,6 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAgABEAAwAGAAEAAAAfAAIAAwAKAAkAAAAEAAUAAwAKAA0AAAADAAoAAwAKAA0AAAATAAgAAwAKAA0AAAAGABMAAwAKABIAAAAeABMAAwAKABUAAAAaABQAAwAKABUAAAAjAAUAAwAKABUAAAAlAAEAAwAKABIAAAAEABIAAwAKAAkAAAACAA8AAwAKAAkAAAARAA0AAwAKAAkAAAAAABYAAwAWAAsAAAAAAA0AAwAWAAsAAAAmAA0AAwAWAAsAAAAmABYAAwAWAAsAAAAmAAQAAwAWAAsAAAAAAAQAAwAWAAsAAAAUABYAAwAWAAsAAAA=")
 tile_set = ExtResource("1_djjyr")
 
-[node name="Knights" type="Node2D" parent="YSorted"]
-y_sort_enabled = true
-
-[node name="Knight" parent="YSorted/Knights" instance=ExtResource("3_pvhuu")]
-position = Vector2(555, 206)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2s8ru")
 camera_attributes = SubResource("CameraAttributesPractical_1g1xk")
@@ -129,6 +122,18 @@ autoplay = "label_animation"
 [node name="OutpostArea2D" parent="." instance=ExtResource("5_3tdcq")]
 position = Vector2(45, 48)
 new_scene = "res://scenes/test/test_map.tscn"
+
+[node name="LabelNoAccess" parent="OutpostArea2D/TargetNode" index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 246.0
+offset_bottom = 13.0
+
+[node name="LabelAllowed" parent="OutpostArea2D/TargetNode" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 44.0
+offset_bottom = 13.0
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_jblci")]
 music = ExtResource("7_57pk3")

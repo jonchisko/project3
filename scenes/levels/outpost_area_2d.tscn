@@ -59,6 +59,7 @@ offset_bottom = -15.0
 
 [node name="LabelNoAccess" type="Label" parent="TargetNode"]
 visible = false
+layout_mode = 0
 offset_left = -30.0
 offset_top = 8.23443
 offset_right = 216.0
@@ -67,6 +68,7 @@ text = "You need to find an outpost keycode to enter!"
 
 [node name="LabelAllowed" type="Label" parent="TargetNode"]
 visible = false
+layout_mode = 0
 offset_left = -30.0
 offset_top = 8.23443
 offset_right = 14.0
