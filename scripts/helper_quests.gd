@@ -2,12 +2,26 @@ extends Node
 class_name HelperQuests
 
 static func parse_quest_reward(quest_reward: String) -> Dictionary:
-	# give_item(outpost_keycode, 1)
-	var first_paranthesis_index = quest_reward.find("(")
-	var last_paranthesis_index = quest_reward.find(")")
-	var comma_index = quest_reward.find(",")
-	
-	var item: String = quest_reward.substr(first_paranthesis_index + 1, comma_index - (first_paranthesis_index + 1))
-	var amount: int = quest_reward.substr(comma_index + 1, last_paranthesis_index - (comma_index + 1)).to_int()
-	
-	return {"item": item, "amount": amount}
+	var pattern := RegEx.new()
+	pattern.compile("^give_item\\(\\s*([^,()]+)\\s*,\\s*([0-9]+)\\s*\\)$")
+	var result: RegExMatch = pattern.search(quest_reward.strip_edges())
+	if result == null:
+		return {"item": "", "amount": 0}
+	return {"item": result.get_string(1).strip_edges(), "amount": result.get_string(2).to_int()}
+
+
+static func get_initial_ownership(quests: Array[QuestResource]) -> Dictionary:
+	var items: Dictionary = {}
+	for quest in quests:
+		for reward in quest.rewards:
+			var parsed: Dictionary = parse_quest_reward(str(reward))
+			if parsed.item.is_empty():
+				if str(reward).strip_edges().begins_with("give_item"):
+					return {"items": {}, "error": "Malformed item reward in quest " + quest.id}
+				continue
+			if not ResourceDictionary.item_ids.has(parsed.item) or parsed.amount <= 0:
+				return {"items": {}, "error": "Invalid item reward in quest " + quest.id}
+			items[parsed.item] = items.get(parsed.item, 0) + parsed.amount
+			if items[parsed.item] > 2147483647:
+				return {"items": {}, "error": "Item reward quantity is too large"}
+	return {"items": items, "error": ""}

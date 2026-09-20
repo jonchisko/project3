@@ -30,6 +30,8 @@ func get_triplet_data_text() -> String:
 	</data_information_triplets>
 	<extra_information> action_history events have timestamps in seconds. The larger the value
 	the more recent the event. In case there are conflicting events, the more recent one is the valid one.
+	Ownership data is the current item balance, not a history of possessions.
+	An item not listed for an owner has quantity zero.
 	</extra_information>".format({"at": action_triplets, "qt": quest_triplets, "ot": ownership_triplets})
 
 
@@ -49,10 +51,34 @@ func set_quest_to_done(quest_id: String) -> bool:
 	
 
 func update_ownership_quantity(game_item_id: String, game_entity_id: String, amount: int) -> bool:
-	if not self._verify_ids(game_item_id, game_entity_id):
+	if amount < 0 or amount > 2147483647 or not self._verify_ids(game_item_id, game_entity_id):
 		return false
 	
 	return self.kdb_rust.update_ownership_quantity(game_item_id, game_entity_id, amount)
+
+
+func replace_ownership(game_entity_id: String, items: Dictionary) -> bool:
+	if not _verify_entity_id(game_entity_id) or not _valid_ownership_items(items, false):
+		return false
+	return kdb_rust.replace_ownership(game_entity_id, items)
+
+
+func transfer_ownership(source_id: String, recipient_id: String, items: Dictionary) -> bool:
+	if source_id == recipient_id or not _verify_entity_id(source_id) or not _verify_entity_id(recipient_id):
+		return false
+	if not _valid_ownership_items(items, true):
+		return false
+	return kdb_rust.transfer_ownership(source_id, recipient_id, items)
+
+
+func _valid_ownership_items(items: Dictionary, positive: bool) -> bool:
+	for item_id in items:
+		var amount = items[item_id]
+		if not item_id is String or not _verify_game_item_id(item_id):
+			return false
+		if not amount is int or amount < (1 if positive else 0) or amount > 2147483647:
+			return false
+	return true
 
 
 func get_ownership_quantity(game_item_id: String, game_entity_id: String) -> int:

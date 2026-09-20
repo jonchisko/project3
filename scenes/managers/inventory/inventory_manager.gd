@@ -10,13 +10,15 @@ var _inventory: Dictionary = {}
 
 
 func has_item(item_id: String, number: int) -> bool:
-	if not self._inventory.has(item_id):
+	if number <= 0 or not self._inventory.has(item_id):
 		return false
 	return self._inventory[item_id] >= number
 
 
 func get_item(item_id: String, number: int = 1) -> InteractableResource:
-	if not self.has_item(item_id, number):
+	if not _valid_item(item_id) or not self.has_item(item_id, number):
+		return null
+	if not _set_quantity(item_id, _inventory[item_id] - number):
 		return null
 	
 	GameEvents.log_info.emit(
@@ -24,15 +26,13 @@ func get_item(item_id: String, number: int = 1) -> InteractableResource:
 		self.name,
 		"Getting item from player - {item_id}, amount {amount}.".format({"item_id": item_id, "amount": number}))
 	
-	for _i in range(number):
-		self._remove_item(item_id)
-	
-	KDBService.update_ownership_quantity(item_id, "player", self._inventory.get(item_id, 0))
 	return ResourceDictionary.ResourceIdToResource[item_id]
 	
 	
 func give_item(item_id: String, number: int = 1) -> bool:
-	if not ResourceDictionary.ResourceIdToResource.has(item_id):
+	if number <= 0 or not _valid_item(item_id):
+		return false
+	if not _set_quantity(item_id, _inventory.get(item_id, 0) + number):
 		return false
 	
 	GameEvents.log_info.emit(
@@ -40,23 +40,97 @@ func give_item(item_id: String, number: int = 1) -> bool:
 		self.name,
 		"Giving item to player - {item_id}, amount {amount}.".format({"item_id": item_id, "amount": number}))
 	
-	var item_data = ResourceDictionary.ResourceIdToResource[item_id]
-	
-	for _i in range(number):
-		self._add_item(item_data)
-	
-	KDBService.update_ownership_quantity(item_id, "player", self._inventory[item_id])
-	
 	self._log_current_state()
+	return true
+
+
+func receive_items_from_npc(npc_id: String, items: Dictionary) -> bool:
+	return _transfer_items(npc_id, items, true)
+
+
+func give_item_to_npc(npc_id: String, item_id: String, amount: int) -> bool:
+	return _transfer_items(npc_id, {item_id: amount}, false)
+
+
+func _transfer_items(npc_id: String, items: Dictionary, to_player: bool) -> bool:
+	if not ResourceDictionary.npc_ids.has(npc_id):
+		return false
+	var next_inventory: Dictionary = _inventory.duplicate()
+	for item_id in items:
+		var amount = items[item_id]
+		if not item_id is String or not _valid_item(item_id) or not amount is int:
+			return false
+		if amount <= 0 or amount > 2147483647:
+			return false
+		var current: int = _inventory.get(item_id, 0)
+		# Refuse a transfer if the database no longer agrees with the physical inventory.
+		if KDBService.get_ownership_quantity(item_id, "player") != current:
+			push_error("Player ownership is out of sync for " + item_id)
+			return false
+		var next: int = current + (amount if to_player else -amount)
+		if next < 0 or next > 2147483647:
+			return false
+		if next == 0:
+			next_inventory.erase(item_id)
+		else:
+			next_inventory[item_id] = next
+	var source: String = npc_id if to_player else "player"
+	var recipient: String = "player" if to_player else npc_id
+	if not KDBService.transfer_ownership(source, recipient, items):
+		return false
+	# No awaits or signals between the database commit and this local assignment.
+	_inventory = next_inventory
+	for item_id in items:
+		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name,
+			"Transferred {amount} {item} from {source} to {recipient}.".format({
+				"amount": items[item_id], "item": item_id, "source": source, "recipient": recipient}))
+	return true
+
+
+func restore_inventory(items: Dictionary) -> bool:
+	var restored: Dictionary = {}
+	for item_id in items:
+		var amount = items[item_id]
+		if not item_id is String or not _valid_item(item_id) or not amount is int:
+			return false
+		if amount < 0 or amount > 2147483647:
+			return false
+		if amount > 0:
+			restored[item_id] = amount
+	if not KDBService.replace_ownership("player", restored):
+		return false
+	_inventory = restored
+	return true
+
+
+func _valid_item(item_id: String) -> bool:
+	if not ResourceDictionary.item_ids.has(item_id):
+		return false
+	var resource: InteractableResource = ResourceDictionary.ResourceIdToResource[item_id]
+	return resource.data is ItemData
+
+
+func _set_quantity(item_id: String, quantity: int) -> bool:
+	if quantity < 0 or quantity > 2147483647:
+		return false
+	if not KDBService.update_ownership_quantity(item_id, "player", quantity):
+		return false
+	if quantity == 0:
+		_inventory.erase(item_id)
+	else:
+		_inventory[item_id] = quantity
 	return true
 	
 
 func show_inventory() -> Dictionary:
-	return self._inventory
+	return self._inventory.duplicate()
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# A new player starts empty; level restoration replaces this with its saved snapshot.
+	if not restore_inventory(_inventory):
+		push_error("Could not synchronize the player's initial inventory")
 	GameEvents.interact_with_interactable.connect(self._on_item_picked_up)
 	
 	self.inventory_ui.item_used.connect(self._on_item_used)
@@ -90,48 +164,29 @@ func _get_item_data() -> Array[Dictionary]:
 
 
 func _on_item_used(item_id: String) -> void:
-	self.item_used.emit(item_id)
-	self._remove_item(item_id)
+	if get_item(item_id, 1) != null:
+		self.item_used.emit(item_id)
+		GameEvents.item_used.emit(item_id)
+	if is_instance_valid(inventory_ui):
+		inventory_ui.refresh_inventory(_get_item_data())
 
 
 func _on_item_picked_up(interactable: InteractableArea):
 	if interactable.interactable_type != GameTypes.InteractableType.Item:
 		return
+	if interactable.get_parent().is_queued_for_deletion():
+		return
+	var item_id: String = interactable.interactable_data.data.id
+	if not give_item(item_id, 1):
+		return
 	
 	KDBService.add_action(KDBService.GameAction.InteractsWith, "player", interactable.interactable_data.data.id)
 	
-	self.item_picked_up.emit(interactable.interactable_data.data.id)
-	self._add_item(interactable.interactable_data)
-	
 	# TODO might be better to call something on the interactable + disable the colisions etc.
-	interactable.get_parent().call_deferred("queue_free")
+	interactable.get_parent().queue_free()
+	self.item_picked_up.emit(item_id)
 	
 	self._log_current_state()
-
-
-func _add_item(item: InteractableResource):
-	var visual = item.visual
-	var data = item.data as ItemData
-	
-	if visual == null or data == null:
-		return
-	
-	if self._inventory.has(data.id):
-		self._inventory[data.id] += 1 
-	else:
-		self._inventory[data.id] = 1
-		
-
-func _remove_item(item_id: String):
-	if not self._inventory.has(item_id):
-		return
-		
-	self._inventory[item_id] -= 1
-	if self._inventory[item_id] == 0:
-		self._inventory.erase(item_id)
-	
-	print("Item used: ", item_id, ". Firing GameEvent(s) item_used.")
-	GameEvents.item_used.emit(item_id)
 
 
 func _log_current_state():

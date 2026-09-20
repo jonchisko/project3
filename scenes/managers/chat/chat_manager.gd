@@ -16,6 +16,7 @@ var _player_inventory: InventoryManager
 var _current_npc_data: NpcData
 var _template: BaseGptTemplate
 var _gpt_template: TemplateBase
+var _dynamic_world_context: Message
 
 var _current_conversation_messages: Array[Message] = []
 var _request_pending: bool = false
@@ -78,6 +79,7 @@ func _on_player_message_sent(player_message: String) -> void:
 	var instruction_count: int = self._gpt_template.get_context().size() - before_instructions
 	self._template.add_player_query(self._gpt_template, player_message, false)
 
+	_refresh_dynamic_world_context()
 	var response: CompletionResponse = await self._gpt_template.get_reply()
 	
 	# First remove the similar_data_from_history and user query, so that we just keep similar history
@@ -131,6 +133,7 @@ func _on_player_message_sent(player_message: String) -> void:
 				self._gpt_template.append_message_with(tool_message)
 				self._current_conversation_messages.append(tool_message)
 				
+			_refresh_dynamic_world_context()
 			response = await self._gpt_template.get_reply()
 			self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 			
@@ -148,6 +151,11 @@ func _set_request_pending(value: bool) -> void:
 	_request_pending = value
 	if is_instance_valid(_chat_messenger_instance):
 		_chat_messenger_instance.set_request_pending(value)
+
+
+func _refresh_dynamic_world_context() -> void:
+	if _dynamic_world_context != null:
+		_dynamic_world_context.content = _template._add_dynamic_world_context()
 
 
 func _on_chat_closed() -> void:
@@ -194,7 +202,7 @@ func _create_open_ai_template(npc_data: NpcData) -> void:
 		
 	self._set_chat_history()
 	
-	self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history_rust)
+	self._dynamic_world_context = self._template.set_up_static_template(self._gpt_template, npc_data, self.chat_history_rust)
 
 
 func _on_skipped_quest() -> void:
@@ -219,11 +227,14 @@ func _on_skipped_quest() -> void:
 			GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, "Quest skip failed: information request for " + quest.id)
 			_set_request_pending(false)
 			return
+	var item_totals: Dictionary = {}
 	for reward in rewards.items:
-		if not _give_item_to_player(reward.item, reward.amount):
-			_chat_messenger_instance.add_chat_element("Could not grant the quest reward. Quest remains active.")
-			_set_request_pending(false)
-			return
+		item_totals[reward.item] = item_totals.get(reward.item, 0) + reward.amount
+	if not item_totals.is_empty() and not _give_items_to_player(item_totals):
+		_chat_messenger_instance.add_chat_element("Could not grant all quest rewards. Quest remains active.")
+		_set_request_pending(false)
+		return
+	for _item_id in item_totals:
 		KDBService.add_action(KDBService.GameAction.Gives, _current_npc_data.id, "player")
 	if information_message != null:
 		_chat_messenger_instance.edit_last_chat_element(information_message.content)
@@ -236,17 +247,15 @@ func _on_skipped_quest() -> void:
 
 func _get_skip_rewards(quest: QuestResource) -> Dictionary:
 	var result: Dictionary = {"items": [], "information": [], "error": ""}
-	var item_pattern := RegEx.new()
-	item_pattern.compile("^give_item\\(\\s*([^,()]+)\\s*,\\s*([0-9]+)\\s*\\)$")
 	for raw_reward in quest.rewards:
 		var reward: String = str(raw_reward).strip_edges()
 		if reward.is_empty():
 			continue
-		var item_match: RegExMatch = item_pattern.search(reward)
-		if item_match != null:
-			var item_id: String = item_match.get_string(1).strip_edges()
-			var amount: int = item_match.get_string(2).to_int()
-			if amount <= 0 or not ResourceDictionary.item_ids.has(item_id):
+		var parsed: Dictionary = HelperQuests.parse_quest_reward(reward)
+		if not parsed.item.is_empty():
+			var item_id: String = parsed.item
+			var amount: int = parsed.amount
+			if amount <= 0 or amount > 2147483647 or not ResourceDictionary.item_ids.has(item_id):
 				result.error = "Invalid item reward for quest " + quest.id
 				return result
 			result.items.append({"item": item_id, "amount": amount})
@@ -298,7 +307,7 @@ func _get_has_item_tool() -> Tool:
 				.build(), 
 			true)\
 		.with_property(
-			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+			PropertyBuilder.new("number", PropertyTypes.Type.IntegerJson)
 				.with_description("How many items you want to give.")
 				.build(), 
 			true)\
@@ -316,7 +325,7 @@ func _get_give_item_tool() -> Tool:
 				.build(), 
 			true)\
 		.with_property(
-			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+			PropertyBuilder.new("number", PropertyTypes.Type.IntegerJson)
 				.with_description("How many items you want to give.")
 				.build(), 
 			true)\
@@ -334,7 +343,7 @@ func _get_get_item_tool() -> Tool:
 				.build(), 
 			true)\
 		.with_property(
-			PropertyBuilder.new("number", PropertyTypes.Type.NumberJson)
+			PropertyBuilder.new("number", PropertyTypes.Type.IntegerJson)
 				.with_description("How many items you want to take.")
 				.build(), 
 			true)\
@@ -377,6 +386,13 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 		return call_result
 		
 	var fun_args = parsed_arguments_data["data"]
+	if fun_name in ["has_item", "get_item", "give_item"]:
+		var amount = fun_args.get("number")
+		if not fun_args.get("item_id") is String or not (amount is int or amount is float):
+			return {"error": true, "message": "An item ID and a positive integer quantity are required.", "call_result": null}
+		if not is_finite(float(amount)) or amount < 1 or amount > 2147483647 or amount != floor(float(amount)):
+			return {"error": true, "message": "Quantity must be a positive integer within the supported range.", "call_result": null}
+		fun_args["number"] = int(amount)
 	
 	match fun_name:
 		"has_item":
@@ -392,13 +408,13 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				call_result["error"] = true
 				call_result["message"] = "Missing function arguments (either 'item_id' or 'number')!"
 			else:
-				var item = self._player_inventory.get_item(fun_args["item_id"], fun_args["number"])
-				if item == null:
+				var transferred: bool = self._player_inventory.give_item_to_npc(self._current_npc_data.id, fun_args["item_id"], fun_args["number"])
+				if not transferred:
 					call_result["error"] = true
 					call_result["message"] = "Get item was unable to obtain {item_id}".format({"item_id": fun_args["item_id"]})
 				else:
 					KDBService.add_action(KDBService.GameAction.Gives, "player", self._current_npc_data.id)
-					call_result["call_result"] = item
+					call_result["call_result"] = {"item_id": fun_args["item_id"], "number": fun_args["number"]}
 		"give_item":
 			if not fun_args.has("item_id") or not fun_args.has("number"):
 				call_result["error"] = true
@@ -411,6 +427,8 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 				
 				call_result["call_result"] = result
 				call_result["error"] = not result
+				if not result:
+					call_result["message"] = "Item transfer failed. Check the item ID and your remaining ownership before retrying."
 		"complete_quest":
 			var quest_id = fun_args.get("quest_id")
 			if not quest_id is String or _current_npc_data.quest_data.is_empty():
@@ -449,8 +467,11 @@ func _parse_arguments_data(arguments: String) -> Dictionary:
 
 
 func _give_item_to_player(reward_item_id: String, amount: int) -> bool:
-	var result = self._player_inventory.give_item(reward_item_id, amount)
-	return result
+	return _give_items_to_player({reward_item_id: amount})
+
+
+func _give_items_to_player(items: Dictionary) -> bool:
+	return self._player_inventory.receive_items_from_npc(self._current_npc_data.id, items)
 
 
 func _finish_quest(quest_id: String) -> void:
@@ -467,7 +488,7 @@ func _refresh_static_template(current_messages: Array[Message], chat_history: Ch
 	self._gpt_template.clear_static_context()
 	self._gpt_template.clear_all_messages()
 	
-	self._template.set_up_static_template(self._gpt_template, npc_data, chat_history)
+	self._dynamic_world_context = self._template.set_up_static_template(self._gpt_template, npc_data, chat_history)
 	
 	for message in current_messages:
 		self._gpt_template.append_message_with(message)

@@ -3,6 +3,7 @@ use std::time::SystemTime;
 
 use godot::prelude::*;
 use rusqlite::{Connection, MappedRows, Result, Row, params};
+use crate::ownership;
 
 #[derive(GodotConvert, Debug)]
 #[godot(via = i64)]
@@ -67,6 +68,9 @@ impl INode for KnowledgeDatabase {
 
     fn ready(&mut self) -> () {
         godot_print!("KnowledgeDatabase: Ready ~ Creating Tables");
+        self.connection
+            .execute_batch("PRAGMA foreign_keys = ON;")
+            .expect("Could not enable database integrity checks");
 
         self.connection
             .execute(
@@ -90,21 +94,7 @@ impl INode for KnowledgeDatabase {
 
         self.connection
             .execute(
-                "CREATE TABLE ownership (
-                id          INTEGER PRIMARY KEY,
-                item_id     INTEGER NOT NULL,
-                entity_id   INTEGER NOT NULL,
-                amount      INTEGER NOT NULL,
-                UNIQUE (item_id, entity_id),
-                FOREIGN KEY (item_id)
-                REFERENCES items (item_id)
-                    ON UPDATE CASCADE
-                    ON DELETE RESTRICT,
-                FOREIGN KEY (entity_id)
-                REFERENCES entities (entity_id)
-                    ON UPDATE CASCADE
-                    ON DELETE RESTRICT
-                )",
+                ownership::CREATE_TABLE,
                 (),
             )
             .expect("Failed at creating ownership table");
@@ -245,8 +235,6 @@ impl KnowledgeDatabase {
         game_entity_id: String,
         amount: i32,
     ) -> bool {
-        let it = game_item_id.clone();
-        let ent = game_entity_id.clone();
         let (item, entity) = (
             self.get_item_id(game_item_id),
             self.get_entity_id(game_entity_id),
@@ -264,35 +252,60 @@ impl KnowledgeDatabase {
 
         let (item, entity) = (item.unwrap(), entity.unwrap());
 
-        let update_result = self.connection.execute(
-            "UPDATE ownership SET amount = ?1 WHERE item_id = ?2 AND entity_id = ?3",
-            params![amount, item, entity],
-        );
+        match ownership::set_quantity(&self.connection, item, entity, amount as i64) {
+            Ok(()) => true,
+            Err(error) => {
+                godot_error!("KnowledgeDatabase: {}", error);
+                false
+            }
+        }
+    }
 
-        if let Err(_) = update_result {
-            godot_error!("KnowledgeDatabase: Could not update ownership");
+    // Validate every external ID and quantity before starting a database mutation.
+    fn ownership_items(&self, items: Dictionary) -> Result<Vec<(i64, i64)>, String> {
+        items.iter_shared()
+            .map(|(key, value)| {
+                let item_id = key.try_to::<GString>()
+                    .map_err(|_| "Item IDs must be strings".to_string())?;
+                let amount = value.try_to::<i64>()
+                    .map_err(|_| "Quantities must be integers".to_string())?;
+                if !(0..=ownership::MAX_QUANTITY).contains(&amount) {
+                    return Err("Ownership quantity is outside the supported range".into());
+                }
+                Ok((self.get_item_id(item_id.to_string())?, amount))
+            })
+            .collect()
+    }
+
+    #[func]
+    fn replace_ownership(&mut self, game_entity_id: String, items: Dictionary) -> bool {
+        let result = self.get_entity_id(game_entity_id).and_then(|owner| {
+            let items = self.ownership_items(items)?;
+            ownership::replace(&mut self.connection, owner, &items)
+        });
+        if let Err(error) = result {
+            godot_error!("KnowledgeDatabase: {}", error);
             return false;
         }
+        true
+    }
 
-        let num_rows = update_result.unwrap();
-
-        if num_rows == 0 {
-            godot_print!("KnowledgeDatabase: No update, inserting new ownership data");
-            let insert_result = self.connection.execute(
-                "INSERT INTO ownership (item_id, entity_id, amount) VALUES (?1, ?2, ?3)",
-                params![item, entity, amount],
-            );
-            if let Err(_) = insert_result {
-                godot_error!("KnowledgeDatabase: Insertion failed");
-                return false;
-            }
-        } else {
-            godot_print!(
-                "KnowledgeDatabase: Updated ownership, rows affected: {}",
-                num_rows
-            );
+    #[func]
+    fn transfer_ownership(
+        &mut self,
+        source_id: String,
+        recipient_id: String,
+        items: Dictionary,
+    ) -> bool {
+        let result = self.get_entity_id(source_id).and_then(|source| {
+            let recipient = self.get_entity_id(recipient_id)?;
+            let items = self.ownership_items(items)?;
+            ownership::transfer(&mut self.connection, source, recipient, &items)
+        });
+        if let Err(error) = result {
+            godot_error!("KnowledgeDatabase: {}", error);
+            return false;
         }
-
         true
     }
 
@@ -315,17 +328,11 @@ impl KnowledgeDatabase {
 
         let (item, entity) = (item.unwrap(), entity.unwrap());
         
-        let entity: Result<i64> = self.connection.query_one(
-            "SELECT amount FROM ownership WHERE item_id = ?1 AND entity_id = ?2",
-            [item, entity],
-            |row| row.get(0),
-        );
-        
-        match entity {
+        match ownership::quantity(&self.connection, item, entity) {
             Ok(val) => val,
             Err(error) => {
-                godot_error!("KnowledgeDatabase: Error obtaining amount (most likely no item yet). Actual 'err': {}", error.to_string());
-                0
+                godot_error!("KnowledgeDatabase: Error obtaining ownership: {}", error);
+                -1
             }
         }
     }

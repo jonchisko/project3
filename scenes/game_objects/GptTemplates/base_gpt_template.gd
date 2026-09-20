@@ -14,7 +14,7 @@ func add_similar_data_from_history(gpt_template: TemplateBase, npc_data: NpcData
 	pass
 
 
-func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistoryRust) -> void:
+func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_history: ChatHistoryRust) -> Message:
 	self.add_instructions(gpt_template)
 	
 	var static_template: String = ""
@@ -26,10 +26,14 @@ func set_up_static_template(gpt_template: TemplateBase, npc_data: NpcData, chat_
 	static_template += self._add_function_calling()
 	static_template += self._add_quest_completion()
 	static_template += self._add_static_world_context()
-	static_template += self._add_dynamic_world_context()
 	static_template += self._add_history(npc_data, chat_history)
 	
 	self._add_template_to_gpt(gpt_template, static_template)
+	# Keep a single replaceable snapshot, separate from static NPC knowledge.
+	var dynamic_context: Message = MessageBuilder.new("developer")\
+		.with_content(self._add_dynamic_world_context()).build()
+	gpt_template.append_message_with(dynamic_context)
+	return dynamic_context
 
 
 func _add_template_to_gpt(gpt_template: TemplateBase, template: String) -> void:

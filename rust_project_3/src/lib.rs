@@ -5,6 +5,7 @@ mod file_storage;
 mod history;
 mod knowledge_database;
 mod logging;
+mod ownership;
 
 struct MyExtension;
 

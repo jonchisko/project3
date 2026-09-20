@@ -25,6 +25,10 @@ class TestManager extends ChatManager:
 	func _give_item_to_player(item_id: String, amount: int) -> bool:
 		granted.append({"item": item_id, "amount": amount})
 		return true
+	func _give_items_to_player(items: Dictionary) -> bool:
+		for item_id in items:
+			_give_item_to_player(item_id, items[item_id])
+		return true
 	func _request_skip_information(_quest: QuestResource, _information: Array) -> Message:
 		information_requests += 1
 		await Engine.get_main_loop().process_frame

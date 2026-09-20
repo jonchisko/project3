@@ -35,6 +35,10 @@ func _populate_data(item_data: Array[Dictionary]) -> void:
 	for item in self._item_array_data:
 		var name_amount = "{n} : {a}".format({"n": item["name"], "a": item["amount"]})
 		self.item_list.add_item(name_amount, item["icon"], true)
+
+
+func refresh_inventory(item_data: Array[Dictionary]) -> void:
+	self._populate_data(item_data)
 		
 	
 func _on_item_in_list_clicked(index: int, _at_position: Vector2, _mouse_button_index: int) -> void:
@@ -49,17 +53,9 @@ func _on_item_in_list_clicked(index: int, _at_position: Vector2, _mouse_button_i
 	
 
 func _on_item_used(index: int) -> void:
+	if index < 0 or index >= self._item_array_data.size():
+		return
 	var item = self._item_array_data[index]
 	var item_id = item["id"]
-	item["amount"] -= 1
-	
-	if item["amount"] > 0:
-		var name_amount = "{n} : {a}".format({"n": item["name"], "a": item["amount"]})
-		self.item_list.set_item_text(index, name_amount)
-	else:
-		self._item_array_data.remove_at(index)
-		self.item_list.remove_item(index)
-	
+	# InventoryManager refreshes the list from committed inventory after the request.
 	self.item_used.emit(item_id)
-	
-	pass
