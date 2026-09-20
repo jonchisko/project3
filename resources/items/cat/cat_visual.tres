@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="VisualResource" load_steps=3 format=3 uid="uid://bfmdgityhaf45"]
+
+[ext_resource type="Texture2D" uid="uid://b04yf6lpt6jex" path="res://assets/sprites/animals/basic_animals/Basic Animal Sprites/cat.tres" id="1_c46mk"]
+[ext_resource type="Script" path="res://resources/visual_resource.gd" id="1_ewtgt"]
+
+[resource]
+script = ExtResource("1_ewtgt")
+icon = ExtResource("1_c46mk")
+world_visual = ExtResource("1_c46mk")

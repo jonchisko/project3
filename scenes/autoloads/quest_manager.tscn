@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xbtpr0o0c2u0"]
+[gd_scene load_steps=17 format=3 uid="uid://xbtpr0o0c2u0"]
 
 [ext_resource type="Script" path="res://scenes/autoloads/quest_manager.gd" id="1_6hmk0"]
 [ext_resource type="Script" path="res://resources/quest_resource.gd" id="2_h2vrh"]
@@ -14,7 +14,9 @@
 [ext_resource type="Resource" uid="uid://d1hk1m1njltp6" path="res://resources/quests/a_date_night.tres" id="12_yqies"]
 [ext_resource type="Resource" uid="uid://2bv6yr2npor5" path="res://resources/quests/bring_tool_set.tres" id="13_ehp5q"]
 [ext_resource type="Resource" uid="uid://cesm3b318uoi1" path="res://resources/quests/solve_a_riddle.tres" id="14_davgj"]
+[ext_resource type="Resource" uid="uid://c2f0aj8gtsvgu" path="res://resources/quests/confront_the_thief.tres" id="15_i8d44"]
+[ext_resource type="Resource" uid="uid://bvngetms2o6lh" path="res://resources/quests/missing_cat.tres" id="16_qgs7l"]
 
 [node name="QuestManager" type="Node"]
 script = ExtResource("1_6hmk0")
-quests = Array[ExtResource("2_h2vrh")]([ExtResource("3_fg54q"), ExtResource("4_gidl1"), ExtResource("5_tti22"), ExtResource("6_1qpwa"), ExtResource("7_th77v"), ExtResource("8_10ewf"), ExtResource("9_ayiq4"), ExtResource("10_q7r6j"), ExtResource("11_12hri"), ExtResource("12_yqies"), ExtResource("13_ehp5q"), ExtResource("14_davgj")])
+quests = Array[ExtResource("2_h2vrh")]([ExtResource("3_fg54q"), ExtResource("4_gidl1"), ExtResource("5_tti22"), ExtResource("6_1qpwa"), ExtResource("7_th77v"), ExtResource("8_10ewf"), ExtResource("9_ayiq4"), ExtResource("10_q7r6j"), ExtResource("11_12hri"), ExtResource("12_yqies"), ExtResource("13_ehp5q"), ExtResource("14_davgj"), ExtResource("15_i8d44"), ExtResource("16_qgs7l")])

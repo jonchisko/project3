@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://3i03prj3viub"]
+
+[ext_resource type="Script" path="res://resources/item_data_resource.gd" id="1_exucg"]
+
+[resource]
+script = ExtResource("1_exucg")
+id = "cat"
+name = "Cat"
+description = "Radovan's cat"
