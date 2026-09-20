@@ -9,5 +9,7 @@ class_name NpcData
 @export var description: String = "NoNameDescription"
 @export var relationships: Dictionary = {} # npc_id -> relationship_description String-String
 @export var quest_data: Array[QuestResource] = []
+## Additional stock beyond quest rewards: item ID -> positive integer quantity.
+@export var starting_items: Dictionary = {}
 @export var temporary_replies: Array[String] = ["Wait, I am thinking ..."]
 @export var system_knowledge: Array[String] = []

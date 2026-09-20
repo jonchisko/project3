@@ -54,9 +54,10 @@ func _tool(tool_name: String, item: String, amount) -> ToolCall:
 func _run() -> void:
 	GameEvents.log_info.connect(func(_kind, _source, content): log_messages.append(content))
 	_check(_quantity("bojan_kovač", "health_potion") == 2, "Bojan starts with both potion rewards")
+	_check(_quantity("franc_petrov", "cracked_smaragd_ring") == 1 and _quantity("franc_petrov", "book_wotlica") == 1, "Franc starts with his ring and book reward")
 	for npc_id in ResourceDictionary.npc_ids:
 		var npc: NpcData = ResourceDictionary.ResourceIdToResource[npc_id].data
-		var initial: Dictionary = HelperQuests.get_initial_ownership(npc.quest_data)
+		var initial: Dictionary = HelperQuests.get_initial_ownership(npc.quest_data, npc.starting_items)
 		_check(initial.error.is_empty(), "valid reward definitions for " + npc_id)
 		for item_id in initial.items:
 			_check(_quantity(npc_id, item_id) == initial.items[item_id], "initial ownership matches rewards: " + npc_id + "/" + item_id)
@@ -67,6 +68,9 @@ func _run() -> void:
 	var fixture_quests: Array[QuestResource] = [quest]
 	var initial: Dictionary = HelperQuests.get_initial_ownership(fixture_quests)
 	_check(initial.items == {"health_potion": 5, "metal_bolt": 1}, "aggregate every reward including repeated item IDs")
+	_check(HelperQuests.get_initial_ownership(fixture_quests, {"health_potion": 1}).items.health_potion == 6, "starting stock is additional to reward stock")
+	for invalid_stock in [{"unknown_item": 1}, {"health_potion": -1}, {"health_potion": 1.5}, {"health_potion": 2147483647}]:
+		_check(not HelperQuests.get_initial_ownership(fixture_quests, invalid_stock).error.is_empty(), "reject invalid starting stock or combined overflow")
 	quest.rewards = ["give_item(unknown_item, 1)"]
 	_check(not HelperQuests.get_initial_ownership(fixture_quests).error.is_empty(), "reject unknown initialization items")
 	quest.rewards = ["give_item(health_potion, -1)"]

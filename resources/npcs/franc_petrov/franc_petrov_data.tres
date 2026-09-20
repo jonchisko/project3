@@ -37,5 +37,8 @@ relationships = {
 "tanja_draguljič": "Finds her loud, but honest. Sometimes smiles when she argues with someone in the plaza. Trusts her to repair small metal parts, never asks her to fix the ring."
 }
 quest_data = Array[ExtResource("1_4jhnj")]([ExtResource("2_o2o1i")])
+starting_items = {
+"cracked_smaragd_ring": 1
+}
 temporary_replies = Array[String](["Wait, I am thinking ...", "...", "...", "...", "*Cough cough*"])
 system_knowledge = Array[String]([])

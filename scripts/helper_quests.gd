@@ -10,8 +10,15 @@ static func parse_quest_reward(quest_reward: String) -> Dictionary:
 	return {"item": result.get_string(1).strip_edges(), "amount": result.get_string(2).to_int()}
 
 
-static func get_initial_ownership(quests: Array[QuestResource]) -> Dictionary:
+static func get_initial_ownership(quests: Array[QuestResource], starting_items: Dictionary = {}) -> Dictionary:
 	var items: Dictionary = {}
+	for item_id in starting_items:
+		var amount = starting_items[item_id]
+		if not ResourceDictionary.item_ids.has(item_id) or typeof(amount) != TYPE_INT:
+			return {"items": {}, "error": "Invalid starting item or quantity: " + str(item_id)}
+		if amount <= 0 or amount > 2147483647:
+			return {"items": {}, "error": "Starting item quantity is out of range: " + str(item_id)}
+		items[item_id] = amount
 	for quest in quests:
 		for reward in quest.rewards:
 			var parsed: Dictionary = parse_quest_reward(str(reward))

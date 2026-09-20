@@ -4,7 +4,7 @@ extends Node
 func _ready():
 	for npc_id in ResourceDictionary.npc_ids:
 		var npc_resource: InteractableResource = ResourceDictionary.ResourceIdToResource[npc_id]
-		var initial: Dictionary = HelperQuests.get_initial_ownership(npc_resource.data.quest_data)
+		var initial: Dictionary = HelperQuests.get_initial_ownership(npc_resource.data.quest_data, npc_resource.data.starting_items)
 		if not initial.error.is_empty():
 			push_error("Cannot initialize ownership for " + npc_id + ": " + initial.error)
 			continue
