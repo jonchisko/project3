@@ -28,5 +28,6 @@ relationships = {
 "tanja_draguljič": "No opinion. Loud voices don’t carry far into the woods."
 }
 quest_data = Array[ExtResource("1_iy4qi")]([ExtResource("2_53d1y")])
+starting_items = {}
 temporary_replies = Array[String](["...", "*Ugh*"])
 system_knowledge = Array[String]([])

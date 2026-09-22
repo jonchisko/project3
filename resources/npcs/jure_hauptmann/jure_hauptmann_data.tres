@@ -33,5 +33,6 @@ relationships = {
 "tanja_draguljič": "Doesn’t know her."
 }
 quest_data = Array[ExtResource("1_sitdb")]([ExtResource("2_l47qm"), ExtResource("3_pn3lv")])
+starting_items = {}
 temporary_replies = Array[String](["...", "Mam'", "...", "...", "..."])
 system_knowledge = Array[String]([])

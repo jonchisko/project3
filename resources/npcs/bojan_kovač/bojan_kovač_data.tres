@@ -31,5 +31,6 @@ relationships = {
 "tanja_draguljič": "Sparks fly — in both ways. Sometimes heat, sometimes friction."
 }
 quest_data = Array[ExtResource("1_r4ji1")]([ExtResource("2_p53aw"), ExtResource("3_d0n3h"), ExtResource("2_1tu7v")])
+starting_items = {}
 temporary_replies = Array[String](["Hmmm ...", "Mmm ...", "...", "Let me think ...", "...", "..."])
 system_knowledge = Array[String]([])

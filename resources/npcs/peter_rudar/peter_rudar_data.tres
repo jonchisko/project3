@@ -30,5 +30,6 @@ relationships = {
 "tanja_draguljič": "Thinks she’s too loud, but appreciated her gift."
 }
 quest_data = Array[ExtResource("1_xah5b")]([ExtResource("2_qgor5")])
+starting_items = {}
 temporary_replies = Array[String](["...", "*Less light the better nNnn*", "..."])
 system_knowledge = Array[String]([])
