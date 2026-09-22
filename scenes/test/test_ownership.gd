@@ -53,6 +53,9 @@ func _tool(tool_name: String, item: String, amount) -> ToolCall:
 
 func _run() -> void:
 	GameEvents.log_info.connect(func(_kind, _source, content): log_messages.append(content))
+	_check(KDBService.kdb_rust.get_action_triplets().is_empty(), "ownership initialization creates no transfer events")
+	_check(KDBService.add_action(KDBService.GameAction.Kills, "player", "enemy_knight"), "ordinary events remain supported")
+	_check(KDBService.kdb_rust.get_action_triplets().contains("player kills enemy_knight : Timestamp"), "ordinary event output is preserved")
 	_check(_quantity("bojan_kovač", "health_potion") == 2, "Bojan starts with both potion rewards")
 	_check(_quantity("franc_petrov", "cracked_smaragd_ring") == 1 and _quantity("franc_petrov", "book_wotlica") == 1, "Franc starts with his ring and book reward")
 	for npc_id in ResourceDictionary.npc_ids:
@@ -99,12 +102,16 @@ func _run() -> void:
 	_check(consumed == 1, "missing items cannot be consumed")
 
 	_check(inventory.receive_items_from_npc("bojan_kovač", {"health_potion": 1}), "receive the first NPC reward")
+	_check(KDBService.kdb_rust.get_action_triplets().count("bojan_kovač gives health_potion quantity=1 to player") == 1, "transfer event includes giver recipient item and quantity once")
 	_check(_quantity("bojan_kovač", "health_potion") == 1 and _quantity("player", "health_potion") == 1, "NPC reward updates both balances")
 	_check(inventory.receive_items_from_npc("bojan_kovač", {"health_potion": 1}), "receive the second NPC reward")
 	_check(_quantity("bojan_kovač", "health_potion") == 0 and inventory.has_item("health_potion", 2), "NPC reward stock reaches zero")
+	var events_before: String = KDBService.kdb_rust.get_action_triplets()
 	_check(not inventory.receive_items_from_npc("bojan_kovač", {"health_potion": 1}), "reject a reward beyond NPC ownership")
+	_check(KDBService.kdb_rust.get_action_triplets() == events_before, "failed transfer creates no event")
 	_check(inventory.has_item("health_potion", 2) and _quantity("player", "health_potion") == 2, "failed transfer leaves player unchanged")
 	_check(inventory.give_item_to_npc("bojan_kovač", "health_potion", 2), "give items back to an NPC")
+	_check(KDBService.kdb_rust.get_action_triplets().contains("player gives health_potion quantity=2 to bojan_kovač"), "reverse transfer records correct quantity and direction")
 	_check(_quantity("bojan_kovač", "health_potion") == 2 and _quantity("player", "health_potion") == 0, "return transfer updates both balances")
 	_check(consumed == 1, "trading potions does not consume or apply them")
 
@@ -130,10 +137,12 @@ func _run() -> void:
 	chat._player_inventory = inventory
 	chat._current_npc_data = NpcData.new()
 	chat._current_npc_data.id = "bojan_kovač"
+	var event_count: int = KDBService.kdb_rust.get_action_triplets().count("[seconds])")
 	var result: Dictionary = chat._parse_tool_call(_tool("give_item", "health_potion", 1))
 	_check(not result.error and _quantity("bojan_kovač", "health_potion") == 1 and _quantity("player", "health_potion") == 1, "real give_item handler uses ownership transfer")
 	result = chat._parse_tool_call(_tool("get_item", "health_potion", 1))
 	_check(not result.error and _quantity("bojan_kovač", "health_potion") == 2 and _quantity("player", "health_potion") == 0, "real get_item handler credits the NPC")
+	_check(KDBService.kdb_rust.get_action_triplets().count("[seconds])") == event_count + 2, "item tool handlers do not duplicate transfer events")
 	for amount in [-1, 0, 0.5, "1", true, 2147483648]:
 		_check(chat._parse_tool_call(_tool("give_item", "health_potion", amount)).error, "reject malformed tool quantity " + str(amount))
 	_check(_quantity("bojan_kovač", "health_potion") == 2, "invalid tool arguments leave NPC ownership unchanged")
@@ -161,12 +170,16 @@ func _run() -> void:
 	allocations.append(chat._chat_messenger_instance)
 	quest.rewards = ["give_item(health_potion, 1)", "give_item(health_potion, 1)"]
 	chat._current_npc_data.quest_data = [quest]
+	event_count = KDBService.kdb_rust.get_action_triplets().count("[seconds])")
 	await chat._on_skipped_quest()
+	_check(KDBService.kdb_rust.get_action_triplets().count("[seconds])") == event_count + 1 and KDBService.kdb_rust.get_action_triplets().contains("bojan_kovač gives health_potion quantity=2 to player"), "skip logs aggregated item reward once")
 	_check(chat._current_npc_data.quest_data.is_empty() and _quantity("bojan_kovač", "health_potion") == 0 and inventory.has_item("health_potion", 2), "skip aggregates repeated rewards and debits NPC ownership")
 	inventory.give_item_to_npc("bojan_kovač", "health_potion", 2)
 	quest.rewards = ["give_item(health_potion, 1)", "give_item(metal_bolt, 1)"]
 	chat._current_npc_data.quest_data = [quest]
+	events_before = KDBService.kdb_rust.get_action_triplets()
 	await chat._on_skipped_quest()
+	_check(KDBService.kdb_rust.get_action_triplets() == events_before, "failed skip creates no transfer events")
 	_check(not chat._current_npc_data.quest_data.is_empty() and _quantity("bojan_kovač", "health_potion") == 2 and inventory.show_inventory().is_empty(), "failed skip preserves all balances and keeps its quest active")
 	GameEvents.quest_done.connect(QuestManager._on_quests_completed)
 

@@ -5,6 +5,20 @@ use godot::prelude::*;
 use rusqlite::{Connection, MappedRows, Result, Row, params};
 use crate::ownership;
 
+pub(crate) const CREATE_ACTION_LOG: &str = "CREATE TABLE action_log (
+    id INTEGER PRIMARY KEY,
+    action_id INTEGER NOT NULL REFERENCES actions(action_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    source_entity_id INTEGER NOT NULL REFERENCES entities(entity_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    target_object TEXT NOT NULL,
+    time INTEGER NOT NULL,
+    recipient_entity_id INTEGER REFERENCES entities(entity_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    item_id INTEGER REFERENCES items(item_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    quantity INTEGER,
+    CHECK ((recipient_entity_id IS NULL AND item_id IS NULL AND quantity IS NULL)
+        OR (recipient_entity_id IS NOT NULL AND item_id IS NOT NULL AND quantity IS NOT NULL
+            AND typeof(quantity) = 'integer' AND quantity BETWEEN 1 AND 2147483647))
+)";
+
 #[derive(GodotConvert, Debug)]
 #[godot(via = i64)]
 pub enum GameAction {
@@ -123,21 +137,7 @@ impl INode for KnowledgeDatabase {
 
         self.connection
             .execute(
-                "CREATE TABLE action_log (
-                id                  INTEGER PRIMARY KEY,
-                action_id           INTEGER NOT NULL,
-                source_entity_id    INTEGER NOT NULL,
-                target_object       TEXT NOT NULL,
-                time                INTEGER NOT NULL,
-                FOREIGN KEY (action_id)
-                REFERENCES actions (action_id)
-                    ON UPDATE CASCADE
-                    ON DELETE RESTRICT,
-                FOREIGN KEY (source_entity_id)
-                REFERENCES entities (entity_id)
-                    ON UPDATE CASCADE
-                    ON DELETE RESTRICT
-            )",
+                CREATE_ACTION_LOG,
                 (),
             )
             .expect("Failed at creating action_log table");
@@ -411,9 +411,13 @@ impl KnowledgeDatabase {
         let mut stmt = self
             .connection
             .prepare(
-                "SELECT en.game_entity_id, ac.name, al.target_object, al.time FROM action_log al
+                "SELECT en.game_entity_id, ac.name, al.target_object, al.time,
+                    recipient.game_entity_id, item.game_item_id, al.quantity FROM action_log al
             INNER JOIN entities en ON en.entity_id = al.source_entity_id
-            INNER JOIN actions ac ON al.action_id = ac.action_id",
+            INNER JOIN actions ac ON al.action_id = ac.action_id
+            LEFT JOIN entities recipient ON recipient.entity_id = al.recipient_entity_id
+            LEFT JOIN items item ON item.item_id = al.item_id
+            ORDER BY al.time, al.id",
             )
             .expect("Failed at creating prepared statement for action triplets");
 
@@ -430,6 +434,17 @@ impl KnowledgeDatabase {
                     .expect("Could not get 'target_object' from table");
 
                 let time: i64 = row.get(3).expect("Could not get 'time' from table");
+
+                if let (Some(recipient), Some(item), Some(quantity)) = (
+                    row.get::<_, Option<String>>(4)?,
+                    row.get::<_, Option<String>>(5)?,
+                    row.get::<_, Option<i64>>(6)?,
+                ) {
+                    return Ok(format!(
+                        "({} {} {} quantity={} to {} : Timestamp {} [seconds])",
+                        game_entity, action_name, item, quantity, recipient, time
+                    ));
+                }
 
                 Ok(format!(
                     "({} {} {} : Timestamp {} [seconds])",

@@ -235,8 +235,6 @@ func _on_skipped_quest() -> void:
 		_chat_messenger_instance.add_chat_element("Could not grant all quest rewards. Quest remains active.")
 		_set_request_pending(false)
 		return
-	for _item_id in item_totals:
-		KDBService.add_action(KDBService.GameAction.Gives, _current_npc_data.id, "player")
 	if information_message != null:
 		_chat_messenger_instance.edit_last_chat_element(information_message.content)
 		_current_conversation_messages.append(information_message)
@@ -456,7 +454,6 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 					call_result["error"] = true
 					call_result["message"] = "Get item was unable to obtain {item_id}".format({"item_id": fun_args["item_id"]})
 				else:
-					KDBService.add_action(KDBService.GameAction.Gives, "player", self._current_npc_data.id)
 					call_result["call_result"] = {"item_id": fun_args["item_id"], "number": fun_args["number"]}
 		"give_item":
 			if not fun_args.has("item_id") or not fun_args.has("number"):
@@ -465,8 +462,6 @@ func _parse_tool_call(tool: ToolCall) -> Dictionary:
 			else:
 				var quest_reward_item = fun_args["item_id"]
 				var result = self._give_item_to_player(quest_reward_item, fun_args["number"])
-				if result:
-					KDBService.add_action(KDBService.GameAction.Gives, self._current_npc_data.id, "player")
 				
 				call_result["call_result"] = result
 				call_result["error"] = not result

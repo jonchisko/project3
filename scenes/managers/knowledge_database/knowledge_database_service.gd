@@ -29,7 +29,9 @@ func get_triplet_data_text() -> String:
 		<ownership_data>{ot}</ownership_data>
 	</data_information_triplets>
 	<extra_information> action_history events have timestamps in seconds. The larger the value
-	the more recent the event. In case there are conflicting events, the more recent one is the valid one.
+	the more recent the event. Events are listed oldest first, with insertion order breaking timestamp ties.
+	Transfer events include the item, quantity and recipient. They record what happened;
+	a later transfer does not invalidate an earlier one. Use ownership_data for current balances.
 	Ownership data is the current item balance, not a history of possessions.
 	An item not listed for an owner has quantity zero.
 	</extra_information>".format({"at": action_triplets, "qt": quest_triplets, "ot": ownership_triplets})
