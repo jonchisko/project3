@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_42tj6")
 task_description = "Tutorial finished."
-task_goal = "Press \"ESC\" when ready."
+task_goal = "Press ESC to quit. Reopen the game and select Play to begin the experiment."
 objects = Array[String]([])

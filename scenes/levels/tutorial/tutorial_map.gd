@@ -27,4 +27,4 @@ func _input(event: InputEvent) -> void:
 		instantiated.open()
 	
 	if self._finish_tutorial and event_key != null and event_key.keycode == KEY_ESCAPE and event.is_pressed() and not event_key.echo:
-		self.get_tree().change_scene_to_file("res://scenes/ui/menu/main_menu_scene.tscn")
+		self.get_tree().quit()
