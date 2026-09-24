@@ -19,7 +19,7 @@ Radovan has long desired to complete the town’s historical section with a sing
 He’s never admitted it aloud, but he believes the book might hold more than just stories. Old methods. Lost traditions. Maybe even something to help Colnica endure what the rest of Wotlica couldn’t. Among the shelves of brittle journals and solar-dried blueprints, there is already a space reserved for it."
 occupation = "Librarian"
 location = "Colnica, library at the northern edge of the plaza, a sun-warped building with a reinforced basement and vine-wrapped dome."
-description = "Radovan is soft-spoken, meticulous, and quietly intense. He does not waste words or time. Some call him distant, but those who’ve spent long evenings in the library’s upper gallery know he is a man of deep thought and occasional bursts of unexpected warmth — especially when discussing old legends, lost documents, or the scent of rain on dusty pages."
+description = "Diplomatic - serious, calm, measured, diplomatic, meticulous, formal"
 relationships = {
 "bojan_kovač": "They talk occasionally, mostly about old texts and metals. Bojan asked about the Wajdovsko kopje once, but Radovan didn’t share the plans. Said they belonged to history, not to hammers.",
 "franc_petrov": "The book is everything. Radovan would never pressure Franc — but he checks that stall every week, just in case.",

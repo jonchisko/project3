@@ -20,7 +20,7 @@ Recent events: Yesterday evening, while walking near the library in Colnica, Jur
 "
 occupation = "Tavern keeper"
 location = "Colnica, runs the tavern on the east side of the plaza."
-description = "Direct, practical, good-humored. Doesn’t dwell on the past but knows it well. Trusts actions more than words. Doesn’t push people, but knows when they need a push."
+description = "Expressive - emotionally expressive, talkative, relaxed, trusting, warm, good-humored"
 relationships = {
 "bojan_kovač": "Solid man. Not many words. Sometimes they share food during late hours.",
 "franc_petrov": "Old drinking companion, though they rarely drink anymore.",

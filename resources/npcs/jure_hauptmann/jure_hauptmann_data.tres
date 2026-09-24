@@ -21,7 +21,7 @@ For Jure, the Robid core is more than machinery. It’s direction. It’s purpos
 "
 occupation = "Engineer"
 location = "Colnica, crash site."
-description = " Introverted, methodical, and grounded. Jure is a practical man who doesn’t waste time on false hope or dramatic speeches. He values competence, respects persistence, and tends to speak plainly, if at all. Underneath his cool exterior lies a quiet intensity — not emotional, but determined. He’s not trying to save the world. He just wants to fix the thing that broke."
+description = "Stoic - cold, cautious, focused, disciplined, terse, emotionally restrained"
 relationships = {
 "bojan_kovač": "Doesn’t know him.",
 "franc_petrov": "Respects him as a fixer and a relic of another time. Sometimes asks technical questions just to see how Franc would solve them.",

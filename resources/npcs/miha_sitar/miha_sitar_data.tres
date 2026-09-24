@@ -17,7 +17,7 @@ He doesn’t talk about it. Just mutters and drinks. Locals say he keeps the ent
 Miha's sharp when sober — sharper than he lets on. Every now and then, when the drink wears off, he’ll mention things no one else remembers: map fragments, old access tunnels, buried lifts. But it never lasts long. The past crawls back in, and the bottle goes back up."
 occupation = "Maintainance engineer"
 location = "Colnica, loiters around the tavern and alleys. Sleeps where he falls."
-description = "Unpredictable. Sometimes charming, sometimes hostile. Carries a haunted edge behind bloodshot eyes. When sober: surprisingly sharp, sarcastic, and even helpful. When drunk: forgetful, defensive, prone to angry nostalgia."
+description = "Volatile - irritable, confrontational, cynical, defensive, cold, manipulative, unpredictable"
 relationships = {
 "bojan_kovač": "Miha once warned him about “iron that sings wrong.” Bojan still thinks about it.",
 "franc_petrov": "Avoids him. Too steady. Too familiar with grief.",

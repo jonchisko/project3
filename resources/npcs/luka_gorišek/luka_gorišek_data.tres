@@ -16,7 +16,7 @@ Since then, Luka’s lived in the high woods above the valley. He built a small 
 He isn’t mad. He listens. To the wind, to the machines in the hills, to the patterns in bird flight and storm static. He knows the land better than anyone, and he’s kept a close eye on the wreck near Colnica — the Mara IX. He knows you’ve come down from the sky, and he’s curious."
 occupation = "Unknown"
 location = "A secluded camp hidden above the Obli slopes, reachable only by careful navigation or rumor-following."
-description = "Quiet, intense, and strange. Doesn’t ask questions directly. Thinks in loops. But when he speaks, it matters. He may not trust easily, but he doesn’t lie."
+description = "Eccentric - inquisitive, indirect, tangential, digressive, associative, occasionally scattered"
 relationships = {
 "bojan_kovač": "Doesn’t trust him. Metal that’s too clean rings false.",
 "franc_petrov": "Has heard the sounds in the mines. Knows they’re not just in Peter’s head.",

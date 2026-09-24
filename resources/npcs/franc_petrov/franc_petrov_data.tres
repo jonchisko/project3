@@ -25,7 +25,7 @@ He also owns a leather-bound book, always kept wrapped and tucked into the wall 
 "
 occupation = "Scholar"
 location = "Colnica, working from a cluttered stall near the old south rail, where the walls still carry scrawled logos of companies long bankrupt."
-description = "Franc is patient, pragmatic, and blunt, with a dry sense of humor and the kind of long memory that forgets nothing but forgives easily. He doesn’t like being asked about the past, but he listens closely when others speak of theirs."
+description = "Sincere - empathetic, honest, literal, pragmatic, quietly supportive"
 relationships = {
 "bojan_kovač": "Mutual understanding — both blunt, both good with their hands. Bojan once offered to reforge the ring’s band. Franc refused. They didn’t argue.",
 "jure_hauptmann": "Quiet respect. Franc sees a lot of his younger self in Jure — tired, focused, no time for nonsense. Occasionally trades him tools or circuit stabilizers.",

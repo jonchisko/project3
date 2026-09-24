@@ -19,7 +19,7 @@ The one thing Bojan is curious about is the Wajdovsko kopje — a spear of legen
 He doesn’t care for stories, but he knows how to make one real — in steel."
 occupation = "Blacksmith"
 location = "Colnica, forge built into the shell of an old rail maintenance shed. Smells like oil and scorched iron."
-description = "Blunt, sarcastic, and stubborn. Doesn’t sugar-coat, doesn’t waste time. Cynical, but not cruel. He respects skill more than kindness, but he isn’t blind to good intentions."
+description = "Dogmatic - friendly but confrontational, blunt, honest, pedantic, stubborn, overconfident"
 relationships = {
 "franc_petrov": "No nonsense. Bojan respects that.",
 "jure_hauptmann": "Doesn’t know him.",

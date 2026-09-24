@@ -18,7 +18,7 @@ Peter has a stash of Robid cores locked away, salvaged from sealed storage befor
 "
 occupation = "Miner"
 location = "Colnica , stays near the disused depot. Taps rhythms on stone when deep in thought."
-description = "Plainspoken, suspicious, but fair. Doesn’t embellish. If he says he saw something, he saw it. Loyal to a fault if you earn his trust. Quick to walk away if you don’t."
+description = "Guarded - reserved, suspicious, distrustful, cautious, reluctant to share information"
 relationships = {
 "bojan_kovač": "Mutual silence. Trust without words.",
 "franc_petrov": "Sees him as someone who understands the weight of staying.",

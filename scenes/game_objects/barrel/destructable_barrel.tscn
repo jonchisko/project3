@@ -44,5 +44,5 @@ position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_rdjn1")
 
 [connection signal="damage_detected" from="Damagable" to="HealthComponent" method="damage"]
-[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="." method="queue_free"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

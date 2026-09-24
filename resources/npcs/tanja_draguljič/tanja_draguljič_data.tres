@@ -19,7 +19,7 @@ Recent events: Yesterday evening, while walking near the library in Colnica, Tan
 "
 occupation = "Jeweler"
 location = "Colnica, runs a loud, busy workshop near the plaza. Smells like heated copper and burnt tea."
-description = "Blunt, witty, impatient with vague talk. Loud laugh. Quick hands. Hates silence unless she’s working. Thinks deeply but never lets it show."
+description = "Witty - playful, talkative, outgoing, sarcastic, teasing, energetic, informal"
 relationships = {
 "bojan_kovač": "A mix of competition and kinship. Both work with heat and metal. They argue often, but trust each other with tools.",
 "franc_petrov": "Years ago, she traded him a hand-etched clasp in exchange for an old soldering torch he kept in a drawer \"just in case.\" Since then, they’ve had a quiet understanding — not many words, but when they speak, it’s always practical, direct, and weirdly precise. As if they skip past the noise and land straight on the point.",
