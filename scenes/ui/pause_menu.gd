@@ -36,4 +36,4 @@ func _on_main_menu_button_pressed() -> void:
 	self.get_tree().paused = false
 	self.animation_player.play("popout")
 	await self.animation_player.animation_finished
-	self.get_tree().change_scene_to_file("res://scenes/ui/menu/main_menu_scene.tscn")
+	self.get_tree().quit()
