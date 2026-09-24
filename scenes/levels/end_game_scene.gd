@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 	var event_key = event as InputEventKey
 	if event_key != null and event_key.keycode == KEY_SPACE and event.is_pressed() and not event_key.echo:
 		if self._correct_texts.is_empty():
-			self.get_tree().change_scene_to_file("res://scenes/ui/menu/main_menu_scene.tscn")
+			self.get_tree().quit()
 			return
 		var current_text = self._correct_texts.pop_front()
 		self.end_story_text.text = current_text
