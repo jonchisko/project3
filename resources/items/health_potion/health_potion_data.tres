@@ -6,4 +6,4 @@
 script = ExtResource("1_f055b")
 id = "health_potion"
 name = "Health potion"
-description = "Increase health by 20."
+description = "Increase health by 15."

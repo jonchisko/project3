@@ -164,6 +164,8 @@ func _get_item_data() -> Array[Dictionary]:
 
 
 func _on_item_used(item_id: String) -> void:
+	if item_id != "health_potion":
+		return
 	if get_item(item_id, 1) != null:
 		self.item_used.emit(item_id)
 		GameEvents.item_used.emit(item_id)

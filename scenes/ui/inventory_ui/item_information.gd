@@ -10,10 +10,13 @@ signal item_used(index: int)
 var _item_index: int
 
 
-func set_data(item_index: int, name: String, description: String, icon: Texture2D):
+func set_data(item_index: int, name: String, description: String, icon: Texture2D, item_id: String):
 	self._item_index = item_index
 	self.label.text = "{name}: {description}".format({"name": name, "description": description})
 	self.icon_texture.texture = icon
+	var buttons = $MarginContainer/PanelContainerShadow/PanelContainer/VBoxContainer/MarginButtons/HBoxContainer
+	buttons.get_node("UseButton").visible = item_id == "health_potion"
+	buttons.get_node("VSeparator").visible = item_id == "health_potion"
 
 
 func _on_use_button_pressed() -> void:

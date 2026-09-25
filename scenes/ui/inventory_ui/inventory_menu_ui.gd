@@ -49,7 +49,7 @@ func _on_item_in_list_clicked(index: int, _at_position: Vector2, _mouse_button_i
 	var instantiated_item_information = self.item_information_ui.instantiate() as ItemInformationUi
 	self.add_child(instantiated_item_information)
 	instantiated_item_information.item_used.connect(self._on_item_used)
-	instantiated_item_information.set_data(index, item_name, item_description, item_icon)
+	instantiated_item_information.set_data(index, item_name, item_description, item_icon, self._item_array_data[index]["id"])
 	
 
 func _on_item_used(index: int) -> void:
