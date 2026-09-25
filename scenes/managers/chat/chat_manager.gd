@@ -21,6 +21,7 @@ var _dynamic_world_context: Message
 var _current_conversation_messages: Array[Message] = []
 var _request_pending: bool = false
 var _pending_completion_id: String = ""
+var _exiting: bool = false
 
 
 func is_chat_open() -> bool:
@@ -33,9 +34,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	print("Chat manager: EXIT TREE")
-	if self._chat_messenger_instance != null:
-		self._chat_messenger_instance.close_chat()
+	_exiting = true
+	_save_current_conversation()
 
 
 func _open_chat_window_for(interactable: InteractableArea) -> void:
@@ -70,6 +70,10 @@ func _on_player_message_sent(player_message: String) -> void:
 	if _request_pending:
 		return
 	_set_request_pending(true)
+	var player_message_to_save: Message = MessageBuilder.new("user")\
+		.with_content(player_message)\
+		.build()
+	self._current_conversation_messages.append(player_message_to_save)
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 
 	self._template.add_player_query(self._gpt_template, player_message, true)
@@ -81,6 +85,8 @@ func _on_player_message_sent(player_message: String) -> void:
 
 	_refresh_dynamic_world_context()
 	var response: CompletionResponse = await self._gpt_template.get_reply()
+	if _exiting:
+		return
 	
 	# First remove the similar_data_from_history and user query, so that we just keep similar history
 	# for current query
@@ -92,11 +98,6 @@ func _on_player_message_sent(player_message: String) -> void:
 	self._gpt_template.remove_newest_message() # similar history
 	
 	self._template.add_player_query(self._gpt_template, player_message, false) # re-add
-	
-	var player_message_to_save: Message = MessageBuilder.new("user")\
-		.with_content(player_message)\
-		.build()
-	self._current_conversation_messages.append(player_message_to_save)
 	
 	while true:
 		if response != null and response.successful() and not response.choices().is_empty():
@@ -135,11 +136,12 @@ func _on_player_message_sent(player_message: String) -> void:
 				
 			_refresh_dynamic_world_context()
 			response = await self._gpt_template.get_reply()
+			if _exiting:
+				return
 			self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 			
 		else:
-			var system_message: String = "Response from assistant was not successful.
-			Player query not stored in 'long-term' history."
+			var system_message: String = "Response from assistant was not successful. Your message will be saved when the chat closes."
 			
 			self._chat_messenger_instance.edit_last_chat_element(system_message)
 			
@@ -159,6 +161,11 @@ func _refresh_dynamic_world_context() -> void:
 
 
 func _on_chat_closed() -> void:
+	_save_current_conversation()
+	self.chat_closed.emit()
+
+
+func _save_current_conversation() -> void:
 	_pending_completion_id = ""
 	if not self.is_tutorial and not self._current_conversation_messages.is_empty():
 		var conversation = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
@@ -181,8 +188,6 @@ func _on_chat_closed() -> void:
 		self.chat_history_rust.save_history_to_file()
 		GodotProjectLogger.save_to_file_blocking()
 	
-	self.chat_closed.emit()
-
 
 # Done ONCE at the start of the chat
 func _create_open_ai_template(npc_data: NpcData) -> void:
