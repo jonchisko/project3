@@ -178,6 +178,8 @@ func _on_chat_closed() -> void:
 			GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
 		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, self.name, "Dialogue closed.")
 		self._current_conversation_messages.clear()
+		self.chat_history_rust.save_history_to_file()
+		GodotProjectLogger.save_to_file_blocking()
 	
 	self.chat_closed.emit()
 
