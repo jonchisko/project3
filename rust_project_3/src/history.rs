@@ -29,11 +29,6 @@ impl INode for ChatHistoryRust {
             base: base,
         }
     }
-
-    fn exit_tree(&mut self) {
-        godot_print!("Saving history to file");
-        self.save_history_to_file();
-    }
 }
 
 #[godot_api]
