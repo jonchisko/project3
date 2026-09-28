@@ -17,16 +17,30 @@ var _last_npc_chat_element: ChatElement
 
 var is_closing: bool = false
 var request_pending: bool = false
+var has_quest: bool = false
+
+
+func set_has_quest(value: bool) -> void:
+	has_quest = value
+	_update_skip_button()
+
+
+func _update_skip_button() -> void:
+	var button = get_node_or_null("PanelContainer2/HBoxContainer/LongPressButton")
+	if button != null:
+		button.disabled = request_pending or not has_quest
+		button.tooltip_text = "" if has_quest else "This NPC has no quests left to skip."
 
 
 func set_request_pending(value: bool) -> void:
 	request_pending = value
 	_line_edit.editable = not value
-	$PanelContainer2/HBoxContainer/LongPressButton.disabled = value
+	_update_skip_button()
 	$PanelContainer2/HBoxContainer/MarginContainer/HBoxContainer/CloseChatButton.disabled = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_update_skip_button()
 	if self._animation_player.is_playing():
 		await self._animation_player.animation_finished
 	
@@ -80,6 +94,6 @@ func _on_close_chat_button_pressed():
 
 
 func _on_long_press_button_long_pressed() -> void:
-	if request_pending or is_closing:
+	if request_pending or is_closing or not has_quest:
 		return
 	self.skip_quest.emit()

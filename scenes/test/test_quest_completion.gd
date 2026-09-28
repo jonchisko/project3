@@ -108,8 +108,15 @@ func _run() -> void:
 		await manager._on_skipped_quest()
 		_check(completed.size() == before + 1, "skip completes reward combination " + str(rewards))
 		_check(not manager._request_pending, "skip releases the input lock")
+		_check(manager._chat_messenger_instance.messages.back().begins_with("[Game] Quest skipped:"), "skip displays game confirmation")
+		_check(not manager._chat_messenger_instance.has_quest, "last quest disables skipping")
+		_check(manager._current_conversation_messages.all(func(message): return not message.content.contains("[Game]")), "confirmation excluded from saved conversation and template replay")
+		var message_count: int = manager._chat_messenger_instance.messages.size()
+		await manager._on_skipped_quest()
+		_check(manager._chat_messenger_instance.messages.size() == message_count and completed.size() == before + 1, "nothing happens when no quest remains")
 		if rewards.size() == 3:
 			_check(manager.granted.size() == 2 and manager.granted[0].amount == 2 and manager.granted[1].amount == 3, "skip grants every item reward and quantity")
+			_check(manager._chat_messenger_instance.messages.back().contains("Health potion ×2") and manager._chat_messenger_instance.messages.back().contains("Metal bolt ×3"), "confirmation uses item names and quantities")
 			_check(manager.information_requests == 1 and manager._current_conversation_messages.size() == 1, "skip requests and retains information for dialogue logging")
 
 	manager = _manager(["give_item(health_potion, 2)", "Tell the player where Bojan is."])
@@ -184,6 +191,18 @@ func _run() -> void:
 	_check(logged.has("Quest completed - collect_metal_scraps."), "normal completion log is preserved")
 	_check(KDBService.get_triplet_data_text().contains("collect_metal_scraps"), "completion reaches the knowledge database")
 
+	var skip_ui: ChatMessengerUi = load("res://scenes/ui/messenger/chat_messenger_ui.tscn").instantiate()
+	add_child(skip_ui)
+	var skip_button = skip_ui.get_node("PanelContainer2/HBoxContainer/LongPressButton")
+	skip_ui.set_has_quest(false)
+	skip_ui.set_request_pending(false)
+	_check(skip_button.disabled, "request completion does not re-enable skip without a quest")
+	skip_ui.set_has_quest(true)
+	_check(not skip_button.disabled, "available quest enables skip")
+	skip_ui.set_request_pending(true)
+	_check(skip_button.disabled, "pending request disables skip")
+	skip_ui.free()
+	get_tree().paused = false
 	for allocation in allocations:
 		allocation.free()
 	print("Quest completion regression failures: ", failures)

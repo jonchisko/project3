@@ -48,6 +48,6 @@ func request_data(url: String, headers: PackedStringArray, method: HTTPClient.Me
 			await get_tree().process_frame
 		else:
 			returned_bytes = returned_bytes + chunk
-	var json_data = returned_bytes.get_string_from_ascii()
+	var json_data = returned_bytes.get_string_from_utf8()
 	
 	return json_data

@@ -56,6 +56,7 @@ func _open_chat_window_for(interactable: InteractableArea) -> void:
 	self._chat_messenger_instance.skip_quest.connect(self._on_skipped_quest)
 	
 	self._current_npc_data = current_npc_data
+	self._chat_messenger_instance.set_has_quest(not current_npc_data.quest_data.is_empty())
 	
 	KDBService.add_action(KDBService.GameAction.InteractsWith, "player", self._current_npc_data.id)
 	
@@ -219,11 +220,13 @@ func _on_skipped_quest() -> void:
 	# A completion accepted in the preceding turn must not grant its rewards twice.
 	if not _pending_completion_id.is_empty():
 		_chat_messenger_instance.add_chat_element("Please send another message to finish the pending conversation before skipping.")
+		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, "Quest skip blocked: pending completion for " + _pending_completion_id)
 		return
 	var quest: QuestResource = _current_npc_data.quest_data[0]
 	var rewards: Dictionary = _get_skip_rewards(quest)
 	if not rewards.error.is_empty():
 		_chat_messenger_instance.add_chat_element(rewards.error)
+		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, "Quest skip failed: " + rewards.error)
 		return
 	_set_request_pending(true)
 	var information_message: Message = null
@@ -240,6 +243,7 @@ func _on_skipped_quest() -> void:
 		item_totals[reward.item] = item_totals.get(reward.item, 0) + reward.amount
 	if not item_totals.is_empty() and not _give_items_to_player(item_totals):
 		_chat_messenger_instance.add_chat_element("Could not grant all quest rewards. Quest remains active.")
+		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, "Quest skip failed: item transfer for " + quest.id)
 		_set_request_pending(false)
 		return
 	if information_message != null:
@@ -249,6 +253,16 @@ func _on_skipped_quest() -> void:
 		"Skipping quest (finishing by 'button skip'): " + quest.id)
 	_set_request_pending(false)
 	_finish_quest(quest.id)
+	var notification: String = "[Game] Quest skipped: " + quest.title + "."
+	var received: Array[String] = []
+	for item_id in item_totals:
+		var item_name: String = ResourceDictionary.ResourceIdToResource[item_id].data.name
+		received.append("%s ×%d" % [item_name, item_totals[item_id]])
+	if not received.is_empty():
+		notification += "\nReceived: " + ", ".join(received) + "."
+	# UI feedback only: do not add this to the conversation buffer or LLM template.
+	_chat_messenger_instance.add_chat_element(notification)
+	GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name, notification)
 
 
 func _get_skip_rewards(quest: QuestResource) -> Dictionary:
@@ -524,6 +538,8 @@ func _finish_quest(quest_id: String) -> void:
 		return
 	_pending_completion_id = ""
 	self._current_npc_data.quest_data.pop_front()
+	if is_instance_valid(_chat_messenger_instance):
+		_chat_messenger_instance.set_has_quest(not _current_npc_data.quest_data.is_empty())
 	# Update the database through QuestManager before rebuilding world context.
 	GameEvents.quest_done.emit(quest_id)
 	self._refresh_static_template(self._current_conversation_messages, self.chat_history_rust, self._current_npc_data)
