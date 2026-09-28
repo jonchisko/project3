@@ -75,6 +75,7 @@ func _on_player_message_sent(player_message: String) -> void:
 		.with_content(player_message)\
 		.build()
 	self._current_conversation_messages.append(player_message_to_save)
+	_log_dialogue_message(player_message_to_save)
 	self._chat_messenger_instance.add_chat_element(self._current_npc_data.temporary_replies.pick_random())
 
 	self._template.add_player_query(self._gpt_template, player_message, true)
@@ -114,6 +115,7 @@ func _on_player_message_sent(player_message: String) -> void:
 			self._chat_messenger_instance.edit_last_chat_element(content_to_show)
 			self._gpt_template.append_message_with(npc_message)
 			self._current_conversation_messages.append(npc_message)
+			_log_dialogue_message(npc_message)
 			
 			var tools: Array[ToolCall] = choice.message.tool_calls
 			
@@ -134,6 +136,7 @@ func _on_player_message_sent(player_message: String) -> void:
 				
 				self._gpt_template.append_message_with(tool_message)
 				self._current_conversation_messages.append(tool_message)
+				_log_dialogue_message(tool_message)
 				
 			_refresh_dynamic_world_context()
 			response = await self._gpt_template.get_reply()
@@ -166,24 +169,28 @@ func _on_chat_closed() -> void:
 	self.chat_closed.emit()
 
 
+func _log_dialogue_message(message: Message) -> void:
+	if is_tutorial:
+		return
+	var source: String
+	match message.role:
+		"user":
+			source = "player"
+		"assistant":
+			source = _current_npc_data.id
+		"tool":
+			source = "tool"
+		_:
+			source = "no_source_id"
+	GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
+
+
 func _save_current_conversation() -> void:
 	_pending_completion_id = ""
 	if not self.is_tutorial and not self._current_conversation_messages.is_empty():
 		var conversation = self._current_conversation_messages.map(func (x: Message): return x.get_dictionary_form())
 		self.chat_history_rust.save_conversation(self._current_npc_data.id, conversation)
 		#print(self.chat_history_rust.get_recent(self._current_npc_data.id))
-		var source: String
-		for message in self._current_conversation_messages:
-			match message.role:
-				"user":
-					source = "player"
-				"assistant":
-					source = self._current_npc_data.id
-				"tool":
-					source = "tool"
-				_:
-					source = "no_source_id"
-			GameEvents.log_info.emit(GodotProjectLogger.LogType.Dialogue, source, message.content)
 		GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, self.name, "Dialogue closed.")
 		self._current_conversation_messages.clear()
 		self.chat_history_rust.save_history_to_file()
@@ -249,6 +256,7 @@ func _on_skipped_quest() -> void:
 	if information_message != null:
 		_chat_messenger_instance.edit_last_chat_element(information_message.content)
 		_current_conversation_messages.append(information_message)
+		_log_dialogue_message(information_message)
 	GameEvents.log_info.emit(GodotProjectLogger.LogType.GameEvent, name,
 		"Skipping quest (finishing by 'button skip'): " + quest.id)
 	_set_request_pending(false)
