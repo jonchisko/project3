@@ -117,13 +117,13 @@ func _add_quest(npc_data: NpcData) -> String:
 	The structure of the <quest_reward> is as follows:
 	<quest_rewards>
 		<quest_reward_structure>
-			give_item(wajdovian_spear_instruction, 1)
-		</quest_reward_structure>
-		<quest_reward_structure>
 			trigger_event(event_id)
 		</quest_reward_structure>
 		<quest_reward_structure>
 			give_item(item_id, amount)
+		</quest_reward_structure>
+		<quest_reward_structure>
+			give information or statement
 		</quest_reward_structure>
 	</quest_rewards>
 	
@@ -137,6 +137,9 @@ func _add_quest(npc_data: NpcData) -> String:
 		</example>
 		<example>
 			give_item(outlawed_pen, 3)
+		</example>
+		<example>
+			You can find Domen near the People's square.
 		</example>
 	</quest_reward_examples>
 	
@@ -235,6 +238,18 @@ func _add_function_calling() -> String:
 	</example_call>
 	
 	If InteractableResource, then the item_id was most likely incorrect.
+
+	## How to complete your current quest
+	After verifying all quest conditions and successfully performing any required item exchanges,
+	call complete_quest with your current <quest_id>:
+	<function>
+		<definition_gdscript>complete_quest(quest_id: String) -> Dictionary</definition_gdscript>
+		<example_call>complete_quest(<quest_id>)</example_call>
+	</function>
+	Call this tool even if the reward is only information or there is no reward. Item transfers alone do not complete quests.
+	A successful result queues completion until your final reply; include any information reward in that reply.
+	If the result reports an error, the quest has not been accepted for completion. Address the error before retrying.
+	Do not repeat successful rewards or begin another quest in the same response.
 
 	## How to check the player's conversation with another NPC
 	When your quest depends on a conversation with another NPC, use this tool to verify the relevant exchange before completing the quest.
