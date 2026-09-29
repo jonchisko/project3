@@ -37,10 +37,16 @@ func construct_data() -> Dictionary:
 	var data: Dictionary = {}
 	
 	data["model"] = self._model
-	data["temperature"] = self._temperature
-	data["frequency_penalty"] = self._frequency_penalty
-	data["presence_penalty"] = self._presence_penalty
-	data["logprobs"] = self._log_probs
+	# GPT-5 mini rejects custom sampling parameters; keep its default reasoning.
+	if self._model != "gpt-5-mini":
+		data["temperature"] = self._temperature
+		data["logprobs"] = self._log_probs
+	if self._model not in ["gpt-5-mini", "gpt-6-luna"]:
+		data["frequency_penalty"] = self._frequency_penalty
+		data["presence_penalty"] = self._presence_penalty
+	# Luna supports Chat Completions function calls only without reasoning.
+	if self._model == "gpt-6-luna":
+		data["reasoning_effort"] = "none"
 	
 	data["n"] = self._n_choices
 	data["stream"] = self._stream

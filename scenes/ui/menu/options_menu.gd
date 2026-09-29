@@ -149,6 +149,18 @@ func _update_open_ai_model_based_on_selection(index: int) -> void:
 			OpenAiConfiguration.open_ai_model = OpenAiTypes.ModelVersion.Gpt_4_1
 		"model-4-1-mini":
 			OpenAiConfiguration.open_ai_model = OpenAiTypes.ModelVersion.Gpt_4_1_Mini
+		"model-4o-mini":
+			OpenAiConfiguration.open_ai_model = OpenAiTypes.ModelVersion.Gpt_4o_Mini
+		"model-5-mini":
+			OpenAiConfiguration.open_ai_model = OpenAiTypes.ModelVersion.Gpt_5_Mini
+		"model-6-luna":
+			OpenAiConfiguration.open_ai_model = OpenAiTypes.ModelVersion.Gpt_6_Luna
+	var is_gpt_5_mini: bool = OpenAiConfiguration.open_ai_model == OpenAiTypes.ModelVersion.Gpt_5_Mini
+	var is_gpt_6_luna: bool = OpenAiConfiguration.open_ai_model == OpenAiTypes.ModelVersion.Gpt_6_Luna
+	%TemperatureInput.editable = not is_gpt_5_mini
+	%TemperatureInput.tooltip_text = "GPT-5 mini uses the model's default temperature." if is_gpt_5_mini else ""
+	%FrequencyPenaltyInput.editable = not (is_gpt_5_mini or is_gpt_6_luna)
+	%FrequencyPenaltyInput.tooltip_text = "Frequency penalty is not sent for this model." if not %FrequencyPenaltyInput.editable else ""
 
 
 func _from_model_type_to_index(model_type) -> int:
@@ -166,6 +178,12 @@ func _from_model_type_to_index(model_type) -> int:
 			return 3
 		OpenAiTypes.ModelVersion.Gpt_4_1_Mini:
 			return 4
+		OpenAiTypes.ModelVersion.Gpt_4o_Mini:
+			return 5
+		OpenAiTypes.ModelVersion.Gpt_5_Mini:
+			return 6
+		OpenAiTypes.ModelVersion.Gpt_6_Luna:
+			return 7
 		_:
 			return 0
 

@@ -19,6 +19,7 @@ const _FrameLookingLeft = 2
 
 var _dash_timer: float = 0.0
 var _dash_start_time: float = 0.0
+var _is_dead: bool = false
 
 
 func _ready() -> void:
@@ -111,12 +112,17 @@ func _on_damagable_damage_detected(amount):
 
 
 func _on_health_component_death():
+	if _is_dead:
+		return
+	_is_dead = true
 	GameEvents.log_info.emit(
 		GodotProjectLogger.LogType.GameEvent,
 		self.name,
 		"Player death.")
 
-	self.queue_free()
+	var death_menu := preload("res://scenes/ui/pause_menu.tscn").instantiate() as PauseMenu
+	$HUDCanvasLayer.add_child(death_menu)
+	death_menu.open(true)
 
 
 func _on_health_component_life_change(health_points: int) -> void:
