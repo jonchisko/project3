@@ -32,6 +32,7 @@ func _add_role(npc_data: NpcData) -> String:
 
 func _add_description(npc_data: NpcData) -> String:
 	return "Your in-game ID is {npc_id}. Your description is the following {npc_description}. 
+	Express these traits through your wording, tone, reactions, and willingness to share information. Demonstrate the personality naturally rather than describing your traits to the player.
 	These are your relationships with other NPCs: {npc_relationships}."\
 	.format({"npc_id": npc_data.id, "npc_description": npc_data.description, "npc_relationships": npc_data.relationships})
 

@@ -635,7 +635,7 @@ tile_set = ExtResource("4_ex0tf")
 y_sort_enabled = true
 
 [node name="Bojan" parent="YSorted/NPCs" instance=ExtResource("5_0kbcl")]
-position = Vector2(-301, 941)
+position = Vector2(-289, 1231)
 interactable_data = ExtResource("6_ltmaq")
 
 [node name="Franc" parent="YSorted/NPCs" instance=ExtResource("5_0kbcl")]

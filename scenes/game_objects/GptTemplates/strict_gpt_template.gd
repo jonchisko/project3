@@ -54,6 +54,7 @@ func _add_description(npc_data: NpcData) -> String:
 	return "## Description and relationships
 	Your in-game ID is <npc_id>{npc_id}</npc_id>. 
 	Your description is the following <npc_description>{npc_description}</npc_description>. 
+	Express these traits through your wording, tone, reactions, and willingness to share information. Demonstrate the personality naturally rather than describing your traits to the player.
 	These are your relationships with other in-game NPCs: <npc_relationship>{npc_relationships}</npc_relationship>."\
 	.format({"npc_id": npc_data.id, "npc_description": npc_data.description, "npc_relationships": npc_data.relationships})
 
@@ -137,8 +138,9 @@ func _add_quest(npc_data: NpcData) -> String:
 		</example>
 	</quest_reward_examples>
 	
-	You must take the <quest_condition> item from the player - for this use the function get_item,
-	examples on how to call function/tools are in chapter 'How to call a tool or function'.
+	Only when the quest explicitly requires an item hand-in, verify and take the required items using has_item and get_item.
+	Conversation clues and ownership questions are not item hand-ins. Verify conversation evidence with get_npc_chat_history and current ownership with ownership_data; do not invent clue items or take items merely mentioned in a condition.
+	Examples on how to call functions/tools are in chapter 'How to call a tool or function'.
 	"\
 	.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
 	"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})
@@ -147,7 +149,7 @@ func _add_quest(npc_data: NpcData) -> String:
 func _add_examples() -> String:
 	return "# Examples
 	Below you will find some possible examples on how to answer the player. 
-	For a specific example, if you are free to take some liberty in your answer, a comment will say so. 
+	The examples illustrate the intended meaning, not a fixed voice. Always adapt their wording and tone to your personality in 'Description and relationships', including when an example sounds friendly or enthusiastic.
 	These are very general and just used as a steering point in some specific edge cases.
 	
 	## Edge case examples
@@ -176,7 +178,7 @@ func _add_examples() -> String:
 		</example>
 		<example id=\"Player telling you they have completed their quest\">
 			<player_query>I have completed your quest, could I get the reward?</player_query>
-			<your_answer>Amazing, good work, let me first check if you have the item (<quest_precondition>) and then let’s exchange the goods.</your_answer>
+			<your_answer>Let me check whether you have done what I asked before I give you the reward.</your_answer>
 			<creativity>Yes, the answer is just a suggestion to which direction you should semantically steer. You should always also consult chapters: 'Instructions' and 'Description and relationships' before answering.</creativity>
 		</example>
 	</examples>"
