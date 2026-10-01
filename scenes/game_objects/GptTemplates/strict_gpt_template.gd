@@ -201,14 +201,14 @@ func _add_function_calling() -> String:
 		<example_call>has_item(<quest_item_id>, <quest_number>)</example_call>
 	</function>
 
-	Remember, if multiples items are in the <quest_condition>, has_item must be called multiple times:
+	Call has_item for each explicit player-inventory requirement, not for items merely mentioned in ownership questions or conversation clues:
 	<example_call>
 		has_item(<quest_item_id>, <quest_number>)
 		has_item(<quest_item_id>, <quest_number>)
 	</example_call>
 
 	## How to give the player the item
-	You can give the player the item (or multiple numbers of the same items) you have as <quest_reward> in the following manner:
+	Use give_item for quest rewards and for items the quest asks you to supply before completion, such as an item needing repair:
 	<function>
 		<definition_gdscript>give_item(item_id: String, number: int = 1) -> bool</definition_gdscript>
 		<example_call>give_item(<quest_reward>, 1)</example_call>
@@ -223,15 +223,14 @@ func _add_function_calling() -> String:
 	exist in case if you misunderstood the item_id from the conversation/quest data.
 	
 	## How to take player’s item
-	After verifying the player has enough quest condition items to finish the quest. You should
-	take them from his or hers inventory (the <quest_item_id> and the <quest_number> can be parsed from <quest_condition>). 
+	Only for an explicit item hand-in, verify the player has the required quantity and take it from their inventory.
 	This is done in the following manner:
 	<function>
 		<definition_gdscript>get_item(item_id: String, number: int = 1) -> InteractableResource</definition_gdscript>
 		<example_call>get_item(<quest_item_id>, <quest_number>)</example_call>
 	</function>
 	
-	Remember, if multiples items are in the <quest_condition>, get_item must be called multiple times:
+	If the quest requires handing in multiple items, call get_item for each:
 	<example_call>
 		get_item(<quest_item_id>, <quest_number>)
 		get_item(<quest_item_id>, <quest_number>)
