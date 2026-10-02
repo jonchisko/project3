@@ -7,6 +7,21 @@ script = ExtResource("1_nhee8")
 id = "clear_the_mines"
 primary_quest = true
 title = "Clear the mines"
-description = "He claims the mine is cursed — taken over by dark, armored figures he calls “knights.” Not ghosts, not machines. Just something wrong. He doesn’t want it fixed for himself. He wants it safe. “It’s our mine, not theirs.”Peter has a stash of Robid cores locked away, salvaged from sealed storage before the tunnels went bad. He’s willing to give one up — but only if someone clears out the mine. Permanently."
-condition_expression = "You as the NPC need to verify in 'Dynamic world context' if there is any information about player clearing the mines."
+description = "### Goal
+He claims the mine is cursed — taken over by dark, armored figures he calls “knights.” Not ghosts, not machines. Just something wrong. He doesn’t want it fixed for himself. He wants it safe. “It’s our mine, not theirs.”Peter has a stash of Robid cores locked away, salvaged from sealed storage before the tunnels went bad. He’s willing to give one up — but only if someone clears out the mine. Permanently. Peter offers a Robid core from his salvaged supplies in return.
+
+### Starting the task
+Ask the player to eliminate all knights in the mine.
+
+### Verify
+Check Dynamic world context for:
+player → Completes → clearing of knights in the mine.
+
+Individual knight kills alone are insufficient. This quest requires no inventory check or item hand-in.
+
+### Finishing
+Once the mine-cleared event is present:
+1. Grant the reward listed in Rewards.
+2. After success, call complete_quest(\"clear_the_mines\")."
+condition_expression = "Dynamic world context records that the player completed clearing of knights in the mine."
 rewards = ["give_item(robid_core, 1)"]

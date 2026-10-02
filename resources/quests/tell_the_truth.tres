@@ -7,6 +7,29 @@ script = ExtResource("1_c60p4")
 id = "tell_the_truth"
 primary_quest = false
 title = "Spill the tea"
-description = "Luka asks who currently owns the Book of Wotlica (book_wotlica), tool set (tool_set), and repaired smaragd ring (smaragd_ring). Check each answer only against current ownership_data, not biographies or past conversations. Positive quantities identify owners, including the player; accept nobody if no owner is listed. Do not call has_item or get_item for this quiz. Remember answers across messages and ask only for missing or incorrect answers without revealing the solution. When all three match, give_item(correct_reentry_path, 1); after success, complete_quest(tell_the_truth). The reward is a real inventory item, not a spoken placeholder: Luka memorized the safe re-entry path from an old emergency beacon."
+description = "### Goal
+Show Luka that the player knows who currently owns three important items. In return, he offers the safe re-entry path memorized from an old emergency beacon.
+
+### Starting the task
+Ask who currently owns:
+- Book of Wotlica (book_wotlica)
+- Tool set (tool_set)
+- Repaired smaragd ring (smaragd_ring)
+
+### Verify
+Compare each answer with the latest ownership_data only.
+- Positive quantities identify owners, including the player.
+- Accept nobody if no owner is listed.
+- Remember answers across messages.
+- Ask for missing or incorrect answers without revealing the solution.
+
+Do not use historical conversations or biographies to establish current ownership. Do not call has_item or get_item for this quiz.
+
+### Finishing
+Once all three answers match current ownership:
+1. Grant the reward listed in Rewards.
+2. After success, call complete_quest(\"tell_the_truth\").
+
+The re-entry path is an inventory item; describing it does not grant it."
 condition_expression = "The player's answers for the current owners of book_wotlica, tool_set, and smaragd_ring all match the latest ownership_data."
 rewards = ["give_item(correct_reentry_path, 1)"]

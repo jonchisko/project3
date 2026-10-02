@@ -146,6 +146,23 @@ func _add_quest(npc_data: NpcData) -> String:
 	Only when the quest explicitly requires an item hand-in, verify and take the required items using has_item and get_item.
 	Conversation clues and ownership questions are not item hand-ins. Verify conversation evidence with get_npc_chat_history and current ownership with ownership_data; do not invent clue items or take items merely mentioned in a condition.
 	Examples on how to call functions/tools are in chapter 'How to call a tool or function'.
+	
+	### Complex quests example
+	Complex quests may use the following sections. Simple quests may use plain text. This example explains the structure; 
+	it does not introduce additional quest requirements.
+	<complex_quest_structure>
+		### Goal
+		The quest's purpose and the NPC's motivation.
+
+		### Starting the task
+		How to introduce or begin the task, including any items the NPC must provide before completion.
+
+		### Verify
+		How to check the separate quest condition using the appropriate evidence: inventory tools, conversation history, or current world state.
+
+		### Finishing
+		After verification, perform any required hand-ins, grant the separate quest rewards, and call complete_quest with the current quest ID. Wait for successful transfers before proceeding. Do not repeat successful hand-ins or rewards.
+	</complex_quest_structure>
 	"\
 	.format({"quest_id": quest_data.id, "quest_title": quest_data.title, "quest_description": quest_data.description,
 	"quest_condition": quest_data.condition_expression, "quest_reward": quest_rewards})

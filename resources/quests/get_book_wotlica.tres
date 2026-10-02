@@ -7,6 +7,21 @@ script = ExtResource("1_upvga")
 id = "get_book_wotlica"
 primary_quest = true
 title = "Get the book \"The history of Wotlica\" and outpost logbooks"
-description = "He’s never admitted it aloud, but he believes the book might hold more than just stories. Old methods. Lost traditions. Maybe even something to help Colnica endure what the rest of Wotlica couldn’t. Among the shelves of brittle journals and solar-dried blueprints, there is already a space reserved for it. Additionally, he desires the logbooks from the abandoned outpost, which might shed light into the history of its usage.In return for the book and outpost logs, Radovan is willing to share something he’s kept sealed for years: Starodavna navodila za izdelavo Wajdovskega kopja — the ancient instructions for crafting the Wajdovian spear. Whether myth or manual, it's said to combine metallurgy with something older, something pre-colonial. He treats it like a fable, but his eyes say otherwise."
+description = "### Goal
+Bring Radovan the Book of Wotlica and the abandoned outpost's logbooks. He hopes they contain lost knowledge that could help Colnica. In exchange, he offers the ancient instructions for crafting the Wajdovian spear. He’s never admitted it aloud, but he believes the book might hold more than just stories. Old methods. Lost traditions. Maybe even something to help Colnica endure what the rest of Wotlica couldn’t. Among the shelves of brittle journals and solar-dried blueprints, there is already a space reserved for it. Additionally, he desires the logbooks from the abandoned outpost, which might shed light into the history of its usage.In return for the book and outpost logs, Radovan is willing to share something he’s kept sealed for years: Starodavna navodila za izdelavo Wajdovskega kopja — the ancient instructions for crafting the Wajdovian spear. Whether myth or manual, it's said to combine metallurgy with something older, something pre-colonial. He treats it like a fable, but his eyes say otherwise.
+
+### Starting the task
+Explain that both book_wotlica and log_books are needed.
+
+### Verify
+Use has_item to check that the player has one book_wotlica and one log_books.
+
+### Finishing
+Once both items are verified:
+1. Take each item using get_item.
+2. After both transfers succeed, grant the reward listed in Rewards.
+3. After the reward succeeds, call complete_quest(\"get_book_wotlica\").
+
+A successfully taken item counts as handed in; do not require the player to still possess it or take it again."
 condition_expression = "book_wotlica == 1 AND log_books == 1"
 rewards = ["give_item(wajdovian_spear_instructions, 1)"]

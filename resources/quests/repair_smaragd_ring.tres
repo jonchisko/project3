@@ -7,6 +7,25 @@ script = ExtResource("1_tddt0")
 id = "repair_smaragd_ring"
 primary_quest = true
 title = "Repair Smaragd ring"
-description = "Franc wants Alenka's cracked ring repaired. When the player offers to repair it, give_item(cracked_smaragd_ring, 1) if Franc still owns it. This starts the task; do not require the repaired ring or proof of the jeweller's skill first. If the player says Radovan named Franc as the book's owner, verify Radovan's reply with get_npc_chat_history(radovan_kolar). That reply is sufficient: admit owning the book without further persuasion. Once the completion condition is met, take the repaired ring with get_item(smaragd_ring, 1), give_item(book_wotlica, 1), then complete_quest(repair_smaragd_ring), waiting for successful transfers. Giving the cracked ring alone does not complete the quest."
-condition_expression = "The player returns one smaragd_ring AND has confronted Franc with Radovan's verified statement that Franc owns book_wotlica."
+description = "### Goal
+Repair Alenka’s cracked ring in exchange for the Book of Wotlica.
+
+### Starting the task
+If the player offers to repair the ring and Franc still owns it:
+- Call give_item(\"cracked_smaragd_ring\", 1).
+- Do not require the repaired ring first.
+- This does not complete the quest.
+
+### Verifying the book claim
+If the player says Radovan identified Franc as the owner:
+- Check get_npc_chat_history(\"radovan_kolar\").
+- Radovan’s recorded statement is sufficient; admit ownership.
+- If evidence is missing and next_offset exists, read the next page.
+
+### Finishing
+After both completion conditions are satisfied:
+1. Take the repaired ring using get_item(\"smaragd_ring\", 1).
+2. After success, give_item(\"book_wotlica\", 1).
+3. After success, complete_quest(\"repair_smaragd_ring\")."
+condition_expression = "The player has smaragd_ring AND has confronted Franc with Radovan's verified statement that Franc owns book_wotlica."
 rewards = ["give_item(book_wotlica, 1)"]

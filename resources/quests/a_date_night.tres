@@ -7,6 +7,23 @@ script = ExtResource("1_tsbrs")
 id = "a_date_night"
 primary_quest = true
 title = "A date night"
-description = "She would love to go on a date night with jurij_vindiš. Player should ask jurij_vindiš whether he wants to go on date with tanja_draguljič. The player should tell her the answer and she should confirm in the history of events and conversations whether the player indeed talked with jurij_vindiš and told the truth. If he did, the quest is complete and the player is awarded the smaragd_ring. Before she is able to give the smaragd ring, she needs to also verify if the player has a cracked smaragd ring."
-condition_expression = "cracked_smaragd_ring == 1 AND player asked jurij_vindiš about the date night (it does not matter whether the date night is happening or not) and the player told the truth"
+description = "### Goal
+Find out whether Jurij would go on a date with Tanja. In exchange, Tanja repairs the player's cracked smaragd ring.
+
+### Starting the task
+Ask the player to speak with Jurij about the date and bring back his answer and the cracked ring.
+
+### Verify
+1. Use get_npc_chat_history(\"jurij_vindiš\") to check that the player asked about the date and accurately reported Jurij's answer.
+2. If the relevant exchange is missing and next_offset exists, read the next page.
+3. Either acceptance or refusal qualifies; the player must report the answer truthfully.
+4. Use has_item(\"cracked_smaragd_ring\", 1) to verify the ring.
+
+### Finishing
+Once the conversation and ring are verified:
+1. Call get_item(\"cracked_smaragd_ring\", 1).
+2. After success, grant the reward listed in Rewards.
+3. After the reward succeeds, call complete_quest(\"a_date_night\").
+"
+condition_expression = "cracked_smaragd_ring == 1 AND the player truthfully reported Jurij's answer to the date invitation, verified in Jurij's conversation history."
 rewards = ["give_item(smaragd_ring, 1)"]
