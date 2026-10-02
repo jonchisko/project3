@@ -8,6 +8,7 @@ signal skip_quest
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _chat_element_container = %VBoxContainer
+@onready var _chat_scroll: ScrollContainer = %VBoxContainer.get_parent()
 @onready var _line_edit = %LineEdit
 @onready var _panel_container: PanelContainer = $PanelContainer
 
@@ -40,6 +41,8 @@ func set_request_pending(value: bool) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Follow the final layout, including replies updated after their text animation.
+	_chat_scroll.get_v_scroll_bar().changed.connect(_scroll_to_latest_message)
 	_update_skip_button()
 	if self._animation_player.is_playing():
 		await self._animation_player.animation_finished
@@ -47,6 +50,11 @@ func _ready():
 	self._panel_container.modulate = Color.TRANSPARENT
 	self.get_tree().paused = true
 	self._animation_player.play("in")
+
+
+func _scroll_to_latest_message() -> void:
+	if not is_closing:
+		_chat_scroll.scroll_vertical = int(_chat_scroll.get_v_scroll_bar().max_value)
 
 
 func add_chat_element(message: String):
